@@ -19,7 +19,7 @@ use App\Http\Controllers\admin\DashboardController;
 //     return view('welcome');
 // });
 Route::get('/', function () {
-    return view('admin-view/dashboard');
+    return redirect()->route('login');
 });
 
 Route::group(['prefix' => 'admin'], function()
