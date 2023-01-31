@@ -35,6 +35,9 @@
             <style>
                 body {
                     background-image: url('{{ asset('admin_site/assets/media/auth/bg4-new.jpg') }}');
+                    background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
                 }    
             </style>
             <!--end::Page bg image-->
