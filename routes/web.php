@@ -50,7 +50,7 @@ Route::group(['prefix' => 'admin'], function()
          */
         Route::get('/logout', [LoginRegisterController::class, 'logout'])->name('logout');
 
-        Route::view('/dashboard', 'admin-view/dashboard')->name('dashboard');
+        Route::get('/dashboard', [DashboardController::class,'dashboard'])->name('dashboard');
 
         /**
          * User Routes
