@@ -85,7 +85,13 @@
 							</div>
 							<!--end::Toolbar-->
 							<!--begin::Content-->
-							@yield('content')
+							<div id="kt_app_content" class="app-content flex-column-fluid">
+								<!--begin::Content container-->
+								<div id="kt_app_content_container" class="app-container container-fluid">
+								@yield('content')
+								</div>
+								<!--end::Content container-->
+							</div>
 							<!--end::Content-->
 						</div>
 						<!--end::Content wrapper-->
@@ -3495,7 +3501,7 @@
 		<!--end::Modal - Invite Friend-->
 		<!--end::Modals-->
 		<!--begin::Javascript-->
-		<script>var hostUrl = "assets/";</script>
+		<script>var hostUrl = "admin_site/assets/";</script>
 		<!--begin::Global Javascript Bundle(mandatory for all pages)-->
 		<script src="{{asset('admin_site/assets/plugins/global/plugins.bundle.js')}}"></script>
 		<script src="{{asset('admin_site/assets/js/scripts.bundle.js')}}"></script>
@@ -3523,6 +3529,43 @@
 		<script src="{{asset('admin_site/assets/js/custom/utilities/modals/create-app.js')}}"></script>
 		<script src="{{asset('admin_site/assets/js/custom/utilities/modals/new-target.js')}}"></script>
 		<script src="{{asset('admin_site/assets/js/custom/utilities/modals/users-search.js')}}"></script>
+		<script>
+		toastr.options = {
+			"closeButton": true,
+			"debug": false,
+			"newestOnTop": false,
+			"progressBar": true,
+			"positionClass": "toastr-top-right",
+			"preventDuplicates": false,
+			"onclick": null,
+			"showDuration": "300",
+			"hideDuration": "1000",
+			"timeOut": "5000",
+			"extendedTimeOut": "1000",
+			"showEasing": "swing",
+			"hideEasing": "linear",
+			"showMethod": "fadeIn",
+			"hideMethod": "fadeOut"
+		};
+		@if(Session::has('success'))
+				toastr.success("{{ session('success') }}");
+		@endif
+
+		@if(Session::has('error'))
+		toastr.options =
+				toastr.error("{{ session('error') }}");
+		@endif
+
+		@if(Session::has('info'))
+		toastr.options =
+				toastr.info("{{ session('info') }}");
+		@endif
+
+		@if(Session::has('warning'))
+		toastr.options =
+				toastr.warning("{{ session('warning') }}");
+		@endif
+		</script>
 		<!--end::Custom Javascript-->
 		<!--end::Javascript-->
 		@yield('scripts')

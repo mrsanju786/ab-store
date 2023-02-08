@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin\LoginRegisterController;
+use App\Http\Controllers\admin\RoleController;
 use App\Http\Controllers\admin\DashboardController;
 
 /*
@@ -51,6 +52,13 @@ Route::group(['prefix' => 'admin'], function()
         Route::get('/logout', [LoginRegisterController::class, 'logout'])->name('logout');
 
         Route::view('/dashboard', 'admin-view/dashboard')->name('dashboard');
+
+        Route::get('/role', [RoleController::class, 'role'])->name('role');
+        Route::get('/add-role', [RoleController::class, 'addRole'])->name('add-role');
+        Route::post('/create-role', [RoleController::class, 'createRole'])->name('create-role');
+        Route::get('/edit-role/{id}', [RoleController::class, 'editRole'])->name('edit-role');
+        Route::post('/update-role/{id}', [RoleController::class, 'updateRole'])->name('update-role');
+
 
         /**
          * User Routes

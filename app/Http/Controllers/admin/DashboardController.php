@@ -12,19 +12,32 @@ class DashboardController extends Controller
 {
     public function test(){
 
-        $user = User::where('id', 2)->first();
 
-        $user->assignRole('User');
         // $adminRole = Role::create(['name' => 'Admin']);
         // $userRole = Role::create(['name' => 'User']);
 
-        // $adminRole->givePermissionTo([
-        //     'logout',
-        //     'dashboard',
-        // ]);
+        $adminRole = Role::where('name', 'Admin')->first();
+
+        $adminRole->givePermissionTo([
+            'register',
+            'save-register',
+            'login',
+            'create-login',
+            'logout',
+            'dashboard',
+            'role',
+            'add-role',
+            'create-role',
+            'edit-role',
+            'update-role',
+        ]);
 
         // $userRole->givePermissionTo([
         //     'dashboard',
         // ]);
+
+        // $user = User::where('id', 1)->first();
+
+        // $user->assignRole('Admin');
     }
 }
