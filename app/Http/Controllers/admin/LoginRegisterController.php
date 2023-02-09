@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Auth;
 use Validator,Redirect,Response;
-use Session;
+use Session, Artisan;
 use App\Models\User;
 
 class LoginRegisterController extends Controller
@@ -39,6 +39,7 @@ class LoginRegisterController extends Controller
 
     public function login()
     {
+        Artisan::call("permission:create-permission-routes");
         return view('admin-view/user_login');
     }
 
