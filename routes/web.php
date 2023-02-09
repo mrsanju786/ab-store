@@ -5,6 +5,7 @@ use App\Http\Controllers\admin\LoginRegisterController;
 use App\Http\Controllers\admin\RoleController;
 use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\admin\UserController;
+use App\Http\Controllers\admin\BranchController;
 
 
 /*
@@ -66,6 +67,8 @@ Route::group(['prefix' => 'admin'], function()
         Route::post('/create-user', [UserController::class, 'createUser'])->name('create-user');
         Route::get('/edit-user/{id}', [UserController::class, 'editUser'])->name('edit-user');
         Route::post('/update-user/{id}', [UserController::class, 'updateUser'])->name('update-user');
+
+        Route::get('/add-branch', [BranchController::class, 'addBranch'])->name('add-branch');
 
         /**
          * User Routes
