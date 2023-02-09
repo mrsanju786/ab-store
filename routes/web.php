@@ -53,7 +53,7 @@ Route::group(['prefix' => 'admin'], function()
          */
         Route::get('/logout', [LoginRegisterController::class, 'logout'])->name('logout');
 
-        Route::view('/dashboard', 'admin-view/dashboard')->name('dashboard');
+        Route::get('/dashboard', [DashboardController::class,'dashboard'])->name('dashboard');
 
         Route::get('/role', [RoleController::class, 'role'])->name('role');
         Route::get('/add-role', [RoleController::class, 'addRole'])->name('add-role');
