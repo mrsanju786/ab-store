@@ -30,6 +30,11 @@ class DashboardController extends Controller
             'create-role',
             'edit-role',
             'update-role',
+            'user',
+            'add-user',
+            'create-user',
+            'edit-user',
+            'update-user',
         ]);
 
         // $userRole->givePermissionTo([
