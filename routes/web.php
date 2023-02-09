@@ -5,6 +5,7 @@ use App\Http\Controllers\admin\LoginRegisterController;
 use App\Http\Controllers\admin\RoleController;
 use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\admin\UserController;
+use App\Http\Controllers\admin\CompanyController;
 
 
 /*
@@ -47,7 +48,8 @@ Route::group(['prefix' => 'admin'], function()
         Route::post('/create-login', [LoginRegisterController::class, 'createLogin'])->name('create-login');
 
 
-    Route::group(['middleware' => ['auth', 'permission']], function() {
+        // Route::group(['middleware' => ['auth', 'permission']], function() {
+        Route::group(['middleware' => ['auth']], function() {
         /**
          * Logout Routes
          */
@@ -66,6 +68,16 @@ Route::group(['prefix' => 'admin'], function()
         Route::post('/create-user', [UserController::class, 'createUser'])->name('create-user');
         Route::get('/edit-user/{id}', [UserController::class, 'editUser'])->name('edit-user');
         Route::post('/update-user/{id}', [UserController::class, 'updateUser'])->name('update-user');
+
+        /**
+         * Company Routes
+         */
+        Route::get('/company-list', [CompanyController::class, 'index'])->name('company_list');
+        Route::get('/add-company', [CompanyController::class, 'addCompany'])->name('add-company');
+        Route::post('/create-company', [CompanyController::class, 'createCompany'])->name('create-company');
+        Route::get('/edit-company/{id}', [CompanyController::class, 'editCompany'])->name('edit-company');
+        Route::post('/update-company', [CompanyController::class, 'updateCompany'])->name('update-company');
+        Route::get('/company-status/{id}/{status}', [CompanyController::class, 'companyStatus'])->name('company-status');
 
         /**
          * User Routes
