@@ -8,6 +8,7 @@ use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\admin\CompanyController;
 use App\Http\Controllers\admin\BranchController;
 use App\Http\Controllers\admin\FoodlicenseController;
+use App\Http\Controllers\admin\RegionController;
 
 
 /*
@@ -91,6 +92,17 @@ Route::group(['prefix' => 'admin'], function()
         Route::post('/create-foodlicense', [FoodlicenseController::class, 'createFoodlicense'])->name('create-foodlicense');
         Route::get('/edit-foodlicense/{id}', [FoodlicenseController::class, 'editFoodlicense'])->name('edit-foodlicense');
         Route::post('/update-foodlicense', [FoodlicenseController::class, 'updateFoodlicense'])->name('update-foodlicense');
+
+
+        /**
+         * Region Routes
+         */
+        Route::get('/region-list', [RegionController::class, 'index'])->name('region_list');
+        Route::get('/add-region', [RegionController::class, 'addRegion'])->name('add-region');
+        Route::post('/create-region', [RegionController::class, 'createRegion'])->name('create-region');
+        Route::get('/edit-region/{id}', [RegionController::class, 'editRegion'])->name('edit-region');
+        Route::post('/update-region', [RegionController::class, 'updateRegion'])->name('update-region');
+        Route::get('/region-status/{id}/{status}', [RegionController::class, 'regionStatus'])->name('region-status');
 
 
         /**

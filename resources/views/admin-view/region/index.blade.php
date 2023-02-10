@@ -9,12 +9,12 @@
     <!--begin::Header-->
     <div class="card-header border-0 pt-5">
         <h3 class="card-title align-items-start flex-column">
-            <span class="card-label fw-bold fs-3 mb-1">company</span>
+            <span class="card-label fw-bold fs-3 mb-1">Region List</span>
         </h3>
 
         <div class="card-toolbar" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="hover"
             data-bs-original-title="Click to add a user" data-kt-initialized="1">
-            <a href="{{route('add-company')}}" class="btn btn-sm btn-light btn-active-primary">
+            <a href="{{route('add-region')}}" class="btn btn-sm btn-light btn-active-primary">
                 <!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
                 <span class="svg-icon svg-icon-3"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
@@ -22,7 +22,7 @@
                             transform="rotate(-90 11.364 20.364)" fill="currentColor"></rect>
                         <rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="currentColor"></rect>
                     </svg></span>
-                <!--end::Svg Icon--> Add company
+                <!--end::Svg Icon--> Add Region
             </a>
         </div>
     </div>
@@ -39,11 +39,7 @@
                     <tr class="fw-bold text-muted">
                         <th class="min-w-150px">#</th>
                         <th class="min-w-150px">Name</th>
-                        <th class="min-w-150px">Logo</th>
-                        <th class="min-w-150px">CIN No.</th>
-                        <th class="min-w-150px">Address</th>
-                        <th class="min-w-150px">License No.</th>
-                        <th class="min-w-150px">Status</th>
+                        <th class="min-w-150px">Company</th>
                         <th class="min-w-100px text-end">Actions</th>
                     </tr>
                 </thead>
@@ -52,43 +48,31 @@
                 <!--begin::Table body-->
                 <tbody>
                     @php $i = 1; @endphp
-                    @foreach($company as $companies)
+                    @foreach($region as $regions)
                     <tr>
                         <td>
                             <span class="text-dark fw-bold d-block fs-7">{{$i++}}</span>
                         </td>
 
                         <td>
-                            <span class="text-dark fw-bold d-block fs-6">{{$companies->company_name}}</span>
+                            <span class="text-dark fw-bold d-block fs-6">{{$regions->region_name}}</span>
                         </td>
 
                         <td>
-                            <span class="text-dark fw-bold d-block fs-6"><img style="width: 60px;" src="{{asset('storage/upload/company')}}/{{$companies->company_logo}}"></span>
+                            <span class="text-dark fw-bold d-block fs-6">{{$regions->company->company_name ?? 'NA'}}</span>
                         </td>
 
                         <td>
-                            <span class="text-dark fw-bold d-block fs-6">{{$companies->CIN_no}}</span>
-                        </td>
-
-                        <td>
-                            <span class="text-dark fw-bold d-block fs-6">{{$companies->registered_address}}</span>
-                        </td>
-
-                        <td>
-                            <span class="text-dark fw-bold d-block fs-6">{{$companies->foodLicense->name ?? 'NA'}}</span>
-                        </td>
-
-                        <td>
-                            @if($companies->is_active == 1)
-                            <span class="text-dark fw-bold d-block fs-6"><button class="btn btn-success btn-sm" onclick="location.href='{{route('company-status',[$companies['id'],0])}}'" title="click to deactive">Active</button></span>
+                            @if($regions->is_active == 1)
+                            <span class="text-dark fw-bold d-block fs-6"><button class="btn btn-success btn-sm" onclick="location.href='{{route('region-status',[$regions['id'],0])}}'" title="click to deactive">Active</button></span>
                             @else
-                            <span class="text-dark fw-bold d-block fs-6"><button class="btn btn-danger btn-sm" onclick="location.href='{{route('company-status',[$companies['id'],1])}}'" title="click to active">Deactive</button></span>
+                            <span class="text-dark fw-bold d-block fs-6"><button class="btn btn-danger btn-sm" onclick="location.href='{{route('region-status',[$regions['id'],1])}}'" title="click to active">Deactive</button></span>
                             @endif
                         </td>
 
                         <td>
                             <div class="d-flex justify-content-end flex-shrink-0">
-                                <a href="{{route('edit-company',[base64_encode($companies['id'])])}}" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
+                                <a href="{{route('edit-region',[base64_encode($regions['id'])])}}" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
                                     <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
                                     <span class="svg-icon svg-icon-3"><svg width="24" height="24" viewBox="0 0 24 24"
                                             fill="none" xmlns="http://www.w3.org/2000/svg">

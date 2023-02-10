@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Company;
+use App\Models\FoodLicense;
 use Storage;
 use Auth;
 
@@ -18,7 +19,8 @@ class CompanyController extends Controller
 
     public function addCompany(){
 
-        return view('admin-view.company.add_company');
+        $license = FoodLicense::get();
+        return view('admin-view.company.add_company', compact('license'));
     }
 
     public function createCompany(Request $request){
@@ -38,7 +40,7 @@ class CompanyController extends Controller
 
         $company = new Company();
         $company->company_name = $request->company_name;
-        
+        $company->food_license_id = $request->license_no;
         $company->cin_no = $request->cin_no;
         $company->registered_address = $request->registered_address;
         $company->created_by = Auth::user()->id;
@@ -56,14 +58,15 @@ class CompanyController extends Controller
 
         $company->save();
 
-        return redirect()->route('company_list')->with('message', 'Company Added Successfully!');
+        return redirect()->route('company_list')->with('success', 'Company Added Successfully!');
 
     }
 
     public function editCompany($id){
 
         $company = Company::find(base64_decode($id));
-        return view('admin-view.company.edit_company', compact('company'));
+        $license = FoodLicense::get();
+        return view('admin-view.company.edit_company', compact('company','license'));
     }
 
     public function updateCompany(Request $request){
@@ -82,7 +85,7 @@ class CompanyController extends Controller
         $id = $request->company_id;
         $company = Company::find($id);
         $company->company_name = $request->company_name;
-        
+        $company->food_license_id = $request->license_no;
         $company->cin_no = $request->cin_no;
         $company->registered_address = $request->registered_address;
         $company->created_by = Auth::user()->id;
@@ -100,7 +103,7 @@ class CompanyController extends Controller
 
         $company->save();
 
-        return redirect()->route('company_list')->with('message', 'Changes saved Successfully!');
+        return redirect()->route('company_list')->with('success', 'Changes saved Successfully!');
     }
 
     public function companyStatus(Request $request)
@@ -108,6 +111,6 @@ class CompanyController extends Controller
         $size = Company::find($request->id);
         $size->is_active = $request->status;
         $size->save();
-        return redirect()->back()->with('Company status updated!');
+        return redirect()->back()->with('success','Company status updated!');
     }
 }
