@@ -42,7 +42,7 @@
                         <th class="min-w-150px">Logo</th>
                         <th class="min-w-150px">CIN No.</th>
                         <th class="min-w-150px">Address</th>
-                        <th class="min-w-150px">License No.</th>
+                        <th class="min-w-150px">License</th>
                         <th class="min-w-150px">Status</th>
                         <th class="min-w-100px text-end">Actions</th>
                     </tr>
