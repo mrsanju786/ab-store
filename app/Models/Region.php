@@ -5,13 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Company extends Model
+class Region extends Model
 {
     use HasFactory;
 
-    public function foodLicense(){
-
-        return $this->belongsTo(Foodlicense::class);
+    public function company(){
+        
+        return $this->belongsTo(Company::class,'company_id','id');
     }
-
 }

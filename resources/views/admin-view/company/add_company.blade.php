@@ -87,6 +87,30 @@
                         <div class="fv-row mb-10 fv-plugins-icon-container">
                             <!--begin::Label-->
                             <label class="fs-5 fw-bold form-label mb-2">
+                                <span class="required">Select License</span>
+                            </label>
+                            <!--end::Label-->
+
+                            <!--begin::Input-->
+                            <select class="form-select" aria-label="Select example" name="license_no">
+                                <option>Select License</option>
+                                @foreach($license as $licenses)
+                                <option value="{{$licenses->id}}">{{$licenses->name}}</option>
+                                @endforeach
+                                
+                            </select>
+                            <!--end::Input-->
+                            @if($errors->has('license_no'))
+                            <span class="text-danger">{{ $errors->first('license_no') }}</span>
+                            @endif
+                            <div class="fv-plugins-message-container invalid-feedback"></div>
+                        </div>
+                        <!--end::Input group-->
+
+                        <!--begin::Input group-->
+                        <div class="fv-row mb-10 fv-plugins-icon-container">
+                            <!--begin::Label-->
+                            <label class="fs-5 fw-bold form-label mb-2">
                                 <span class="required">Registered Address</span>
                             </label>
                             <!--end::Label-->
