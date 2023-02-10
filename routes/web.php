@@ -7,6 +7,7 @@ use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\admin\CompanyController;
 use App\Http\Controllers\admin\BranchController;
+use App\Http\Controllers\admin\FoodlicenseController;
 
 
 /*
@@ -81,6 +82,26 @@ Route::group(['prefix' => 'admin'], function()
         Route::get('/edit-company/{id}', [CompanyController::class, 'editCompany'])->name('edit-company');
         Route::post('/update-company', [CompanyController::class, 'updateCompany'])->name('update-company');
         Route::get('/company-status/{id}/{status}', [CompanyController::class, 'companyStatus'])->name('company-status');
+
+        /**
+         * Foodlicense Routes
+         */
+        Route::get('/foodlicense-list', [FoodlicenseController::class, 'index'])->name('foodlicense_list');
+        Route::get('/add-foodlicense', [FoodlicenseController::class, 'addFoodlicense'])->name('add-foodlicense');
+        Route::post('/create-foodlicense', [FoodlicenseController::class, 'createFoodlicense'])->name('create-foodlicense');
+        Route::get('/edit-foodlicense/{id}', [FoodlicenseController::class, 'editFoodlicense'])->name('edit-foodlicense');
+        Route::post('/update-foodlicense', [FoodlicenseController::class, 'updateFoodlicense'])->name('update-foodlicense');
+
+
+        /**
+         * Branch Routes
+         */
+        Route::get('/branch-list', [BranchController::class, 'index'])->name('branch_list');
+        Route::get('/add-branch', [BranchController::class, 'addBranch'])->name('add-branch');
+        Route::post('/create-branch', [BranchController::class, 'createBranch'])->name('create-branch');
+        Route::get('/edit-branch/{id}', [BranchController::class, 'editBranch'])->name('edit-branch');
+        Route::post('/update-branch', [BranchController::class, 'updateBranch'])->name('update-branch');
+        Route::get('/branch-status/{id}/{status}', [BranchController::class, 'branchStatus'])->name('branch-status');
 
         /**
          * User Routes
