@@ -13,7 +13,7 @@
             <div class="card-header">
                 <!--begin::Card title-->
                 <div class="card-title">
-                    <h2>Add branch</h2>
+                    <h2>Edit branch</h2>
                 </div>
                 <!--end::Card title-->
             </div>
@@ -22,7 +22,7 @@
             <!--begin::Card body-->
             <div class="card-body pt-1">
                 <!--begin::Form-->
-                <form action="{{route('create-branch')}}" method="POST" enctype="multipart/form-data">
+                <form action="{{route('update-branch')}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <!--begin::Scroll-->
                     <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_add_role_scroll">
@@ -36,7 +36,7 @@
 
                             <!--begin::Input-->
                             <input class="form-control form-control-solid" placeholder="Enter Region"
-                                name="region_id">
+                                name="region_id" value="{{$branch->region_id}}">
                             <!--end::Input-->
                             @if($errors->has('region_id'))
                             <span class="text-danger">{{ $errors->first('region_id') }}</span>
@@ -55,7 +55,7 @@
 
                             <!--begin::Input-->
                             <input class="form-control form-control-solid" placeholder="Enter branch name"
-                                name="branch_name">
+                                name="branch_name" value="{{$branch->name}}">
                             <!--end::Input-->
                             @if($errors->has('branch_name'))
                             <span class="text-danger">{{ $errors->first('branch_name') }}</span>
@@ -74,7 +74,7 @@
 
                             <!--begin::Input-->
                             <input class="form-control form-control-solid" placeholder="Enter branch Code"
-                                name="branch_code">
+                                name="branch_code" value="{{$branch->branch_code}}">
                             <!--end::Input-->
                             @if($errors->has('branch_code'))
                             <span class="text-danger">{{ $errors->first('branch_code') }}</span>
@@ -93,7 +93,7 @@
 
                             <!--begin::Input-->
                             <input class="form-control form-control-solid" placeholder="Branch Manager"
-                                name="branch_manager">
+                                name="branch_manager" value="{{$branch->branch_manager}}">
                             <!--end::Input-->
                             @if($errors->has('branch_manager'))
                             <span class="text-danger">{{ $errors->first('branch_manager') }}</span>
@@ -112,7 +112,7 @@
 
                             <!--begin::Input-->
                             <input class="form-control form-control-solid" placeholder="Contact Number"
-                                name="contact_number">
+                                name="contact_number" value="{{$branch->contact_number}}">
                             <!--end::Input-->
                             @if($errors->has('contact_number'))
                             <span class="text-danger">{{ $errors->first('contact_number') }}</span>
@@ -125,13 +125,13 @@
                         <div class="fv-row mb-10 fv-plugins-icon-container">
                             <!--begin::Label-->
                             <label class="fs-5 fw-bold form-label mb-2">
-                                <span class="required">branch Serving</span>
+                                <span class="required">Branch Serving</span>
                             </label>
                             <!--end::Label-->
 
                             <!--begin::Input-->
-                            <input class="form-control form-control-solid" placeholder="branch Serving"
-                                name="branch_serving">
+                            <input class="form-control form-control-solid" placeholder="Branch Serving"
+                                name="branch_serving" value="{{$branch->branch_serving}}">
                             <!--end::Input-->
                             @if($errors->has('branch_serving'))
                             <span class="text-danger">{{ $errors->first('branch_serving') }}</span>
@@ -140,17 +140,18 @@
                         </div>
                         <!--end::Input group-->
 
+
                         <!--begin::Input group-->
                         <div class="fv-row mb-10 fv-plugins-icon-container">
                             <!--begin::Label-->
                             <label class="fs-5 fw-bold form-label mb-2">
-                                <span class="required">serving Type</span>
+                                <span class="required">Serving Type</span>
                             </label>
                             <!--end::Label-->
 
                             <!--begin::Input-->
-                            <input class="form-control form-control-solid" placeholder="serving Type"
-                                name="serving_type">
+                            <input class="form-control form-control-solid" placeholder="Serving Type"
+                                name="serving_type" value="{{$branch->serving_type}}">
                             <!--end::Input-->
                             @if($errors->has('serving_type'))
                             <span class="text-danger">{{ $errors->first('serving_type') }}</span>
@@ -165,7 +166,7 @@
                             <button type="submit" class="btn btn-primary"
                                 data-kt-roles-modal-action="submit">
                                 <span class="indicator-label">
-                                    Submit
+                                    Update
                                 </span>
                                 <span class="indicator-progress">
                                     Please wait... <span
@@ -173,6 +174,7 @@
                                 </span>
                             </button>
                         </div>
+                        <input type="hidden" name="branch_id" value="{{$branch->id}}">
                         <!--end::Actions-->
                 </form>
                 <!--end::Form-->

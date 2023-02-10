@@ -22,6 +22,7 @@ class CreateBranchesTable extends Migration
             $table->integer('is_active')->default('1')->comment('1=active, 0=deactive');
             $table->integer('branch_serving')->nullable()->comment('1st 0=breakfast, 2nd 0=lunch, 3rd 0=snacks, 4th 0=dinner');
             $table->integer('serving_type')->nullable()->comment('1st 0=veg, 2nd 0=nonveg, 3rd 0=bevarage');
+            $table->integer('region_id');
             $table->timestamps();
         });
     }
