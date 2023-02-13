@@ -7,7 +7,7 @@
 <!--begin::Row-->
 <div class="row">
     <!--begin::Col-->
-    <div class="col-md-10 mx-auto">
+    <div class="col-md-12 mx-auto">
         <div class="card card-flush h-md-100" id="kt_modal_add_role">
             <!--begin::Card header-->
             <div class="card-header">
@@ -128,9 +128,8 @@
 
 
                         <!--begin::Actions-->
-                        <div class=" text-center pt-15">
-
-                            <button type="submit" class="btn btn-primary"
+                        <div class="text-left pt-3">
+                            <button type="submit" class="btn btn-lg btn-primary"
                                 data-kt-roles-modal-action="submit">
                                 <span class="indicator-label">
                                     Update

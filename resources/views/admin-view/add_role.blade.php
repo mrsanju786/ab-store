@@ -7,7 +7,7 @@
 <!--begin::Row-->
 <div class="row">
     <!--begin::Col-->
-    <div class="col-md-10 mx-auto">
+    <div class="col-md-12 mx-auto">
         <div class="card card-flush h-md-100" id="kt_modal_add_role">
             <!--begin::Card header-->
             <div class="card-header">
@@ -27,24 +27,38 @@
                     @csrf
                     <!--begin::Scroll-->
                     <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_add_role_scroll">
-                        <!--begin::Input group-->
-                        <div class="fv-row mb-10 fv-plugins-icon-container">
-                            <!--begin::Label-->
-                            <label class="fs-5 fw-bold form-label mb-2">
-                                <span class="required">Role name</span>
-                            </label>
-                            <!--end::Label-->
+                        
+                        <!--begin::Row-->
+                        <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
+                            <!--begin::Col-->
+                            <div class="col">
+                                <!--begin::Input group-->
+                                <div class="fv-row mb-10 fv-plugins-icon-container">
+                                    <!--begin::Label-->
+                                    <label class="fs-5 fw-bold form-label mb-2 pt-3">
+                                        <span class="required">Role Name</span>
+                                    </label>
+                                    <!--end::Label-->
 
-                            <!--begin::Input-->
-                            <input class="form-control form-control-solid" placeholder="Enter a role name"
-                                name="role_name">
-                            <!--end::Input-->
-                            @if($errors->has('role_name'))
-                            <span class="text-danger">{{ $errors->first('role_name') }}</span>
-                            @endif
-                            <div class="fv-plugins-message-container invalid-feedback"></div>
+                                    <!--begin::Input-->
+                                    <input class="form-control form-control-solid" placeholder="Enter a Role Name"
+                                        name="role_name">
+                                    <!--end::Input-->
+                                    @if($errors->has('role_name'))
+                                    <span class="text-danger">{{ $errors->first('role_name') }}</span>
+                                    @endif
+                                    <div class="fv-plugins-message-container invalid-feedback"></div>
+                                </div>
+                                <!--end::Input group-->
+                            </div>
+                            <!--end::Col-->
+                            <!--begin::Col-->
+                            <div class="col">
+                                
+                            </div>
+                            <!--end::Col-->            
                         </div>
-                        <!--end::Input group-->
+                        <!--end::Row-->
 
                         <!--begin::Permissions-->
                         <div class="fv-row">
@@ -74,7 +88,7 @@
                                                     <input class="form-check-input" type="checkbox" value=""
                                                         id="kt_roles_select_all">
                                                     <span class="form-check-label" for="kt_roles_select_all">
-                                                        Select all
+                                                        Select All
                                                     </span>
                                                 </label>
                                                 <!--end::Checkbox-->
@@ -110,7 +124,7 @@
                                                         <input class="form-check-input" type="checkbox" value="role"
                                                             name="permission[]">
                                                         <span class="form-check-label">
-                                                        role
+                                                        Role
                                                         </span>
                                                     </label>
                                                     <!--end::Checkbox-->
@@ -121,7 +135,7 @@
                                                         <input class="form-check-input" type="checkbox" value="add-role"
                                                             name="permission[]">
                                                         <span class="form-check-label">
-                                                        add-role
+                                                        Add Role
                                                         </span>
                                                     </label>
                                                     <!--end::Checkbox-->
@@ -132,7 +146,7 @@
                                                         <input class="form-check-input" type="checkbox" value="edit-role"
                                                             name="permission[]">
                                                         <span class="form-check-label">
-                                                        edit-role
+                                                        Edit Role
                                                         </span>
                                                     </label>
                                                     <!--end::Checkbox-->
@@ -143,7 +157,7 @@
                                                         <input class="form-check-input" type="checkbox" value="update-role"
                                                             name="permission[]">
                                                         <span class="form-check-label">
-                                                            update-role
+                                                            Update Role
                                                         </span>
                                                     </label>
                                                     <!--end::Checkbox-->
@@ -608,9 +622,9 @@
                             <!--end::Scroll-->
 
                             <!--begin::Actions-->
-                            <div class=" text-center pt-15">
+                            <div class="text-left pt-3">
 
-                                                            <button type="submit" class="btn btn-primary"
+                                                            <button type="submit" class="btn btn-lg btn-primary"
                                                                 data-kt-roles-modal-action="submit">
                                                                 <span class="indicator-label">
                                                                     Submit

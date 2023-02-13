@@ -7,13 +7,13 @@
 <!--begin::Row-->
 <div class="row">
     <!--begin::Col-->
-    <div class="col-md-10 mx-auto">
+    <div class="col-md-12 mx-auto">
         <div class="card card-flush h-md-100" id="kt_modal_add_role">
             <!--begin::Card header-->
             <div class="card-header">
                 <!--begin::Card title-->
                 <div class="card-title">
-                    <h2>Edit branch</h2>
+                    <h2>Edit Branch</h2>
                 </div>
                 <!--end::Card title-->
             </div>
@@ -49,12 +49,12 @@
                         <div class="fv-row mb-10 fv-plugins-icon-container">
                             <!--begin::Label-->
                             <label class="fs-5 fw-bold form-label mb-2">
-                                <span class="required">Branch name</span>
+                                <span class="required">Branch Name</span>
                             </label>
                             <!--end::Label-->
 
                             <!--begin::Input-->
-                            <input class="form-control form-control-solid" placeholder="Enter branch name"
+                            <input class="form-control form-control-solid" placeholder="Enter Branch Name"
                                 name="branch_name" value="{{$branch->name}}">
                             <!--end::Input-->
                             @if($errors->has('branch_name'))
@@ -73,7 +73,7 @@
                             <!--end::Label-->
 
                             <!--begin::Input-->
-                            <input class="form-control form-control-solid" placeholder="Enter branch Code"
+                            <input class="form-control form-control-solid" placeholder="Enter Branch Code"
                                 name="branch_code" value="{{$branch->branch_code}}">
                             <!--end::Input-->
                             @if($errors->has('branch_code'))
@@ -161,9 +161,9 @@
                         <!--end::Input group-->
 
                         <!--begin::Actions-->
-                        <div class=" text-center pt-15">
+                        <div class="text-left pt-3">
 
-                            <button type="submit" class="btn btn-primary"
+                            <button type="submit" class="btn btn-lg btn-primary"
                                 data-kt-roles-modal-action="submit">
                                 <span class="indicator-label">
                                     Update

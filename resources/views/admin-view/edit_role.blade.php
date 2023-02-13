@@ -7,7 +7,7 @@
 <!--begin::Row-->
 <div class="row">
     <!--begin::Col-->
-    <div class="col-md-10 mx-auto">
+    <div class="col-md-12 mx-auto">
         <div class="card card-flush h-md-100" id="kt_modal_add_role">
             <!--begin::Card header-->
             <div class="card-header">
