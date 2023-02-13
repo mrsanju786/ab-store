@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Branch;
+use App\Models\Region;
 use Storage;
 use Auth;
 
@@ -18,7 +19,8 @@ class BranchController extends Controller
 
     public function addBranch()
     {
-        return view('admin-view.branch.add_branch');
+        $region_list = Region::get();
+        return view('admin-view.branch.add_branch', compact('region_list'));
     }
 
     public function createBranch(Request $request){
@@ -50,7 +52,8 @@ class BranchController extends Controller
 
     public function editBranch($id){
         $branch = Branch::find(base64_decode($id));
-        return view('admin-view.branch.edit_branch', compact('branch'));
+        $region_list = Region::get();
+        return view('admin-view.branch.edit_branch', compact('branch', 'region_list'));
     }
 
     public function updateBranch(Request $request){

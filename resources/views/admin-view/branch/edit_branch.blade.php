@@ -30,13 +30,18 @@
                         <div class="fv-row mb-10 fv-plugins-icon-container">
                             <!--begin::Label-->
                             <label class="fs-5 fw-bold form-label mb-2">
-                                <span class="required">Region</span>
+                                <span class="required">Select Region</span>
                             </label>
                             <!--end::Label-->
 
                             <!--begin::Input-->
-                            <input class="form-control form-control-solid" placeholder="Enter Region"
-                                name="region_id" value="{{$branch->region_id}}">
+                            <select class="form-select" aria-label="Select example" name="region_id">
+                                <option>Select Region</option>
+                                @foreach($region_list as $region)
+                                <option value="{{$region->id}}" {{($branch->region_id == $region->id) ? 'selected' : ''}}>{{$region->region_name}}</option>
+                                @endforeach
+                                
+                            </select>
                             <!--end::Input-->
                             @if($errors->has('region_id'))
                             <span class="text-danger">{{ $errors->first('region_id') }}</span>
