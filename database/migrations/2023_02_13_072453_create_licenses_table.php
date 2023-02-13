@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRegionsTable extends Migration
+class CreateLicensesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,13 @@ class CreateRegionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('regions', function (Blueprint $table) {
+        Schema::create('licenses', function (Blueprint $table) {
             $table->id();
-            $table->string('region_name');
+            $table->string('license_name');
+            $table->string('format');
+            $table->string('alises_name');
+            $table->string('example');
             $table->integer('country_id');
-            $table->integer('is_active')->default('1')->comment('1=active, 0=deactive');
             $table->timestamps();
         });
     }
@@ -29,6 +31,6 @@ class CreateRegionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('regions');
+        Schema::dropIfExists('licenses');
     }
 }
