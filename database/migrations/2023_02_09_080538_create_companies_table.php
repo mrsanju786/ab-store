@@ -19,6 +19,10 @@ class CreateCompaniesTable extends Migration
             $table->string('company_logo')->nullable();
             $table->integer('is_active')->default('1')->comment('1=active, 0=deactive');
             $table->string('registered_address')->nullable();
+            $table->integer('country_id')->nullable();
+            $table->integer('state_id')->nullable();
+            $table->integer('city_id')->nullable();
+            $table->string('pincode')->nullable();
             $table->string('CIN_no')->nullable();
             $table->integer('created_by')->nullable();
             $table->integer('updated_by')->nullable();
