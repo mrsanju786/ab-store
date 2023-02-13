@@ -9,6 +9,9 @@ use App\Http\Controllers\admin\CompanyController;
 use App\Http\Controllers\admin\BranchController;
 use App\Http\Controllers\admin\FoodlicenseController;
 use App\Http\Controllers\admin\RegionController;
+use App\Http\Controllers\admin\CountryController;
+use App\Http\Controllers\admin\StateController;
+use App\Http\Controllers\admin\CityController;
 
 
 /*
@@ -115,6 +118,33 @@ Route::group(['prefix' => 'admin'], function()
         Route::post('/update-branch', [BranchController::class, 'updateBranch'])->name('update-branch');
         Route::get('/branch-status/{id}/{status}', [BranchController::class, 'branchStatus'])->name('branch-status');
 
+
+        /**
+         * Country Routes
+         */
+        Route::get('/country-list', [CountryController::class, 'index'])->name('country_list');
+        Route::get('/add-country', [CountryController::class, 'addCountry'])->name('add-country');
+        Route::post('/create-country', [CountryController::class, 'createCountry'])->name('create-country');
+        Route::get('/edit-country/{id}', [CountryController::class, 'editCountry'])->name('edit-country');
+        Route::post('/update-country', [CountryController::class, 'updateCountry'])->name('update-country');
+
+        /**
+         * State Routes
+         */
+        Route::get('/state-list', [StateController::class, 'index'])->name('state_list');
+        Route::get('/add-state', [StateController::class, 'addState'])->name('add-state');
+        Route::post('/create-state', [StateController::class, 'createState'])->name('create-state');
+        Route::get('/edit-state/{id}', [StateController::class, 'editState'])->name('edit-state');
+        Route::post('/update-state', [StateController::class, 'updateState'])->name('update-state');
+
+        /**
+         * City Routes
+         */
+        Route::get('/city-list', [CityController::class, 'index'])->name('city_list');
+        Route::get('/add-city', [CityController::class, 'addCity'])->name('add-city');
+        Route::post('/create-city', [CityController::class, 'createCity'])->name('create-city');
+        Route::get('/edit-city/{id}', [CityController::class, 'editCity'])->name('edit-city');
+        Route::post('/update-city', [CityController::class, 'updateCity'])->name('update-city');
         /**
          * User Routes
          */
