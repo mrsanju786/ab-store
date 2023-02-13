@@ -18,7 +18,10 @@
                 <!--end::Card title-->
             </div>
             <!--end::Card header-->
-
+ <!--begin::Row-->
+            <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
+                <!--begin::Col-->
+                <div class="col">
             <!--begin::Card body-->
             <div class="card-body pt-1">
                 <!--begin::Form-->
@@ -146,6 +149,17 @@
                 <!--end::Form-->
             </div>
             <!--end::Card body-->
+            </div>
+                <!--end::Col-->
+
+                <!--begin::Col-->
+                <div class="col">
+
+                </div>
+                <!--end::Col-->
+            </div>
+            <!--end::Row-->
+
         </div>
     </div>
     <!--end::Col-->
