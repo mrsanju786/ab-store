@@ -98,7 +98,7 @@
                                 <!--end::Label-->
 
                                 <!--begin::Input-->
-                                <select class="form-select" aria-label="Select example" name="license_no">
+                                <select class="form-select form-select-solid" aria-label="Select example" name="license_no"  data-control="select2" >
                                     <option>Select License</option>
                                     @foreach($license as $licenses)
                                     <option value="{{$licenses->id}}">{{$licenses->name}}</option>

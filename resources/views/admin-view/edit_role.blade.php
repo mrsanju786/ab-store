@@ -13,7 +13,7 @@
             <div class="card-header">
                 <!--begin::Card title-->
                 <div class="card-title">
-                    <h2>Add a Role</h2>
+                    <h2>Edit Role</h2>
                 </div>
                 <!--end::Card title-->
             </div>
@@ -27,7 +27,11 @@
                     @csrf
                     <!--begin::Scroll-->
                     <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_add_role_scroll">
-                        <!--begin::Input group-->
+                    <!--begin::Row-->
+                        <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
+                            <!--begin::Col-->
+                            <div class="col">   
+                    <!--begin::Input group-->
                         <div class="fv-row mb-10 fv-plugins-icon-container">
                             <!--begin::Label-->
                             <label class="fs-5 fw-bold form-label mb-2">
@@ -37,7 +41,7 @@
 
                             <!--begin::Input-->
                             <input class="form-control form-control-solid" placeholder="Enter a role name"
-                                name="role_name" value="{{$role['name']}}">
+                                name="role_name" value="{{$role['name']}}" style="width=50%">
                             <!--end::Input-->
                             @if($errors->has('role_name'))
                             <span class="text-danger">{{ $errors->first('role_name') }}</span>
@@ -45,7 +49,15 @@
                             <div class="fv-plugins-message-container invalid-feedback"></div>
                         </div>
                         <!--end::Input group-->
-
+                    </div>
+                            <!--end::Col-->
+                            <!--begin::Col-->
+                            <div class="col">
+                                
+                            </div>
+                            <!--end::Col-->            
+                        </div>
+                        <!--end::Row-->
                         <!--begin::Permissions-->
                         <div class="fv-row">
                             <!--begin::Label-->
@@ -607,7 +619,7 @@
                             <!--end::Scroll-->
 
                             <!--begin::Actions-->
-                            <div class=" text-center pt-15">
+                            <div class=" text-left pt-3">
 
                                                             <button type="submit" class="btn btn-primary"
                                                                 data-kt-roles-modal-action="submit">
