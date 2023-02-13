@@ -13,7 +13,7 @@
             <div class="card-header">
                 <!--begin::Card title-->
                 <div class="card-title">
-                    <h2>Add Company</h2>
+                    <h2>Add State</h2>
                 </div>
                 <!--end::Card title-->
             </div>
@@ -28,7 +28,7 @@
                 <!--begin::Card body-->
                 <div class="card-body pt-1">
                     <!--begin::Form-->
-                    <form action="{{route('create-company')}}" method="POST" enctype="multipart/form-data">
+                    <form action="{{route('create-state')}}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <!--begin::Scroll-->
                         <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_add_role_scroll">
@@ -36,16 +36,16 @@
                             <div class="fv-row mb-10 fv-plugins-icon-container">
                                 <!--begin::Label-->
                                 <label class="fs-5 fw-bold form-label mb-2">
-                                    <span class="required">Company Name</span>
+                                    <span class="required">State Name</span>
                                 </label>
                                 <!--end::Label-->
 
                                 <!--begin::Input-->
-                                <input class="form-control form-control-solid" placeholder="Enter Company Name"
-                                    name="company_name">
+                                <input class="form-control form-control-solid" placeholder="Enter State Name"
+                                    name="state_name">
                                 <!--end::Input-->
-                                @if($errors->has('company_name'))
-                                <span class="text-danger">{{ $errors->first('company_name') }}</span>
+                                @if($errors->has('state_name'))
+                                <span class="text-danger">{{ $errors->first('state_name') }}</span>
                                 @endif
                                 <div class="fv-plugins-message-container invalid-feedback"></div>
                             </div>
@@ -55,84 +55,64 @@
                             <div class="fv-row mb-10 fv-plugins-icon-container">
                                 <!--begin::Label-->
                                 <label class="fs-5 fw-bold form-label mb-2">
-                                    <span class="required">Company Logo</span>
+                                    <span class="required">State Code</span>
                                 </label>
                                 <!--end::Label-->
 
                                 <!--begin::Input-->
-                                <input type="file" class="form-control form-control-solid" placeholder="Enter company name"
-                                title="Choose a video please"  name="company_logo">
+                                <input class="form-control form-control-solid" placeholder="Enter State code"
+                                    name="state_code">
                                 <!--end::Input-->
-                                @if($errors->has('company_logo'))
-                                <span class="text-danger">{{ $errors->first('company_logo') }}</span>
+                                @if($errors->has('state_code'))
+                                <span class="text-danger">{{ $errors->first('state_code') }}</span>
                                 @endif
                                 <div class="fv-plugins-message-container invalid-feedback"></div>
                             </div>
                             <!--end::Input group-->
 
-                            <!--begin::Input group-->
+                            <!--begin::Label-->
                             <div class="fv-row mb-10 fv-plugins-icon-container">
-                                <!--begin::Label-->
                                 <label class="fs-5 fw-bold form-label mb-2">
-                                    <span class="required">CIN No.</span>
+                                    <span class="required">Select Country</span>
                                 </label>
                                 <!--end::Label-->
-
                                 <!--begin::Input-->
-                                <input class="form-control form-control-solid" placeholder="CIN No."
-                                    name="cin_no">
-                                <!--end::Input-->
-                                @if($errors->has('cin_no'))
-                                <span class="text-danger">{{ $errors->first('cin_no') }}</span>
-                                @endif
-                                <div class="fv-plugins-message-container invalid-feedback"></div>
-                            </div>
-                            <!--end::Input group-->
-
-                            <!--begin::Input group-->
-                            <div class="fv-row mb-10 fv-plugins-icon-container">
-                                <!--begin::Label-->
-                                <label class="fs-5 fw-bold form-label mb-2">
-                                    <span class="required">Select License</span>
-                                </label>
-                                <!--end::Label-->
-
-                                <!--begin::Input-->
-                                <select class="form-select form-select-solid" aria-label="Select example" name="license_no"  data-control="select2" >
-                                    <option>Select License</option>
-                                    @foreach($license as $licenses)
-                                    <option value="{{$licenses->id}}">{{$licenses->name}}</option>
+                                <select class="form-select" aria-label="Select example" name="country_id">
+                                    <option>Select Country</option>
+                                    @foreach($country as $countries)
+                                    <option value="{{$countries->id}}">{{$countries->country_name}}</option>
                                     @endforeach
                                     
                                 </select>
                                 <!--end::Input-->
-                                @if($errors->has('license_no'))
-                                <span class="text-danger">{{ $errors->first('license_no') }}</span>
+                                @if($errors->has('country_id'))
+                                <span class="text-danger">{{ $errors->first('country_id') }}</span>
                                 @endif
                                 <div class="fv-plugins-message-container invalid-feedback"></div>
                             </div>
                             <!--end::Input group-->
-
-                            <!--begin::Input group-->
-                            <div class="fv-row mb-10 fv-plugins-icon-container">
-                                <!--begin::Label-->
-                                <label class="fs-5 fw-bold form-label mb-2">
-                                    <span class="required">Registered Address</span>
-                                </label>
-                                <!--end::Label-->
-
-                                <!--begin::Input-->
-                                {{-- <input class="form-control form-control-solid" placeholder="Registered Address"
-                                    name="registered_address"> --}}
-                                <textarea class="form-control form-control-solid" placeholder="Registered Address"
-                                name="registered_address" row="2"></textarea>
-                                <!--end::Input-->
-                                @if($errors->has('registered_address'))
-                                <span class="text-danger">{{ $errors->first('registered_address') }}</span>
-                                @endif
-                                <div class="fv-plugins-message-container invalid-feedback"></div>
-                            </div>
-                            <!--end::Input group-->
+                        
+                        <!--begin::Label-->
+                        <div class="fv-row mb-10 fv-plugins-icon-container">
+                            <label class="fs-5 fw-bold form-label mb-2">
+                                <span class="required">Select Region</span>
+                            </label>
+                            <!--end::Label-->
+                            <!--begin::Input-->
+                            <select class="form-select" aria-label="Select example" name="region_id">
+                                    <option>Select Region</option>
+                                    @foreach($region as $regions)
+                                    <option value="{{$countries->id}}">{{$regions->region_name}}</option>
+                                    @endforeach
+                                    
+                            </select>
+                            <!--end::Input-->
+                            @if($errors->has('region_id'))
+                            <span class="text-danger">{{ $errors->first('region_id') }}</span>
+                            @endif
+                            <div class="fv-plugins-message-container invalid-feedback"></div>
+                        </div>
+                        <!--end::Input group-->
 
                             <!--begin::Actions-->
                             <div class="text-left pt-3">
