@@ -40,7 +40,7 @@
                             <!--end::Label-->
 
                             <!--begin::Input-->
-                            <select class="form-select" aria-label="Select example" name="region_id">
+                            <select class="form-select form-select-solid" aria-label="Select example" name="region_id" data-control="select2">
                                 <option>Select Region</option>
                                 @foreach($region_list as $region)
                                 <option value="{{$region->id}}" {{($branch->region_id == $region->id) ? 'selected' : ''}}>{{$region->region_name}}</option>

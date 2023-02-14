@@ -58,7 +58,7 @@
                                 </label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <select class="form-select" aria-label="Select example" name="state_id">
+                                <select class="form-select form-select-solid" aria-label="Select example" name="state_id" data-control="select2">
                                     <option>Select Country</option>
                                     @foreach($state as $states)
                                     <option value="{{$states->id}}">{{$states->state_name}}</option>
