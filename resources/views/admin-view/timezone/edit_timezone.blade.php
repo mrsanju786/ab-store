@@ -7,18 +7,23 @@
 <!--begin::Row-->
 <div class="row">
     <!--begin::Col-->
-    <div class="col-md-10 mx-auto">
+    <div class="col-md-12 mx-auto">
         <div class="card card-flush h-md-100" id="kt_modal_add_role">
             <!--begin::Card header-->
             <div class="card-header">
                 <!--begin::Card title-->
                 <div class="card-title">
-                    <h2>Add Timezone</h2>
+                    <h2>Edit Timezone</h2>
                 </div>
                 <!--end::Card title-->
             </div>
             <!--end::Card header-->
+             <br>
+            <!--begin::Row-->
+            <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
 
+                <!--begin::Col-->
+                <div class="col">
             <!--begin::Card body-->
             <div class="card-body pt-1">
                 <!--begin::Form-->
@@ -115,7 +120,7 @@
                             <!--end::Label-->
 
                             <!--begin::Input-->
-                            <select class="form-select" aria-label="Select example" name="country_id">
+                            <select class="form-select form-select-solid" aria-label="Select example" name="country_id" data-control="select2">
                                 <option value="">Select Country</option>
                                 @foreach($country_list as $country)
                                 <option value="{{$country->id}}" {{($timezone->country_id == $country->id) ? 'selected' : ''}}>{{$country->country_name}}</option>
@@ -131,7 +136,7 @@
                         <!--end::Input group-->
 
                         <!--begin::Actions-->
-                        <div class=" text-center pt-15">
+                        <div class=" text-left pt-3">
 
                             <button type="submit" class="btn btn-primary"
                                 data-kt-roles-modal-action="submit">
@@ -149,6 +154,16 @@
                 <!--end::Form-->
             </div>
             <!--end::Card body-->
+             </div>
+                <!--end::Col-->
+
+                <!--begin::Col-->
+                <div class="col">
+
+                </div>
+                <!--end::Col-->
+            </div>
+            <!--end::Row-->
         </div>
     </div>
     <!--end::Col-->
