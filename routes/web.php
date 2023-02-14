@@ -9,6 +9,9 @@ use App\Http\Controllers\admin\CompanyController;
 use App\Http\Controllers\admin\BranchController;
 use App\Http\Controllers\admin\FoodlicenseController;
 use App\Http\Controllers\admin\RegionController;
+use App\Http\Controllers\admin\LicenseController;
+use App\Http\Controllers\admin\CurrencyController;
+use App\Http\Controllers\admin\TimezoneController;
 use App\Http\Controllers\admin\CountryController;
 use App\Http\Controllers\admin\StateController;
 use App\Http\Controllers\admin\CityController;
@@ -75,7 +78,33 @@ Route::group(['prefix' => 'admin'], function()
         Route::get('/edit-user/{id}', [UserController::class, 'editUser'])->name('edit-user');
         Route::post('/update-user/{id}', [UserController::class, 'updateUser'])->name('update-user');
 
-        Route::get('/add-branch', [BranchController::class, 'addBranch'])->name('add-branch');
+        /**
+         * License Routes
+         */
+        Route::get('/license-list', [LicenseController::class, 'index'])->name('license-list');
+        Route::get('/add-license', [LicenseController::class, 'addLicense'])->name('add-license');
+        Route::post('/create-license', [LicenseController::class, 'createLicense'])->name('create-license');
+        Route::get('/edit-license/{id}', [LicenseController::class, 'editLicense'])->name('edit-license');
+        Route::post('/update-license', [LicenseController::class, 'updateLicense'])->name('update-license');
+
+        /**
+         * Currency Routes
+         */
+        Route::get('/currency-list', [CurrencyController::class, 'index'])->name('currency-list');
+        Route::get('/add-currency', [CurrencyController::class, 'addCurrency'])->name('add-currency');
+        Route::post('/create-currency', [CurrencyController::class, 'createCurrency'])->name('create-currency');
+        Route::get('/edit-currency/{id}', [CurrencyController::class, 'editCurrency'])->name('edit-currency');
+        Route::post('/update-currency', [CurrencyController::class, 'updateCurrency'])->name('update-currency');
+
+        /**
+         * Timezone Routes
+         */
+        Route::get('/timezone-list', [TimezoneController::class, 'index'])->name('timezone-list');
+        Route::get('/add-timezone', [TimezoneController::class, 'addTimezone'])->name('add-timezone');
+        Route::post('/create-timezone', [TimezoneController::class, 'createTimezone'])->name('create-timezone');
+        Route::get('/edit-timezone/{id}', [TimezoneController::class, 'editTimezone'])->name('edit-timezone');
+        Route::post('/update-timezone', [TimezoneController::class, 'updateTimezone'])->name('update-timezone');
+
 
         /**
          * Company Routes
