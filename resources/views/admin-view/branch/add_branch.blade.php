@@ -39,30 +39,6 @@
                                 <div class="fv-row mb-10 fv-plugins-icon-container">
                                     <!--begin::Label-->
                                     <label class="fs-5 fw-bold form-label mb-2">
-                                        <span class="required">Select Region</span>
-                                    </label>
-                                    <!--end::Label-->
-
-                                    <!--begin::Input-->
-                                    <select class="form-select" aria-label="Select example" name="region_id">
-                                        <option>Select Region</option>
-                                        @foreach($region_list as $region)
-                                        <option value="{{$region->id}}">{{$region->region_name}}</option>
-                                        @endforeach
-                                        
-                                    </select>
-                                    <!--end::Input-->
-                                    @if($errors->has('region_id'))
-                                    <span class="text-danger">{{ $errors->first('region_id') }}</span>
-                                    @endif
-                                    <div class="fv-plugins-message-container invalid-feedback"></div>
-                                </div>
-                                <!--end::Input group-->
-
-                                <!--begin::Input group-->
-                                <div class="fv-row mb-10 fv-plugins-icon-container">
-                                    <!--begin::Label-->
-                                    <label class="fs-5 fw-bold form-label mb-2">
                                         <span class="required">Branch Name</span>
                                     </label>
                                     <!--end::Label-->
@@ -139,16 +115,16 @@
                                 <div class="fv-row mb-10 fv-plugins-icon-container">
                                     <!--begin::Label-->
                                     <label class="fs-5 fw-bold form-label mb-2">
-                                        <span class="required">Branch Serving</span>
+                                        <span>GST Number</span>
                                     </label>
                                     <!--end::Label-->
 
                                     <!--begin::Input-->
-                                    <input class="form-control form-control-solid" placeholder="Branch Serving"
-                                        name="branch_serving">
+                                    <input class="form-control form-control-solid" placeholder="GST Number"
+                                        name="gst_no">
                                     <!--end::Input-->
-                                    @if($errors->has('branch_serving'))
-                                    <span class="text-danger">{{ $errors->first('branch_serving') }}</span>
+                                    @if($errors->has('gst_no'))
+                                    <span class="text-danger">{{ $errors->first('gst_no') }}</span>
                                     @endif
                                     <div class="fv-plugins-message-container invalid-feedback"></div>
                                 </div>
@@ -158,16 +134,76 @@
                                 <div class="fv-row mb-10 fv-plugins-icon-container">
                                     <!--begin::Label-->
                                     <label class="fs-5 fw-bold form-label mb-2">
-                                        <span class="required">Serving Type</span>
+                                        <span>License Number</span>
                                     </label>
                                     <!--end::Label-->
 
                                     <!--begin::Input-->
-                                    <input class="form-control form-control-solid" placeholder="Serving Type"
-                                        name="serving_type">
+                                    <input class="form-control form-control-solid" placeholder="License Number"
+                                        name="license_no">
                                     <!--end::Input-->
-                                    @if($errors->has('serving_type'))
-                                    <span class="text-danger">{{ $errors->first('serving_type') }}</span>
+                                    @if($errors->has('license_no'))
+                                    <span class="text-danger">{{ $errors->first('license_no') }}</span>
+                                    @endif
+                                    <div class="fv-plugins-message-container invalid-feedback"></div>
+                                </div>
+                                <!--end::Input group-->
+
+                                <!--begin::Input group-->
+                                <div class="fv-row mb-10 fv-plugins-icon-container">
+                                    <!--begin::Label-->
+                                    <label class="fs-5 fw-bold form-label mb-2">
+                                        <span class="required">Branch Service</span>
+                                    </label>
+                                    <!--end::Label-->
+
+                                    <!--begin::Input-->
+                                    <!-- <div class="form-check form-check-sm form-check-custom form-check-solid">
+                                        <input type="checkbox" class="form-check-input" name="is_pos" id="is_pos"> &nbsp;POS &nbsp;
+                                        <input type="checkbox" class="form-check-input" name="is_pos" id="is_pos"> &nbsp;Self Ordering Kiosk
+                                        <input type="checkbox" class="form-check-input" name="is_pos" id="is_pos"> &nbsp;Qr Code Based web ordering
+                                        <input type="checkbox" class="form-check-input" name="is_pos" id="is_pos"> &nbsp;Mobile App Ordering
+                                        <input type="checkbox" class="form-check-input" name="is_pos" id="is_pos"> &nbsp;Table / Room Odering
+                                    </div> -->
+
+                                    <label class="form-check form-check-custom form-check-inline form-check-solid me-5">
+                                    <input class="form-check-input" name="is_pos" type="checkbox" value="1">
+                                    <span class="fw-semibold ps-2 fs-6">
+                                    POS
+                                    </span>
+                                    </label>
+
+                                    <label class="form-check form-check-custom form-check-inline form-check-solid me-5">
+                                    <input class="form-check-input" name="is_sok" type="checkbox" value="1">
+                                    <span class="fw-semibold ps-2 fs-6">
+                                    Self Ordering Kiosk
+                                    </span>
+                                    </label>
+
+                                    <label class="form-check form-check-custom form-check-inline form-check-solid me-5">
+                                    <input class="form-check-input" name="is_qrcode" type="checkbox" value="1">
+                                    <span class="fw-semibold ps-2 fs-6">
+                                    Qr Code Based web ordering
+                                    </span>
+                                    </label>
+
+                                    <label class="form-check form-check-custom form-check-inline form-check-solid me-5">
+                                    <input class="form-check-input" name="is_mobile_ordering" type="checkbox" value="1">
+                                    <span class="fw-semibold ps-2 fs-6">
+                                    Mobile App Ordering
+                                    </span>
+                                    </label>
+
+                                    <label class="form-check form-check-custom form-check-inline form-check-solid me-5">
+                                    <input class="form-check-input" name="is_table_room" type="checkbox" value="1">
+                                    <span class="fw-semibold ps-2 fs-6">
+                                    Table / Room Odering
+                                    </span>
+                                    </label>
+                                    
+                                    <!--end::Input-->
+                                    @if($errors->has('contact_number'))
+                                    <span class="text-danger">{{ $errors->first('contact_number') }}</span>
                                     @endif
                                     <div class="fv-plugins-message-container invalid-feedback"></div>
                                 </div>

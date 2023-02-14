@@ -101,7 +101,7 @@
                                 <select class="form-select form-select-solid" aria-label="Select example" name="license_no"  data-control="select2" >
                                     <option>Select License</option>
                                     @foreach($license as $licenses)
-                                    <option value="{{$licenses->id}}">{{$licenses->name}}</option>
+                                    <option value="{{$licenses->id}}">{{$licenses->license_name}}</option>
                                     @endforeach
                                     
                                 </select>
@@ -168,11 +168,11 @@
 
                                 <!--begin::Input-->
                                 <select class="form-select form-select-solid" aria-label="Select example" name="state_id" id="state_id" data-control="select2" >
-                                    <option value="">Select Country</option>                                    
+                                    <option value="">Select State</option>                                    
                                 </select>
                                 <!--end::Input-->
-                                @if($errors->has('country_id'))
-                                <span class="text-danger">{{ $errors->first('country_id') }}</span>
+                                @if($errors->has('state_id'))
+                                <span class="text-danger">{{ $errors->first('state_id') }}</span>
                                 @endif
                                 <div class="fv-plugins-message-container invalid-feedback"></div>
                             </div>
@@ -192,8 +192,8 @@
                                     
                                 </select>
                                 <!--end::Input-->
-                                @if($errors->has('country_id'))
-                                <span class="text-danger">{{ $errors->first('country_id') }}</span>
+                                @if($errors->has('city_id'))
+                                <span class="text-danger">{{ $errors->first('city_id') }}</span>
                                 @endif
                                 <div class="fv-plugins-message-container invalid-feedback"></div>
                             </div>
@@ -282,7 +282,7 @@ $('#country_id').on('change', function(){
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
-        url: "{{ url('admin/get-state') }}/" + country_id,
+        url: "{{ url('admin/master/get-state') }}/" + country_id,
         type: "GET",
         success: function(response) {
             $.each(response,function(key, value)
@@ -299,7 +299,7 @@ $('#state_id').on('change', function(){
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
-        url: "{{ url('admin/get-city') }}/" + state_id,
+        url: "{{ url('admin/master/get-city') }}/" + state_id,
         type: "GET",
         success: function(response) {
             $.each(response,function(key, value)

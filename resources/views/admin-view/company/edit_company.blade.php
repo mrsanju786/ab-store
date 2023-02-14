@@ -98,7 +98,7 @@
                             <select class="form-select" aria-label="Select example" name="license_no">
                                 <option value="">Select License</option>
                                 @foreach($license as $licenses)
-                                <option value="{{$licenses->id}}" {{($company->food_license_id == $licenses->id) ? 'selected' : ''}}>{{$licenses->name}}</option>
+                                <option value="{{$licenses->id}}" {{($company->food_license_id == $licenses->id) ? 'selected' : ''}}>{{$licenses->license_name}}</option>
                                 @endforeach
                                 
                             </select>
@@ -276,7 +276,7 @@ $.ajax({
     headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     },
-    url: "{{ url('admin/get-state') }}/" + country_id,
+    url: "{{ url('admin/master/get-state') }}/" + country_id,
     type: "GET",
     success: function(response) {
         var chk = "{{$company->state_id}}";
@@ -294,7 +294,7 @@ $.ajax({
     headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     },
-    url: "{{ url('admin/get-city') }}/" + state_id,
+    url: "{{ url('admin/master/get-city') }}/" + state_id,
     type: "GET",
     success: function(response) {
         var chk = "{{$company->city_id}}";

@@ -42,9 +42,6 @@
                         <th class="min-w-150px">Branch Code</th>
                         <th class="min-w-150px">Branch Manager</th>
                         <th class="min-w-150px">Contact Number</th>
-                        <th class="min-w-150px">Branch Serving</th>
-                        <th class="min-w-150px">Serving Type</th>
-                        <th class="min-w-150px">Region</th>
                         <th class="min-w-100px">Status</th>
                         <th class="min-w-100px text-end">Actions</th>
                     </tr>
@@ -74,18 +71,6 @@
 
                         <td>
                             <span class="text-dark fw-bold d-block fs-6">{{$branch_data->contact_number}}</span>
-                        </td>
-
-                        <td>
-                            <span class="text-dark fw-bold d-block fs-6">{{$branch_data->branch_serving}}</span>
-                        </td>
-
-                        <td>
-                            <span class="text-dark fw-bold d-block fs-6">{{$branch_data->serving_type}}</span>
-                        </td>
-
-                        <td>
-                            <span class="text-dark fw-bold d-block fs-6">{{$branch_data->region_id}}</span>
                         </td>
 
                         <td>

@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Company;
 use App\Models\Country;
-use App\Models\FoodLicense;
+use App\Models\License;
+use App\Models\CompanyHasRegion;
+use App\Models\State;
 use Storage;
 use Auth;
 
@@ -20,7 +22,7 @@ class CompanyController extends Controller
 
     public function addCompany(){
 
-        $license = FoodLicense::get();
+        $license = License::get();
         $country = Country::get();
         return view('admin-view.company.add_company', compact('license','country'));
     }
@@ -72,6 +74,14 @@ class CompanyController extends Controller
 
         $company->save();
 
+        $state = State::find($request->state_id);
+        $region_id = $state->region_id;
+        
+        $company_has_region = new CompanyHasRegion;
+        $company_has_region->company_id = $company->id;
+        $company_has_region->region_id = $region_id;
+        $company_has_region->save();
+
         return redirect()->route('company_list')->with('success', 'Company Added Successfully!');
 
     }
@@ -79,7 +89,7 @@ class CompanyController extends Controller
     public function editCompany($id){
 
         $company = Company::find(base64_decode($id));
-        $license = FoodLicense::get();
+        $license = License::get();
         $country = Country::get();
         return view('admin-view.company.edit_company', compact('company','license','country'));
     }
@@ -125,6 +135,11 @@ class CompanyController extends Controller
         }
 
         $company->save();
+
+        $state = State::find($request->state_id);
+        $region_id = $state->region_id;
+        
+        $company_has_region = CompanyHasRegion::where('company_id',$id)->update(['region_id'=>$region_id]);
 
         return redirect()->route('company_list')->with('success', 'Changes saved Successfully!');
     }

@@ -20,13 +20,17 @@ class CreateBranchesTable extends Migration
             $table->string('branch_manager');
             $table->string('contact_number');
             $table->integer('is_active')->default('1')->comment('1=active, 0=deactive');
-            $table->integer('branch_serving')->nullable()->comment('1st 0=breakfast, 2nd 0=lunch, 3rd 0=snacks, 4th 0=dinner');
-            $table->integer('serving_type')->nullable()->comment('1st 0=veg, 2nd 0=nonveg, 3rd 0=bevarage');
-            $table->integer('company_ha_sregion_id');
+            $table->integer('company_has_region_id')->nullable();
+            $table->integer('company_id')->nullable();
+            $table->integer('is_pos')->default('0');
+            $table->integer('is_sok')->default('0');
+            $table->integer('is_qrcode')->default('0');
+            $table->integer('is_mobile_ordering')->default('0');
+            $table->integer('is_table_room')->default('0');
             $table->integer('country_id')->nullable();
             $table->integer('license_id')->nullable();
-            $table->string('license_no')->nullable()->comment('optional');
-            $table->string('gst_no')->nullable()->comment('optional');
+            $table->string('license_no')->nullable();
+            $table->string('gst_no')->nullable();
             $table->timestamps();
         });
     }

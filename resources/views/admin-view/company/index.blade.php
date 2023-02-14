@@ -75,7 +75,7 @@
                         </td>
 
                         <td>
-                            <span class="text-dark fw-bold d-block fs-6">{{$companies->foodLicense->name ?? 'NA'}}</span>
+                            <span class="text-dark fw-bold d-block fs-6">{{$companies->foodLicense->license_name ?? 'NA'}}</span>
                         </td>
 
                         <td>

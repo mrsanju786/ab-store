@@ -26,24 +26,24 @@ class BranchController extends Controller
     public function createBranch(Request $request){
 
         $request->validate([
-            'region_id' => 'required',
             'branch_name' => 'required',
             'branch_code' => 'required',
             'branch_manager' => 'required',
             'contact_number' => 'required',
-            'branch_serving' => 'required',
-            'serving_type' => 'required',
-
         ]);
 
         $branch = new Branch();
-        $branch->region_id = $request->region_id;
         $branch->name = $request->branch_name;
-        $branch->branch_code = $request->branch_name;
+        $branch->branch_code = $request->branch_code;
         $branch->branch_manager = $request->branch_manager;
         $branch->contact_number = $request->contact_number;
-        $branch->branch_serving = $request->branch_serving;
-        $branch->serving_type = $request->serving_type;
+        $branch->gst_no = $request->gst_no;
+        $branch->license_no = $request->license_no;
+        $branch->is_pos = $request->is_pos ?? 0;
+        $branch->is_sok = $request->is_sok ?? 0;
+        $branch->is_qrcode = $request->is_qrcode ?? 0;
+        $branch->is_mobile_ordering = $request->is_mobile_ordering ?? 0;
+        $branch->is_table_room = $request->is_table_room ?? 0;
         $branch->save();
 
         return redirect()->route('branch_list')->with('success', 'Branch Added Successfully!');
@@ -52,31 +52,31 @@ class BranchController extends Controller
 
     public function editBranch($id){
         $branch = Branch::find(base64_decode($id));
-        $region_list = Region::get();
-        return view('admin-view.branch.edit_branch', compact('branch', 'region_list'));
+        return view('admin-view.branch.edit_branch', compact('branch'));
     }
 
     public function updateBranch(Request $request){
 
         $request->validate([
-            'region_id' => 'required',
             'branch_name' => 'required',
             'branch_code' => 'required',
             'branch_manager' => 'required',
             'contact_number' => 'required',
-            'branch_serving' => 'required',
-            'serving_type' => 'required',
         ]);
 
         $id = $request->branch_id;
         $branch = Branch::find($id);
-        $branch->region_id = $request->region_id;
         $branch->name = $request->branch_name;
         $branch->branch_code = $request->branch_code;
         $branch->branch_manager = $request->branch_manager;
         $branch->contact_number = $request->contact_number;
-        $branch->branch_serving = $request->branch_serving;
-        $branch->serving_type = $request->serving_type;
+        $branch->gst_no = $request->gst_no;
+        $branch->license_no = $request->license_no;
+        $branch->is_pos = $request->is_pos ?? 0;
+        $branch->is_sok = $request->is_sok ?? 0;
+        $branch->is_qrcode = $request->is_qrcode ?? 0;
+        $branch->is_mobile_ordering = $request->is_mobile_ordering ?? 0;
+        $branch->is_table_room = $request->is_table_room ?? 0;
         $branch->save();
 
         return redirect()->route('branch_list')->with('success', 'Changes saved Successfully!');
