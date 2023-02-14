@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Region;
 use App\Models\Company;
+use App\Models\Country;
 use Auth;
 
 class RegionController extends Controller
@@ -18,23 +19,23 @@ class RegionController extends Controller
 
     public function addRegion(){
 
-        $company = Company::get();
-        return view('admin-view.region.add_region', compact('company'));
+        $country = Country::get();
+        return view('admin-view.region.add_region', compact('country'));
     }
 
     public function createRegion(Request $request){
 
         $request->validate([
             'region_name' => 'required',
-            'company_id' => 'required',
+            'country_id' => 'required',
         ],[
             'region_name.required'=>'Region Name is Required',
-            'company_id.required'=>'Company Id is Required',
+            'country_id.required'=>'country Id is Required',
         ]);
 
         $license = new Region();
         $license->region_name = $request->region_name;
-        $license->company_id = $request->company_id;
+        $license->country_id = $request->country_id;
         $license->save();
 
         return redirect()->route('region_list')->with('success', 'Region Added Successfully!');
@@ -44,26 +45,26 @@ class RegionController extends Controller
     public function editRegion($id){
 
         $region = Region::find(base64_decode($id));
-        $company = Company::get();
-        return view('admin-view.region.edit_region', compact('region','company'));
+        $country = Country::get();
+        return view('admin-view.region.edit_region', compact('region','country'));
     }
 
     public function updateRegion(Request $request){
 
         $request->validate([
             'region_name' => 'required',
-            'company_id' => 'required',
+            'country_id' => 'required',
         ],[
             'region_name.required'=>'Region Name is Required',
-            'company_id.required'=>'Company Id is Required',
+            'country_id.required'=>'Country Id is Required',
         ]);
 
         $license = Region::find($request->region_id);
         $license->region_name = $request->region_name;
-        $license->company_id = $request->company_id;
+        $license->country_id = $request->country_id;
         $license->save();
 
-        return redirect()->route('region_list')->with('message', 'Changes saved Successfully!');
+        return redirect()->route('region_list')->with('success', 'Changes saved Successfully!');
     }
 
     public function regionStatus(Request $request)

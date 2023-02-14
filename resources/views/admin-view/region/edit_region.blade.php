@@ -54,21 +54,21 @@
                         <div class="fv-row mb-10 fv-plugins-icon-container">
                             <!--begin::Label-->
                             <label class="fs-5 fw-bold form-label mb-2">
-                                <span class="required">Select Company</span>
+                                <span class="required">Select Country</span>
                             </label>
                             <!--end::Label-->
 
                             <!--begin::Input-->
-                            <select class="form-select" aria-label="Select example" name="company_id">
+                            <select class="form-select" aria-label="Select example" name="country_id">
                                 
-                                @foreach($company as $companies)
-                                <option value="{{$companies->id}}" {{($region->company_id == $companies->id) ? 'selected' : ''}}>{{$companies->company_name}}</option>
+                                @foreach($country as $countries)
+                                <option value="{{$countries->id}}" {{($region->company_id == $countries->id) ? 'selected' : ''}}>{{$countries->country_name}}</option>
                                 @endforeach
                                 
                             </select>
                             <!--end::Input-->
-                            @if($errors->has('company_id'))
-                            <span class="text-danger">{{ $errors->first('company_id') }}</span>
+                            @if($errors->has('country_id'))
+                            <span class="text-danger">{{ $errors->first('country_id') }}</span>
                             @endif
                             <div class="fv-plugins-message-container invalid-feedback"></div>
                         </div>

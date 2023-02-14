@@ -81,4 +81,11 @@ class StateController extends Controller
 
         return redirect()->route('state_list')->with('success', 'Changes saved Successfully!');
     }
+
+    public function getState($id){
+
+        $state = State::where('country_id', $id)->get();
+
+        return $state;
+    }
 }

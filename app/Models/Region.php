@@ -9,8 +9,8 @@ class Region extends Model
 {
     use HasFactory;
 
-    public function company(){
+    public function country(){
         
-        return $this->belongsTo(Company::class,'company_id','id');
+        return $this->belongsTo(Country::class,'country_id','id');
     }
 }

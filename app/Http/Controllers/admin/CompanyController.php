@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Company;
+use App\Models\Country;
 use App\Models\FoodLicense;
 use Storage;
 use Auth;
@@ -20,7 +21,8 @@ class CompanyController extends Controller
     public function addCompany(){
 
         $license = FoodLicense::get();
-        return view('admin-view.company.add_company', compact('license'));
+        $country = Country::get();
+        return view('admin-view.company.add_company', compact('license','country'));
     }
 
     public function createCompany(Request $request){
@@ -30,12 +32,20 @@ class CompanyController extends Controller
             'company_logo' => 'required',
             'cin_no' => 'required',
             'registered_address' => 'required',
+            'country_id' => 'required',
+            'state_id' => 'required',
+            'city_id' => 'required',
+            'pincode' => 'required',
 
         ],[
             'company_name.required'=>'Company Name is Required',
             'company_logo.required'=>'Company Logo is Required',
             'cin_no.required'=>'CIN No. is required',
             'registered_address.required'=>'Registered Address is required',
+            'country_id.required'=>'country_id is required',
+            'state_id.required'=>'state_id is required',
+            'city_id.required'=>'city_id is required',
+            'pincode.required'=>'pincode is required',
         ]);
 
         $company = new Company();
@@ -43,6 +53,10 @@ class CompanyController extends Controller
         $company->food_license_id = $request->license_no;
         $company->cin_no = $request->cin_no;
         $company->registered_address = $request->registered_address;
+        $company->country_id = $request->country_id;
+        $company->state_id = $request->state_id;
+        $company->city_id = $request->city_id;
+        $company->pincode = $request->pincode;
         $company->created_by = Auth::user()->id;
         
         if ($request->file('company_logo')) {
@@ -66,7 +80,8 @@ class CompanyController extends Controller
 
         $company = Company::find(base64_decode($id));
         $license = FoodLicense::get();
-        return view('admin-view.company.edit_company', compact('company','license'));
+        $country = Country::get();
+        return view('admin-view.company.edit_company', compact('company','license','country'));
     }
 
     public function updateCompany(Request $request){
@@ -75,6 +90,10 @@ class CompanyController extends Controller
             'company_name' => 'required',
             'cin_no' => 'required',
             'registered_address' => 'required',
+            'country_id' => 'required',
+            'state_id' => 'required',
+            'city_id' => 'required',
+            'pincode' => 'required',
 
         ],[
             'company_name.required'=>'Company Name is Required',
@@ -88,6 +107,10 @@ class CompanyController extends Controller
         $company->food_license_id = $request->license_no;
         $company->cin_no = $request->cin_no;
         $company->registered_address = $request->registered_address;
+        $company->country_id = $request->country_id;
+        $company->state_id = $request->state_id;
+        $company->city_id = $request->city_id;
+        $company->pincode = $request->pincode;
         $company->created_by = Auth::user()->id;
         
         if ($request->file('company_logo')) {

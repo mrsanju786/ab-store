@@ -39,7 +39,7 @@
                     <tr class="fw-bold text-muted">
                         <th class="min-w-150px">#</th>
                         <th class="min-w-150px">Name</th>
-                        <th class="min-w-150px">Company</th>
+                        <th class="min-w-150px">Country</th>
                         <th class="min-w-100px text-end">Actions</th>
                     </tr>
                 </thead>
@@ -59,7 +59,7 @@
                         </td>
 
                         <td>
-                            <span class="text-dark fw-bold d-block fs-6">{{$regions->company->company_name ?? 'NA'}}</span>
+                            <span class="text-dark fw-bold d-block fs-6">{{$regions->country->country_name ?? 'NA'}}</span>
                         </td>
 
                         <td>

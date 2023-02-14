@@ -136,6 +136,7 @@ Route::group(['prefix' => 'admin'], function()
         Route::post('/create-state', [StateController::class, 'createState'])->name('create-state');
         Route::get('/edit-state/{id}', [StateController::class, 'editState'])->name('edit-state');
         Route::post('/update-state', [StateController::class, 'updateState'])->name('update-state');
+        Route::get('/get-state/{id}', [StateController::class, 'getState'])->name('get-state');
 
         /**
          * City Routes
@@ -145,6 +146,7 @@ Route::group(['prefix' => 'admin'], function()
         Route::post('/create-city', [CityController::class, 'createCity'])->name('create-city');
         Route::get('/edit-city/{id}', [CityController::class, 'editCity'])->name('edit-city');
         Route::post('/update-city', [CityController::class, 'updateCity'])->name('update-city');
+        Route::get('/get-city/{id}', [CityController::class, 'getCity'])->name('get-city');
         /**
          * User Routes
          */

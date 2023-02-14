@@ -117,6 +117,30 @@
                             <div class="fv-row mb-10 fv-plugins-icon-container">
                                 <!--begin::Label-->
                                 <label class="fs-5 fw-bold form-label mb-2">
+                                    <span class="required">Select Country</span>
+                                </label>
+                                <!--end::Label-->
+
+                                <!--begin::Input-->
+                                <select class="form-select form-select-solid" aria-label="Select example" name="country_id" id="country_id" data-control="select2" >
+                                    <option>Select Country</option>
+                                    @foreach($country as $countries)
+                                    <option value="{{$countries->id}}">{{$countries->country_name}}</option>
+                                    @endforeach
+                                    
+                                </select>
+                                <!--end::Input-->
+                                @if($errors->has('country_id'))
+                                <span class="text-danger">{{ $errors->first('country_id') }}</span>
+                                @endif
+                                <div class="fv-plugins-message-container invalid-feedback"></div>
+                            </div>
+                            <!--end::Input group-->
+
+                            <!--begin::Input group-->
+                            <div class="fv-row mb-10 fv-plugins-icon-container">
+                                <!--begin::Label-->
+                                <label class="fs-5 fw-bold form-label mb-2">
                                     <span class="required">Registered Address</span>
                                 </label>
                                 <!--end::Label-->
@@ -129,6 +153,66 @@
                                 <!--end::Input-->
                                 @if($errors->has('registered_address'))
                                 <span class="text-danger">{{ $errors->first('registered_address') }}</span>
+                                @endif
+                                <div class="fv-plugins-message-container invalid-feedback"></div>
+                            </div>
+                            <!--end::Input group-->
+
+                            <!--begin::Input group-->
+                            <div class="fv-row mb-10 fv-plugins-icon-container">
+                                <!--begin::Label-->
+                                <label class="fs-5 fw-bold form-label mb-2">
+                                    <span class="required">Select State</span>
+                                </label>
+                                <!--end::Label-->
+
+                                <!--begin::Input-->
+                                <select class="form-select form-select-solid" aria-label="Select example" name="state_id" id="state_id" data-control="select2" >
+                                    <option value="">Select Country</option>                                    
+                                </select>
+                                <!--end::Input-->
+                                @if($errors->has('country_id'))
+                                <span class="text-danger">{{ $errors->first('country_id') }}</span>
+                                @endif
+                                <div class="fv-plugins-message-container invalid-feedback"></div>
+                            </div>
+                            <!--end::Input group-->
+
+                            <!--begin::Input group-->
+                            <div class="fv-row mb-10 fv-plugins-icon-container">
+                                <!--begin::Label-->
+                                <label class="fs-5 fw-bold form-label mb-2">
+                                    <span class="required">Select City</span>
+                                </label>
+                                <!--end::Label-->
+
+                                <!--begin::Input-->
+                                <select class="form-select form-select-solid" aria-label="Select example" name="city_id" id="city_id" data-control="select2" >
+                                    <option value="">Select City</option>
+                                    
+                                </select>
+                                <!--end::Input-->
+                                @if($errors->has('country_id'))
+                                <span class="text-danger">{{ $errors->first('country_id') }}</span>
+                                @endif
+                                <div class="fv-plugins-message-container invalid-feedback"></div>
+                            </div>
+                            <!--end::Input group-->
+
+                            <!--begin::Input group-->
+                            <div class="fv-row mb-10 fv-plugins-icon-container">
+                                <!--begin::Label-->
+                                <label class="fs-5 fw-bold form-label mb-2">
+                                    <span class="required">Pincode</span>
+                                </label>
+                                <!--end::Label-->
+
+                                <!--begin::Input-->
+                                <input class="form-control form-control-solid" placeholder="pincode"
+                                    name="pincode">
+                                <!--end::Input-->
+                                @if($errors->has('pincode'))
+                                <span class="text-danger">{{ $errors->first('pincode') }}</span>
                                 @endif
                                 <div class="fv-plugins-message-container invalid-feedback"></div>
                             </div>
@@ -191,5 +275,40 @@ $(document).ready(function() {
 
     });
 });
+
+$('#country_id').on('change', function(){
+    var country_id = $(this).val();
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        url: "{{ url('admin/get-state') }}/" + country_id,
+        type: "GET",
+        success: function(response) {
+            $.each(response,function(key, value)
+            {
+                $("#state_id").append('<option value=' + value.id + '>' + value.state_name + '</option>');
+            });
+        }
+    });
+});
+
+$('#state_id').on('change', function(){
+    var state_id = $(this).val();
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        url: "{{ url('admin/get-city') }}/" + state_id,
+        type: "GET",
+        success: function(response) {
+            $.each(response,function(key, value)
+            {
+                $("#city_id").append('<option value=' + value.id + '>' + value.city_name + '</option>');
+            });
+        }
+    });
+});
+
 </script>
 @endsection

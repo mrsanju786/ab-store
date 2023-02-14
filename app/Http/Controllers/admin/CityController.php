@@ -66,4 +66,11 @@ class CityController extends Controller
 
         return redirect()->route('city_list')->with('success', 'Changes saved Successfully!');
     }
+
+    public function getCity($id){
+
+        $city = City::where('state_id', $id)->get();
+
+        return $city;
+    }
 }
