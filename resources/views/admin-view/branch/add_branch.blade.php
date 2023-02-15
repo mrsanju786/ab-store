@@ -189,42 +189,48 @@
                                         <input type="checkbox" class="form-check-input" name="is_pos" id="is_pos"> &nbsp;Mobile App Ordering
                                         <input type="checkbox" class="form-check-input" name="is_pos" id="is_pos"> &nbsp;Table / Room Odering
                                     </div> -->
-
-                                    <label class="form-check form-check-custom form-check-inline form-check-solid me-5">
+<br>
+<br>
+                                    <label class="form-check form-check-custom form-check-inline form-check-solid me-5 form-check-success">
                                     <input class="form-check-input" name="is_pos" type="checkbox" value="1">
                                     <span class="fw-semibold ps-2 fs-6">
                                     POS
                                     </span>
                                     </label>
-
-                                    <label class="form-check form-check-custom form-check-inline form-check-solid me-5">
+<br>
+<br>
+                                    <label class="form-check form-check-custom form-check-inline form-check-solid me-5 form-check-success">
                                     <input class="form-check-input" name="is_sok" type="checkbox" value="1">
                                     <span class="fw-semibold ps-2 fs-6">
                                     Self Ordering Kiosk
                                     </span>
                                     </label>
-
-                                    <label class="form-check form-check-custom form-check-inline form-check-solid me-5">
+<br>
+<br>
+                                    <label class="form-check form-check-custom form-check-inline form-check-solid me-5 form-check-success">
                                     <input class="form-check-input" name="is_qrcode" type="checkbox" value="1">
                                     <span class="fw-semibold ps-2 fs-6">
                                     Qr Code Based web ordering
                                     </span>
                                     </label>
-
-                                    <label class="form-check form-check-custom form-check-inline form-check-solid me-5">
+<br>
+<br>
+                                    <label class="form-check form-check-custom form-check-inline form-check-solid me-5 form-check-success">
                                     <input class="form-check-input" name="is_mobile_ordering" type="checkbox" value="1">
                                     <span class="fw-semibold ps-2 fs-6">
                                     Mobile App Ordering
                                     </span>
                                     </label>
-
-                                    <label class="form-check form-check-custom form-check-inline form-check-solid me-5">
+<br>
+<br>
+                                    <label class="form-check form-check-custom form-check-inline form-check-solid me-5 form-check-success">
                                     <input class="form-check-input" name="is_table_room" type="checkbox" value="1">
                                     <span class="fw-semibold ps-2 fs-6">
                                     Table / Room Odering
                                     </span>
                                     </label>
-                                    
+                                  <br>  
+                                  <br>
                                     <!--end::Input-->
                                     @if($errors->has('contact_number'))
                                     <span class="text-danger">{{ $errors->first('contact_number') }}</span>
