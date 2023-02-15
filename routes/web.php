@@ -15,6 +15,8 @@ use App\Http\Controllers\admin\TimezoneController;
 use App\Http\Controllers\admin\CountryController;
 use App\Http\Controllers\admin\StateController;
 use App\Http\Controllers\admin\CityController;
+use App\Http\Controllers\admin\LocationController;
+use App\Http\Controllers\admin\LocationDiscountController;
 
 
 /*
@@ -178,6 +180,26 @@ Route::group(['prefix' => 'admin'], function()
         Route::get('/edit-branch/{id}', [BranchController::class, 'editBranch'])->name('edit-branch');
         Route::post('/update-branch', [BranchController::class, 'updateBranch'])->name('update-branch');
         Route::get('/branch-status/{id}/{status}', [BranchController::class, 'branchStatus'])->name('branch-status');
+
+        /**
+         * Location Routes
+         */
+        Route::get('/location-list', [LocationController::class, 'index'])->name('location_list');
+        Route::get('/add-location', [LocationController::class, 'addLocation'])->name('add-location');
+        Route::post('/create-location', [LocationController::class, 'createLocation'])->name('create-location');
+        Route::get('/edit-location/{id}', [LocationController::class, 'editLocation'])->name('edit-location');
+        Route::post('/update-location', [LocationController::class, 'updateLocation'])->name('update-location');
+        Route::get('/location-status/{id}/{status}', [LocationController::class, 'locationStatus'])->name('location-status');
+
+        /**
+         * Location Discount Routes
+         */
+        Route::get('/location-discount-list', [LocationDiscountController::class, 'index'])->name('location-discount-list');
+        Route::get('/add-location-discount', [LocationDiscountController::class, 'addLocationDiscount'])->name('add-location-discount');
+        Route::post('/create-location-discount', [LocationDiscountController::class, 'createLocationDiscount'])->name('create-location-discount');
+        Route::get('/edit-location-discount/{id}', [LocationDiscountController::class, 'editLocationDiscount'])->name('edit-location-discount');
+        Route::post('/update-location-discount', [LocationDiscountController::class, 'updateLocationDiscount'])->name('update-location-discount');
+        Route::get('/location-discount-status/{id}/{status}', [LocationDiscountController::class, 'LocationDiscountStatus'])->name('location-discount-status');
         /**
          * User Routes
          */

@@ -26,6 +26,8 @@ class CreateLocationsTable extends Migration
             $table->string('license_name')->nullable();
             $table->string('license_format')->nullable();
             $table->integer('branch_id')->nullable();
+            $table->integer('country_id')->nullable();
+            $table->integer('is_active')->default('1');
             $table->timestamps();
         });
     }
