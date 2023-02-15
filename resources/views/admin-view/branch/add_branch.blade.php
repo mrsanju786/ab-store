@@ -39,30 +39,6 @@
                                 <div class="fv-row mb-10 fv-plugins-icon-container">
                                     <!--begin::Label-->
                                     <label class="fs-5 fw-bold form-label mb-2">
-                                        <span class="required">Select Region</span>
-                                    </label>
-                                    <!--end::Label-->
-
-                                    <!--begin::Input-->
-                                    <select class="form-select form-select-solid" aria-label="Select example" name="region_id" data-control="select2">
-                                        <option>Select Region</option>
-                                        @foreach($region_list as $region)
-                                        <option value="{{$region->id}}">{{$region->region_name}}</option>
-                                        @endforeach
-                                        
-                                    </select>
-                                    <!--end::Input-->
-                                    @if($errors->has('region_id'))
-                                    <span class="text-danger">{{ $errors->first('region_id') }}</span>
-                                    @endif
-                                    <div class="fv-plugins-message-container invalid-feedback"></div>
-                                </div>
-                                <!--end::Input group-->
-
-                                <!--begin::Input group-->
-                                <div class="fv-row mb-10 fv-plugins-icon-container">
-                                    <!--begin::Label-->
-                                    <label class="fs-5 fw-bold form-label mb-2">
                                         <span class="required">Branch Name</span>
                                     </label>
                                     <!--end::Label-->
@@ -168,6 +144,29 @@
                                     <!--end::Input-->
                                     @if($errors->has('license_no'))
                                     <span class="text-danger">{{ $errors->first('license_no') }}</span>
+                                    @endif
+                                    <div class="fv-plugins-message-container invalid-feedback"></div>
+                                </div>
+                                <!--end::Input group-->
+
+                                <!--begin::Input group-->
+                                <div class="fv-row mb-10 fv-plugins-icon-container">
+                                    <!--begin::Label-->
+                                    <label class="fs-5 fw-bold form-label mb-2">
+                                        <span class="required">Select Company</span>
+                                    </label>
+                                    <!--end::Label-->
+
+                                    <!--begin::Input-->
+                                    <select class="form-select form-select-solid" aria-label="Select example" name="company_id" id="company_id" data-control="select2" >
+                                        <option value="">Select Company</option>
+                                        @foreach($company as $companies)
+                                        <option value="{{$companies->id}}">{{$companies->company_name}}</option>
+                                        @endforeach                                   
+                                    </select>
+                                    <!--end::Input-->
+                                    @if($errors->has('company_id'))
+                                    <span class="text-danger">{{ $errors->first('company_id') }}</span>
                                     @endif
                                     <div class="fv-plugins-message-container invalid-feedback"></div>
                                 </div>

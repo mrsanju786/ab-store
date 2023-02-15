@@ -13,7 +13,7 @@
             <div class="card-header">
                 <!--begin::Card title-->
                 <div class="card-title">
-                    <h2>Edit Branch</h2>
+                    <h2>Edit Location</h2>
                 </div>
                 <!--end::Card title-->
             </div>
@@ -30,25 +30,25 @@
                     <div class="card-body pt-1">
 
                         <!--begin::Form-->
-                        <form action="{{route('update-branch')}}" method="POST" enctype="multipart/form-data">
+                        <form action="{{route('update-location')}}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <!--begin::Scroll-->
-                            <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_add_role_scroll">
+                            <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_add_role_scroll">  
 
                                 <!--begin::Input group-->
                                 <div class="fv-row mb-10 fv-plugins-icon-container">
                                     <!--begin::Label-->
                                     <label class="fs-5 fw-bold form-label mb-2">
-                                        <span class="required">Branch Name</span>
+                                        <span class="required">Address</span>
                                     </label>
                                     <!--end::Label-->
 
                                     <!--begin::Input-->
-                                    <input class="form-control form-control-solid" placeholder="Enter Branch Name"
-                                        name="branch_name" value="{{$branch->name}}">
+                                    <textarea class="form-control form-control-solid" placeholder="Enter Address"
+                                        name="location_address">{{$location->address}}</textarea>
                                     <!--end::Input-->
-                                    @if($errors->has('branch_name'))
-                                    <span class="text-danger">{{ $errors->first('branch_name') }}</span>
+                                    @if($errors->has('location_address'))
+                                    <span class="text-danger">{{ $errors->first('location_address') }}</span>
                                     @endif
                                     <div class="fv-plugins-message-container invalid-feedback"></div>
                                 </div>
@@ -58,13 +58,76 @@
                                 <div class="fv-row mb-10 fv-plugins-icon-container">
                                     <!--begin::Label-->
                                     <label class="fs-5 fw-bold form-label mb-2">
-                                        <span class="required">Branch Code</span>
+                                        <span class="required">Select State</span>
                                     </label>
                                     <!--end::Label-->
 
                                     <!--begin::Input-->
-                                    <input class="form-control form-control-solid" placeholder="Enter Branch Code"
-                                        name="branch_code" value="{{$branch->branch_code}}">
+                                    <select class="form-select form-select-solid" aria-label="Select example" name="state_id" id="state_id" data-control="select2" >
+                                        <option>Select State</option>
+                                        @foreach($state as $states)
+                                        <option value="{{$states->id}}" {{($location->state_id == $states->id)? 'selected' : ''}}>{{$states->state_name}}</option>
+                                        @endforeach                                   
+                                    </select>
+                                    <!--end::Input-->
+                                    @if($errors->has('state_id'))
+                                    <span class="text-danger">{{ $errors->first('state_id') }}</span>
+                                    @endif
+                                    <div class="fv-plugins-message-container invalid-feedback"></div>
+                                    </div>
+                                    <!--end::Input group-->
+
+                                <!--begin::Input group-->
+                                <div class="fv-row mb-10 fv-plugins-icon-container">
+                                    <!--begin::Label-->
+                                    <label class="fs-5 fw-bold form-label mb-2">
+                                        <span class="required">Select City</span>
+                                    </label>
+                                    <!--end::Label-->
+
+                                    <!--begin::Input-->
+                                    <select class="form-select form-select-solid" aria-label="Select example" name="city_id" id="city_id" data-control="select2" >
+                                        <option value="">Select City</option>
+                                        
+                                    </select>
+                                    <!--end::Input-->
+                                    @if($errors->has('city_id'))
+                                    <span class="text-danger">{{ $errors->first('city_id') }}</span>
+                                    @endif
+                                    <div class="fv-plugins-message-container invalid-feedback"></div>
+                                </div>
+                                <!--end::Input group-->
+
+                                <!--begin::Input group-->
+                                <div class="fv-row mb-10 fv-plugins-icon-container">
+                                    <!--begin::Label-->
+                                    <label class="fs-5 fw-bold form-label mb-2">
+                                        <span class="required">Pincode</span>
+                                    </label>
+                                    <!--end::Label-->
+
+                                    <!--begin::Input-->
+                                    <input class="form-control form-control-solid" placeholder="pincode"
+                                        name="pincode" value="{{$location->pincode}}">
+                                    <!--end::Input-->
+                                    @if($errors->has('pincode'))
+                                    <span class="text-danger">{{ $errors->first('pincode') }}</span>
+                                    @endif
+                                    <div class="fv-plugins-message-container invalid-feedback"></div>
+                                </div>
+                                <!--end::Input group-->
+
+                                <!--begin::Input group-->
+                                <div class="fv-row mb-10 fv-plugins-icon-container">
+                                    <!--begin::Label-->
+                                    <label class="fs-5 fw-bold form-label mb-2">
+                                        <span class="required">Vip Percent</span>
+                                    </label>
+                                    <!--end::Label-->
+
+                                    <!--begin::Input-->
+                                    <input type="number" class="form-control form-control-solid" placeholder="Enter Vip Percent"
+                                        name="vip_percent" value="{{$location->vip_percent}}">
                                     <!--end::Input-->
                                     @if($errors->has('branch_code'))
                                     <span class="text-danger">{{ $errors->first('branch_code') }}</span>
@@ -77,16 +140,16 @@
                                 <div class="fv-row mb-10 fv-plugins-icon-container">
                                     <!--begin::Label-->
                                     <label class="fs-5 fw-bold form-label mb-2">
-                                        <span class="required">Branch Manager</span>
+                                        <span class="required">VVip Percent</span>
                                     </label>
                                     <!--end::Label-->
 
                                     <!--begin::Input-->
-                                    <input class="form-control form-control-solid" placeholder="Branch Manager"
-                                        name="branch_manager" value="{{$branch->branch_manager}}">
+                                    <input type="number" class="form-control form-control-solid" placeholder="VVip Percent"
+                                        name="vvip_percent" value="{{$location->vvip_percent}}">
                                     <!--end::Input-->
-                                    @if($errors->has('branch_manager'))
-                                    <span class="text-danger">{{ $errors->first('branch_manager') }}</span>
+                                    @if($errors->has('vvip_percent'))
+                                    <span class="text-danger">{{ $errors->first('vvip_percent') }}</span>
                                     @endif
                                     <div class="fv-plugins-message-container invalid-feedback"></div>
                                 </div>
@@ -96,16 +159,16 @@
                                 <div class="fv-row mb-10 fv-plugins-icon-container">
                                     <!--begin::Label-->
                                     <label class="fs-5 fw-bold form-label mb-2">
-                                        <span class="required">Contact Number</span>
+                                        <span class="required">License Name</span>
                                     </label>
                                     <!--end::Label-->
 
                                     <!--begin::Input-->
-                                    <input class="form-control form-control-solid" placeholder="Contact Number"
-                                        name="contact_number" value="{{$branch->contact_number}}">
+                                    <input class="form-control form-control-solid" placeholder="License Name"
+                                        name="license_name" value="{{$location->license_name}}">
                                     <!--end::Input-->
-                                    @if($errors->has('contact_number'))
-                                    <span class="text-danger">{{ $errors->first('contact_number') }}</span>
+                                    @if($errors->has('license_name'))
+                                    <span class="text-danger">{{ $errors->first('license_name') }}</span>
                                     @endif
                                     <div class="fv-plugins-message-container invalid-feedback"></div>
                                 </div>
@@ -115,115 +178,39 @@
                                 <div class="fv-row mb-10 fv-plugins-icon-container">
                                     <!--begin::Label-->
                                     <label class="fs-5 fw-bold form-label mb-2">
-                                        <span>GST Number</span>
+                                        <span>License Format</span>
                                     </label>
                                     <!--end::Label-->
 
                                     <!--begin::Input-->
-                                    <input class="form-control form-control-solid" placeholder="GST Number"
-                                        name="gst_no" value="{{$branch->gst_no}}">
+                                    <input class="form-control form-control-solid" placeholder="License Format"
+                                        name="license_format" value="{{$location->license_format}}">
                                     <!--end::Input-->
-                                    @if($errors->has('gst_no'))
-                                    <span class="text-danger">{{ $errors->first('gst_no') }}</span>
+                                    @if($errors->has('license_format'))
+                                    <span class="text-danger">{{ $errors->first('license_format') }}</span>
                                     @endif
                                     <div class="fv-plugins-message-container invalid-feedback"></div>
                                 </div>
                                 <!--end::Input group-->
 
-                                <!--begin::Input group-->
-                                <div class="fv-row mb-10 fv-plugins-icon-container">
-                                    <!--begin::Label-->
-                                    <label class="fs-5 fw-bold form-label mb-2">
-                                        <span>License Number</span>
-                                    </label>
-                                    <!--end::Label-->
-
-                                    <!--begin::Input-->
-                                    <input class="form-control form-control-solid" placeholder="License Number"
-                                        name="license_no" value="{{$branch->license_no}}">
-                                    <!--end::Input-->
-                                    @if($errors->has('license_no'))
-                                    <span class="text-danger">{{ $errors->first('license_no') }}</span>
-                                    @endif
-                                    <div class="fv-plugins-message-container invalid-feedback"></div>
-                                </div>
-                                <!--end::Input group-->
-
-                                <!--begin::Input group-->
-                                <div class="fv-row mb-10 fv-plugins-icon-container">
-                                    <!--begin::Label-->
-                                    <label class="fs-5 fw-bold form-label mb-2">
-                                        <span class="required">Select Company</span>
-                                    </label>
-                                    <!--end::Label-->
-
-                                    <!--begin::Input-->
-                                    <select class="form-select form-select-solid" aria-label="Select example" name="company_id" id="company_id" data-control="select2" >
-                                        <option value="">Select Company</option>
-                                        @foreach($company as $companies)
-                                        <option value="{{$companies->id}}" {{($companies->id == $branch->company_id)? 'selected':''}}>{{$companies->company_name}}</option>
+                                <!--begin::Label-->
+                                <label class="fs-5 fw-bold form-label mb-2">
+                                    <span class="required">Select Branch</span>
+                                </label>
+                                <!--begin::Input-->
+                                <select class="form-select form-select-solid" aria-label="Select example" name="branch_id" id="branch_id" data-control="select2" >
+                                        <option value="">Select Branch</option>
+                                        @foreach($branch as $branches)
+                                        <option value="{{$branches->id}}" {{($branches->id == $location->branch_id)?'selected':''}}>{{$branches->name}}</option>
                                         @endforeach                                   
                                     </select>
-                                    <!--end::Input-->
-                                    @if($errors->has('company_id'))
-                                    <span class="text-danger">{{ $errors->first('company_id') }}</span>
-                                    @endif
-                                    <div class="fv-plugins-message-container invalid-feedback"></div>
+                                <!--end::Input-->
+                                @if($errors->has('branch_id'))
+                                <span class="text-danger">{{ $errors->first('branch_id') }}</span>
+                                @endif
+                                <div class="fv-plugins-message-container invalid-feedback"></div>
                                 </div>
                                 <!--end::Input group-->
-
-                                <!--begin::Input group-->
-                                <div class="fv-row mb-10 fv-plugins-icon-container">
-                                    <!--begin::Label-->
-                                    <label class="fs-5 fw-bold form-label mb-2">
-                                        <span class="required">Branch Service</span>
-                                    </label>
-                                    <!--end::Label-->
-
-                                    <!--begin::Input-->
-                                    <label class="form-check form-check-custom form-check-inline form-check-solid me-5">
-                                    <input class="form-check-input" name="is_pos" type="checkbox" value="1" {{($branch->is_pos == 1)? 'checked' : ''}}>
-                                    <span class="fw-semibold ps-2 fs-6">
-                                    POS
-                                    </span>
-                                    </label>
-
-                                    <label class="form-check form-check-custom form-check-inline form-check-solid me-5">
-                                    <input class="form-check-input" name="is_sok" type="checkbox" value="1" {{($branch->is_sok == 1)? 'checked' : ''}}>
-                                    <span class="fw-semibold ps-2 fs-6">
-                                    Self Ordering Kiosk
-                                    </span>
-                                    </label>
-
-                                    <label class="form-check form-check-custom form-check-inline form-check-solid me-5">
-                                    <input class="form-check-input" name="is_qrcode" type="checkbox" value="1" {{($branch->is_qrcode == 1)? 'checked' : ''}}>
-                                    <span class="fw-semibold ps-2 fs-6">
-                                    Qr Code Based web ordering
-                                    </span>
-                                    </label>
-
-                                    <label class="form-check form-check-custom form-check-inline form-check-solid me-5">
-                                    <input class="form-check-input" name="is_mobile_ordering" type="checkbox" value="1" {{($branch->is_mobile_ordering == 1)? 'checked' : ''}}>
-                                    <span class="fw-semibold ps-2 fs-6">
-                                    Mobile App Ordering
-                                    </span>
-                                    </label>
-
-                                    <label class="form-check form-check-custom form-check-inline form-check-solid me-5">
-                                    <input class="form-check-input" name="is_table_room" type="checkbox" value="1" {{($branch->is_table_room == 1)? 'checked' : ''}}>
-                                    <span class="fw-semibold ps-2 fs-6">
-                                    Table / Room Odering
-                                    </span>
-                                    </label>
-                                    
-                                    <!--end::Input-->
-                                    @if($errors->has('contact_number'))
-                                    <span class="text-danger">{{ $errors->first('contact_number') }}</span>
-                                    @endif
-                                    <div class="fv-plugins-message-container invalid-feedback"></div>
-                                </div>
-                                <!--end::Input group-->
-                                <input type="hidden" name="branch_id" id="branch_id" value="{{$branch->id}}">
 
                                 <!--begin::Actions-->
                                 <div class="text-left pt-3">
@@ -286,6 +273,43 @@ $(document).ready(function() {
         }
 
     });
+
+    $('#state_id').on('change', function(){
+    var state_id = $(this).val();
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "{{ url('admin/master/get-city') }}/" + state_id,
+            type: "GET",
+            success: function(response) {
+                
+                $.each(response,function(key, value)
+                {
+                    $("#city_id").append('<option value=' + value.id + '>' + value.city_name + '</option>');
+                });
+            }
+        });
+    });
+
+    var state_id = "{{$location->state_id}}";
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        url: "{{ url('admin/master/get-city') }}/" + state_id,
+        type: "GET",
+        success: function(response) {
+            var chk = "{{$location->city_id}}";
+            $.each(response,function(key, value)
+            {
+                $("#city_id").append('<option value=' + value.id + '>' + value.city_name + '</option>');
+            });
+            $('#city_id option[value='+chk+']').attr('selected','selected');
+        }
+    });
+
 });
+
 </script>
 @endsection

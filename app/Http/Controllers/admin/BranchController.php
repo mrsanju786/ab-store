@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Branch;
 use App\Models\Region;
+use App\Models\Company;
 use Storage;
 use Auth;
 
@@ -20,7 +21,8 @@ class BranchController extends Controller
     public function addBranch()
     {
         $region_list = Region::get();
-        return view('admin-view.branch.add_branch', compact('region_list'));
+        $company = Company::get();
+        return view('admin-view.branch.add_branch', compact('region_list','company'));
     }
 
     public function createBranch(Request $request){
@@ -30,6 +32,7 @@ class BranchController extends Controller
             'branch_code' => 'required',
             'branch_manager' => 'required',
             'contact_number' => 'required',
+            'company_id' => 'required',
         ]);
 
         $branch = new Branch();
@@ -44,6 +47,7 @@ class BranchController extends Controller
         $branch->is_qrcode = $request->is_qrcode ?? 0;
         $branch->is_mobile_ordering = $request->is_mobile_ordering ?? 0;
         $branch->is_table_room = $request->is_table_room ?? 0;
+        $branch->company_id = $request->company_id;
         $branch->save();
 
         return redirect()->route('branch_list')->with('success', 'Branch Added Successfully!');
@@ -52,7 +56,8 @@ class BranchController extends Controller
 
     public function editBranch($id){
         $branch = Branch::find(base64_decode($id));
-        return view('admin-view.branch.edit_branch', compact('branch'));
+        $company = Company::get();
+        return view('admin-view.branch.edit_branch', compact('branch','company'));
     }
 
     public function updateBranch(Request $request){
@@ -62,6 +67,7 @@ class BranchController extends Controller
             'branch_code' => 'required',
             'branch_manager' => 'required',
             'contact_number' => 'required',
+            'company_id' => 'required',
         ]);
 
         $id = $request->branch_id;
@@ -77,6 +83,7 @@ class BranchController extends Controller
         $branch->is_qrcode = $request->is_qrcode ?? 0;
         $branch->is_mobile_ordering = $request->is_mobile_ordering ?? 0;
         $branch->is_table_room = $request->is_table_room ?? 0;
+        $branch->company_id = $request->company_id;
         $branch->save();
 
         return redirect()->route('branch_list')->with('success', 'Changes saved Successfully!');
