@@ -17,6 +17,9 @@ use App\Http\Controllers\admin\StateController;
 use App\Http\Controllers\admin\CityController;
 use App\Http\Controllers\admin\LocationController;
 use App\Http\Controllers\admin\LocationDiscountController;
+use App\Http\Controllers\admin\TaxController;
+use App\Http\Controllers\admin\LocationTaxController;
+use App\Http\Controllers\admin\AreaController;
 
 
 /*
@@ -200,6 +203,38 @@ Route::group(['prefix' => 'admin'], function()
         Route::get('/edit-location-discount/{id}', [LocationDiscountController::class, 'editLocationDiscount'])->name('edit-location-discount');
         Route::post('/update-location-discount', [LocationDiscountController::class, 'updateLocationDiscount'])->name('update-location-discount');
         Route::get('/location-discount-status/{id}/{status}', [LocationDiscountController::class, 'LocationDiscountStatus'])->name('location-discount-status');
+        
+        
+        /**
+         * Tax Routes
+         */
+        Route::get('/tax-list', [TaxController::class, 'index'])->name('tax-list');
+        Route::get('/add-tax', [TaxController::class, 'addTax'])->name('add-tax');
+        Route::post('/create-tax', [TaxController::class, 'createTax'])->name('create-tax');
+        Route::get('/edit-tax/{id}', [TaxController::class, 'editTax'])->name('edit-tax');
+        Route::post('/update-tax', [TaxController::class, 'updateTax'])->name('update-tax');
+        
+        /**
+         * Location Tax Routes
+         */
+        Route::get('/location-tax-list', [LocationTaxController::class, 'index'])->name('location-tax-list');
+        Route::get('/add-location-tax', [LocationTaxController::class, 'addLocationTax'])->name('add-location-tax');
+        Route::post('/create-location-tax', [LocationTaxController::class, 'createLocationTax'])->name('create-location-tax');
+        Route::get('/edit-location-tax/{id}', [LocationTaxController::class, 'editLocationTax'])->name('edit-location-tax');
+        Route::post('/update-location-tax', [LocationTaxController::class, 'updateLocationTax'])->name('update-location-tax');
+        Route::get('/location-tax-status/{id}/{status}', [LocationTaxController::class, 'locationTaxStatus'])->name('location-tax-status');
+
+        /**
+         * Area Routes
+         */
+        Route::get('/area-list', [AreaController::class, 'index'])->name('area_list');
+        Route::get('/add-area', [AreaController::class, 'addArea'])->name('add-area');
+        Route::post('/create-area', [AreaController::class, 'createArea'])->name('create-area');
+        Route::get('/edit-area/{id}', [AreaController::class, 'editArea'])->name('edit-area');
+        Route::post('/update-area', [AreaController::class, 'updateArea'])->name('update-area');
+        Route::get('/area-status/{id}/{status}', [AreaController::class, 'areaStatus'])->name('area-status');
+
+
         /**
          * User Routes
          */
