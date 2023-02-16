@@ -32,25 +32,6 @@
                         @csrf
                         <!--begin::Scroll-->
                         <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_add_role_scroll">
-                            <!--begin::Input group-->
-                            <div class="fv-row mb-10 fv-plugins-icon-container">
-                                <!--begin::Label-->
-                                <label class="fs-5 fw-bold form-label mb-2">
-                                    <span class="required">City Name</span>
-                                </label>
-                                <!--end::Label-->
-
-                                <!--begin::Input-->
-                                <input class="form-control form-control-solid" placeholder="Enter City Name"
-                                    name="city_name">
-                                <!--end::Input-->
-                                @if($errors->has('city_name'))
-                                <span class="text-danger">{{ $errors->first('city_name') }}</span>
-                                @endif
-                                <div class="fv-plugins-message-container invalid-feedback"></div>
-                            </div>
-                            <!--end::Input group-->
-
                             <!--begin::Label-->
                             <div class="fv-row mb-10 fv-plugins-icon-container">
                                 <label class="fs-5 fw-bold form-label mb-2">
@@ -68,6 +49,25 @@
                                 <!--end::Input-->
                                 @if($errors->has('state_id'))
                                 <span class="text-danger">{{ $errors->first('state_id') }}</span>
+                                @endif
+                                <div class="fv-plugins-message-container invalid-feedback"></div>
+                            </div>
+                            <!--end::Input group-->
+                            
+                            <!--begin::Input group-->
+                            <div class="fv-row mb-10 fv-plugins-icon-container">
+                                <!--begin::Label-->
+                                <label class="fs-5 fw-bold form-label mb-2">
+                                    <span class="required">City Name</span>
+                                </label>
+                                <!--end::Label-->
+
+                                <!--begin::Input-->
+                                <input class="form-control form-control-solid" placeholder="Enter City Name"
+                                    name="city_name">
+                                <!--end::Input-->
+                                @if($errors->has('city_name'))
+                                <span class="text-danger">{{ $errors->first('city_name') }}</span>
                                 @endif
                                 <div class="fv-plugins-message-container invalid-feedback"></div>
                             </div>

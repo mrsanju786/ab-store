@@ -36,25 +36,6 @@
                         <div class="fv-row mb-10 fv-plugins-icon-container">
                             <!--begin::Label-->
                             <label class="fs-5 fw-bold form-label mb-2">
-                                <span class="required">Region name</span>
-                            </label>
-                            <!--end::Label-->
-
-                            <!--begin::Input-->
-                            <input class="form-control form-control-solid" placeholder="Enter Region name"
-                                name="region_name">
-                            <!--end::Input-->
-                            @if($errors->has('region_name'))
-                            <span class="text-danger">{{ $errors->first('region_name') }}</span>
-                            @endif
-                            <div class="fv-plugins-message-container invalid-feedback"></div>
-                        </div>
-                        <!--end::Input group-->
-
-                        <!--begin::Input group-->
-                        <div class="fv-row mb-10 fv-plugins-icon-container">
-                            <!--begin::Label-->
-                            <label class="fs-5 fw-bold form-label mb-2">
                                 <span class="required">Select Country</span>
                             </label>
                             <!--end::Label-->
@@ -70,6 +51,25 @@
                             <!--end::Input-->
                             @if($errors->has('country_id'))
                             <span class="text-danger">{{ $errors->first('country_id') }}</span>
+                            @endif
+                            <div class="fv-plugins-message-container invalid-feedback"></div>
+                        </div>
+                        <!--end::Input group-->
+                        
+                        <!--begin::Input group-->
+                        <div class="fv-row mb-10 fv-plugins-icon-container">
+                            <!--begin::Label-->
+                            <label class="fs-5 fw-bold form-label mb-2">
+                                <span class="required">Region name</span>
+                            </label>
+                            <!--end::Label-->
+
+                            <!--begin::Input-->
+                            <input class="form-control form-control-solid" placeholder="Enter Region name"
+                                name="region_name">
+                            <!--end::Input-->
+                            @if($errors->has('region_name'))
+                            <span class="text-danger">{{ $errors->first('region_name') }}</span>
                             @endif
                             <div class="fv-plugins-message-container invalid-feedback"></div>
                         </div>

@@ -32,6 +32,50 @@
                         @csrf
                         <!--begin::Scroll-->
                         <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_add_role_scroll">
+
+                            <!--begin::Label-->
+                            <label class="fs-5 fw-bold form-label mb-2">
+                                <span class="required">Select Country</span>
+                            </label>
+                            <!--end::Label-->
+                            <!--begin::Input-->
+                            <select class="form-select form-select-solid" aria-label="Select example" name="country_id" data-control="select2">
+                                <option value="">Select Country</option>
+                                @foreach($country as $countries)
+                                <option value="{{$countries->id}}" {{($countries->id == $state->country_id) ? 'selected' : ''}}>{{$countries->country_name}}</option>
+                                @endforeach
+                                
+                            </select>
+                            <!--end::Input-->
+                            @if($errors->has('country_id'))
+                            <span class="text-danger">{{ $errors->first('country_id') }}</span>
+                            @endif
+                            <div class="fv-plugins-message-container invalid-feedback"></div>
+                            </div>
+                            <!--end::Input group-->
+                        
+                            <!--begin::Label-->
+                            <div class="fv-row mb-10 fv-plugins-icon-container">
+                                <label class="fs-5 fw-bold form-label mb-2">
+                                    <span class="required">Select Region</span>
+                                </label>
+                                <!--end::Label-->
+                                <!--begin::Input-->
+                                <select class="form-select form-select-solid" aria-label="Select example" name="region_id" data-control="select2">
+                                    <option>Select Region</option>
+                                    @foreach($region as $regions)
+                                    <option value="{{$regions->id}}" {{($regions->id == $state->region_id) ? 'selected' : ''}}>{{$regions->region_name}}</option>
+                                    @endforeach
+                                    
+                                </select>
+                                <!--end::Input-->
+                                @if($errors->has('region_id'))
+                                <span class="text-danger">{{ $errors->first('region_id') }}</span>
+                                @endif
+                                <div class="fv-plugins-message-container invalid-feedback"></div>
+                            </div>
+                            <!--end::Input group-->
+
                             <!--begin::Input group-->
                             <div class="fv-row mb-10 fv-plugins-icon-container">
                                 <!--begin::Label-->
@@ -71,48 +115,7 @@
                             </div>
                             <!--end::Input group-->
 
-                            <!--begin::Label-->
-                            <label class="fs-5 fw-bold form-label mb-2">
-                                <span class="required">Select Country</span>
-                            </label>
-                            <!--end::Label-->
-                            <!--begin::Input-->
-                            <select class="form-select form-select-solid" aria-label="Select example" name="country_id" data-control="select2">
-                                <option value="">Select Country</option>
-                                @foreach($country as $countries)
-                                <option value="{{$countries->id}}" {{($countries->id == $state->country_id) ? 'selected' : ''}}>{{$countries->country_name}}</option>
-                                @endforeach
-                                
-                            </select>
-                            <!--end::Input-->
-                            @if($errors->has('country_id'))
-                            <span class="text-danger">{{ $errors->first('country_id') }}</span>
-                            @endif
-                            <div class="fv-plugins-message-container invalid-feedback"></div>
-                            </div>
-                            <!--end::Input group-->
-                        
-                        <!--begin::Label-->
-                        <div class="fv-row mb-10 fv-plugins-icon-container">
-                                <label class="fs-5 fw-bold form-label mb-2">
-                                    <span class="required">Select Region</span>
-                                </label>
-                                <!--end::Label-->
-                                <!--begin::Input-->
-                                <select class="form-select form-select-solid" aria-label="Select example" name="region_id" data-control="select2">
-                                    <option>Select Region</option>
-                                    @foreach($region as $regions)
-                                    <option value="{{$regions->id}}" {{($regions->id == $state->region_id) ? 'selected' : ''}}>{{$regions->region_name}}</option>
-                                    @endforeach
-                                    
-                                </select>
-                                <!--end::Input-->
-                                @if($errors->has('region_id'))
-                                <span class="text-danger">{{ $errors->first('region_id') }}</span>
-                                @endif
-                                <div class="fv-plugins-message-container invalid-feedback"></div>
-                            </div>
-                            <!--end::Input group-->
+                            
                             <input type="hidden" name="state_id" id="state_id" value="{{$state->id}}">
 
                             <!--begin::Actions-->
