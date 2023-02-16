@@ -18,6 +18,7 @@
                 <!--end::Card title-->
             </div>
             <!--end::Card header-->
+            <br>
  <!--begin::Row-->
             <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
                 <!--begin::Col-->
@@ -206,7 +207,7 @@
                                 <!--end::Label-->
 
                                 <!--begin::Input-->
-                                <input class="form-control form-control-solid" placeholder="pincode"
+                                <input class="form-control form-control-solid" placeholder="Pincode"
                                     name="pincode" value="{{$company->pincode}}">
                                 <!--end::Input-->
                                 @if($errors->has('pincode'))

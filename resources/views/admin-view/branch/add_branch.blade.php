@@ -18,7 +18,7 @@
                 <!--end::Card title-->
             </div>
             <!--end::Card header-->
-
+            <br>
            
             <!--begin::Row-->
             <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
@@ -229,7 +229,6 @@
                                     </span>
                                     </label>
                                   <br>  
-                                  <br>
                                     <!--end::Input-->
                                     @if($errors->has('contact_number'))
                                     <span class="text-danger">{{ $errors->first('contact_number') }}</span>

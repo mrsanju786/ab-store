@@ -18,8 +18,7 @@
                 <!--end::Card title-->
             </div>
             <!--end::Card header-->
-
-            
+            <br>
             <!--begin::Row-->
             <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
                 <!--begin::Col-->
@@ -60,8 +59,8 @@
                                 <!--end::Label-->
 
                                 <!--begin::Input-->
-                                <input type="file" class="form-control form-control-solid" placeholder="Enter company name"
-                                title="Choose a video please"  name="company_logo">
+                                <input type="file" class="form-control form-control-solid" placeholder="Upload Company Logo"
+                                title="Choose an Image please"  name="company_logo">
                                 <!--end::Input-->
                                 @if($errors->has('company_logo'))
                                 <span class="text-danger">{{ $errors->first('company_logo') }}</span>
@@ -208,7 +207,7 @@
                                 <!--end::Label-->
 
                                 <!--begin::Input-->
-                                <input class="form-control form-control-solid" placeholder="pincode"
+                                <input class="form-control form-control-solid" placeholder="Pincode"
                                     name="pincode">
                                 <!--end::Input-->
                                 @if($errors->has('pincode'))

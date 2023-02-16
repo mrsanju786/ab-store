@@ -18,7 +18,7 @@
                 <!--end::Card title-->
             </div>
             <!--end::Card header-->
-
+            <br>
            
             <!--begin::Row-->
             <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
@@ -211,7 +211,8 @@
                                 <div class="fv-plugins-message-container invalid-feedback"></div>
                                 </div>
                                 <!--end::Input group-->
-
+                                <br>
+                                <br>
                                 <!--begin::Actions-->
                                 <div class="text-left pt-3">
 

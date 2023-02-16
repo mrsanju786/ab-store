@@ -35,7 +35,7 @@
                         <div class="fv-row mb-10 fv-plugins-icon-container">
                             <!--begin::Label-->
                             <label class="fs-5 fw-bold form-label mb-2">
-                                <span class="required">Role name</span>
+                                <span class="required">Role Name</span>
                             </label>
                             <!--end::Label-->
 
@@ -82,11 +82,11 @@
                                             </td>
                                             <td>
                                                 <!--begin::Checkbox-->
-                                                <label class="form-check form-check-custom form-check-solid me-9">
+                                                <label class="form-check form-check-custom form-check-solid form-check-success me-9">
                                                     <input class="form-check-input" type="checkbox" value=""
                                                         id="kt_roles_select_all">
                                                     <span class="form-check-label" for="kt_roles_select_all">
-                                                        Select all
+                                                        Select All
                                                     </span>
                                                 </label>
                                                 <!--end::Checkbox-->
@@ -106,7 +106,7 @@
                                                 <div class="d-flex">
                                                     <!--begin::Checkbox-->
                                                     <label
-                                                        class="form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-20">
+                                                        class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
                                                         <input class="form-check-input" type="checkbox" value="dashboard"
                                                             name="permission[]">
                                                         <span class="form-check-label">
@@ -117,44 +117,44 @@
 
                                                                                                         <!--begin::Checkbox-->
                                                                                                         <label
-                                                        class="form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-20">
+                                                        class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
                                                         <input class="form-check-input" type="checkbox" value="role"
                                                             name="permission[]">
                                                         <span class="form-check-label">
-                                                        role
+                                                        Role
                                                         </span>
                                                     </label>
                                                     <!--end::Checkbox-->
 
                                                                                                         <!--begin::Checkbox-->
                                                                                                         <label
-                                                        class="form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-20">
+                                                        class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
                                                         <input class="form-check-input" type="checkbox" value="add-role"
                                                             name="permission[]">
                                                         <span class="form-check-label">
-                                                        add-role
+                                                        Add Role
                                                         </span>
                                                     </label>
                                                     <!--end::Checkbox-->
 
                                                                                                         <!--begin::Checkbox-->
                                                                                                         <label
-                                                        class="form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-20">
+                                                        class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
                                                         <input class="form-check-input" type="checkbox" value="edit-role"
                                                             name="permission[]">
                                                         <span class="form-check-label">
-                                                        edit-role
+                                                        Edit Role
                                                         </span>
                                                     </label>
                                                     <!--end::Checkbox-->
 
                                                                                                         <!--begin::Checkbox-->
                                                                                                         <label
-                                                        class="form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-20">
+                                                        class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
                                                         <input class="form-check-input" type="checkbox" value="update-role"
                                                             name="permission[]">
                                                         <span class="form-check-label">
-                                                            update-role
+                                                            Update Role
                                                         </span>
                                                     </label>
                                                     <!--end::Checkbox-->
@@ -178,7 +178,7 @@
                                                 <div class="d-flex">
                                                     <!--begin::Checkbox-->
                                                     <label
-                                                        class="form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-20">
+                                                        class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
                                                         <input class="form-check-input" type="checkbox" value="Read"
                                                             name="permission[]">
                                                         <span class="form-check-label">
@@ -189,7 +189,7 @@
 
                                                     <!--begin::Checkbox-->
                                                     <label
-                                                        class="form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-20">
+                                                        class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
                                                         <input class="form-check-input" type="checkbox" value="Write"
                                                             name="permission[]">
                                                         <span class="form-check-label">
@@ -200,7 +200,7 @@
 
                                                     <!--begin::Checkbox-->
                                                     <label
-                                                        class="form-check form-check-sm form-check-custom form-check-solid">
+                                                        class="form-check form-check-sm form-check-custom form-check-solid form-check-success">
                                                         <input class="form-check-input" type="checkbox" value="Create"
                                                             name="permission[]">
                                                         <span class="form-check-label" "="">
@@ -228,7 +228,7 @@
                                                 <div class="d-flex">
                                                     <!--begin::Checkbox-->
                                                     <label
-                                                        class="form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-20">
+                                                        class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
                                                         <input class="form-check-input" type="checkbox" value="Read1"
                                                             name="permission[]">
                                                         <span class="form-check-label">
@@ -239,7 +239,7 @@
 
                                                     <!--begin::Checkbox-->
                                                     <label
-                                                        class="form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-20">
+                                                        class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
                                                         <input class="form-check-input" type="checkbox" value="Write1"
                                                             name="permission[]">
                                                         <span class="form-check-label">
@@ -250,7 +250,7 @@
 
                                                     <!--begin::Checkbox-->
                                                     <label
-                                                        class="form-check form-check-sm form-check-custom form-check-solid">
+                                                        class="form-check form-check-sm form-check-custom form-check-solid form-check-success">
                                                         <input class="form-check-input" type="checkbox" value="Create1"
                                                             name="permission[]">
                                                         <span class="form-check-label" "="">
@@ -277,7 +277,7 @@
                                                 <div class="d-flex">
                                                     <!--begin::Checkbox-->
                                                     <label
-                                                        class="form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-20">
+                                                        class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
                                                         <input class="form-check-input" type="checkbox" value=""
                                                             name="permission[]">
                                                         <span class="form-check-label">
@@ -288,7 +288,7 @@
 
                                                     <!--begin::Checkbox-->
                                                     <label
-                                                        class="form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-20">
+                                                        class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
                                                         <input class="form-check-input" type="checkbox" value=""
                                                             name="permission[]">
                                                         <span class="form-check-label">
@@ -299,7 +299,7 @@
 
                                                     <!--begin::Checkbox-->
                                                     <label
-                                                        class="form-check form-check-sm form-check-custom form-check-solid">
+                                                        class="form-check form-check-sm form-check-custom form-check-solid form-check-success">
                                                         <input class="form-check-input" type="checkbox" value=""
                                                             name="permission[]">
                                                         <span class="form-check-label" "="">
@@ -326,7 +326,7 @@
                                                 <div class="d-flex">
                                                     <!--begin::Checkbox-->
                                                     <label
-                                                        class="form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-20">
+                                                        class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
                                                         <input class="form-check-input" type="checkbox" value=""
                                                             name="permission[]">
                                                         <span class="form-check-label">
@@ -337,7 +337,7 @@
 
                                                     <!--begin::Checkbox-->
                                                     <label
-                                                        class="form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-20">
+                                                        class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
                                                         <input class="form-check-input" type="checkbox" value=""
                                                             name="permission[]">
                                                         <span class="form-check-label">
@@ -348,7 +348,7 @@
 
                                                     <!--begin::Checkbox-->
                                                     <label
-                                                        class="form-check form-check-sm form-check-custom form-check-solid">
+                                                        class="form-check form-check-sm form-check-custom form-check-solid form-check-success">
                                                         <input class="form-check-input" type="checkbox" value=""
                                                             name="permission[]">
                                                         <span class="form-check-label" "="">
@@ -375,7 +375,7 @@
                                                 <div class="d-flex">
                                                     <!--begin::Checkbox-->
                                                     <label
-                                                        class="form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-20">
+                                                        class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
                                                         <input class="form-check-input" type="checkbox" value=""
                                                             name="permission[]">
                                                         <span class="form-check-label">
@@ -386,7 +386,7 @@
 
                                                     <!--begin::Checkbox-->
                                                     <label
-                                                        class="form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-20">
+                                                        class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
                                                         <input class="form-check-input" type="checkbox" value=""
                                                             name="permission[]">
                                                         <span class="form-check-label">
@@ -397,7 +397,7 @@
 
                                                     <!--begin::Checkbox-->
                                                     <label
-                                                        class="form-check form-check-sm form-check-custom form-check-solid">
+                                                        class="form-check form-check-sm form-check-custom form-check-solid form-check-success">
                                                         <input class="form-check-input" type="checkbox" value=""
                                                             name="permission[]">
                                                         <span class="form-check-label" "="">
@@ -424,7 +424,7 @@
                                                 <div class="d-flex">
                                                     <!--begin::Checkbox-->
                                                     <label
-                                                        class="form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-20">
+                                                        class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
                                                         <input class="form-check-input" type="checkbox" value=""
                                                             name="permission[]">
                                                         <span class="form-check-label">
@@ -435,7 +435,7 @@
 
                                                     <!--begin::Checkbox-->
                                                     <label
-                                                        class="form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-20">
+                                                        class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
                                                         <input class="form-check-input" type="checkbox" value=""
                                                             name="permission[]">
                                                         <span class="form-check-label">
@@ -446,7 +446,7 @@
 
                                                     <!--begin::Checkbox-->
                                                     <label
-                                                        class="form-check form-check-sm form-check-custom form-check-solid">
+                                                        class="form-check form-check-sm form-check-custom form-check-solid form-check-success">
                                                         <input class="form-check-input" type="checkbox" value=""
                                                             name="permission[]">
                                                         <span class="form-check-label" "="">
@@ -473,7 +473,7 @@
                                                 <div class="d-flex">
                                                     <!--begin::Checkbox-->
                                                     <label
-                                                        class="form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-20">
+                                                        class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
                                                         <input class="form-check-input" type="checkbox" value=""
                                                             name="permission[]">
                                                         <span class="form-check-label">
@@ -484,7 +484,7 @@
 
                                                     <!--begin::Checkbox-->
                                                     <label
-                                                        class="form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-20">
+                                                        class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
                                                         <input class="form-check-input" type="checkbox" value=""
                                                             name="permission[]">
                                                         <span class="form-check-label">
@@ -495,7 +495,7 @@
 
                                                     <!--begin::Checkbox-->
                                                     <label
-                                                        class="form-check form-check-sm form-check-custom form-check-solid">
+                                                        class="form-check form-check-sm form-check-custom form-check-solid form-check-success">
                                                         <input class="form-check-input" type="checkbox" value=""
                                                             name="permission[]">
                                                         <span class="form-check-label" "="">
@@ -522,7 +522,7 @@
                                                 <div class="d-flex">
                                                     <!--begin::Checkbox-->
                                                     <label
-                                                        class="form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-20">
+                                                        class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
                                                         <input class="form-check-input" type="checkbox" value=""
                                                             name="permission[]">
                                                         <span class="form-check-label">
@@ -533,7 +533,7 @@
 
                                                     <!--begin::Checkbox-->
                                                     <label
-                                                        class="form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-20">
+                                                        class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
                                                         <input class="form-check-input" type="checkbox" value=""
                                                             name="permission[]">
                                                         <span class="form-check-label">
@@ -544,7 +544,7 @@
 
                                                     <!--begin::Checkbox-->
                                                     <label
-                                                        class="form-check form-check-sm form-check-custom form-check-solid">
+                                                        class="form-check form-check-sm form-check-custom form-check-solid form-check-success">
                                                         <input class="form-check-input" type="checkbox" value=""
                                                             name="permission[]">
                                                         <span class="form-check-label" "="">
@@ -571,7 +571,7 @@
                                                 <div class="d-flex">
                                                     <!--begin::Checkbox-->
                                                     <label
-                                                        class="form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-20">
+                                                        class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
                                                         <input class="form-check-input" type="checkbox" value=""
                                                             name="permission[]">
                                                         <span class="form-check-label">
@@ -582,7 +582,7 @@
 
                                                     <!--begin::Checkbox-->
                                                     <label
-                                                        class="form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-20">
+                                                        class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
                                                         <input class="form-check-input" type="checkbox" value=""
                                                             name="permission[]">
                                                         <span class="form-check-label">
@@ -593,7 +593,7 @@
 
                                                     <!--begin::Checkbox-->
                                                     <label
-                                                        class="form-check form-check-sm form-check-custom form-check-solid">
+                                                        class="form-check form-check-sm form-check-custom form-check-solid form-check-success">
                                                         <input class="form-check-input" type="checkbox" value=""
                                                             name="permission[]">
                                                         <span class="form-check-label" "="">
