@@ -18,7 +18,7 @@
                 <!--end::Card title-->
             </div>
             <!--end::Card header-->
-
+            <br>
            
             <!--begin::Row-->
             <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
@@ -179,7 +179,8 @@
                                         <span class="required">Branch Service</span>
                                     </label>
                                     <!--end::Label-->
-
+                                    <br>
+                                    <br>
                                     <!--begin::Input-->
                                     <label class="form-check form-check-custom form-check-inline form-check-solid me-5">
                                     <input class="form-check-input" name="is_pos" type="checkbox" value="1" {{($branch->is_pos == 1)? 'checked' : ''}}>
@@ -187,34 +188,39 @@
                                     POS
                                     </span>
                                     </label>
-
+                                    <br>
+                                    <br>
                                     <label class="form-check form-check-custom form-check-inline form-check-solid me-5">
                                     <input class="form-check-input" name="is_sok" type="checkbox" value="1" {{($branch->is_sok == 1)? 'checked' : ''}}>
                                     <span class="fw-semibold ps-2 fs-6">
                                     Self Ordering Kiosk
                                     </span>
                                     </label>
-
+                                    <br>
+                                    <br>
                                     <label class="form-check form-check-custom form-check-inline form-check-solid me-5">
                                     <input class="form-check-input" name="is_qrcode" type="checkbox" value="1" {{($branch->is_qrcode == 1)? 'checked' : ''}}>
                                     <span class="fw-semibold ps-2 fs-6">
                                     Qr Code Based web ordering
                                     </span>
                                     </label>
-
+                                    <br>
+                                    <br>
                                     <label class="form-check form-check-custom form-check-inline form-check-solid me-5">
                                     <input class="form-check-input" name="is_mobile_ordering" type="checkbox" value="1" {{($branch->is_mobile_ordering == 1)? 'checked' : ''}}>
                                     <span class="fw-semibold ps-2 fs-6">
                                     Mobile App Ordering
                                     </span>
                                     </label>
-
+                                    <br>
+                                    <br>
                                     <label class="form-check form-check-custom form-check-inline form-check-solid me-5">
                                     <input class="form-check-input" name="is_table_room" type="checkbox" value="1" {{($branch->is_table_room == 1)? 'checked' : ''}}>
                                     <span class="fw-semibold ps-2 fs-6">
                                     Table / Room Odering
                                     </span>
                                     </label>
+                                    <br>
                                     
                                     <!--end::Input-->
                                     @if($errors->has('contact_number'))
