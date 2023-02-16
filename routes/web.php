@@ -115,16 +115,6 @@ Route::group(['prefix' => 'admin'], function()
 
 
             /**
-             * Company Routes
-             */
-            Route::get('/company-list', [CompanyController::class, 'index'])->name('company_list');
-            Route::get('/add-company', [CompanyController::class, 'addCompany'])->name('add-company');
-            Route::post('/create-company', [CompanyController::class, 'createCompany'])->name('create-company');
-            Route::get('/edit-company/{id}', [CompanyController::class, 'editCompany'])->name('edit-company');
-            Route::post('/update-company', [CompanyController::class, 'updateCompany'])->name('update-company');
-            Route::get('/company-status/{id}/{status}', [CompanyController::class, 'companyStatus'])->name('company-status');
-
-            /**
              * Foodlicense Routes
              */
             Route::get('/foodlicense-list', [FoodlicenseController::class, 'index'])->name('foodlicense_list');
@@ -174,6 +164,17 @@ Route::group(['prefix' => 'admin'], function()
             Route::post('/update-city', [CityController::class, 'updateCity'])->name('update-city');
             Route::get('/get-city/{id}', [CityController::class, 'getCity'])->name('get-city');
         });
+
+        /**
+             * Company Routes
+             */
+            Route::get('/company-list', [CompanyController::class, 'index'])->name('company_list');
+            Route::get('/add-company', [CompanyController::class, 'addCompany'])->name('add-company');
+            Route::post('/create-company', [CompanyController::class, 'createCompany'])->name('create-company');
+            Route::get('/edit-company/{id}', [CompanyController::class, 'editCompany'])->name('edit-company');
+            Route::post('/update-company', [CompanyController::class, 'updateCompany'])->name('update-company');
+            Route::get('/company-status/{id}/{status}', [CompanyController::class, 'companyStatus'])->name('company-status');
+            
 
         /**
          * Branch Routes
