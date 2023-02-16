@@ -153,10 +153,6 @@
                 <div class="menu-sub menu-sub-accordion {{ request()->is('admin/master/*') ? 'show' : '' }}" kt-hidden-height="242" style=" ">
                     <!--begin:Menu item-->
                     <div class="menu-item">
-                        <!--begin:Menu link--><a class="menu-link" href="{{route('company_list')}}"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Company</span></a><!--end:Menu link-->
-                    </div>
-                    <!--end:Menu item--><!--begin:Menu item-->
-                    <div class="menu-item">
                         <!--begin:Menu link--><a class="menu-link" href="{{route('country_list')}}"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Country</span></a><!--end:Menu link-->
                     </div>
                     <!--end:Menu item--><!--begin:Menu item-->
@@ -187,6 +183,29 @@
                     <!--end:Menu item-->
                 </div>
                 <!--end:Menu sub-->
+                </div>
+                
+                <div class="menu-item">
+                    <!--begin:Menu link-->
+                    <a class="menu-link {{ request()->is('admin/company-list') ? 'active' : '' }}" href="{{route('company_list')}}">
+                        <span class="menu-icon">
+                            <!--begin::Svg Icon | path: icons/duotune/general/gen014.svg-->
+                            <span class="svg-icon svg-icon-2"><svg width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="2" y="2" width="9" height="9" rx="2" fill="currentColor"></rect>
+                                    <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="currentColor">
+                                    </rect>
+                                    <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="currentColor">
+                                    </rect>
+                                    <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="currentColor">
+                                    </rect>
+                                </svg>
+                            </span>
+                            <!--end::Svg Icon-->
+                        </span>
+                        <span class="menu-title">Company</span>
+                    </a>
+                    <!--end:Menu link-->
                 </div>
 
                 <div class="menu-item">
@@ -235,7 +254,7 @@
                     <!--end:Menu link-->
                 </div>
 
-                <div class="menu-item">
+                {{--<div class="menu-item">
                     <!--begin:Menu link-->
                     <a class="menu-link {{ request()->is('admin/tax-list') ? 'active' : '' }}" href="{{route('tax-list')}}">
                         <span class="menu-icon">
@@ -256,7 +275,7 @@
                         <span class="menu-title">Tax</span>
                     </a>
                     <!--end:Menu link-->
-                </div>
+                </div> --}}
 
                 <div class="menu-item">
                     <!--begin:Menu link-->
