@@ -18,7 +18,7 @@ class LocationTaxController extends Controller
 
     public function addLocationTax(){
         $tax_list = Tax::get();
-        $location_list = Location::get();
+        $location_list = Location::where('is_active', 1)->get();
         return view('admin-view.location_tax.add_location_tax', compact('tax_list', 'location_list'));
     }
 
@@ -42,7 +42,7 @@ class LocationTaxController extends Controller
 
     public function editLocationTax($id){
         $tax_list = Tax::get();
-        $location_list = Location::get();
+        $location_list = Location::where('is_active', 1)->get();
         $location_tax = LocationTax::find(base64_decode($id));
         return view('admin-view.location_tax.edit_location_tax', compact('location_tax', 'tax_list', 'location_list'));
     }

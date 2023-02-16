@@ -211,10 +211,10 @@
                     </a>
                     <!--end:Menu link-->
                 </div>
-                {{--
+                
                 <div class="menu-item">
                     <!--begin:Menu link-->
-                    <a class="menu-link {{ request()->is('admin/location-list') ? 'active' : '' }}" href="{{route('location-list')}}">
+                    <a class="menu-link {{ request()->is('admin/location_list') ? 'active' : '' }}" href="{{route('location_list')}}">
                         <span class="menu-icon">
                             <!--begin::Svg Icon | path: icons/duotune/general/gen014.svg-->
                             <span class="svg-icon svg-icon-2"><svg width="24" height="24" viewBox="0 0 24 24"
@@ -283,7 +283,7 @@
 
                 <div class="menu-item">
                     <!--begin:Menu link-->
-                    <a class="menu-link {{ request()->is('admin/area-list') ? 'active' : '' }}" href="{{route('area-list')}}">
+                    <a class="menu-link {{ request()->is('admin/area_list') ? 'active' : '' }}" href="{{route('area_list')}}">
                         <span class="menu-icon">
                             <!--begin::Svg Icon | path: icons/duotune/general/gen014.svg-->
                             <span class="svg-icon svg-icon-2"><svg width="24" height="24" viewBox="0 0 24 24"
@@ -306,7 +306,7 @@
 
                 <div class="menu-item">
                     <!--begin:Menu link-->
-                    <a class="menu-link {{ request()->is('admin/location-dicount-list') ? 'active' : '' }}" href="{{route('location-dicount-list')}}">
+                    <a class="menu-link {{ request()->is('admin/location-discount-list') ? 'active' : '' }}" href="{{route('location-discount-list')}}">
                         <span class="menu-icon">
                             <!--begin::Svg Icon | path: icons/duotune/general/gen014.svg-->
                             <span class="svg-icon svg-icon-2"><svg width="24" height="24" viewBox="0 0 24 24"
@@ -322,7 +322,7 @@
                             </span>
                             <!--end::Svg Icon-->
                         </span>
-                        <span class="menu-title">Location Dicount</span>
+                        <span class="menu-title">Location Discount</span>
                     </a>
                     <!--end:Menu link-->
                 </div>
@@ -349,7 +349,7 @@
                     </a>
                     <!--end:Menu link-->
                 </div>
-                --}}
+                
             </div>
             <!--end::Menu-->
         </div>

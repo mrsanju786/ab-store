@@ -9,12 +9,12 @@
     <!--begin::Header-->
     <div class="card-header border-0 pt-5">
         <h3 class="card-title align-items-start flex-column">
-            <span class="card-label fw-bold fs-3 mb-1">Location Discount</span>
+            <span class="card-label fw-bold fs-3 mb-1">Counter</span>
         </h3>
 
         <div class="card-toolbar" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="hover"
             data-bs-original-title="Click to add a user" data-kt-initialized="1">
-            <a href="{{route('add-location-discount')}}" class="btn btn-sm btn-light btn-active-primary">
+            <a href="{{route('add-counter')}}" class="btn btn-sm btn-light btn-active-primary">
                 <!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
                 <span class="svg-icon svg-icon-3"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
@@ -22,7 +22,7 @@
                             transform="rotate(-90 11.364 20.364)" fill="currentColor"></rect>
                         <rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="currentColor"></rect>
                     </svg></span>
-                <!--end::Svg Icon--> Add Location Discount
+                <!--end::Svg Icon--> Add Counter
             </a>
         </div>
     </div>
@@ -38,11 +38,10 @@
                 <thead>
                     <tr class="fw-bold text-muted">
                         <th class="min-w-50px">#</th>
-                        <th class="min-w-150px">Discount Name</th>
-                        <th class="min-w-150px">Discount Percent</th>
-                        <th class="min-w-150px">Start Date</th>
-                        <th class="min-w-150px">End Date</th>
-                        <th class="min-w-150px">Location</th>
+                        <th class="min-w-150px">Counter Name</th>
+                        <th class="min-w-150px">License No.</th>
+                        <th class="min-w-150px">License Expiry Date</th>
+                        <th class="min-w-150px">Area</th>
                         <th class="min-w-100px text-end">Actions</th>
                     </tr>
                 </thead>
@@ -51,35 +50,31 @@
                 <!--begin::Table body-->
                 <tbody>
                     @php $i = 1; @endphp
-                    @foreach($locationDiscount as $locationDiscounts)
+                    @foreach($counter as $counters)
                     <tr>
                         <td>
                             <span class="text-dark fw-bold d-block fs-7">{{$i}}</span>
                         </td>
 
                         <td>
-                            <span class="text-dark fw-bold d-block fs-6">{{$locationDiscounts->discount_name}}</span>
+                            <span class="text-dark fw-bold d-block fs-6">{{$counters->counter_name}}</span>
                         </td>
 
                         <td>
-                            <span class="text-dark fw-bold d-block fs-6">{{$locationDiscounts->discount_percent}}</span>
+                            <span class="text-dark fw-bold d-block fs-6">{{$counters->license_no}}</span>
                         </td>
 
                         <td>
-                            <span class="text-dark fw-bold d-block fs-6">{{date('Y-m-d',strtotime($locationDiscounts->start_date))}}</span>
+                            <span class="text-dark fw-bold d-block fs-6">{{$counters->license_expiry_date}}</span>
                         </td>
 
                         <td>
-                            <span class="text-dark fw-bold d-block fs-6">{{date('Y-m-d',strtotime($locationDiscounts->end_date))}}</span>
-                        </td>
-
-                        <td>
-                            <span class="text-dark fw-bold d-block fs-6">{{$locationDiscounts->location->address}}</span>
+                            <span class="text-dark fw-bold d-block fs-6">{{$counters->area->area_name}}</span>
                         </td>
 
                         <td>
                             <div class="d-flex justify-content-end flex-shrink-0">
-                                <a href="{{route('edit-location-discount',[base64_encode($locationDiscounts['id'])])}}" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
+                                <a href="{{route('edit-counter',[base64_encode($counters['id'])])}}" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
                                     <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
                                     <span class="svg-icon svg-icon-3"><svg width="24" height="24" viewBox="0 0 24 24"
                                             fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -22,7 +22,7 @@ class LocationController extends Controller
     public function addLocation()
     {
         $state = State::get();
-        $branch = Branch::get();
+        $branch = Branch::where('is_active', 1)->get();
         return view('admin-view.location.add_location', compact('state','branch'));
     }
 
@@ -63,7 +63,7 @@ class LocationController extends Controller
 
     public function editLocation($id){
         $location = Location::find(base64_decode($id));
-        $branch = Branch::get();
+        $branch = Branch::where('is_active', 1)->get();
         $state = State::get();
         return view('admin-view.location.edit_location', compact('location','branch','state'));
     }

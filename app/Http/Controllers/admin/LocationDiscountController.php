@@ -16,7 +16,7 @@ class LocationDiscountController extends Controller
 
     public function addLocationDiscount()
     {
-        $location = Location::get();
+        $location = Location::where('is_active', 1)->get();
         return view('admin-view.locationdiscount.add_discount', compact('location'));
     }
 
@@ -44,7 +44,7 @@ class LocationDiscountController extends Controller
 
     public function editLocationDiscount($id){
         $locationDiscount = LocationDiscount::find(base64_decode($id));
-        $location = Location::get();
+        $location = Location::where('is_active', 1)->get();
         return view('admin-view.locationdiscount.edit_discount', compact('locationDiscount','location'));
     }
 
