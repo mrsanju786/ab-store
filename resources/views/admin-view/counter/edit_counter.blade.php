@@ -94,7 +94,7 @@
                                 <!--end::Input group-->
 
                                 <!--begin::Input group-->
-                                <div class="fv-row mb-10 fv-plugins-icon-container">
+                                <div class="fv-row mb-10 fv-plugins-icon-container datadisplay">
                                     <!--begin::Label-->
                                     <label class="fs-5 fw-bold form-label mb-2">
                                         <span class="required">License Expiry Date</span>
@@ -103,7 +103,7 @@
 
                                     <!--begin::Input-->
                                     <input type="date" class="form-control form-control-solid" placeholder="License Expiry Date"
-                                        name="lincese_expiry_date" value="{{date('Y-m-d',strtotime($counter->license_expiry_date))}}">
+                                        name="lincese_expiry_date" value="{{date('Y-m-d',strtotime($counter->license_expiry_date))}}"  min="{{date('Y-m-d')}}">
                                     <!--end::Input-->
                                     @if($errors->has('lincese_expiry_date'))
                                     <span class="text-danger">{{ $errors->first('lincese_expiry_date') }}</span>
