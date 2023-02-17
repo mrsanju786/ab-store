@@ -34,7 +34,27 @@
                             @csrf
                             <!--begin::Scroll-->
                             <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_add_role_scroll">  
-
+                                <!--begin::Label-->
+                                <label class="fs-5 fw-bold form-label mb-2">
+                                    <span class="required">Select Area</span>
+                                </label>
+                                <!--begin::Input-->
+                                <select class="form-select form-select-solid" aria-label="Select example" name="area_id" id="area_id" data-control="select2" >
+                                        <option value="">Select Area</option>
+                                        @foreach($area as $areas)
+                                        <option value="{{$areas->id}}">{{$areas->area_name}}</option>
+                                        @endforeach                                   
+                                    </select>
+                                <!--end::Input-->
+                                @if($errors->has('area_id'))
+                                <span class="text-danger">{{ $errors->first('area_id') }}</span>
+                                @endif
+                                <div class="fv-plugins-message-container invalid-feedback"></div>
+                                </div>
+                                <!--end::Input group-->
+                                <br>
+                                <br>
+                                
                                 <!--begin::Input group-->
                                 <div class="fv-row mb-10 fv-plugins-icon-container">
                                     <!--begin::Label-->
@@ -92,26 +112,6 @@
                                 </div>
                                 <!--end::Input group-->
 
-                                <!--begin::Label-->
-                                <label class="fs-5 fw-bold form-label mb-2">
-                                    <span class="required">Select Area</span>
-                                </label>
-                                <!--begin::Input-->
-                                <select class="form-select form-select-solid" aria-label="Select example" name="area_id" id="area_id" data-control="select2" >
-                                        <option value="">Select Area</option>
-                                        @foreach($area as $areas)
-                                        <option value="{{$areas->id}}">{{$areas->area_name}}</option>
-                                        @endforeach                                   
-                                    </select>
-                                <!--end::Input-->
-                                @if($errors->has('area_id'))
-                                <span class="text-danger">{{ $errors->first('area_id') }}</span>
-                                @endif
-                                <div class="fv-plugins-message-container invalid-feedback"></div>
-                                </div>
-                                <!--end::Input group-->
-                                <br>
-                                <br>
                                 <!--begin::Actions-->
                                 <div class="text-left pt-3">
                                     <button type="submit" class="btn btn-lg btn-primary"

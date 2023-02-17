@@ -163,6 +163,7 @@ Route::group(['prefix' => 'admin'], function()
             Route::get('/edit-city/{id}', [CityController::class, 'editCity'])->name('edit-city');
             Route::post('/update-city', [CityController::class, 'updateCity'])->name('update-city');
             Route::get('/get-city/{id}', [CityController::class, 'getCity'])->name('get-city');
+            Route::get('/get-company-city/{id}', [CityController::class, 'getCompanyCity'])->name('get-company-city');
         });
 
         /**

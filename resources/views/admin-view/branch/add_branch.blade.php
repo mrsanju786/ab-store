@@ -34,7 +34,49 @@
                             @csrf
                             <!--begin::Scroll-->
                             <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_add_role_scroll">
+                                <!--begin::Input group-->
+                                <div class="fv-row mb-10 fv-plugins-icon-container">
+                                    <!--begin::Label-->
+                                    <label class="fs-5 fw-bold form-label mb-2">
+                                        <span class="required">Select Company</span>
+                                    </label>
+                                    <!--end::Label-->
 
+                                    <!--begin::Input-->
+                                    <select class="form-select form-select-solid" aria-label="Select example" name="company_id" id="company_id" data-control="select2" >
+                                        <option value="">Select Company</option>
+                                        @foreach($company as $companies)
+                                        <option value="{{$companies->id}}">{{$companies->company_name}}</option>
+                                        @endforeach                                   
+                                    </select>
+                                    <!--end::Input-->
+                                    @if($errors->has('company_id'))
+                                    <span class="text-danger">{{ $errors->first('company_id') }}</span>
+                                    @endif
+                                    <div class="fv-plugins-message-container invalid-feedback"></div>
+                                </div>
+                                <!--end::Input group-->
+
+                                <!--begin::Input group-->
+                                <div class="fv-row mb-10 fv-plugins-icon-container">
+                                    <!--begin::Label-->
+                                    <label class="fs-5 fw-bold form-label mb-2">
+                                        <span class="required">Select City</span>
+                                    </label>
+                                    <!--end::Label-->
+
+                                    <!--begin::Input-->
+                                    <select class="form-select form-select-solid" aria-label="Select example" name="city_id" id="city_id" data-control="select2" >
+                                        <option value="">Select City</option>                                
+                                    </select>
+                                    <!--end::Input-->
+                                    @if($errors->has('city_id'))
+                                    <span class="text-danger">{{ $errors->first('city_id') }}</span>
+                                    @endif
+                                    <div class="fv-plugins-message-container invalid-feedback"></div>
+                                </div>
+                                <!--end::Input group-->
+                                
                                 <!--begin::Input group-->
                                 <div class="fv-row mb-10 fv-plugins-icon-container">
                                     <!--begin::Label-->
@@ -55,22 +97,25 @@
                                 <!--end::Input group-->
 
                                 <!--begin::Input group-->
-                                <div class="fv-row mb-10 fv-plugins-icon-container">
+                                <!-- <div class="fv-row mb-10 fv-plugins-icon-container"> -->
                                     <!--begin::Label-->
-                                    <label class="fs-5 fw-bold form-label mb-2">
+                                    <!-- <label class="fs-5 fw-bold form-label mb-2">
                                         <span class="required">Branch Code</span>
-                                    </label>
+                                    </label> -->
                                     <!--end::Label-->
 
                                     <!--begin::Input-->
-                                    <input class="form-control form-control-solid" placeholder="Enter Branch Code"
-                                        name="branch_code">
+                                    @php
+                                    $code = "BRANCH-".uniqid();
+                                    @endphp
+                                    <input type="hidden" class="form-control form-control-solid" placeholder="Enter Branch Code"
+                                        name="branch_code" value="{{$code}}">
                                     <!--end::Input-->
                                     @if($errors->has('branch_code'))
                                     <span class="text-danger">{{ $errors->first('branch_code') }}</span>
                                     @endif
                                     <div class="fv-plugins-message-container invalid-feedback"></div>
-                                </div>
+                                <!-- </div> -->
                                 <!--end::Input group-->
 
                                 <!--begin::Input group-->
@@ -144,29 +189,6 @@
                                     <!--end::Input-->
                                     @if($errors->has('license_no'))
                                     <span class="text-danger">{{ $errors->first('license_no') }}</span>
-                                    @endif
-                                    <div class="fv-plugins-message-container invalid-feedback"></div>
-                                </div>
-                                <!--end::Input group-->
-
-                                <!--begin::Input group-->
-                                <div class="fv-row mb-10 fv-plugins-icon-container">
-                                    <!--begin::Label-->
-                                    <label class="fs-5 fw-bold form-label mb-2">
-                                        <span class="required">Select Company</span>
-                                    </label>
-                                    <!--end::Label-->
-
-                                    <!--begin::Input-->
-                                    <select class="form-select form-select-solid" aria-label="Select example" name="company_id" id="company_id" data-control="select2" >
-                                        <option value="">Select Company</option>
-                                        @foreach($company as $companies)
-                                        <option value="{{$companies->id}}">{{$companies->company_name}}</option>
-                                        @endforeach                                   
-                                    </select>
-                                    <!--end::Input-->
-                                    @if($errors->has('company_id'))
-                                    <span class="text-danger">{{ $errors->first('company_id') }}</span>
                                     @endif
                                     <div class="fv-plugins-message-container invalid-feedback"></div>
                                 </div>
@@ -297,6 +319,25 @@ $(document).ready(function() {
             });
         }
 
+    });
+});
+
+$('#company_id').on('change', function(){
+    $("#city_id").empty();
+    $("#city_id").append('<option value="">Select City</option>');
+    var company_id = $(this).val();
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        url: "{{ url('admin/master/get-company-city') }}/" + company_id,
+        type: "GET",
+        success: function(response) {
+            $.each(response,function(key, value)
+            {
+                $("#city_id").append('<option value=' + value.id + '>' + value.city_name + '</option>');
+            });
+        }
     });
 });
 </script>
