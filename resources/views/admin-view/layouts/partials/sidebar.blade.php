@@ -277,7 +277,7 @@
                     <!--end:Menu link-->
                 </div> --}}
 
-                <div class="menu-item">
+                {{--<div class="menu-item">
                     <!--begin:Menu link-->
                     <a class="menu-link {{ request()->is('admin/location-tax-list') ? 'active' : '' }}" href="{{route('location-tax-list')}}">
                         <span class="menu-icon">
@@ -298,7 +298,7 @@
                         <span class="menu-title">Location Tax</span>
                     </a>
                     <!--end:Menu link-->
-                </div>
+                </div>--}}
 
                 <div class="menu-item">
                     <!--begin:Menu link-->

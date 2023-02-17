@@ -21,6 +21,7 @@ use App\Http\Controllers\admin\TaxController;
 use App\Http\Controllers\admin\LocationTaxController;
 use App\Http\Controllers\admin\AreaController;
 use App\Http\Controllers\admin\CounterController;
+use App\Http\Controllers\admin\DishController;
 
 
 /*
@@ -246,6 +247,26 @@ Route::group(['prefix' => 'admin'], function()
         Route::get('/edit-counter/{id?}', [CounterController::class, 'editCounter'])->name('edit-counter');
         Route::post('/update-counter', [CounterController::class, 'updateCounter'])->name('update-counter');
         Route::get('/counter-status/{id}/{status}', [CounterController::class, 'areaStatus'])->name('counter-status');
+
+        /**
+         * counter Routes
+         */
+        Route::get('/counter-list', [CounterController::class, 'index'])->name('counter-list');
+        Route::get('/add-counter', [CounterController::class, 'addCounter'])->name('add-counter');
+        Route::post('/create-counter', [CounterController::class, 'createCounter'])->name('create-counter');
+        Route::get('/edit-counter/{id?}', [CounterController::class, 'editCounter'])->name('edit-counter');
+        Route::post('/update-counter', [CounterController::class, 'updateCounter'])->name('update-counter');
+        Route::get('/counter-status/{id}/{status}', [CounterController::class, 'areaStatus'])->name('counter-status');
+
+        /**
+         * Dish Routes
+         */
+        Route::get('/dish-list', [DishController::class, 'index'])->name('dish-list');
+        Route::get('/add-dish', [DishController::class, 'addDish'])->name('add-dish');
+        Route::post('/create-dish', [DishController::class, 'createDish'])->name('create-dish');
+        Route::get('/edit-dish/{id?}', [DishController::class, 'editDish'])->name('edit-dish');
+        Route::post('/update-dish', [DishController::class, 'updateDish'])->name('update-dish');
+        Route::get('/dish-status/{id}/{status}', [DishController::class, 'dishStatus'])->name('dish-status');
 
 
         /**
