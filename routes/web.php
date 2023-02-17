@@ -21,6 +21,7 @@ use App\Http\Controllers\admin\TaxController;
 use App\Http\Controllers\admin\LocationTaxController;
 use App\Http\Controllers\admin\AreaController;
 use App\Http\Controllers\admin\CounterController;
+use App\Http\Controllers\admin\CountryTaxController;
 
 
 /*
@@ -163,17 +164,28 @@ Route::group(['prefix' => 'admin'], function()
             Route::get('/edit-city/{id}', [CityController::class, 'editCity'])->name('edit-city');
             Route::post('/update-city', [CityController::class, 'updateCity'])->name('update-city');
             Route::get('/get-city/{id}', [CityController::class, 'getCity'])->name('get-city');
+
+            /**
+             * Countrytax Routes
+             */
+            Route::get('/countrytax-list', [CountrytaxController::class, 'index'])->name('countrytax-list');
+            Route::get('/add-countrytax', [CountrytaxController::class, 'addCountrytax'])->name('add-countrytax');
+            Route::post('/create-countrytax', [CountrytaxController::class, 'createCountrytax'])->name('create-countrytax');
+            Route::get('/edit-countrytax/{id}', [CountrytaxController::class, 'editCountrytax'])->name('edit-countrytax');
+            Route::post('/update-countrytax', [CountrytaxController::class, 'updateCountrytax'])->name('update-countrytax');
+            Route::get('/countrytax-status/{id}/{status}', [CountrytaxController::class, 'countrytaxStatus'])->name('countrytax-status');
+
         });
 
         /**
-             * Company Routes
-             */
-            Route::get('/company-list', [CompanyController::class, 'index'])->name('company_list');
-            Route::get('/add-company', [CompanyController::class, 'addCompany'])->name('add-company');
-            Route::post('/create-company', [CompanyController::class, 'createCompany'])->name('create-company');
-            Route::get('/edit-company/{id}', [CompanyController::class, 'editCompany'])->name('edit-company');
-            Route::post('/update-company', [CompanyController::class, 'updateCompany'])->name('update-company');
-            Route::get('/company-status/{id}/{status}', [CompanyController::class, 'companyStatus'])->name('company-status');
+         * Company Routes
+         */
+        Route::get('/company-list', [CompanyController::class, 'index'])->name('company_list');
+        Route::get('/add-company', [CompanyController::class, 'addCompany'])->name('add-company');
+        Route::post('/create-company', [CompanyController::class, 'createCompany'])->name('create-company');
+        Route::get('/edit-company/{id}', [CompanyController::class, 'editCompany'])->name('edit-company');
+        Route::post('/update-company', [CompanyController::class, 'updateCompany'])->name('update-company');
+        Route::get('/company-status/{id}/{status}', [CompanyController::class, 'companyStatus'])->name('company-status');
             
 
         /**

@@ -68,9 +68,9 @@ class AreaController extends Controller
 
     public function areaStatus(Request $request)
     {
-        $size = Area::find($request->id);
-        $size->is_active = $request->status;
-        $size->save();
+        $area = Area::find($request->id);
+        $area->is_active = $request->status;
+        $area->save();
         return redirect()->back()->with('success','Area status updated!');
     }
 }
