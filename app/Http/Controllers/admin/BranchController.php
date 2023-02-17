@@ -33,6 +33,7 @@ class BranchController extends Controller
             'branch_manager' => 'required',
             'contact_number' => 'required',
             'company_id' => 'required',
+            'city_id' => 'required',
         ]);
 
         $branch = new Branch();
@@ -48,6 +49,7 @@ class BranchController extends Controller
         $branch->is_mobile_ordering = $request->is_mobile_ordering ?? 0;
         $branch->is_table_room = $request->is_table_room ?? 0;
         $branch->company_id = $request->company_id;
+        $branch->city_id = $request->city_id;
         $branch->save();
 
         return redirect()->route('branch_list')->with('success', 'Branch Added Successfully!');
@@ -68,6 +70,7 @@ class BranchController extends Controller
             'branch_manager' => 'required',
             'contact_number' => 'required',
             'company_id' => 'required',
+            'city_id' => 'required',
         ]);
 
         $id = $request->branch_id;
@@ -84,6 +87,7 @@ class BranchController extends Controller
         $branch->is_mobile_ordering = $request->is_mobile_ordering ?? 0;
         $branch->is_table_room = $request->is_table_room ?? 0;
         $branch->company_id = $request->company_id;
+        $branch->city_id = $request->city_id;
         $branch->save();
 
         return redirect()->route('branch_list')->with('success', 'Changes saved Successfully!');

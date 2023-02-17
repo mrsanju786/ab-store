@@ -5,10 +5,10 @@
     <div class="app-sidebar-logo px-6" id="kt_app_sidebar_logo">
         <!--begin::Logo image-->
         <a href="{{route('dashboard')}}">
-            <img alt="Logo" src="{{asset('admin_site/assets/media/logos/foodiisoft-logo.png')}}"
+            <img alt="Logo" src="{{asset('admin_site/assets/media/logos/foodiisoft-logo-new.png')}}"
                 class="h-25px app-sidebar-logo-default" />
-            <img alt="Logo" src="{{asset('admin_site/assets/media/logos/foodiisoft-logo.png')}}"
-                class="h-20px app-sidebar-logo-minimize" />
+            <img alt="Logo" src="{{asset('admin_site/assets/media/logos/foodiisoft-logo-new.png')}}"
+                class="h-10px app-sidebar-logo-minimize" />
         </a>
         <!--end::Logo image-->
         <!--begin::Sidebar toggle-->

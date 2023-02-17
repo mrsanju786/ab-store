@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\State;
 use App\Models\City;
+use App\Models\Company;
 
 class CityController extends Controller
 {
@@ -70,6 +71,13 @@ class CityController extends Controller
     public function getCity($id){
 
         $city = City::where('state_id', $id)->get();
+
+        return $city;
+    }
+
+    public function getCompanyCity($id){
+        $company = Company::where('id', $id)->first();
+        $city = City::where('state_id', $company->state_id)->get();
 
         return $city;
     }

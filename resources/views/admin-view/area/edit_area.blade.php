@@ -35,25 +35,6 @@
                         <div class="fv-row mb-10 fv-plugins-icon-container">
                             <!--begin::Label-->
                             <label class="fs-5 fw-bold form-label mb-2">
-                                <span class="required">Area name</span>
-                            </label>
-                            <!--end::Label-->
-
-                            <!--begin::Input-->
-                            <input class="form-control form-control-solid" placeholder="Enter Area name"
-                                name="area_name" value="{{$area->area_name}}">
-                            <!--end::Input-->
-                            @if($errors->has('area_name'))
-                            <span class="text-danger">{{ $errors->first('area_name') }}</span>
-                            @endif
-                            <div class="fv-plugins-message-container invalid-feedback"></div>
-                        </div>
-                        <!--end::Input group-->
-
-                        <!--begin::Input group-->
-                        <div class="fv-row mb-10 fv-plugins-icon-container">
-                            <!--begin::Label-->
-                            <label class="fs-5 fw-bold form-label mb-2">
                                 <span class="required">Select Location</span>
                             </label>
                             <!--end::Label-->
@@ -73,7 +54,27 @@
                             <div class="fv-plugins-message-container invalid-feedback"></div>
                         </div>
                         <!--end::Input group-->
+                        
+                        <!--begin::Input group-->
+                        <div class="fv-row mb-10 fv-plugins-icon-container">
+                            <!--begin::Label-->
+                            <label class="fs-5 fw-bold form-label mb-2">
+                                <span class="required">Area name</span>
+                            </label>
+                            <!--end::Label-->
 
+                            <!--begin::Input-->
+                            <input class="form-control form-control-solid" placeholder="Enter Area name"
+                                name="area_name" value="{{$area->area_name}}">
+                            <!--end::Input-->
+                            @if($errors->has('area_name'))
+                            <span class="text-danger">{{ $errors->first('area_name') }}</span>
+                            @endif
+                            <div class="fv-plugins-message-container invalid-feedback"></div>
+                        </div>
+                        <!--end::Input group-->
+
+                        
                         <!--begin::Actions-->
                         <div class=" text-left pt-3">
 

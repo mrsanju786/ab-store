@@ -175,6 +175,7 @@ Route::group(['prefix' => 'admin'], function()
             Route::post('/update-countrytax', [CountrytaxController::class, 'updateCountrytax'])->name('update-countrytax');
             Route::get('/countrytax-status/{id}/{status}', [CountrytaxController::class, 'countrytaxStatus'])->name('countrytax-status');
 
+            Route::get('/get-company-city/{id}', [CityController::class, 'getCompanyCity'])->name('get-company-city');
         });
 
         /**

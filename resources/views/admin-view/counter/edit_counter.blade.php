@@ -18,8 +18,7 @@
                 <!--end::Card title-->
             </div>
             <!--end::Card header-->
-
-           
+            <br>
             <!--begin::Row-->
             <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
 
@@ -34,7 +33,28 @@
                             @csrf
                             <!--begin::Scroll-->
                             <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_add_role_scroll">  
-
+                                <!--begin::Label-->
+                                <label class="fs-5 fw-bold form-label mb-2">
+                                    <span class="required">Select Area</span>
+                                </label>
+                                <!--begin::Input-->
+                                <select class="form-select form-select-solid" aria-label="Select example" name="area_id" id="area_id" data-control="select2" >
+                                    <option value="">Select Area</option>
+                                    @foreach($area as $areas)
+                                    <option value="{{$areas->id}}" {{($areas->id == $counter->area_id)?'selected':''}}>{{$areas->area_name}}</option>
+                                    @endforeach                                   
+                                </select>
+                                <!--end::Input-->
+                                @if($errors->has('area_id'))
+                                <span class="text-danger">{{ $errors->first('area_id') }}</span>
+                                @endif
+                                <div class="fv-plugins-message-container invalid-feedback"></div>
+                                </div>
+                                <!--end::Input group-->
+                                <input type="hidden" name="counter_id" id="counter_id" value="{{$counter->id}}">
+                                <br>
+                                <br>
+                                
                                 <!--begin::Input group-->
                                 <div class="fv-row mb-10 fv-plugins-icon-container">
                                     <!--begin::Label-->
@@ -74,7 +94,7 @@
                                 <!--end::Input group-->
 
                                 <!--begin::Input group-->
-                                <div class="fv-row mb-10 fv-plugins-icon-container">
+                                <div class="fv-row mb-10 fv-plugins-icon-container datadisplay">
                                     <!--begin::Label-->
                                     <label class="fs-5 fw-bold form-label mb-2">
                                         <span class="required">License Expiry Date</span>
@@ -83,7 +103,7 @@
 
                                     <!--begin::Input-->
                                     <input type="date" class="form-control form-control-solid" placeholder="License Expiry Date"
-                                        name="lincese_expiry_date" value="{{date('Y-m-d',strtotime($counter->license_expiry_date))}}">
+                                        name="lincese_expiry_date" value="{{date('Y-m-d',strtotime($counter->license_expiry_date))}}"  min="{{date('Y-m-d')}}">
                                     <!--end::Input-->
                                     @if($errors->has('lincese_expiry_date'))
                                     <span class="text-danger">{{ $errors->first('lincese_expiry_date') }}</span>
@@ -91,26 +111,6 @@
                                     <div class="fv-plugins-message-container invalid-feedback"></div>
                                 </div>
                                 <!--end::Input group-->
-
-                                <!--begin::Label-->
-                                <label class="fs-5 fw-bold form-label mb-2">
-                                    <span class="required">Select Area</span>
-                                </label>
-                                <!--begin::Input-->
-                                <select class="form-select form-select-solid" aria-label="Select example" name="area_id" id="area_id" data-control="select2" >
-                                    <option value="">Select Area</option>
-                                    @foreach($area as $areas)
-                                    <option value="{{$areas->id}}" {{($areas->id == $counter->area_id)?'selected':''}}>{{$areas->area_name}}</option>
-                                    @endforeach                                   
-                                </select>
-                                <!--end::Input-->
-                                @if($errors->has('area_id'))
-                                <span class="text-danger">{{ $errors->first('area_id') }}</span>
-                                @endif
-                                <div class="fv-plugins-message-container invalid-feedback"></div>
-                                </div>
-                                <!--end::Input group-->
-                                <input type="hidden" name="counter_id" id="counter_id" value="{{$counter->id}}">
 
                                 <!--begin::Actions-->
                                 <div class="text-left pt-3">

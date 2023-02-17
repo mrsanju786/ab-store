@@ -18,7 +18,7 @@
                 <!--end::Card title-->
             </div>
             <!--end::Card header-->
-
+            <br>
            
             <!--begin::Row-->
             <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
@@ -34,7 +34,49 @@
                             @csrf
                             <!--begin::Scroll-->
                             <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_add_role_scroll">
+                                <!--begin::Input group-->
+                                <div class="fv-row mb-10 fv-plugins-icon-container">
+                                    <!--begin::Label-->
+                                    <label class="fs-5 fw-bold form-label mb-2">
+                                        <span class="required">Select Company</span>
+                                    </label>
+                                    <!--end::Label-->
 
+                                    <!--begin::Input-->
+                                    <select class="form-select form-select-solid" aria-label="Select example" name="company_id" id="company_id" data-control="select2" >
+                                        <option value="">Select Company</option>
+                                        @foreach($company as $companies)
+                                        <option value="{{$companies->id}}" {{($companies->id == $branch->company_id)? 'selected':''}}>{{$companies->company_name}}</option>
+                                        @endforeach                                   
+                                    </select>
+                                    <!--end::Input-->
+                                    @if($errors->has('company_id'))
+                                    <span class="text-danger">{{ $errors->first('company_id') }}</span>
+                                    @endif
+                                    <div class="fv-plugins-message-container invalid-feedback"></div>
+                                </div>
+                                <!--end::Input group-->
+
+                                <!--begin::Input group-->
+                                <div class="fv-row mb-10 fv-plugins-icon-container">
+                                    <!--begin::Label-->
+                                    <label class="fs-5 fw-bold form-label mb-2">
+                                        <span class="required">Select City</span>
+                                    </label>
+                                    <!--end::Label-->
+
+                                    <!--begin::Input-->
+                                    <select class="form-select form-select-solid" aria-label="Select example" name="city_id" id="city_id" data-control="select2" >
+                                        <option value="">Select City</option>                                
+                                    </select>
+                                    <!--end::Input-->
+                                    @if($errors->has('city_id'))
+                                    <span class="text-danger">{{ $errors->first('city_id') }}</span>
+                                    @endif
+                                    <div class="fv-plugins-message-container invalid-feedback"></div>
+                                </div>
+                                <!--end::Input group-->
+                                
                                 <!--begin::Input group-->
                                 <div class="fv-row mb-10 fv-plugins-icon-container">
                                     <!--begin::Label-->
@@ -55,22 +97,22 @@
                                 <!--end::Input group-->
 
                                 <!--begin::Input group-->
-                                <div class="fv-row mb-10 fv-plugins-icon-container">
+                                <!-- <div class="fv-row mb-10 fv-plugins-icon-container"> -->
                                     <!--begin::Label-->
-                                    <label class="fs-5 fw-bold form-label mb-2">
+                                    <!-- <label class="fs-5 fw-bold form-label mb-2">
                                         <span class="required">Branch Code</span>
-                                    </label>
+                                    </label> -->
                                     <!--end::Label-->
 
                                     <!--begin::Input-->
-                                    <input class="form-control form-control-solid" placeholder="Enter Branch Code"
-                                        name="branch_code" value="{{$branch->branch_code}}">
+                                    <input type="hidden" class="form-control form-control-solid" placeholder="Enter Branch Code"
+                                        name="branch_code" value="{{$branch->branch_code}}" readonly>
                                     <!--end::Input-->
                                     @if($errors->has('branch_code'))
                                     <span class="text-danger">{{ $errors->first('branch_code') }}</span>
                                     @endif
                                     <div class="fv-plugins-message-container invalid-feedback"></div>
-                                </div>
+                                <!-- </div> -->
                                 <!--end::Input group-->
 
                                 <!--begin::Input group-->
@@ -153,33 +195,11 @@
                                 <div class="fv-row mb-10 fv-plugins-icon-container">
                                     <!--begin::Label-->
                                     <label class="fs-5 fw-bold form-label mb-2">
-                                        <span class="required">Select Company</span>
-                                    </label>
-                                    <!--end::Label-->
-
-                                    <!--begin::Input-->
-                                    <select class="form-select form-select-solid" aria-label="Select example" name="company_id" id="company_id" data-control="select2" >
-                                        <option value="">Select Company</option>
-                                        @foreach($company as $companies)
-                                        <option value="{{$companies->id}}" {{($companies->id == $branch->company_id)? 'selected':''}}>{{$companies->company_name}}</option>
-                                        @endforeach                                   
-                                    </select>
-                                    <!--end::Input-->
-                                    @if($errors->has('company_id'))
-                                    <span class="text-danger">{{ $errors->first('company_id') }}</span>
-                                    @endif
-                                    <div class="fv-plugins-message-container invalid-feedback"></div>
-                                </div>
-                                <!--end::Input group-->
-
-                                <!--begin::Input group-->
-                                <div class="fv-row mb-10 fv-plugins-icon-container">
-                                    <!--begin::Label-->
-                                    <label class="fs-5 fw-bold form-label mb-2">
                                         <span class="required">Branch Service</span>
                                     </label>
                                     <!--end::Label-->
-
+                                    <br>
+                                    <br>
                                     <!--begin::Input-->
                                     <label class="form-check form-check-custom form-check-inline form-check-solid me-5">
                                     <input class="form-check-input" name="is_pos" type="checkbox" value="1" {{($branch->is_pos == 1)? 'checked' : ''}}>
@@ -187,34 +207,39 @@
                                     POS
                                     </span>
                                     </label>
-
+                                    <br>
+                                    <br>
                                     <label class="form-check form-check-custom form-check-inline form-check-solid me-5">
                                     <input class="form-check-input" name="is_sok" type="checkbox" value="1" {{($branch->is_sok == 1)? 'checked' : ''}}>
                                     <span class="fw-semibold ps-2 fs-6">
                                     Self Ordering Kiosk
                                     </span>
                                     </label>
-
+                                    <br>
+                                    <br>
                                     <label class="form-check form-check-custom form-check-inline form-check-solid me-5">
                                     <input class="form-check-input" name="is_qrcode" type="checkbox" value="1" {{($branch->is_qrcode == 1)? 'checked' : ''}}>
                                     <span class="fw-semibold ps-2 fs-6">
                                     Qr Code Based web ordering
                                     </span>
                                     </label>
-
+                                    <br>
+                                    <br>
                                     <label class="form-check form-check-custom form-check-inline form-check-solid me-5">
                                     <input class="form-check-input" name="is_mobile_ordering" type="checkbox" value="1" {{($branch->is_mobile_ordering == 1)? 'checked' : ''}}>
                                     <span class="fw-semibold ps-2 fs-6">
                                     Mobile App Ordering
                                     </span>
                                     </label>
-
+                                    <br>
+                                    <br>
                                     <label class="form-check form-check-custom form-check-inline form-check-solid me-5">
                                     <input class="form-check-input" name="is_table_room" type="checkbox" value="1" {{($branch->is_table_room == 1)? 'checked' : ''}}>
                                     <span class="fw-semibold ps-2 fs-6">
                                     Table / Room Odering
                                     </span>
                                     </label>
+                                    <br>
                                     
                                     <!--end::Input-->
                                     @if($errors->has('contact_number'))
@@ -286,6 +311,43 @@ $(document).ready(function() {
         }
 
     });
+
+    var company_id = "{{$branch->company_id}}";
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        url: "{{ url('admin/master/get-company-city') }}/" + company_id,
+        type: "GET",
+        success: function(response) {
+            var chk = "{{$branch->city_id}}";
+            $.each(response,function(key, value)
+            {
+                $("#city_id").append('<option value=' + value.id +'>' + value.city_name + '</option>');
+            });
+            $('#city_id option[value='+chk+']').attr('selected','selected');
+        }
+    });
+
+    $('#company_id').on('change', function(){
+        $("#city_id").empty();
+        $("#city_id").append('<option value="">Select City</option>');
+        var company_id = $(this).val();
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "{{ url('admin/master/get-company-city') }}/" + company_id,
+            type: "GET",
+            success: function(response) {
+                $.each(response,function(key, value)
+                {
+                    $("#city_id").append('<option value=' + value.id + '>' + value.city_name + '</option>');
+                });
+            }
+        });
+    });
 });
+
 </script>
 @endsection
