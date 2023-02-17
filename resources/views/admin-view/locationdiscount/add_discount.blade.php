@@ -73,16 +73,17 @@
                                 <!--end::Input group-->
 
                                 <!--begin::Input group-->
-                                <div class="fv-row mb-10 fv-plugins-icon-container">
+                                <div class="fv-row mb-10 fv-plugins-icon-container datadisplay">
                                     <!--begin::Label-->
                                     <label class="fs-5 fw-bold form-label mb-2">
                                         <span class="required">Start Date</span>
                                     </label>
                                     <!--end::Label-->
-
                                     <!--begin::Input-->
-                                    <input type="date" class="form-control form-control-solid" placeholder="Enter Start Date"
-                                        name="start_date">
+                                    <div class="date-container">
+                                        <input type="text" class="start-date form-control form-control-solid" placeholder="Enter Start Date" name="start_date" required>
+                                        <i class="date-icon fa fa-calendar" aria-hidden="true"></i>
+                                    </div>
                                     <!--end::Input-->
                                     @if($errors->has('start_date'))
                                     <span class="text-danger">{{ $errors->first('start_date') }}</span>
@@ -92,7 +93,7 @@
                                 <!--end::Input group-->
 
                                 <!--begin::Input group-->
-                                <div class="fv-row mb-10 fv-plugins-icon-container">
+                                <div class="fv-row mb-10 fv-plugins-icon-container datadisplay">
                                     <!--begin::Label-->
                                     <label class="fs-5 fw-bold form-label mb-2">
                                         <span class="required">End Date</span>
@@ -100,8 +101,10 @@
                                     <!--end::Label-->
 
                                     <!--begin::Input-->
-                                    <input type="date" class="form-control form-control-solid" placeholder="Enter End Date"
-                                        name="end_date">
+                                    <div class="date-container">
+                                        <input type="text" class="end-date form-control form-control-solid" placeholder="Enter End Date" name="end_date" required>
+                                        <i class="date-icon fa fa-calendar" aria-hidden="true"></i>
+                                    </div>   
                                     <!--end::Input-->
                                     @if($errors->has('end_date'))
                                     <span class="text-danger">{{ $errors->first('end_date') }}</span>
@@ -210,4 +213,59 @@ $('#state_id').on('change', function(){
     });
 });
 </script>
+
+<!-- start date and end date JS start-->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.1/js/bootstrap-datepicker.min.js'></script>
+
+<script>
+$(".start-date").datepicker({
+  templates: {
+    leftArrow: '<i class="fa fa-chevron-left hover12"></i>',
+    rightArrow: '<i class="fa fa-chevron-right hover12"></i>',
+  },
+  format: "dd/mm/yyyy",
+  startDate: new Date(),
+  keyboardNavigation: false,
+  autoclose: true,
+  todayHighlight: true,
+  disableTouchKeyboard: true,
+  orientation: "bottom auto",
+});
+
+$(".end-date").datepicker({
+  templates: {
+    leftArrow: '<i class="fa fa-chevron-left hover12"></i>',
+    rightArrow: '<i class="fa fa-chevron-right hover12"></i>',
+  },
+  format: "dd/mm/yyyy",
+  startDate: moment().add(0, "days").toDate(),
+  keyboardNavigation: false,
+  autoclose: true,
+  todayHighlight: true,
+  disableTouchKeyboard: true,
+  orientation: "bottom auto",
+});
+
+$(".start-date")
+  .datepicker()
+  .on("changeDate", function () {
+    var startDate = $(".start-date").datepicker("getDate");
+    var oneDayFromStartDate = moment(startDate).add(0, "days").toDate();
+    $(".end-date").datepicker("setStartDate", oneDayFromStartDate);
+    $(".end-date").datepicker("setDate", oneDayFromStartDate);
+  });
+
+
+$(".end-date")
+.datepicker()
+.on("show", function () {
+var startDate = $(".start-date").datepicker("getDate");
+$(".day.disabled")
+    .filter(function (index) {
+    return $(this).text() === moment(startDate).format("D");
+    })
+    .addClass("active");
+});
+</script>
+<!-- start date and end date JS end-->
 @endsection

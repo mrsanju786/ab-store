@@ -36,12 +36,12 @@
                         <div class="fv-row mb-10 fv-plugins-icon-container">
                             <!--begin::Label-->
                             <label class="fs-5 fw-bold form-label mb-2">
-                                <span class="required">Area name</span>
+                                <span class="required">Area Name</span>
                             </label>
                             <!--end::Label-->
 
                             <!--begin::Input-->
-                            <input class="form-control form-control-solid" placeholder="Enter Area name"
+                            <input class="form-control form-control-solid" placeholder="Enter Area Name"
                                 name="area_name">
                             <!--end::Input-->
                             @if($errors->has('area_name'))

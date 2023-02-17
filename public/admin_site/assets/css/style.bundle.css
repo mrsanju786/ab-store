@@ -60506,3 +60506,245 @@ html:not([data-theme=dark]) {
         color: #fff !important
     }
 }
+
+ .datadisplay input[type="date"]:after {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    content: "\f073";
+    color: #555;
+    padding: 0 5px;
+}
+
+.datadisplay input[type="date"]::-webkit-calendar-picker-indicator {
+    background: transparent;
+    bottom: 0;
+    color: transparent;
+    cursor: default;
+    height: auto;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: auto;
+} 
+
+/* Start Date and End Date css start */
+
+/***CALENDER START****/
+.datepicker .day {
+    border-radius: 4px;
+}
+
+.datepicker-dropdown {
+    top: 0;
+    left: 0;
+    padding: 5px;
+}
+
+.datepicker-dropdown:before {
+    content: '';
+    display: inline-block;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    border-bottom: 7px solid red;
+    border-top: 0;
+    border-bottom-color: red;
+    position: absolute;
+}
+
+.datepicker-dropdown:after {
+    content: '';
+    display: inline-block;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-bottom: 6px solid #fff;
+    border-top: 0;
+    position: absolute;
+}
+
+.datepicker-dropdown.datepicker-orient-left:before {
+    left: 6px;
+}
+
+.datepicker-dropdown.datepicker-orient-left:after {
+    left: 7px;
+}
+
+.datepicker-dropdown.datepicker-orient-right:before {
+    right: 6px;
+}
+
+.datepicker-dropdown.datepicker-orient-right:after {
+    right: 7px;
+}
+
+.datepicker-dropdown.datepicker-orient-bottom:before {
+    top: -7px;
+}
+
+.datepicker-dropdown.datepicker-orient-bottom:after {
+    top: -6px;
+}
+
+.datepicker-dropdown.datepicker-orient-top:before {
+    bottom: -7px;
+    border-bottom: 0;
+    border-top: 7px solid red;
+}
+
+.datepicker-dropdown.datepicker-orient-top:after {
+    bottom: -6px;
+    border-bottom: 0;
+    border-top: 6px solid red;
+}
+
+.datepicker table {
+    margin: 0;
+    user-select: none;
+}
+
+.datepicker td,
+.datepicker th {
+    text-align: center;
+    width: 30px;
+    height: 30px;
+    border: none;
+}
+
+.datepicker .datepicker-switch,
+.datepicker .prev,
+.datepicker .next,
+.datepicker tfoot tr th {
+    cursor: pointer;
+}
+
+/*.datepicker .datepicker-switch:hover,*/
+/*.datepicker .prev:hover,*/
+/*.datepicker .next:hover,*/
+/*.datepicker tfoot tr th:hover {*/
+/*background: red;*/
+/*border-radius: 4px;*/
+/*}*/
+.datepicker .prev .disabled,
+.datepicker .next .disabled {
+    visibility: hidden;
+}
+
+.datepicker .range-start {
+    background: #337ab7 url("../images/range-bg-1.png") top right no-repeat;
+    color: #fff;
+}
+
+.datepicker .range-end {
+    background: #337ab7 url("../images/range-bg-2.png") top left no-repeat;
+    color: #fff;
+}
+
+.datepicker .range-start.range-end {
+    background-image: none;
+}
+
+.datepicker .range {
+    background: #d5e9f7;
+}
+
+.datepicker .disabled.day{
+    color:#999;
+}
+
+/* Hover */
+.datepicker .day:hover,
+.datepicker .month:hover,
+.datepicker .year:hover,
+.datepicker .datepicker-switch:hover,
+.datepicker .next:hover,
+.datepicker .prev:hover {
+    background-color: #ff8000;
+    color: white;
+    border-radius: 4px;
+}
+
+.datepicker .today {
+    font-weight: bold;
+    color: #1ed443;
+
+}
+
+/* Estilos para meses y años */
+.datepicker-months,
+.datepicker-years {
+    width: 213px;
+}
+
+.datepicker-months td,
+.datepicker-years td {
+    width: auto;
+    height: auto;
+}
+
+.datepicker-months .month,
+.datepicker-years .year {
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+    float: left;
+    display: block;
+    width: 23%;
+    height: 46px;
+    line-height: 46px;
+    margin: 1%;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.day.active,
+.start-date-active {
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+}
+
+/* Desactivados */
+.day.disabled,
+.month.disabled,
+.year.disabled,
+.start-date-active.disabled {
+    cursor: not-allowed;
+    filter: alpha(opacity=65);
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    opacity: .65;
+}
+
+a:active,
+a:hover {
+    outline: 0;
+}
+/***CALENDER END****/
+
+/***DATE AND CALENDER START****/
+.hover12:hover  {
+    color: #fff  !important;
+}
+
+.datadisplay .date-container {
+    position: relative;
+}
+
+.datadisplay .date-text {
+    position: absolute;
+    top: 6px;
+    left: 12px;
+    color: #aaa;
+}
+
+.datadisplay .date-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    color: #aaa;
+}
+/***DATE AND CALENDER END****/
+
+/* Start Date and End Date css end */
