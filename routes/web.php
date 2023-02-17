@@ -273,5 +273,6 @@ Route::group(['prefix' => 'admin'], function()
         //     Route::delete('/{user}/delete', 'UsersController@destroy')->name('users.destroy');
         // });
         
+        Route::view('/test-dish', "admin-view.test_dish");
     });
 });
