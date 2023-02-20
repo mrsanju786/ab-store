@@ -24,6 +24,7 @@ use App\Http\Controllers\admin\CounterController;
 use App\Http\Controllers\admin\DishController;
 use App\Http\Controllers\admin\CountryTaxController;
 use App\Http\Controllers\admin\DishVariantController;
+use App\Http\Controllers\admin\OptionController;
 
 
 /*
@@ -290,6 +291,16 @@ Route::group(['prefix' => 'admin'], function()
         Route::get('/edit-dishvariant/{id?}', [DishVariantController::class, 'editDishVariant'])->name('edit-dishvariant');
         Route::post('/update-dishvariant', [DishVariantController::class, 'updateDishVariant'])->name('update-dishvariant');
         Route::get('/dishvariant-status/{id}/{status}', [DishVariantController::class, 'dishvariantStatus'])->name('dishvariant-status');
+
+        /**
+         * Option Variant Routes
+         */
+        Route::get('/option-list/{id}', [OptionController::class, 'index'])->name('option-list');
+        Route::get('/add-option', [OptionController::class, 'addOption'])->name('add-option');
+        Route::post('/create-option', [OptionController::class, 'createOption'])->name('create-option');
+        Route::get('/edit-option/{id?}', [OptionController::class, 'editOption'])->name('edit-option');
+        Route::post('/update-option', [OptionController::class, 'updateOption'])->name('update-option');
+        Route::get('/option-status/{id}/{status}', [OptionController::class, 'optionStatus'])->name('option-status');
 
 
         /**
