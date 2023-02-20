@@ -60748,3 +60748,9 @@ a:hover {
 /***DATE AND CALENDER END****/
 
 /* Start Date and End Date css end */
+
+/* NEW GLOBA CSS START */
+.borderbottom{
+    border-bottom: 1px solid #999 !important;
+}
+/* NEW GLOBA CSS END */
