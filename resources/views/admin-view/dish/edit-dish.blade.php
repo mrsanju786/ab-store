@@ -226,7 +226,8 @@
                                 <!--end::Card title-->   
                                 <!--begin::Create campaign button-->
                                 <div class="card-toolbar">
-                                    <a href="{{route('add-dishvariant', base64_encode($dish->id))}}" type="button" class="btn btn-sm btn-primary">Add</a>
+                                    <a href="{{route('option-list', base64_encode($dish->id))}}" type="button" class="btn btn-sm btn-primary me-5">Add Option</a>
+                                    <a href="{{route('add-dishvariant', base64_encode($dish->id))}}" type="button" class="btn btn-sm btn-primary">Add Variant</a>
                                 </div>
                                 <!--end::Create campaign button-->
                             </div>                               

@@ -29,7 +29,7 @@
                             <!--begin::Scroll-->
                             <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_add_role_scroll">
 
-                            <input type="hidden" class="form-control form-control-solid" name="dish_id" value="22">
+                            <input type="hidden" class="form-control form-control-solid" name="dish_id" value="{{$dish_id}}">
                                 
                                 <!--begin::Input group-->
                                 <div class="fv-row mb-10 fv-plugins-icon-container">

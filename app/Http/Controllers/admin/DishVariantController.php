@@ -21,6 +21,9 @@ class DishVariantController extends Controller
         $de_id = base64_decode($id);
         $dish_option = DishOption::where('dish_id',$de_id)->get();
         
+        if($dish_option->isEmpty()){
+            return redirect()->route('add-option', ['id'=>$id])->with('error', 'First, you will need to add some options!');
+        }
         return view('admin-view.dish_variant.add-variant', ['id'=>$id,'dish_option'=>$dish_option]);
     }
 

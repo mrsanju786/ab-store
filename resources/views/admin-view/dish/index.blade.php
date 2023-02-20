@@ -70,7 +70,7 @@
                         </td>
 
                         <td>
-                            <span class="text-dark fw-bold d-block fs-6">{{$dishes->counter->counter_name}}</span>
+                            <span class="text-dark fw-bold d-block fs-6">{{$dishes->counter->counter_name ?? "-"}}</span>
                         </td>
 
                         <td>

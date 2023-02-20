@@ -296,7 +296,7 @@ Route::group(['prefix' => 'admin'], function()
          * Option Variant Routes
          */
         Route::get('/option-list/{id}', [OptionController::class, 'index'])->name('option-list');
-        Route::get('/add-option', [OptionController::class, 'addOption'])->name('add-option');
+        Route::get('/add-option/{id}', [OptionController::class, 'addOption'])->name('add-option');
         Route::post('/create-option', [OptionController::class, 'createOption'])->name('create-option');
         Route::get('/edit-option/{id?}', [OptionController::class, 'editOption'])->name('edit-option');
         Route::post('/update-option', [OptionController::class, 'updateOption'])->name('update-option');
