@@ -4,174 +4,125 @@
 @endsection
 @section('content')
 
-
+<!--begin::Row-->
 <div class="row">
+    <!--begin::Col-->
+    <div class="col-md-12 mx-auto">
+        <div class="card card-flush h-md-100" id="kt_modal_add_role">
+            <!--begin::Card header-->
+            <div class="card-header">
+                <!--begin::Card title-->
+                <div class="card-title">
+                    <h2>Add Variant</h2>
+                </div>
+                <!--end::Card title-->
+            </div>
+            <!--end::Card header-->
+            <br>
+            <!--begin::Row-->
+            <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
 
-    <div class="col-lg-6 col-12"> 
-        <div class="row">               
-            <div class="col-md-12 mx-auto">
-                <div class="card card-flush h-md-100" id="kt_modal_add_role">
-                    <!--begin::Card header-->
-                    <div class="card-header">
-                        <!--begin::Card title-->
-                        <div class="card-title">
-                            <h2>Add Dish Variant</h2>
-                        </div>
-                        <!--end::Card title-->
-                    </div>
-                    <!--end::Card header-->
+                <!--begin::Col-->
+                <div class="col">
 
                     <!--begin::Card body-->
                     <div class="card-body pt-1">
-                        <!--begin::Form-->
-                        <form action="{{route('create-dishvariant')}}" method="POST" enctype="multipart/form-data">
-                            @csrf
-                            <!--begin::Scroll-->
-                            <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_add_role_scroll">
+                <!--begin::Form-->
+                <form action="{{route('create-dishvariant', $id)}}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <!--begin::Scroll-->
+                    <input type="hidden" name="dish_id" value="{{base64_decode($id)}}">
+                    <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_add_role_scroll">
+                        <!--begin::Input group-->
+                        <div class="fv-row mb-10 fv-plugins-icon-container">
+                            <!--begin::Label-->
+                            <label class="fs-5 fw-bold form-label mb-2">
+                                <span class="required">Price</span>
+                            </label>
+                            <!--end::Label-->
+
+                            <!--begin::Input-->
+                            <input type="number" class="form-control form-control-solid" placeholder="Enter Price"
+                                name="price">
+                            <!--end::Input-->
+                            @if($errors->has('price'))
+                            <span class="text-danger">{{ $errors->first('price') }}</span>
+                            @endif
+                            <div class="fv-plugins-message-container invalid-feedback"></div>
+                        </div>
+                        <!--end::Input group-->
+
+                        <!--begin::Input group-->
+                        <div class="fv-row mb-10 fv-plugins-icon-container">
+                            <!--begin::Label-->
+                            <label class="fs-5 fw-bold form-label mb-2">
+                                <span class="required">Options</span>
+                            </label>
+                            <br>
+                            <!--end::Label-->
+                            @foreach($dish_option as $dish_options)
+                            <!--begin::Label-->
+                            <label class="fs-5 fw-bold form-label mb-2">
+                                <span>{{$dish_options->option_name}}</span>
+                            </label>
+                            <!--end::Label-->
+                            <!--begin::Input-->
+                            <select class="form-select form-select-solid" aria-label="Select example" name="options[]" data-control="select2">
+                                <!-- <option>Select Location</option> -->
+                                @php 
+                                 $option_val = explode(',', $dish_options->option_value); 
                                 
-                                <!--begin::Input group-->
-                                <div class="fv-row mb-10 fv-plugins-icon-container">
-                                    <!--begin::Label-->
-                                    <label class="fs-5 fw-bold form-label mb-2">
-                                        <span class="required">Dish Price</span>
-                                    </label>
-                                    <!--end::Label-->
+                                @endphp
+                                @foreach($option_val as $option_val)
+                                <option value="{{$option_val}}">{{$option_val}}</option>
+                                @endforeach
+                                
+                            </select>
+                            <!--end::Input-->
+                            @if($errors->has('location_id'))
+                            <span class="text-danger">{{ $errors->first('location_id') }}</span>
+                            @endif
+                            <div class="fv-plugins-message-container invalid-feedback"></div>
+                            @endforeach
+                        </div>
+                        <!--end::Input group-->
 
-                                    <!--begin::Input-->
-                                    <input type="number" class="form-control form-control-solid" placeholder="Enter Dish Price"
-                                        name="dish_price">
-                                    <!--end::Input-->
-                                    @if($errors->has('dish_price'))
-                                    <span class="text-danger">{{ $errors->first('dish_price') }}</span>
-                                    @endif
-                                    <div class="fv-plugins-message-container invalid-feedback"></div>
-                                </div>
-                                <!--end::Input group-->
+                        <!--begin::Actions-->
+                        <div class="text-left pt-3">
 
-                                <!--begin::Input group-->
-                                <div class="fv-row mb-10 fv-plugins-icon-container">
-                                    <!--begin::Label-->
-                                    <label class="fs-5 fw-bold form-label mb-2">
-                                        <span class="required">Select Counter</span>
-                                    </label>
-                                    <!--end::Label-->
-
-                                    <!--begin::Input-->
-                                    <select class="form-select form-select-solid" aria-label="Select example" name="counter_id"  data-control="select2" >
-                                        <option>Select Counter</option>
-                                        <option value="1">Counter 1</option>
-                                        <option value="2">Counter 2</option>
-                                        
-                                    </select>
-                                    <!--end::Input-->
-                                    @if($errors->has('counter_id'))
-                                    <span class="text-danger">{{ $errors->first('counter_id') }}</span>
-                                    @endif
-                                    <div class="fv-plugins-message-container invalid-feedback"></div>
-                                </div>
-                                <!--end::Input group-->
-
-                                <!--begin::Actions-->
-                                <div class="text-left pt-3">
-                                    <button type="submit" class="btn btn-lg btn-primary"
-                                        data-kt-roles-modal-action="submit">
-                                        <span class="indicator-label">
-                                            Submit
-                                        </span>
-                                        <span class="indicator-progress">
-                                            Please wait... <span
-                                                class="spinner-border spinner-border-sm align-middle ms-2"></span>
-                                        </span>
-                                    </button>
-                                </div>
-                                <!--end::Actions-->
-                            </div>
-                        </form>
-                        <!--end::Form-->
-                    </div>
-                    <!--end::Card body-->                
-                </div>                
+                            <button type="submit" class="btn btn-primary"
+                                data-kt-roles-modal-action="submit">
+                                <span class="indicator-label">
+                                    Submit
+                                </span>
+                                <span class="indicator-progress">
+                                    Please wait... <span
+                                        class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                                </span>
+                            </button>
+                        </div>
+                        <!--end::Actions-->
+                </form>
+                <!--end::Form-->
             </div>
+            <!--end::Card body-->
+             </div>
+                <!--end::Col-->
+
+                <!--begin::Col-->
+                <div class="col">
+
+                </div>
+                <!--end::Col-->
+            </div>
+            <!--end::Row-->
+
+
         </div>
     </div>
-
-    {{--<div class="col-lg-6 col-12">         
-        <div class="row ">               
-            <div class="col-md-12 mx-auto">
-                <div class="card card-flush h-md-100" id="kt_modal_add_role">                                                     
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="card-header py-7">
-                                    <!--begin::Card title-->
-                                    <div class="card-title">
-                                    <h2>Variants  </h2>
-                                </div>
-                                <!--end::Card title-->   
-                                <!--begin::Create campaign button-->
-                                <div class="card-toolbar">
-                                    <a href="#" type="button" class="btn btn-sm btn-primary"  data-bs-toggle="modal" data-bs-target="#kt_modal_create_campaign">Add</a>
-                                </div>
-                                <!--end::Create campaign button-->
-                            </div>                               
-                        </div> 
-
-                        <div class="col-md-12">
-                            <!--begin::Body-->
-                            <div class="card-body pt-5">
-                                <div class="d-flex justify-content-between">
-                                    <div class="fw-bold">Name  </div>
-                                    <div class="fw-bold">Price </div>
-                                    <div class="fw-bold">For  </div>
-                                </div>
-                            </div>                                
-                            <!--end::Body-->
-                        </div> 
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row mt-6">               
-            <div class="col-md-12 mx-auto">
-                <div class="card card-flush h-md-100" id="kt_modal_add_role">                                                     
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="card-header py-7">
-                                    <!--begin::Card title-->
-                                    <div class="card-title">
-                                    <h2>Extras  </h2>
-                                </div>
-                                <!--end::Card title-->   
-                                <!--begin::Create campaign button-->
-                                <div class="card-toolbar">
-                                    <a href="#" type="button" class="btn  btn-sm btn-primary"  data-bs-toggle="modal" data-bs-target="#kt_modal_create_campaign">Add</a>
-                                </div>
-                                <!--end::Create campaign button-->
-                            </div>                               
-                        </div> 
-
-                        <div class="col-md-12">
-                            <!--begin::Body-->
-                            <div class="card-body pt-5">
-                                <div class="d-flex justify-content-between">
-                                    <div class="fw-bold">Name  </div>
-                                    <div class="fw-bold">Price </div>
-                                    <div class="fw-bold">For  </div>
-                                    </div>
-                            </div>                                
-                            <!--end::Body-->
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-    </div>--}}
-
+    <!--end::Col-->
 </div>
-
-
-
+<!--end::Row-->
 
 @endsection
 
@@ -192,40 +143,5 @@ $(document).ready(function() {
 
     });
 });
-
-$('#country_id').on('change', function(){
-    var country_id = $(this).val();
-    $.ajax({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
-        url: "{{ url('admin/master/get-state') }}/" + country_id,
-        type: "GET",
-        success: function(response) {
-            $.each(response,function(key, value)
-            {
-                $("#state_id").append('<option value=' + value.id + '>' + value.state_name + '</option>');
-            });
-        }
-    });
-});
-
-$('#state_id').on('change', function(){
-    var state_id = $(this).val();
-    $.ajax({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
-        url: "{{ url('admin/master/get-city') }}/" + state_id,
-        type: "GET",
-        success: function(response) {
-            $.each(response,function(key, value)
-            {
-                $("#city_id").append('<option value=' + value.id + '>' + value.city_name + '</option>');
-            });
-        }
-    });
-});
-
 </script>
 @endsection

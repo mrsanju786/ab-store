@@ -226,7 +226,7 @@
                                 <!--end::Card title-->   
                                 <!--begin::Create campaign button-->
                                 <div class="card-toolbar">
-                                    <a href="{{route('dishvariant-list', base64_encode($dish->id))}}" type="button" class="btn btn-sm btn-primary">Add</a>
+                                    <a href="{{route('add-dishvariant', base64_encode($dish->id))}}" type="button" class="btn btn-sm btn-primary">Add</a>
                                 </div>
                                 <!--end::Create campaign button-->
                             </div>                               
@@ -238,7 +238,7 @@
                                 <div class="d-flex justify-content-between">
                                     <div class="fw-bold">Name  </div>
                                     <div class="fw-bold">Price </div>
-                                    <div class="fw-bold">For  </div>
+                                    <div class="fw-bold">Action  </div>
                                 </div>
                             </div>                                
                             <!--end::Body-->
