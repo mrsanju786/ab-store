@@ -226,7 +226,7 @@
                                 <!--end::Card title-->   
                                 <!--begin::Create campaign button-->
                                 <div class="card-toolbar">
-                                    <a href="{{route('dishvariant-list', base64_encode($dish->id))}}" type="button" class="btn btn-sm btn-primary">Add</a>
+                                    <a href="{{route('add-dishvariant', base64_encode($dish->id))}}" type="button" class="btn btn-sm btn-primary">Add</a>
                                 </div>
                                 <!--end::Create campaign button-->
                             </div>                               
@@ -234,13 +234,48 @@
 
                         <div class="col-md-12">
                             <!--begin::Body-->
-                            <div class="card-body pt-5">
-                                <div class="d-flex justify-content-between">
-                                    <div class="fw-bold">Name  </div>
-                                    <div class="fw-bold">Price </div>
-                                    <div class="fw-bold">For  </div>
+                            <div class="card-body pt-6">
+                                <!--begin::Table container-->
+                                <div class="table-responsive">
+                                    <!--begin::Table-->
+                                    <table class="table table-row-dashed align-middle gs-0 gy-3 my-0">
+                                        <!--begin::Table head-->
+                                        <thead>
+                                            <tr class="fs-7 fw-bold text-dark-600 borderbottom">
+                                                <th class="p-0 pb-3 min-w-100px">Name</th>
+                                                <th class="p-0 pb-3 w-125px">Price</th>
+                                                <th class="p-0 pb-3 w-50px">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <!--end::Table head-->
+                                        <!--begin::Table body-->
+                                        <tbody>
+                                            @foreach($variant as $variants)
+                                            <tr>
+                                                <td class="p-0 py-3 w-125px">
+                                                    <span class="text-gray-600 fw-bold fs-6">{{$variants->variant_name}}</span>
+                                                </td>
+                                                <td class="p-0 py-3 w-125px">
+                                                    <span class="text-gray-600 fw-bold fs-6">{{$variants->variant_price}}</span>
+                                                </td>
+                                                <td class="p-0 py-3 w-125px">
+                                                    <div class="card-toolbar">
+                                                        <a href="{{route('edit-dishvariant', base64_encode($dish->id))}}" type="button" class="btn btn-sm btn-primary mx-2"
+                                                        >Edit </a>
+                                                        <!-- <a href="#" type="button" class="btn btn-sm btn-danger"
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#kt_modal_create_campaign">Delete</a> -->
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            @endforeach
+                                        </tbody>
+                                        <!--end::Table body-->
+                                    </table>
+                                    <!--end::Table-->
                                 </div>
-                            </div>                                
+                                <!--end::Table container-->
+                            </div>
                             <!--end::Body-->
                         </div> 
                     </div>

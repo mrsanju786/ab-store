@@ -13,7 +13,7 @@
             <div class="card-header">
                 <!--begin::Card title-->
                 <div class="card-title">
-                    <h2>Add Variant</h2>
+                    <h2>Edit Variant</h2>
                 </div>
                 <!--end::Card title-->
             </div>
@@ -28,10 +28,10 @@
                     <!--begin::Card body-->
                     <div class="card-body pt-1">
                 <!--begin::Form-->
-                <form action="{{route('create-dishvariant', $id)}}" method="POST" enctype="multipart/form-data">
+                <form action="{{route('update-dishvariant', base64_encode($variant->id))}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <!--begin::Scroll-->
-                    <input type="hidden" name="dish_id" value="{{base64_decode($id)}}">
+                    <input type="hidden" name="dish_id" value="{{base64_decode($variant->id)}}">
                     <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_add_role_scroll">
                         <!--begin::Input group-->
                         <div class="fv-row mb-10 fv-plugins-icon-container">
@@ -43,7 +43,7 @@
 
                             <!--begin::Input-->
                             <input type="number" class="form-control form-control-solid" placeholder="Enter Price"
-                                name="price">
+                                name="price" value="{{$variant->variant_price}}">
                             <!--end::Input-->
                             @if($errors->has('price'))
                             <span class="text-danger">{{ $errors->first('price') }}</span>
@@ -60,7 +60,7 @@
                             </label>
                             <br>
                             <!--end::Label-->
-                            @foreach($dish_option as $dish_options)
+                            @foreach($dish_option as $key=>$dish_options)
                             <!--begin::Label-->
                             <label class="fs-5 fw-bold form-label mb-2">
                                 <span>{{$dish_options->option_name}}</span>
@@ -71,10 +71,10 @@
                                 <!-- <option>Select Location</option> -->
                                 @php 
                                  $option_val = explode(',', $dish_options->option_value); 
-                                
+                                 $pre_val = explode(",", $variant->variant_name);
                                 @endphp
                                 @foreach($option_val as $option_val)
-                                <option value="{{$option_val}}">{{$option_val}}</option>
+                                <option value="{{$option_val}}" {{(in_array($option_val, $pre_val)? 'selected' : '')}}>{{$option_val}}</option>
                                 @endforeach
                                 
                             </select>
@@ -86,7 +86,7 @@
                             @endforeach
                         </div>
                         <!--end::Input group-->
-
+                        <input type="hidden" name="variant_id" value="{{$variant->id}}">
                         <!--begin::Actions-->
                         <div class="text-left pt-3">
 

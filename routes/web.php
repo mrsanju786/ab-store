@@ -286,10 +286,10 @@ Route::group(['prefix' => 'admin'], function()
          * Dish Variant Routes
          */
         Route::get('/dishvariant-list/{id}', [DishVariantController::class, 'index'])->name('dishvariant-list');
-        Route::get('/add-dishvariant', [DishVariantController::class, 'addDishVariant'])->name('add-dishvariant');
-        Route::post('/create-dishvariant', [DishVariantController::class, 'createDishVariant'])->name('create-dishvariant');
+        Route::get('/add-dishvariant/{id}', [DishVariantController::class, 'addDishVariant'])->name('add-dishvariant');
+        Route::post('/create-dishvariant/{id}', [DishVariantController::class, 'createDishVariant'])->name('create-dishvariant');
         Route::get('/edit-dishvariant/{id?}', [DishVariantController::class, 'editDishVariant'])->name('edit-dishvariant');
-        Route::post('/update-dishvariant', [DishVariantController::class, 'updateDishVariant'])->name('update-dishvariant');
+        Route::post('/update-dishvariant/{id}', [DishVariantController::class, 'updateDishVariant'])->name('update-dishvariant');
         Route::get('/dishvariant-status/{id}/{status}', [DishVariantController::class, 'dishvariantStatus'])->name('dishvariant-status');
 
         /**

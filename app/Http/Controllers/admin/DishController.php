@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Dish;
 use App\Models\Counter;
+use App\Models\DishVariant;
 use Storage;
 use Auth;
 
@@ -78,7 +79,8 @@ class DishController extends Controller
 
         $dish = Dish::find(base64_decode($id));
         $counter = Counter::get();
-        return view('admin-view.dish.edit-dish', compact('dish','counter'));
+        $variant = DishVariant::where('dish_id', $dish->id)->get();
+        return view('admin-view.dish.edit-dish', compact('dish','counter', 'variant'));
     }
 
     public function updateDish(Request $request){
