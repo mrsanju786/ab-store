@@ -51,39 +51,23 @@
                 <!--begin::Table body-->
                 <tbody>
                     @php $i = 1; @endphp
-                    @foreach($dish as $dishes)
+                    @foreach($variant as $variants)
                     <tr>
                         <td>
                             <span class="text-dark fw-bold d-block fs-7">{{$i++}}</span>
                         </td>
 
                         <td>
-                            <span class="text-dark fw-bold d-block fs-6">{{$dishes->dish_name}}</span>
+                            <span class="text-dark fw-bold d-block fs-6">{{$variants->variant_name}}</span>
                         </td>
 
                         <td>
-                            <span class="text-dark fw-bold d-block fs-6"><img style="width: 60px;" src="{{asset('storage/upload/dish')}}/{{$dishes->dish_images}}"></span>
-                        </td>
-
-                        <td>
-                            <span class="text-dark fw-bold d-block fs-6">{{$dishes->dish_hsn}}</span>
-                        </td>
-
-                        <td>
-                            <span class="text-dark fw-bold d-block fs-6">{{$dishes->counter->counter_name}}</span>
-                        </td>
-
-                        <td>
-                            @if($dishes->is_active == 1)
-                            <span class="text-dark fw-bold d-block fs-6"><button class="btn btn-success btn-sm" onclick="location.href='{{route('dish-status',[$dishes['id'],0])}}'" title="click to deactive">Active</button></span>
-                            @else
-                            <span class="text-dark fw-bold d-block fs-6"><button class="btn btn-danger btn-sm" onclick="location.href='{{route('dish-status',[$dishes['id'],1])}}'" title="click to active">Deactive</button></span>
-                            @endif
+                            <span class="text-dark fw-bold d-block fs-6">{{$variants->variant_price}}</span>
                         </td>
 
                         <td>
                             <div class="d-flex justify-content-end flex-shrink-0">
-                                <a href="{{route('edit-dish',[base64_encode($dishes['id'])])}}" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
+                                <a href="{{route('edit-dishvariant',[base64_encode($variants['id'])])}}" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
                                     <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
                                     <span class="svg-icon svg-icon-3"><svg width="24" height="24" viewBox="0 0 24 24"
                                             fill="none" xmlns="http://www.w3.org/2000/svg">

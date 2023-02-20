@@ -15,7 +15,7 @@
                     <div class="card-header">
                         <!--begin::Card title-->
                         <div class="card-title">
-                            <h2>Edit Dish</h2>
+                            <h2>Add Dish Variant</h2>
                         </div>
                         <!--end::Card title-->
                     </div>
@@ -24,29 +24,11 @@
                     <!--begin::Card body-->
                     <div class="card-body pt-1">
                         <!--begin::Form-->
-                        <form action="{{route('update-dish')}}" method="POST" enctype="multipart/form-data">
+                        <form action="{{route('create-dishvariant')}}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <!--begin::Scroll-->
                             <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_add_role_scroll">
-                                <!--begin::Input group-->
-                                <div class="fv-row mb-10 fv-plugins-icon-container">
-                                    <!--begin::Label-->
-                                    <label class="fs-5 fw-bold form-label mb-2">
-                                        <span class="required">Dish Name</span>
-                                    </label>
-                                    <!--end::Label-->
                                 
-                                    <!--begin::Input-->
-                                    <input class="form-control form-control-solid" placeholder="Enter Dish Name"
-                                        name="dish_name" value="{{$dish->dish_name}}">
-                                    <!--end::Input-->
-                                    @if($errors->has('dish_name'))
-                                    <span class="text-danger">{{ $errors->first('dish_name') }}</span>
-                                    @endif
-                                    <div class="fv-plugins-message-container invalid-feedback"></div>
-                                </div>
-                                <!--end::Input group-->
-
                                 <!--begin::Input group-->
                                 <div class="fv-row mb-10 fv-plugins-icon-container">
                                     <!--begin::Label-->
@@ -57,54 +39,10 @@
 
                                     <!--begin::Input-->
                                     <input type="number" class="form-control form-control-solid" placeholder="Enter Dish Price"
-                                        name="dish_price" value="{{$dish->dish_price}}">
+                                        name="dish_price">
                                     <!--end::Input-->
                                     @if($errors->has('dish_price'))
                                     <span class="text-danger">{{ $errors->first('dish_price') }}</span>
-                                    @endif
-                                    <div class="fv-plugins-message-container invalid-feedback"></div>
-                                </div>
-                                <!--end::Input group-->
-
-                                <!--begin::Input group-->
-                                <div class="fv-row mb-10 fv-plugins-icon-container">
-                                    <!--begin::Label-->
-                                    <label class="fs-5 fw-bold form-label mb-2">
-                                        <span class="required">Dish Image</span>
-                                    </label>
-                                    <!--end::Label-->
-
-                                    <!--begin::Input-->
-                                    <input type="file" class="form-control form-control-solid" placeholder="Upload Dish Image"
-                                    title="Choose an Image please"  name="dish_image">
-                                    <img width="155" src="{{asset('storage/upload/dish')}}/{{$dish->dish_images}}" >
-                                    <!--end::Input-->
-                                    @if($errors->has('dish_image'))
-                                    <span class="text-danger">{{ $errors->first('dish_image') }}</span>
-                                    @endif
-                                    <div class="fv-plugins-message-container invalid-feedback"></div>
-                                </div>
-                                <!--end::Input group-->
-
-                                <!-- dish code start -->
-                            
-                                <input type="hidden" class="form-control form-control-solid" name="dish_code" value="{{$dish->dish_code}}">
-                                <!-- dish code end -->
-
-                                <!--begin::Input group-->
-                                <div class="fv-row mb-10 fv-plugins-icon-container">
-                                    <!--begin::Label-->
-                                    <label class="fs-5 fw-bold form-label mb-2">
-                                        <span class="required">Dish Hsn</span>
-                                    </label>
-                                    <!--end::Label-->
-
-                                    <!--begin::Input-->
-                                    <input class="form-control form-control-solid" placeholder="Dish Hsn"
-                                        name="dish_hsn" value="{{$dish->dish_hsn}}">
-                                    <!--end::Input-->
-                                    @if($errors->has('dish_hsn'))
-                                    <span class="text-danger">{{ $errors->first('dish_hsn') }}</span>
                                     @endif
                                     <div class="fv-plugins-message-container invalid-feedback"></div>
                                 </div>
@@ -121,9 +59,8 @@
                                     <!--begin::Input-->
                                     <select class="form-select form-select-solid" aria-label="Select example" name="counter_id"  data-control="select2" >
                                         <option>Select Counter</option>
-                                        @foreach($counter as $counters)
-                                        <option value="{{$counters->id}}" {{($dish->counter_id == $counters->id)? 'selected': ''}}>{{$counters->counter_name}}</option>
-                                        @endforeach
+                                        <option value="1">Counter 1</option>
+                                        <option value="2">Counter 2</option>
                                         
                                     </select>
                                     <!--end::Input-->
@@ -133,59 +70,6 @@
                                     <div class="fv-plugins-message-container invalid-feedback"></div>
                                 </div>
                                 <!--end::Input group-->
-
-                                <!--begin::Input group-->
-                                <div class="fv-row mb-10 fv-plugins-icon-container">
-                                    <!--begin::Label-->
-                                    <label class="fs-5 fw-bold form-label mb-2">
-                                        <span>Tax Inclusive</span>
-                                    </label>
-                                    <!--end::Label-->
-
-                                    <!--begin::Input-->
-                                    <input class="form-check-input" name="tax_inc" type="radio" value="1" {{($dish->is_tax_inclusive == "1")? 'checked':''}}>
-                                        <span class="fw-semibold ps-2 fs-6">
-                                        Yes
-                                        </span>
-
-                                    <input class="form-check-input" name="tax_inc" type="radio" value="0" {{($dish->is_tax_inclusive == "0")? 'checked':''}}>
-                                        <span class="fw-semibold ps-2 fs-6">
-                                        No
-                                        </span>
-                                    <!--end::Input-->
-                                    @if($errors->has('tax_inc'))
-                                    <span class="text-danger">{{ $errors->first('tax_inc') }}</span>
-                                    @endif
-                                    <div class="fv-plugins-message-container invalid-feedback"></div>
-                                </div>
-                                <!--end::Input group-->
-
-                                <!--begin::Input group-->
-                                <div class="fv-row mb-10 fv-plugins-icon-container">
-                                    <!--begin::Label-->
-                                    <label class="fs-5 fw-bold form-label mb-2">
-                                        <span>Dish Has Variant</span>
-                                    </label>
-                                    <!--end::Label-->
-
-                                    <!--begin::Input-->
-                                    <input class="form-check-input" name="dish_has_variant" type="radio" value="1" {{($dish->has_variant == "1")?'checked':''}}>
-                                        <span class="fw-semibold ps-2 fs-6">
-                                        Yes
-                                        </span>
-
-                                    <input class="form-check-input" name="dish_has_variant" type="radio" value="0" {{($dish->has_variant == "0")?'checked':''}}>
-                                        <span class="fw-semibold ps-2 fs-6">
-                                        No
-                                        </span>
-                                    <!--end::Input-->
-                                    @if($errors->has('dish_has_variant'))
-                                    <span class="text-danger">{{ $errors->first('dish_has_variant') }}</span>
-                                    @endif
-                                    <div class="fv-plugins-message-container invalid-feedback"></div>
-                                </div>
-                                <!--end::Input group-->
-                                <input type="hidden" name="dish_id" id="dish_id" value="{{$dish->id}}">
 
                                 <!--begin::Actions-->
                                 <div class="text-left pt-3">
@@ -211,8 +95,7 @@
         </div>
     </div>
 
-    <div class="col-lg-6 col-12">
-        @if($dish->has_variant == 1)         
+    {{--<div class="col-lg-6 col-12">         
         <div class="row ">               
             <div class="col-md-12 mx-auto">
                 <div class="card card-flush h-md-100" id="kt_modal_add_role">                                                     
@@ -226,7 +109,7 @@
                                 <!--end::Card title-->   
                                 <!--begin::Create campaign button-->
                                 <div class="card-toolbar">
-                                    <a href="{{route('dishvariant-list', base64_encode($dish->id))}}" type="button" class="btn btn-sm btn-primary">Add</a>
+                                    <a href="#" type="button" class="btn btn-sm btn-primary"  data-bs-toggle="modal" data-bs-target="#kt_modal_create_campaign">Add</a>
                                 </div>
                                 <!--end::Create campaign button-->
                             </div>                               
@@ -247,7 +130,6 @@
                 </div>
             </div>
         </div>
-        @endif
 
         <div class="row mt-6">               
             <div class="col-md-12 mx-auto">
@@ -284,7 +166,7 @@
             </div>
         </div>
         
-    </div>
+    </div>--}}
 
 </div>
 

@@ -226,7 +226,7 @@
                                 <!--end::Card title-->   
                                 <!--begin::Create campaign button-->
                                 <div class="card-toolbar">
-                                    <a href="{{route('dishvariant-list', base64_encode($dish->id))}}" type="button" class="btn btn-sm btn-primary">Add</a>
+                                    <a href="#" type="button" class="btn btn-sm btn-primary"  data-bs-toggle="modal" data-bs-target="#kt_modal_create_campaign">Add</a>
                                 </div>
                                 <!--end::Create campaign button-->
                             </div>                               

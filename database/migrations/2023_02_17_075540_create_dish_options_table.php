@@ -16,7 +16,7 @@ class CreateDishOptionsTable extends Migration
         Schema::create('dish_options', function (Blueprint $table) {
             $table->id();
             $table->string('option_name');
-            $table->decimal('option_value');
+            $table->string('option_value');
             $table->integer('dish_id');
             $table->timestamps();
         });

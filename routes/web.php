@@ -23,6 +23,7 @@ use App\Http\Controllers\admin\AreaController;
 use App\Http\Controllers\admin\CounterController;
 use App\Http\Controllers\admin\DishController;
 use App\Http\Controllers\admin\CountryTaxController;
+use App\Http\Controllers\admin\DishVariantController;
 
 
 /*
@@ -279,6 +280,16 @@ Route::group(['prefix' => 'admin'], function()
         Route::get('/edit-dish/{id?}', [DishController::class, 'editDish'])->name('edit-dish');
         Route::post('/update-dish', [DishController::class, 'updateDish'])->name('update-dish');
         Route::get('/dish-status/{id}/{status}', [DishController::class, 'dishStatus'])->name('dish-status');
+
+        /**
+         * Dish Variant Routes
+         */
+        Route::get('/dishvariant-list/{id}', [DishVariantController::class, 'index'])->name('dishvariant-list');
+        Route::get('/add-dishvariant', [DishVariantController::class, 'addDishVariant'])->name('add-dishvariant');
+        Route::post('/create-dishvariant', [DishVariantController::class, 'createDishVariant'])->name('create-dishvariant');
+        Route::get('/edit-dishvariant/{id?}', [DishVariantController::class, 'editDishVariant'])->name('edit-dishvariant');
+        Route::post('/update-dishvariant', [DishVariantController::class, 'updateDishVariant'])->name('update-dishvariant');
+        Route::get('/dishvariant-status/{id}/{status}', [DishVariantController::class, 'dishvariantStatus'])->name('dishvariant-status');
 
 
         /**
