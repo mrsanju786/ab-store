@@ -64,7 +64,13 @@ class DishController extends Controller
 
         $dish->save();
 
-        return redirect()->route('dish-list')->with('success', 'Dish Added Successfully!');
+        if($request->dish_has_variant == 1){
+
+            return redirect()->route('edit-dish', ['id'=>base64_encode($dish->id)])->with('success', 'Saved Successfully!');
+        }else{
+
+            return redirect()->route('dish-list')->with('success', 'Dish Added Successfully!');
+        }
 
     }
 
@@ -115,7 +121,7 @@ class DishController extends Controller
 
         $dish->save();
         
-        return redirect()->route('dish-list')->with('success', 'Changes saved Successfully!');
+        return redirect()->route('edit-dish', ['id'=>base64_encode($id)])->with('success', 'Changes saved Successfully!');
     }
 
     public function dishStatus(Request $request)
