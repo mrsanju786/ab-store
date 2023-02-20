@@ -261,7 +261,7 @@
                                                 </td>
                                                 <td class="p-0 py-3 w-125px">
                                                     <div class="card-toolbar">
-                                                        <a href="{{route('edit-dishvariant', base64_encode($dish->id))}}" type="button" class="btn btn-sm btn-primary mx-2"
+                                                        <a href="{{route('edit-dishvariant', base64_encode($variants->id))}}" type="button" class="btn btn-sm btn-primary mx-2"
                                                         >Edit </a>
                                                         <!-- <a href="#" type="button" class="btn btn-sm btn-danger"
                                                             data-bs-toggle="modal"
@@ -310,7 +310,7 @@
                                 <div class="d-flex justify-content-between">
                                     <div class="fw-bold">Name  </div>
                                     <div class="fw-bold">Price </div>
-                                    <div class="fw-bold">For  </div>
+                                    <div class="fw-bold">Action  </div>
                                     </div>
                             </div>                                
                             <!--end::Body-->

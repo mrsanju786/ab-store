@@ -47,9 +47,9 @@ class DishVariantController extends Controller
     }
 
     public function editDishVariant($id){
-        $de_id = base64_decode($id);
-        $variant = DishVariant::find(base64_decode($id));
-        $dish_option = DishOption::where('dish_id',$de_id)->get();
+        $d_id = base64_decode($id);
+        $variant = DishVariant::where('id', $d_id)->first();
+        $dish_option = DishOption::where('dish_id',$variant->dish_id)->get();
         return view('admin-view.dish_variant.edit-variant', compact('variant','dish_option'));
     }
 
@@ -67,7 +67,7 @@ class DishVariantController extends Controller
         $variant->variant_name = implode(",", $request->options);
         $variant->save();
         
-        return redirect()->route('edit-dish', ['id'=>base64_encode($id)])->with('success', 'Changes saved Successfully!');
+        return redirect()->route('edit-dish', ['id'=>base64_encode($request->dish_id)])->with('success', 'Changes saved Successfully!');
     }
 
     public function dishvariantStatus(Request $request)

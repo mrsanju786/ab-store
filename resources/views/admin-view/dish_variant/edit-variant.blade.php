@@ -87,6 +87,7 @@
                         </div>
                         <!--end::Input group-->
                         <input type="hidden" name="variant_id" value="{{$variant->id}}">
+                        <input type="hidden" name="dish_id" value="{{$variant->dish_id}}">
                         <!--begin::Actions-->
                         <div class="text-left pt-3">
 
