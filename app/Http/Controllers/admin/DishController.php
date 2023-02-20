@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Dish;
 use App\Models\Counter;
+use App\Models\DishVariant;
 use Storage;
 use Auth;
 
@@ -64,7 +65,13 @@ class DishController extends Controller
 
         $dish->save();
 
-        return redirect()->route('dish-list')->with('success', 'Dish Added Successfully!');
+        if($request->dish_has_variant == 1){
+
+            return redirect()->route('edit-dish', ['id'=>base64_encode($dish->id)])->with('success', 'Saved Successfully!');
+        }else{
+
+            return redirect()->route('dish-list')->with('success', 'Dish Added Successfully!');
+        }
 
     }
 
@@ -72,7 +79,8 @@ class DishController extends Controller
 
         $dish = Dish::find(base64_decode($id));
         $counter = Counter::get();
-        return view('admin-view.dish.edit-dish', compact('dish','counter'));
+        $variant = DishVariant::where('dish_id', $dish->id)->get();
+        return view('admin-view.dish.edit-dish', compact('dish','counter', 'variant'));
     }
 
     public function updateDish(Request $request){
@@ -115,7 +123,7 @@ class DishController extends Controller
 
         $dish->save();
         
-        return redirect()->route('dish-list')->with('success', 'Changes saved Successfully!');
+        return redirect()->route('edit-dish', ['id'=>base64_encode($id)])->with('success', 'Changes saved Successfully!');
     }
 
     public function dishStatus(Request $request)
