@@ -15,7 +15,7 @@ class CreateDishExtrasTable extends Migration
     {
         Schema::create('dish_extras', function (Blueprint $table) {
             $table->id();
-            $table->string('variant_name')->nullable();
+            $table->string('variant_id')->nullable();
             $table->string('extra_name');
             $table->decimal('extra_price', 9, 2);
             $table->integer('extra_for_all')->default(0);
