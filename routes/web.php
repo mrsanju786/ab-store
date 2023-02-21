@@ -26,6 +26,7 @@ use App\Http\Controllers\admin\DishController;
 use App\Http\Controllers\admin\CountryTaxController;
 use App\Http\Controllers\admin\DishVariantController;
 use App\Http\Controllers\admin\OptionController;
+use App\Http\Controllers\admin\MenuController;
 
 
 /*
@@ -315,7 +316,15 @@ Route::group(['prefix' => 'admin'], function()
         Route::post('/update-option', [OptionController::class, 'updateOption'])->name('update-option');
         Route::get('/option-status/{id}/{status}', [OptionController::class, 'optionStatus'])->name('option-status');
 
-
+        /**
+         * Dish Routes
+         */
+        Route::get('/menu-list', [MenuController::class, 'index'])->name('menu-list');
+        Route::get('/add-menu', [MenuController::class, 'addMenu'])->name('add-menu');
+        Route::post('/create-menu', [MenuController::class, 'createMenu'])->name('create-menu');
+        Route::get('/edit-menu/{id?}', [MenuController::class, 'editMenu'])->name('edit-menu');
+        Route::post('/update-menu', [MenuController::class, 'updateMenu'])->name('update-menu');
+        Route::get('/menu-status/{id}/{status}', [MenuController::class, 'menuStatus'])->name('menu-status');
         /**
          * User Routes
          */
