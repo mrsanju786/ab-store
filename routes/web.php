@@ -21,6 +21,7 @@ use App\Http\Controllers\admin\TaxController;
 use App\Http\Controllers\admin\LocationTaxController;
 use App\Http\Controllers\admin\AreaController;
 use App\Http\Controllers\admin\CounterController;
+use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\DishController;
 use App\Http\Controllers\admin\CountryTaxController;
 use App\Http\Controllers\admin\DishVariantController;
@@ -271,6 +272,18 @@ Route::group(['prefix' => 'admin'], function()
         Route::get('/edit-counter/{id?}', [CounterController::class, 'editCounter'])->name('edit-counter');
         Route::post('/update-counter', [CounterController::class, 'updateCounter'])->name('update-counter');
         Route::get('/counter-status/{id}/{status}', [CounterController::class, 'areaStatus'])->name('counter-status');
+
+
+        /**
+         * category Routes
+         */
+        Route::get('/category-list', [CategoryController::class, 'index'])->name('category-list');
+        Route::get('/add-category', [CategoryController::class, 'addCategory'])->name('add-category');
+        Route::post('/create-category', [CategoryController::class, 'createCategory'])->name('create-category');
+        Route::get('/edit-category/{id?}', [CategoryController::class, 'editCategory'])->name('edit-category');
+        Route::post('/update-category', [CategoryController::class, 'updateCategory'])->name('update-category');
+        Route::get('/category-status/{id}/{status}', [CategoryController::class, 'areaStatus'])->name('category-status');
+
 
         /**
          * Dish Routes
