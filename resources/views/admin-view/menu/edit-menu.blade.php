@@ -15,7 +15,7 @@
                     <div class="card-header">
                         <!--begin::Card title-->
                         <div class="card-title">
-                            <h2>Edit Dish</h2>
+                            <h2>Edit Menu</h2>
                         </div>
                         <!--end::Card title-->
                     </div>
@@ -24,24 +24,91 @@
                     <!--begin::Card body-->
                     <div class="card-body pt-1">
                         <!--begin::Form-->
-                        <form action="{{route('update-dish')}}" method="POST" enctype="multipart/form-data">
+                        <form action="{{route('update-menu')}}" method="POST" enctype="multipart/form-data">
                             @csrf
+                            
+                            <!--begin::Input group-->
+                            <div class="fv-row mb-10 fv-plugins-icon-container">
+                                <!--begin::Label-->
+                                <label class="fs-5 fw-bold form-label mb-2">
+                                    <span class="required">Select Company</span>
+                                </label>
+                                <!--end::Label-->
+
+                                <!--begin::Input-->
+                                <select class="form-select form-select-solid" aria-label="Select example" name="company_id" id="company_id" data-control="select2" >
+                                    <option value="">Select Company</option>
+                                    @foreach($company as $companies)
+                                    <option value="{{$companies->id}}" {{($companies->id == $menu->company_id)? 'selected':''}}>{{$companies->company_name}}</option>
+                                    @endforeach
+                                    
+                                </select>
+                                <!--end::Input-->
+                                @if($errors->has('company_id'))
+                                <span class="text-danger">{{ $errors->first('company_id') }}</span>
+                                @endif
+                                <div class="fv-plugins-message-container invalid-feedback"></div>
+                            </div>
+                            <!--end::Input group-->
+
+                            <!--begin::Input group-->
+                            <div class="fv-row mb-10 fv-plugins-icon-container">
+                                <!--begin::Label-->
+                                <label class="fs-5 fw-bold form-label mb-2">
+                                    <span class="required">Select Branch</span>
+                                </label>
+                                <!--end::Label-->
+
+                                <!--begin::Input-->
+                                <select class="form-select form-select-solid" aria-label="Select example" name="branch_id" id="branch_id"  data-control="select2" >
+                                    <option>Select Branch</option>
+                                    
+                                </select>
+                                <!--end::Input-->
+                                @if($errors->has('branch_id'))
+                                <span class="text-danger">{{ $errors->first('branch_id') }}</span>
+                                @endif
+                                <div class="fv-plugins-message-container invalid-feedback"></div>
+                            </div>
+                            <!--end::Input group-->
+
+                            <!--begin::Input group-->
+                            <div class="fv-row mb-10 fv-plugins-icon-container">
+                                <!--begin::Label-->
+                                <label class="fs-5 fw-bold form-label mb-2">
+                                    <span class="required">Select Counter</span>
+                                </label>
+                                <!--end::Label-->
+
+                                <!--begin::Input-->
+                                <select class="form-select form-select-solid" aria-label="Select example" name="counter_id" id="counter_id" data-control="select2" >
+                                    <option>Select Counter</option>
+                                    
+                                </select>
+                                <!--end::Input-->
+                                @if($errors->has('counter_id'))
+                                <span class="text-danger">{{ $errors->first('counter_id') }}</span>
+                                @endif
+                                <div class="fv-plugins-message-container invalid-feedback"></div>
+                            </div>
+                            <!--end::Input group-->
+
                             <!--begin::Scroll-->
                             <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_add_role_scroll">
                                 <!--begin::Input group-->
                                 <div class="fv-row mb-10 fv-plugins-icon-container">
                                     <!--begin::Label-->
                                     <label class="fs-5 fw-bold form-label mb-2">
-                                        <span class="required">Dish Name</span>
+                                        <span class="required">Menu Name</span>
                                     </label>
                                     <!--end::Label-->
-                                
+
                                     <!--begin::Input-->
-                                    <input class="form-control form-control-solid" placeholder="Enter Dish Name"
-                                        name="dish_name" value="{{$dish->dish_name}}">
+                                    <input class="form-control form-control-solid" placeholder="Enter Menu Name"
+                                        name="menu_name" value="{{$menu->menu_name}}">
                                     <!--end::Input-->
-                                    @if($errors->has('dish_name'))
-                                    <span class="text-danger">{{ $errors->first('dish_name') }}</span>
+                                    @if($errors->has('menu_name'))
+                                    <span class="text-danger">{{ $errors->first('menu_name') }}</span>
                                     @endif
                                     <div class="fv-plugins-message-container invalid-feedback"></div>
                                 </div>
@@ -51,16 +118,16 @@
                                 <div class="fv-row mb-10 fv-plugins-icon-container">
                                     <!--begin::Label-->
                                     <label class="fs-5 fw-bold form-label mb-2">
-                                        <span class="required">Dish Price</span>
+                                        <span class="required">From Time</span>
                                     </label>
                                     <!--end::Label-->
 
                                     <!--begin::Input-->
-                                    <input type="number" class="form-control form-control-solid" placeholder="Enter Dish Price"
-                                        name="dish_price" value="{{$dish->dish_price}}">
+                                    <input type="time" class="form-control form-control-solid" placeholder="Enter From time"
+                                        name="from_time" value="{{$menu->from_time}}">
                                     <!--end::Input-->
-                                    @if($errors->has('dish_price'))
-                                    <span class="text-danger">{{ $errors->first('dish_price') }}</span>
+                                    @if($errors->has('from_time'))
+                                    <span class="text-danger">{{ $errors->first('from_time') }}</span>
                                     @endif
                                     <div class="fv-plugins-message-container invalid-feedback"></div>
                                 </div>
@@ -70,41 +137,35 @@
                                 <div class="fv-row mb-10 fv-plugins-icon-container">
                                     <!--begin::Label-->
                                     <label class="fs-5 fw-bold form-label mb-2">
-                                        <span class="required">Dish Image</span>
+                                        <span class="required">To Time</span>
                                     </label>
                                     <!--end::Label-->
 
                                     <!--begin::Input-->
-                                    <input type="file" class="form-control form-control-solid" placeholder="Upload Dish Image"
-                                    title="Choose an Image please"  name="dish_image">
-                                    <img width="155" src="{{asset('storage/upload/dish')}}/{{$dish->dish_images}}" >
+                                    <input type="time" class="form-control form-control-solid" placeholder="Enter To time"
+                                        name="to_time" value="{{$menu->to_time}}">
                                     <!--end::Input-->
-                                    @if($errors->has('dish_image'))
-                                    <span class="text-danger">{{ $errors->first('dish_image') }}</span>
+                                    @if($errors->has('to_time'))
+                                    <span class="text-danger">{{ $errors->first('to_time') }}</span>
                                     @endif
                                     <div class="fv-plugins-message-container invalid-feedback"></div>
                                 </div>
                                 <!--end::Input group-->
-
-                                <!-- dish code start -->
-                            
-                                <input type="hidden" class="form-control form-control-solid" name="dish_code" value="{{$dish->dish_code}}">
-                                <!-- dish code end -->
-
+                               
                                 <!--begin::Input group-->
                                 <div class="fv-row mb-10 fv-plugins-icon-container">
                                     <!--begin::Label-->
                                     <label class="fs-5 fw-bold form-label mb-2">
-                                        <span class="required">Dish Hsn</span>
+                                        <span class="required">Off Time</span>
                                     </label>
                                     <!--end::Label-->
 
                                     <!--begin::Input-->
-                                    <input class="form-control form-control-solid" placeholder="Dish Hsn"
-                                        name="dish_hsn" value="{{$dish->dish_hsn}}">
+                                    <input type="time" class="form-control form-control-solid" placeholder="Enter Off Time"
+                                        name="off_time" value="{{$menu->offtime}}">
                                     <!--end::Input-->
-                                    @if($errors->has('dish_hsn'))
-                                    <span class="text-danger">{{ $errors->first('dish_hsn') }}</span>
+                                    @if($errors->has('off_time'))
+                                    <span class="text-danger">{{ $errors->first('off_time') }}</span>
                                     @endif
                                     <div class="fv-plugins-message-container invalid-feedback"></div>
                                 </div>
@@ -114,78 +175,56 @@
                                 <div class="fv-row mb-10 fv-plugins-icon-container">
                                     <!--begin::Label-->
                                     <label class="fs-5 fw-bold form-label mb-2">
-                                        <span class="required">Select Counter</span>
+                                        <span class="required">Repeat Days</span>
                                     </label>
+                                    <br>
                                     <!--end::Label-->
-
+                                    @php
+                                    $repeatDays = explode(",",$menu->repeat_days);
+                                    @endphp
                                     <!--begin::Input-->
-                                    <select class="form-select form-select-solid" aria-label="Select example" name="counter_id"  data-control="select2" >
-                                        <option>Select Counter</option>
-                                        @foreach($counter as $counters)
-                                        <option value="{{$counters->id}}" {{($dish->counter_id == $counters->id)? 'selected': ''}}>{{$counters->counter_name}}</option>
-                                        @endforeach
-                                        
-                                    </select>
-                                    <!--end::Input-->
-                                    @if($errors->has('counter_id'))
-                                    <span class="text-danger">{{ $errors->first('counter_id') }}</span>
-                                    @endif
-                                    <div class="fv-plugins-message-container invalid-feedback"></div>
-                                </div>
-                                <!--end::Input group-->
-
-                                <!--begin::Input group-->
-                                <div class="fv-row mb-10 fv-plugins-icon-container">
-                                    <!--begin::Label-->
-                                    <label class="fs-5 fw-bold form-label mb-2">
-                                        <span>Tax Inclusive</span>
-                                    </label>
-                                    <!--end::Label-->
-
-                                    <!--begin::Input-->
-                                    <input class="form-check-input" name="tax_inc" type="radio" value="1" {{($dish->is_tax_inclusive == "1")? 'checked':''}}>
+                                    <input class="form-check-input" name="repeat_days[]" type="checkbox" value="Monday" {{in_array("Monday", $repeatDays)? 'checked' : ''}}>
                                         <span class="fw-semibold ps-2 fs-6">
-                                        Yes
+                                        Monday
                                         </span>
 
-                                    <input class="form-check-input" name="tax_inc" type="radio" value="0" {{($dish->is_tax_inclusive == "0")? 'checked':''}}>
+                                    <input class="form-check-input" name="repeat_days[]" type="checkbox" value="Tuesday" {{in_array("Tuesday", $repeatDays)? 'checked' : ''}}>
                                         <span class="fw-semibold ps-2 fs-6">
-                                        No
+                                        Tuesday
+                                        </span>
+                                    
+                                    <input class="form-check-input" name="repeat_days[]" type="checkbox" value="Wednesday" {{in_array("Wednesday", $repeatDays)? 'checked' : ''}}>
+                                        <span class="fw-semibold ps-2 fs-6">
+                                        Wednesday
+                                        </span>
+
+                                    <input class="form-check-input" name="repeat_days[]" type="checkbox" value="Thursday" {{in_array("Thursday", $repeatDays)? 'checked' : ''}}>
+                                        <span class="fw-semibold ps-2 fs-6">
+                                        Thursday
+                                        </span>
+                                    
+                                    <input class="form-check-input" name="repeat_days[]" type="checkbox" value="Friday" {{in_array("Friday", $repeatDays)? 'checked' : ''}}>
+                                        <span class="fw-semibold ps-2 fs-6">
+                                        Friday
+                                        </span>
+
+                                    <input class="form-check-input" name="repeat_days[]" type="checkbox" value="Saturday" {{in_array("Saturday", $repeatDays)? 'checked' : ''}}>
+                                        <span class="fw-semibold ps-2 fs-6">
+                                        Saturday
+                                        </span>
+
+                                    <input class="form-check-input" name="repeat_days[]" type="checkbox" value="Sunday" {{in_array("Sunday", $repeatDays)? 'checked' : ''}}>
+                                        <span class="fw-semibold ps-2 fs-6">
+                                        Sunday
                                         </span>
                                     <!--end::Input-->
-                                    @if($errors->has('tax_inc'))
-                                    <span class="text-danger">{{ $errors->first('tax_inc') }}</span>
+                                    @if($errors->has('repeat_days'))
+                                    <span class="text-danger">{{ $errors->first('repeat_days') }}</span>
                                     @endif
                                     <div class="fv-plugins-message-container invalid-feedback"></div>
                                 </div>
                                 <!--end::Input group-->
-
-                                <!--begin::Input group-->
-                                <div class="fv-row mb-10 fv-plugins-icon-container">
-                                    <!--begin::Label-->
-                                    <label class="fs-5 fw-bold form-label mb-2">
-                                        <span>Dish Has Variant</span>
-                                    </label>
-                                    <!--end::Label-->
-
-                                    <!--begin::Input-->
-                                    <input class="form-check-input" name="dish_has_variant" type="radio" value="1" {{($dish->has_variant == "1")?'checked':''}}>
-                                        <span class="fw-semibold ps-2 fs-6">
-                                        Yes
-                                        </span>
-
-                                    <input class="form-check-input" name="dish_has_variant" type="radio" value="0" {{($dish->has_variant == "0")?'checked':''}}>
-                                        <span class="fw-semibold ps-2 fs-6">
-                                        No
-                                        </span>
-                                    <!--end::Input-->
-                                    @if($errors->has('dish_has_variant'))
-                                    <span class="text-danger">{{ $errors->first('dish_has_variant') }}</span>
-                                    @endif
-                                    <div class="fv-plugins-message-container invalid-feedback"></div>
-                                </div>
-                                <!--end::Input group-->
-                                <input type="hidden" name="dish_id" id="dish_id" value="{{$dish->id}}">
+                                <input type="hidden" name="menu_id" id="menu_id" value="{{$menu->id}}">
 
                                 <!--begin::Actions-->
                                 <div class="text-left pt-3">
@@ -211,8 +250,7 @@
         </div>
     </div>
 
-    <div class="col-lg-6 col-12">
-        @if($dish->has_variant == 1)         
+    {{--<div class="col-lg-6 col-12">         
         <div class="row ">               
             <div class="col-md-12 mx-auto">
                 <div class="card card-flush h-md-100" id="kt_modal_add_role">                                                     
@@ -226,8 +264,7 @@
                                 <!--end::Card title-->   
                                 <!--begin::Create campaign button-->
                                 <div class="card-toolbar">
-                                    <a href="{{route('option-list', base64_encode($dish->id))}}" type="button" class="btn btn-sm btn-primary me-5">Add Option</a>
-                                    <a href="{{route('add-dishvariant', base64_encode($dish->id))}}" type="button" class="btn btn-sm btn-primary">Add Variant</a>
+                                    <a href="#" type="button" class="btn btn-sm btn-primary"  data-bs-toggle="modal" data-bs-target="#kt_modal_create_campaign">Add</a>
                                 </div>
                                 <!--end::Create campaign button-->
                             </div>                               
@@ -235,55 +272,19 @@
 
                         <div class="col-md-12">
                             <!--begin::Body-->
-                            <div class="card-body pt-6">
-                                <!--begin::Table container-->
-                                <div class="table-responsive">
-                                    <!--begin::Table-->
-                                    <table class="table table-row-dashed align-middle gs-0 gy-3 my-0">
-                                        <!--begin::Table head-->
-                                        <thead>
-                                            <tr class="fs-7 fw-bold text-dark-600 borderbottom">
-                                                <th class="p-0 pb-3 min-w-100px">Name</th>
-                                                <th class="p-0 pb-3 w-125px">Price</th>
-                                                <th class="p-0 pb-3 w-50px">Action</th>
-                                            </tr>
-                                        </thead>
-                                        <!--end::Table head-->
-                                        <!--begin::Table body-->
-                                        <tbody>
-                                            @foreach($variant as $variants)
-                                            <tr>
-                                                <td class="p-0 py-3 w-125px">
-                                                    <span class="text-gray-600 fw-bold fs-6">{{$variants->variant_name}}</span>
-                                                </td>
-                                                <td class="p-0 py-3 w-125px">
-                                                    <span class="text-gray-600 fw-bold fs-6">{{$variants->variant_price}}</span>
-                                                </td>
-                                                <td class="p-0 py-3 w-125px">
-                                                    <div class="card-toolbar">
-                                                        <a href="{{route('edit-dishvariant', base64_encode($variants->id))}}" type="button" class="btn btn-sm btn-primary mx-2"
-                                                        >Edit </a>
-                                                        <!-- <a href="#" type="button" class="btn btn-sm btn-danger"
-                                                            data-bs-toggle="modal"
-                                                            data-bs-target="#kt_modal_create_campaign">Delete</a> -->
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            @endforeach
-                                        </tbody>
-                                        <!--end::Table body-->
-                                    </table>
-                                    <!--end::Table-->
+                            <div class="card-body pt-5">
+                                <div class="d-flex justify-content-between">
+                                    <div class="fw-bold">Name  </div>
+                                    <div class="fw-bold">Price </div>
+                                    <div class="fw-bold">For  </div>
                                 </div>
-                                <!--end::Table container-->
-                            </div>
+                            </div>                                
                             <!--end::Body-->
                         </div> 
                     </div>
                 </div>
             </div>
         </div>
-        @endif
 
         <div class="row mt-6">               
             <div class="col-md-12 mx-auto">
@@ -310,7 +311,7 @@
                                 <div class="d-flex justify-content-between">
                                     <div class="fw-bold">Name  </div>
                                     <div class="fw-bold">Price </div>
-                                    <div class="fw-bold">Action  </div>
+                                    <div class="fw-bold">For  </div>
                                     </div>
                             </div>                                
                             <!--end::Body-->
@@ -320,7 +321,7 @@
             </div>
         </div>
         
-    </div>
+    </div>--}}
 
 </div>
 
@@ -345,37 +346,77 @@ $(document).ready(function() {
         }
 
     });
-});
 
-$('#country_id').on('change', function(){
-    var country_id = $(this).val();
+   
+    var company_id = "{{$menu->company_id}}";
     $.ajax({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
-        url: "{{ url('admin/master/get-state') }}/" + country_id,
+        url: "{{ url('admin/get-branch') }}/" + company_id,
         type: "GET",
-        success: function(response) {
+        success: function(response) { 
+            var branch = "{{$menu->branch_id}}";
             $.each(response,function(key, value)
             {
-                $("#state_id").append('<option value=' + value.id + '>' + value.state_name + '</option>');
+                $("#branch_id").append('<option value=' + value.id + '>' + value.name + '</option>');
+            });
+            $('#branch_id option[value='+branch+']').attr('selected','selected');
+        }
+    });
+
+    var branch_id = "{{$menu->branch_id}}";
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        url: "{{ url('admin/get-counter') }}/" + branch_id,
+        type: "GET",
+        success: function(response) {
+            var cntr = "{{$menu->counter_id}}";
+            $.each(response,function(key, value)
+            {
+                $("#counter_id").append('<option value=' + value.id + '>' + value.counter_name + '</option>');
+            });
+            $('#counter_id option[value='+cntr+']').attr('selected','selected');
+        }
+    });
+
+});
+
+$('#company_id').on('change', function(){
+    $("#branch_id").empty();
+    $("#branch_id").append('<option value="">Select Company</option>');
+    var company_id = $(this).val();
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        url: "{{ url('admin/get-branch') }}/" + company_id,
+        type: "GET",
+        success: function(response) { 
+            $.each(response,function(key, value)
+            {
+                $("#branch_id").append('<option value=' + value.id + '>' + value.name + '</option>');
             });
         }
     });
 });
 
-$('#state_id').on('change', function(){
-    var state_id = $(this).val();
+$('#branch_id').on('change', function(){
+    $("#counter_id").empty();
+    $("#counter_id").append('<option value="">Select Counter</option>');
+    var branch_id = $(this).val();
     $.ajax({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
-        url: "{{ url('admin/master/get-city') }}/" + state_id,
+        url: "{{ url('admin/get-counter') }}/" + branch_id,
         type: "GET",
         success: function(response) {
             $.each(response,function(key, value)
             {
-                $("#city_id").append('<option value=' + value.id + '>' + value.city_name + '</option>');
+                $("#counter_id").append('<option value=' + value.id + '>' + value.counter_name + '</option>');
             });
         }
     });

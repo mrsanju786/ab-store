@@ -26,6 +26,73 @@
                         <!--begin::Form-->
                         <form action="{{route('create-menu')}}" method="POST" enctype="multipart/form-data">
                             @csrf
+                            
+                            <!--begin::Input group-->
+                            <div class="fv-row mb-10 fv-plugins-icon-container">
+                                <!--begin::Label-->
+                                <label class="fs-5 fw-bold form-label mb-2">
+                                    <span class="required">Select Company</span>
+                                </label>
+                                <!--end::Label-->
+
+                                <!--begin::Input-->
+                                <select class="form-select form-select-solid" aria-label="Select example" name="company_id" id="company_id" data-control="select2" >
+                                    <option value="">Select Company</option>
+                                    @foreach($company as $companies)
+                                    <option value="{{$companies->id}}">{{$companies->company_name}}</option>
+                                    @endforeach
+                                    
+                                </select>
+                                <!--end::Input-->
+                                @if($errors->has('company_id'))
+                                <span class="text-danger">{{ $errors->first('company_id') }}</span>
+                                @endif
+                                <div class="fv-plugins-message-container invalid-feedback"></div>
+                            </div>
+                            <!--end::Input group-->
+
+                            <!--begin::Input group-->
+                            <div class="fv-row mb-10 fv-plugins-icon-container">
+                                <!--begin::Label-->
+                                <label class="fs-5 fw-bold form-label mb-2">
+                                    <span class="required">Select Branch</span>
+                                </label>
+                                <!--end::Label-->
+
+                                <!--begin::Input-->
+                                <select class="form-select form-select-solid" aria-label="Select example" name="branch_id" id="branch_id"  data-control="select2" >
+                                    <option>Select Branch</option>
+                                    
+                                </select>
+                                <!--end::Input-->
+                                @if($errors->has('branch_id'))
+                                <span class="text-danger">{{ $errors->first('branch_id') }}</span>
+                                @endif
+                                <div class="fv-plugins-message-container invalid-feedback"></div>
+                            </div>
+                            <!--end::Input group-->
+
+                            <!--begin::Input group-->
+                            <div class="fv-row mb-10 fv-plugins-icon-container">
+                                <!--begin::Label-->
+                                <label class="fs-5 fw-bold form-label mb-2">
+                                    <span class="required">Select Counter</span>
+                                </label>
+                                <!--end::Label-->
+
+                                <!--begin::Input-->
+                                <select class="form-select form-select-solid" aria-label="Select example" name="counter_id" id="counter_id" data-control="select2" >
+                                    <option>Select Counter</option>
+                                    
+                                </select>
+                                <!--end::Input-->
+                                @if($errors->has('counter_id'))
+                                <span class="text-danger">{{ $errors->first('counter_id') }}</span>
+                                @endif
+                                <div class="fv-plugins-message-container invalid-feedback"></div>
+                            </div>
+                            <!--end::Input group-->
+
                             <!--begin::Scroll-->
                             <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_add_role_scroll">
                                 <!--begin::Input group-->
@@ -37,7 +104,7 @@
                                     <!--end::Label-->
 
                                     <!--begin::Input-->
-                                    <input class="form-control form-control-solid" placeholder="Enter Dish Name"
+                                    <input class="form-control form-control-solid" placeholder="Enter Menu Name"
                                         name="menu_name">
                                     <!--end::Input-->
                                     @if($errors->has('menu_name'))
@@ -51,7 +118,7 @@
                                 <div class="fv-row mb-10 fv-plugins-icon-container">
                                     <!--begin::Label-->
                                     <label class="fs-5 fw-bold form-label mb-2">
-                                        <span class="required">From Date</span>
+                                        <span class="required">From Time</span>
                                     </label>
                                     <!--end::Label-->
 
@@ -84,25 +151,21 @@
                                     <div class="fv-plugins-message-container invalid-feedback"></div>
                                 </div>
                                 <!--end::Input group-->
-
+                               
                                 <!--begin::Input group-->
                                 <div class="fv-row mb-10 fv-plugins-icon-container">
                                     <!--begin::Label-->
                                     <label class="fs-5 fw-bold form-label mb-2">
-                                        <span class="required">Select Company</span>
+                                        <span class="required">Off Time</span>
                                     </label>
                                     <!--end::Label-->
 
                                     <!--begin::Input-->
-                                    <select class="form-select form-select-solid" aria-label="Select example" name="company_id"  data-control="select2" >
-                                        <option>Select Company</option>
-                                        <option value="1">Company 1</option>
-                                        <option value="2">Company 2</option>
-                                        
-                                    </select>
+                                    <input type="time" class="form-control form-control-solid" placeholder="Enter Off Time"
+                                        name="off_time">
                                     <!--end::Input-->
-                                    @if($errors->has('company_id'))
-                                    <span class="text-danger">{{ $errors->first('company_id') }}</span>
+                                    @if($errors->has('off_time'))
+                                    <span class="text-danger">{{ $errors->first('off_time') }}</span>
                                     @endif
                                     <div class="fv-plugins-message-container invalid-feedback"></div>
                                 </div>
@@ -112,46 +175,49 @@
                                 <div class="fv-row mb-10 fv-plugins-icon-container">
                                     <!--begin::Label-->
                                     <label class="fs-5 fw-bold form-label mb-2">
-                                        <span class="required">Select Branch</span>
+                                        <span class="required">Repeat Days</span>
                                     </label>
+                                    <br>
                                     <!--end::Label-->
 
                                     <!--begin::Input-->
-                                    <select class="form-select form-select-solid" aria-label="Select example" name="branch_id"  data-control="select2" >
-                                        <option>Select Branch</option>
-                                        <option value="1">Branch 1</option>
-                                        <option value="2">Branch 2</option>
-                                        
-                                    </select>
-                                    <!--end::Input-->
-                                    @if($errors->has('branch_id'))
-                                    <span class="text-danger">{{ $errors->first('branch_id') }}</span>
-                                    @endif
-                                    <div class="fv-plugins-message-container invalid-feedback"></div>
-                                </div>
-                                <!--end::Input group-->
-
-                                <!--begin::Input group-->
-                                <div class="fv-row mb-10 fv-plugins-icon-container">
-                                    <!--begin::Label-->
-                                    <label class="fs-5 fw-bold form-label mb-2">
-                                        <span class="required">Dish Has Variant</span>
-                                    </label>
-                                    <!--end::Label-->
-
-                                    <!--begin::Input-->
-                                    <input class="form-check-input" name="dish_has_variant" type="radio" value="1" checked>
+                                    <input class="form-check-input" name="repeat_days[]" type="checkbox" value="Monday" checked>
                                         <span class="fw-semibold ps-2 fs-6">
-                                        Yes
+                                        Monday
                                         </span>
 
-                                    <input class="form-check-input" name="dish_has_variant" type="radio" value="0">
+                                    <input class="form-check-input" name="repeat_days[]" type="checkbox" value="Tuesday">
                                         <span class="fw-semibold ps-2 fs-6">
-                                        No
+                                        Tuesday
+                                        </span>
+                                    
+                                    <input class="form-check-input" name="repeat_days[]" type="checkbox" value="Wednesday">
+                                        <span class="fw-semibold ps-2 fs-6">
+                                        Wednesday
+                                        </span>
+
+                                    <input class="form-check-input" name="repeat_days[]" type="checkbox" value="Thursday">
+                                        <span class="fw-semibold ps-2 fs-6">
+                                        Thursday
+                                        </span>
+                                    
+                                    <input class="form-check-input" name="repeat_days[]" type="checkbox" value="Friday">
+                                        <span class="fw-semibold ps-2 fs-6">
+                                        Friday
+                                        </span>
+
+                                    <input class="form-check-input" name="repeat_days[]" type="checkbox" value="Saturday">
+                                        <span class="fw-semibold ps-2 fs-6">
+                                        Saturday
+                                        </span>
+
+                                    <input class="form-check-input" name="repeat_days[]" type="checkbox" value="Sunday">
+                                        <span class="fw-semibold ps-2 fs-6">
+                                        Sunday
                                         </span>
                                     <!--end::Input-->
-                                    @if($errors->has('dish_has_variant'))
-                                    <span class="text-danger">{{ $errors->first('dish_has_variant') }}</span>
+                                    @if($errors->has('repeat_days'))
+                                    <span class="text-danger">{{ $errors->first('repeat_days') }}</span>
                                     @endif
                                     <div class="fv-plugins-message-container invalid-feedback"></div>
                                 </div>
@@ -279,35 +345,39 @@ $(document).ready(function() {
     });
 });
 
-$('#country_id').on('change', function(){
-    var country_id = $(this).val();
+$('#company_id').on('change', function(){
+    $("#branch_id").empty();
+    $("#branch_id").append('<option value="">Select Company</option>');
+    var company_id = $(this).val();
     $.ajax({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
-        url: "{{ url('admin/master/get-state') }}/" + country_id,
+        url: "{{ url('admin/get-branch') }}/" + company_id,
         type: "GET",
-        success: function(response) {
+        success: function(response) { 
             $.each(response,function(key, value)
             {
-                $("#state_id").append('<option value=' + value.id + '>' + value.state_name + '</option>');
+                $("#branch_id").append('<option value=' + value.id + '>' + value.name + '</option>');
             });
         }
     });
 });
 
-$('#state_id').on('change', function(){
-    var state_id = $(this).val();
+$('#branch_id').on('change', function(){
+    $("#counter_id").empty();
+    $("#counter_id").append('<option value="">Select Counter</option>');
+    var branch_id = $(this).val();
     $.ajax({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
-        url: "{{ url('admin/master/get-city') }}/" + state_id,
+        url: "{{ url('admin/get-counter') }}/" + branch_id,
         type: "GET",
         success: function(response) {
             $.each(response,function(key, value)
             {
-                $("#city_id").append('<option value=' + value.id + '>' + value.city_name + '</option>');
+                $("#counter_id").append('<option value=' + value.id + '>' + value.counter_name + '</option>');
             });
         }
     });

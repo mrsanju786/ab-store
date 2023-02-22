@@ -204,6 +204,8 @@ Route::group(['prefix' => 'admin'], function()
         Route::post('/update-branch', [BranchController::class, 'updateBranch'])->name('update-branch');
         Route::get('/branch-status/{id}/{status}', [BranchController::class, 'branchStatus'])->name('branch-status');
 
+        Route::get('/get-branch/{id}', [BranchController::class, 'getBranch'])->name('get-branch');
+
         /**
          * Location Routes
          */
@@ -263,6 +265,8 @@ Route::group(['prefix' => 'admin'], function()
         Route::get('/edit-counter/{id?}', [CounterController::class, 'editCounter'])->name('edit-counter');
         Route::post('/update-counter', [CounterController::class, 'updateCounter'])->name('update-counter');
         Route::get('/counter-status/{id}/{status}', [CounterController::class, 'areaStatus'])->name('counter-status');
+
+        Route::get('/get-counter/{id}', [CounterController::class, 'getCounter'])->name('getCounter');
 
         /**
          * counter Routes
