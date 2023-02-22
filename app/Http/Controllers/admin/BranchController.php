@@ -100,4 +100,10 @@ class BranchController extends Controller
         $size->save();
         return redirect()->back()->with('success', 'Branch status updated!');
     }
+
+    public function getBranch($id){
+
+        $branch = Branch::where('company_id',$id)->get();
+        return $branch;
+    }
 }

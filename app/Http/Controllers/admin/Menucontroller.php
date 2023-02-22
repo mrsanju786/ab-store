@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Menu;
+use App\Models\Company;
 
 class Menucontroller extends Controller
 {
@@ -14,119 +15,83 @@ class Menucontroller extends Controller
         return view('admin-view.menu.index', compact('menu'));
     }
 
-    public function addDish(){
+    public function addMenu(){
 
-        $counter = Menu::get();
-        return view('admin-view.menu.add-dish', compact('counter'));
+        $company = Company::get();
+        return view('admin-view.menu.add-menu', compact('company'));
     }
 
-    public function createDish(Request $request){
+    public function createMenu(Request $request){
 
         $request->validate([
-            'dish_name' => 'required',
-            'dish_image' => 'required',
-            'dish_hsn' => 'required',
+            'company_id' => 'required',
+            'branch_id' => 'required',
             'counter_id' => 'required',
-            'tax_inc' => 'required',
-            'dish_has_variant' => 'required',
+            'menu_name' => 'required',
+            'from_time' => 'required',
+            'to_time' => 'required',
+            'off_time' => 'required',
+            'repeat_days' => 'required',
 
-        ],[
-            'dish_name.required'=>'Dish Name is Required',
-            'dish_image.required'=>'Dish Logo is Required',
-            'dish_hsn.required'=>'CIN No. is required',
-            'counter_id.required'=>'Registered Address is required',
-            'tax_inc.required'=>'Tax option is required',
-            'dish_has_variant.required'=>'state_id is required',
         ]);
 
-        $dish = new Menu();
-        $dish->dish_name = $request->dish_name;
-        $dish->dish_price = $request->dish_price;
-        $dish->dish_code = $request->dish_code;
-        $dish->dish_hsn = $request->dish_hsn;
-        $dish->counter_id = $request->counter_id;
-        $dish->is_tax_inclusive = $request->tax_inc;
-        $dish->has_variant = $request->dish_has_variant;
+        $menu = new Menu();
+        $menu->company_id = $request->company_id;
+        $menu->branch_id = $request->branch_id;
+        $menu->counter_id = $request->counter_id;
+        $menu->menu_name = $request->menu_name;
+        $menu->from_time = $request->from_time;
+        $menu->to_time = $request->to_time;
+        $menu->offtime = $request->off_time;
+        $menu->repeat_days = implode(",", $request->repeat_days);
         
-        if ($request->file('dish_image')) {
-            $imageFileType = $request->dish_image->getClientOriginalExtension();
-            $imageName = \Carbon\Carbon::now()->toDateString() . "-" . uniqid() . "." . $imageFileType;
-            $dir = "/upload/dish/";
-            if (!Storage::disk('public')->exists($dir)) {
-                Storage::disk('public')->makeDirectory($dir);
-            }
-            Storage::disk('public')->put($dir . $imageName, file_get_contents($request->dish_image));
-            $dish->dish_images = $imageName;
-        }
+        $menu->save();
 
-        $dish->save();
-
-        if($request->dish_has_variant == 1){
-
-            return redirect()->route('edit-dish', ['id'=>base64_encode($dish->id)])->with('success', 'Saved Successfully!');
-        }else{
-
-            return redirect()->route('dish-list')->with('success', 'Dish Added Successfully!');
-        }
-
+        return redirect()->route('menu-list')->with('success', 'Menu Added Successfully!');
+        
     }
 
-    public function editDish($id){
+    public function editMenu($id){
 
-        $dish = Menu::find(base64_decode($id));
-        $counter = Counter::get();
-        $variant = DishVariant::where('dish_id', $dish->id)->get();
-        return view('admin-view.menu.edit-dish', compact('dish','counter', 'variant'));
+        $menu = Menu::find(base64_decode($id));
+        $company = Company::get();
+        return view('admin-view.menu.edit-menu', compact('menu','company'));
     }
 
-    public function updateDish(Request $request){
+    public function updateMenu(Request $request){
 
         $request->validate([
-            'dish_name' => 'required',
-            'dish_hsn' => 'required',
+            'company_id' => 'required',
+            'branch_id' => 'required',
             'counter_id' => 'required',
-            'tax_inc' => 'required',
-            'dish_has_variant' => 'required',
+            'menu_name' => 'required',
+            'from_time' => 'required',
+            'to_time' => 'required',
+            'off_time' => 'required',
+            'repeat_days' => 'required',
 
-        ],[
-            'dish_name.required'=>'Dish Name is Required',
-            'dish_hsn.required'=>'CIN No. is required',
-            'counter_id.required'=>'Registered Address is required',
-            'tax_inc.required'=>'Tax option is required',
-            'dish_has_variant.required'=>'state_id is required',
         ]);
 
-        $id = $request->dish_id;
-        $dish = Menu::find($id);
-        $dish->dish_name = $request->dish_name;
-        $dish->dish_price = $request->dish_price;
-        $dish->dish_code = $request->dish_code;
-        $dish->dish_hsn = $request->dish_hsn;
-        $dish->counter_id = $request->counter_id;
-        $dish->is_tax_inclusive = $request->tax_inc;
-        $dish->has_variant = $request->dish_has_variant;
+        $id = $request->menu_id;
+        $menu = Menu::find($id);
+        $menu->company_id = $request->company_id;
+        $menu->branch_id = $request->branch_id;
+        $menu->counter_id = $request->counter_id;
+        $menu->menu_name = $request->menu_name;
+        $menu->from_time = $request->from_time;
+        $menu->to_time = $request->to_time;
+        $menu->offtime = $request->off_time;
+        $menu->repeat_days = implode(",", $request->repeat_days);
+        $menu->save();
         
-        if ($request->file('dish_image')) {
-            $imageFileType = $request->company_logo->getClientOriginalExtension();
-            $imageName = \Carbon\Carbon::now()->toDateString() . "-" . uniqid() . "." . $imageFileType;
-            $dir = "/upload/dish/";
-            if (!Storage::disk('public')->exists($dir)) {
-                Storage::disk('public')->makeDirectory($dir);
-            }
-            Storage::disk('public')->put($dir . $imageName, file_get_contents($request->dish_image));
-            $dish->dish_images = $imageName;
-        }
-
-        $dish->save();
-        
-        return redirect()->route('edit-dish', ['id'=>base64_encode($id)])->with('success', 'Changes saved Successfully!');
+        return redirect()->route('menu-list')->with('success', 'Menu Updated Successfully!');
     }
 
-    public function dishStatus(Request $request)
+    public function menuStatus(Request $request)
     {
-        $size = Menu::find($request->id);
-        $size->is_active = $request->status;
-        $size->save();
-        return redirect()->back()->with('success','Dish status updated!');
+        $menu = Menu::find($request->id);
+        $menu->is_active = $request->status;
+        $menu->save();
+        return redirect()->back()->with('success','Menu status updated!');
     }
 }
