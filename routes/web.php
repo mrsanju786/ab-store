@@ -263,17 +263,8 @@ Route::group(['prefix' => 'admin'], function()
         Route::get('/edit-counter/{id?}', [CounterController::class, 'editCounter'])->name('edit-counter');
         Route::post('/update-counter', [CounterController::class, 'updateCounter'])->name('update-counter');
         Route::get('/counter-status/{id}/{status}', [CounterController::class, 'areaStatus'])->name('counter-status');
-
-        /**
-         * counter Routes
-         */
-        Route::get('/counter-list', [CounterController::class, 'index'])->name('counter-list');
-        Route::get('/add-counter', [CounterController::class, 'addCounter'])->name('add-counter');
-        Route::post('/create-counter', [CounterController::class, 'createCounter'])->name('create-counter');
-        Route::get('/edit-counter/{id?}', [CounterController::class, 'editCounter'])->name('edit-counter');
-        Route::post('/update-counter', [CounterController::class, 'updateCounter'])->name('update-counter');
-        Route::get('/counter-status/{id}/{status}', [CounterController::class, 'areaStatus'])->name('counter-status');
-
+        Route::get('/get-counter/{id}', [CounterController::class, 'getCounter'])->name('get-counter');
+        Route::get('/get-menu/{id}', [CounterController::class, 'getMenu'])->name('get-menu');
 
         /**
          * category Routes

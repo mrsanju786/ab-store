@@ -64,10 +64,7 @@
                                     </label>
                                     <!--begin::Input-->
                                     <select class="form-select form-select-solid" aria-label="Select example" name="counter_id" id="counter_id" data-control="select2" >
-                                            <option value="">Select Counter</option>
-                                            @foreach($counter as $counters)
-                                            <option value="{{$counters->id}}">{{$counters->counter_name}}</option>
-                                            @endforeach                                   
+                                            <option value="">Select Counter</option>                                 
                                         </select>
                                     <!--end::Input-->
                                     @if($errors->has('counter_id'))
@@ -145,7 +142,7 @@
 
 
                                 <!--begin::Input group-->
-                                <div class="fv-row mb-10 fv-plugins-icon-container">
+                                <div class="fv-row mb-10 fv-plugins-icon-container" id="menu_list_block">
                                     <!--begin::Label-->
                                     <label class="fs-5 fw-bold form-label mb-2">
                                         <span class="required">Select Menu</span>
@@ -153,16 +150,7 @@
                                     <!--end::Label-->
                                     <br>
                                     <br>
-                                    @foreach($menu as $menus)
-                                    <label class="form-check form-check-custom form-check-inline form-check-solid me-5 form-check-success">
-                                    <input class="form-check-input" name="menu_id[]" type="checkbox" value="{{$menus->id}}">
-                                    <span class="fw-semibold ps-2 fs-6">
-                                    {{$menus->menu_name}}
-                                    </span>
-                                    </label>
-                                    <br>
-                                    <br>
-                                    @endforeach
+                                    <div id="menu_list"></div>
                                     
                                     <!--end::Input-->
                                     @if($errors->has('menu_id'))
@@ -255,21 +243,48 @@ $(document).ready(function() {
     });
 });
 
-$('#state_id').on('change', function(){
-    var country_id = $(this).val();
-    $.ajax({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
-        url: "{{ url('admin/master/get-city') }}/" + country_id,
-        type: "GET",
-        success: function(response) {
-            $.each(response,function(key, value)
-            {
-                $("#city_id").append('<option value=' + value.id + '>' + value.city_name + '</option>');
-            });
-        }
-    });
+$('#branch_id').on('change', function(){
+    var branch_id = $(this).val();
+    $('#counter_id option:gt(0)').remove();
+    if(branch_id){
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "{{ url('admin/get-counter') }}/" + branch_id,
+            type: "GET",
+            success: function(response) {
+                $.each(response,function(key, value)
+                {
+                    $("#counter_id").append('<option value=' + value.id + '>' + value.counter_name + '</option>');
+                });
+            }
+        });
+    }
+});
+
+$('#menu_list_block').hide();
+
+$('#counter_id').on('change', function(){
+    var counter_id = $(this).val();
+    $('#menu_list').empty();
+    $('#menu_list_block').hide();
+    if(counter_id){
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "{{ url('admin/get-menu') }}/" + counter_id,
+            type: "GET",
+            success: function(response) {
+                $('#menu_list_block').show();
+                $.each(response,function(key, value)
+                {
+                    $("#menu_list").append('<label class="form-check form-check-custom form-check-inline form-check-solid me-5 form-check-success"><input class="form-check-input" name="menu_id[]" type="checkbox" value="' + value.id + '"><span class="fw-semibold ps-2 fs-6">' + value.menu_name + '</span></label><br><br>');
+                });
+            }
+        });
+    }
 });
 </script>
 @endsection

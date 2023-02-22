@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Counter;
 use App\Models\Area;
+use App\Models\Menu;
 
 class CounterController extends Controller
 {
@@ -67,5 +68,15 @@ class CounterController extends Controller
         $counter->save();
 
         return redirect()->route('counter-list')->with('success', 'Changes saved Successfully!');
+    }
+
+    public function getCounter($id){
+        $counter = Counter::where('branch_id', $id)->get();
+        return $counter;
+    }
+
+    public function getMenu($id){
+        $menu = Menu::where('counter_id', $id)->get();
+        return $menu;
     }
 }
