@@ -62,22 +62,22 @@
                         </td>
 
                         <td>
-                            <span class="text-dark fw-bold d-block fs-6">{{$menus->company_id ?? "-"}}</span>
+                            <span class="text-dark fw-bold d-block fs-6">{{$menus->company->company_name ?? "-"}}</span>
                         </td>
 
                         <td>
-                            <span class="text-dark fw-bold d-block fs-6">{{$menus->branch_id ?? "-"}}</span>
+                            <span class="text-dark fw-bold d-block fs-6">{{$menus->branch->name ?? "-"}}</span>
                         </td>
 
                         <td>
-                            <span class="text-dark fw-bold d-block fs-6">{{$menus->from_time ?? "-"}}</span>
+                            <span class="text-dark fw-bold d-block fs-6">{{$menus->from_time ?? "-"}} To {{$menus->to_time ?? "-"}}</span>
                         </td>
 
                         <td>
                             @if($menus->is_active == 1)
-                            <span class="text-dark fw-bold d-block fs-6"><button class="btn btn-success btn-sm" onclick="location.href='{{route('dish-status',[$menus['id'],0])}}'" title="click to deactive">Active</button></span>
+                            <span class="text-dark fw-bold d-block fs-6"><button class="btn btn-success btn-sm" onclick="location.href='{{route('menu-status',[$menus['id'],0])}}'" title="click to deactive">Active</button></span>
                             @else
-                            <span class="text-dark fw-bold d-block fs-6"><button class="btn btn-danger btn-sm" onclick="location.href='{{route('dish-status',[$menus['id'],1])}}'" title="click to active">Deactive</button></span>
+                            <span class="text-dark fw-bold d-block fs-6"><button class="btn btn-danger btn-sm" onclick="location.href='{{route('menu-status',[$menus['id'],1])}}'" title="click to active">Deactive</button></span>
                             @endif
                         </td>
 
