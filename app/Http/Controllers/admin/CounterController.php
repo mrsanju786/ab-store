@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Counter;
 use App\Models\Area;
-use App\Models\Menu;
 use App\Models\Location;
 
 class CounterController extends Controller
@@ -71,14 +70,12 @@ class CounterController extends Controller
         return redirect()->route('counter-list')->with('success', 'Changes saved Successfully!');
     }
 
-    public function getCounter($id){
+    public function getCounterByBranch($id){
         $counter = Counter::where('branch_id', $id)->get();
         return $counter;
     }
 
-    public function getMenu($id){
-        $menu = Menu::where('counter_id', $id)->get();
-        return $menu;
+    public function getCounter($id){
 
         $location = Location::where('branch_id', $id)->get('id')->toArray();
         $area = Area::whereIn('location_id', $location)->get('id')->toArray();
@@ -86,4 +83,5 @@ class CounterController extends Controller
         return $counter;
 
     }
+
 }

@@ -94,4 +94,9 @@ class Menucontroller extends Controller
         $menu->save();
         return redirect()->back()->with('success','Menu status updated!');
     }
+
+    public function getMenu($id){
+        $menu = Menu::where('counter_id', $id)->get();
+        return $menu;
+    }
 }

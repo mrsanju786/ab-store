@@ -472,7 +472,7 @@ $('#branch_id').on('change', function(){
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-            url: "{{ url('admin/get-counter') }}/" + branch_id,
+            url: "{{ url('admin/get-counter-by-branch') }}/" + branch_id,
             type: "GET",
             success: function(response) {
                 $.each(response,function(key, value)
