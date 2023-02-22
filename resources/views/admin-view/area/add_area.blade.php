@@ -18,18 +18,26 @@
                 <!--end::Card title-->
             </div>
             <!--end::Card header-->
-            <br>
-            <!--begin::Row-->
-            <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
+            </div>
+            </div>
+    <!--end::Col-->
+           
+           <!--begin::Col-->
+    <div class="col-lg-12">
+        <!--begin::Card widget 18-->
+        <div class="card card-flush">
+            <!--begin::Body-->
+            <div class="card-body">
 
-                <!--begin::Col-->
-                <div class="col">
-
-                    <!--begin::Card body-->
-                    <div class="card-body pt-1">
+           
                 <!--begin::Form-->
                 <form action="{{route('create-area')}}" method="POST" enctype="multipart/form-data">
                     @csrf
+
+                     <!--begin::Row-->
+                    <div class="row gx-9 h-100">
+                        <!--begin::Col-->
+                        <div class="col-sm-6">
                     <!--begin::Scroll-->
                     <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_add_role_scroll">
                         <!--begin::Input group-->
@@ -55,7 +63,16 @@
                             <div class="fv-plugins-message-container invalid-feedback"></div>
                         </div>
                         <!--end::Input group-->
-                        
+                         </div>
+                            <!--end::Scroll-->
+                        </div>
+                        <!--end::Col-->
+                        <!--begin::Col-->
+                        <div class="col-sm-6">
+                            <!--begin::Scroll-->
+                            <div class="d-flex flex-column scroll-y me-n7 pe-p pe-md-7" id="kt_modal_add_role_scroll">
+
+
                         <!--begin::Input group-->
                         <div class="fv-row mb-10 fv-plugins-icon-container">
                             <!--begin::Label-->
@@ -74,6 +91,17 @@
                             <div class="fv-plugins-message-container invalid-feedback"></div>
                         </div>
                         <!--end::Input group-->
+                          </div>
+                            <!--end::Scroll-->
+                        </div>
+                        <!--end::Col-->
+                    </div>
+                    <!--end::Row-->
+                                  <!--begin::Row-->
+                    <div class="row gx-9 h-100">
+                        <!--begin::Col-->
+                        <div class="col-md-12 mx-auto">
+                               
 
                         <!--begin::Actions-->
                         <div class="text-left pt-3">
@@ -90,28 +118,22 @@
                             </button>
                         </div>
                         <!--end::Actions-->
+                          </div>
+                        <!--end::Col-->
+                    </div>
+                    <!--end::Row-->
                 </form>
                 <!--end::Form-->
-            </div>
-            <!--end::Card body-->
-             </div>
-                <!--end::Col-->
-
-                <!--begin::Col-->
-                <div class="col">
-
-                </div>
-                <!--end::Col-->
-            </div>
-            <!--end::Row-->
-
-
+           
+</div>
+            <!--end::Body-->
         </div>
+        <!--end::Card widget 18-->
     </div>
     <!--end::Col-->
+
 </div>
 <!--end::Row-->
-
 @endsection
 
 @section('scripts')

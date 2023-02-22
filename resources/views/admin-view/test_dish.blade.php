@@ -243,12 +243,18 @@
                                                 </td>
                                                 <td class="p-0 py-3 w-125px">
                                                     <div class="card-toolbar">
-                                                        <a href="#" type="button" class="btn btn-sm btn-primary mx-2"
+                                                        <div class="d-flex justify-content-start">
+                                                            <div>
+                                                                <a href="#" type="button" class="btn btn-sm btn-primary mx-2"
                                                             data-bs-toggle="modal"
                                                             data-bs-target="#kt_modal_create_campaign">Edit </a>
-                                                        <a href="#" type="button" class="btn btn-sm btn-danger"
+                                                            </div>
+                                                            <div class="d-flex justify-content-start">
+                                                                <a href="#" type="button" class="btn btn-sm btn-danger"
                                                             data-bs-toggle="modal"
                                                             data-bs-target="#kt_modal_create_campaign">Delete</a>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -261,12 +267,18 @@
                                                 </td>
                                                 <td class="p-0 py-3 w-125px">
                                                     <div class="card-toolbar">
-                                                        <a href="#" type="button" class="btn btn-sm btn-primary mx-2"
+                                                        <div class="d-flex justify-content-start">
+                                                            <div>
+                                                                <a href="#" type="button" class="btn btn-sm btn-primary mx-2"
                                                             data-bs-toggle="modal"
                                                             data-bs-target="#kt_modal_create_campaign">Edit </a>
-                                                        <a href="#" type="button" class="btn btn-sm btn-danger"
+                                                            </div>
+                                                            <div class="d-flex justify-content-start">
+                                                                <a href="#" type="button" class="btn btn-sm btn-danger"
                                                             data-bs-toggle="modal"
                                                             data-bs-target="#kt_modal_create_campaign">Delete</a>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -279,12 +291,18 @@
                                                 </td>
                                                 <td class="p-0 py-3 w-125px">
                                                     <div class="card-toolbar">
-                                                        <a href="#" type="button" class="btn btn-sm btn-primary mx-2"
+                                                        <div class="d-flex justify-content-start">
+                                                            <div>
+                                                                <a href="#" type="button" class="btn btn-sm btn-primary mx-2"
                                                             data-bs-toggle="modal"
                                                             data-bs-target="#kt_modal_create_campaign">Edit </a>
-                                                        <a href="#" type="button" class="btn btn-sm btn-danger"
+                                                            </div>
+                                                            <div class="d-flex justify-content-start">
+                                                                <a href="#" type="button" class="btn btn-sm btn-danger"
                                                             data-bs-toggle="modal"
                                                             data-bs-target="#kt_modal_create_campaign">Delete</a>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -301,7 +319,6 @@
                 </div>
             </div>
         </div>
-
         <div class="row mt-6">
             <div class="col-md-12 mx-auto">
                 <div class="card card-flush h-md-100" id="kt_modal_add_role">
@@ -315,8 +332,7 @@
                                 <!--end::Card title-->
                                 <!--begin::Create campaign button-->
                                 <div class="card-toolbar">
-                                    <a href="#" type="button" class="btn  btn-sm btn-primary" data-bs-toggle="modal"
-                                        data-bs-target="#kt_modal_create_campaign">Add</a>
+                                    <a href="#" type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#kt_modal_create_campaign">Add Extras</a>
                                 </div>
                                 <!--end::Create campaign button-->
                             </div>
@@ -348,12 +364,18 @@
                                                 </td>
                                                 <td class="p-0 py-3 w-125px">
                                                     <div class="card-toolbar">
-                                                        <a href="#" type="button" class="btn btn-sm btn-primary mx-2"
+                                                        <div class="d-flex justify-content-start">
+                                                            <div>
+                                                                <a href="#" type="button" class="btn btn-sm btn-primary mx-2"
                                                             data-bs-toggle="modal"
                                                             data-bs-target="#kt_modal_create_campaign">Edit </a>
-                                                        <a href="#" type="button" class="btn btn-sm btn-danger"
+                                                            </div>
+                                                            <div class="d-flex justify-content-start">
+                                                                <a href="#" type="button" class="btn btn-sm btn-danger"
                                                             data-bs-toggle="modal"
                                                             data-bs-target="#kt_modal_create_campaign">Delete</a>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -367,12 +389,18 @@
                                                 </td>
                                                 <td class="p-0 py-3 w-125px">
                                                     <div class="card-toolbar">
-                                                        <a href="#" type="button" class="btn btn-sm btn-primary mx-2"
+                                                        <div class="d-flex justify-content-start">
+                                                            <div>
+                                                                <a href="#" type="button" class="btn btn-sm btn-primary mx-2"
                                                             data-bs-toggle="modal"
                                                             data-bs-target="#kt_modal_create_campaign">Edit </a>
-                                                        <a href="#" type="button" class="btn btn-sm btn-danger"
+                                                            </div>
+                                                            <div class="d-flex justify-content-start">
+                                                                <a href="#" type="button" class="btn btn-sm btn-danger"
                                                             data-bs-toggle="modal"
                                                             data-bs-target="#kt_modal_create_campaign">Delete</a>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -386,12 +414,18 @@
                                                 </td>
                                                 <td class="p-0 py-3 w-125px">
                                                     <div class="card-toolbar">
-                                                        <a href="#" type="button" class="btn btn-sm btn-primary mx-2"
+                                                        <div class="d-flex justify-content-start">
+                                                            <div>
+                                                                <a href="#" type="button" class="btn btn-sm btn-primary mx-2"
                                                             data-bs-toggle="modal"
                                                             data-bs-target="#kt_modal_create_campaign">Edit </a>
-                                                        <a href="#" type="button" class="btn btn-sm btn-danger"
+                                                            </div>
+                                                            <div class="d-flex justify-content-start">
+                                                                <a href="#" type="button" class="btn btn-sm btn-danger"
                                                             data-bs-toggle="modal"
                                                             data-bs-target="#kt_modal_create_campaign">Delete</a>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -411,8 +445,6 @@
     </div>
 
 </div>
-
-
 
 
 @endsection
