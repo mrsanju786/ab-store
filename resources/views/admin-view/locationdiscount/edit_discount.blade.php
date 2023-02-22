@@ -113,26 +113,6 @@
                             <div class="d-flex flex-column scroll-y me-n7 pe-p pe-md-7" id="kt_modal_add_role_scroll">
 
 
-                                <!--begin::Input group-->
-                                <div class="fv-row mb-10 fv-plugins-icon-container datadisplay">
-                                    <!--begin::Label-->
-                                    <label class="fs-5 fw-bold form-label mb-2">
-                                        <span class="required">End Date</span>
-                                    </label>
-                                    <!--end::Label-->
-                                    <!--begin::Input-->
-                                    <div class="date-container">
-                                        <input type="text" class="end-date form-control form-control-solid" placeholder="Enter End Date" name="end_date" value="{{date('Y-m-d',strtotime($locationDiscount->end_date))}}" required>
-                                        <i class="date-icon fa fa-calendar" aria-hidden="true"></i>
-                                    </div>  
-                                    <!--end::Input-->
-                                    @if($errors->has('end_date'))
-                                    <span class="text-danger">{{ $errors->first('end_date') }}</span>
-                                    @endif
-                                    <div class="fv-plugins-message-container invalid-feedback"></div>
-                                </div>
-                                <!--end::Input group-->
-
                                   <!--begin::Input group-->
                                 <div class="fv-row mb-10 fv-plugins-icon-container">
                                     <!--begin::Label-->
