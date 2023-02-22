@@ -17,241 +17,260 @@
                 </div>
                 <!--end::Card title-->
             </div>
-            <!--end::Card header-->
-            <br>
-            <!--begin::Row-->
-            <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
-                <!--begin::Col-->
-                <div class="col">
+            <!--end::Card header-->            
+        </div>
+    </div>
+    <!--end::Col-->
 
-                <!--begin::Card body-->
-                <div class="card-body pt-1">
-                    <!--begin::Form-->
-                    <form action="{{route('create-company')}}" method="POST" enctype="multipart/form-data">
-                        @csrf
-                        <!--begin::Scroll-->
-                        <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_add_role_scroll">
-                            <!--begin::Input group-->
-                            <div class="fv-row mb-10 fv-plugins-icon-container">
-                                <!--begin::Label-->
-                                <label class="fs-5 fw-bold form-label mb-2">
-                                    <span class="required">Company Name</span>
-                                </label>
-                                <!--end::Label-->
+    <!--begin::Col-->
+    <div class="col-lg-12">
+        <!--begin::Card widget 18-->
+        <div class="card card-flush">
+            <!--begin::Body-->
+            <div class="card-body">
 
-                                <!--begin::Input-->
-                                <input class="form-control form-control-solid" placeholder="Enter Company Name"
-                                    name="company_name">
-                                <!--end::Input-->
-                                @if($errors->has('company_name'))
-                                <span class="text-danger">{{ $errors->first('company_name') }}</span>
-                                @endif
-                                <div class="fv-plugins-message-container invalid-feedback"></div>
+                <!--begin::Form-->
+                <form action="{{route('create-company')}}" method="POST" enctype="multipart/form-data">
+                    @csrf
+
+                    <!--begin::Row-->
+                    <div class="row gx-9 h-100">
+                        <!--begin::Col-->
+                        <div class="col-sm-6">
+                            <!--begin::Scroll-->
+                            <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_add_role_scroll">
+                                <!--begin::Input group-->
+                                <div class="fv-row mb-10 fv-plugins-icon-container">
+                                    <!--begin::Label-->
+                                    <label class="fs-5 fw-bold form-label mb-2">
+                                        <span class="required">Company Name</span>
+                                    </label>
+                                    <!--end::Label-->
+
+                                    <!--begin::Input-->
+                                    <input class="form-control form-control-solid" placeholder="Enter Company Name" name="company_name">
+                                    <!--end::Input-->
+                                    @if($errors->has('company_name'))
+                                    <span class="text-danger">{{ $errors->first('company_name') }}</span>
+                                    @endif
+                                    <div class="fv-plugins-message-container invalid-feedback"></div>
+                                </div>
+                                <!--end::Input group-->
+
+                                <!--begin::Input group-->
+                                <div class="fv-row mb-10 fv-plugins-icon-container">
+                                    <!--begin::Label-->
+                                    <label class="fs-5 fw-bold form-label mb-2">
+                                        <span class="required">CIN No.</span>
+                                    </label>
+                                    <!--end::Label-->
+
+                                    <!--begin::Input-->
+                                    <input class="form-control form-control-solid" placeholder="CIN No." name="cin_no">
+                                    <!--end::Input-->
+                                    @if($errors->has('cin_no'))
+                                    <span class="text-danger">{{ $errors->first('cin_no') }}</span>
+                                    @endif
+                                    <div class="fv-plugins-message-container invalid-feedback"></div>
+                                </div>
+                                <!--end::Input group-->
+
+                                <!--begin::Input group-->
+                                <div class="fv-row mb-10 fv-plugins-icon-container">
+                                    <!--begin::Label-->
+                                    <label class="fs-5 fw-bold form-label mb-2">
+                                        <span class="required">Select Country</span>
+                                    </label>
+                                    <!--end::Label-->
+
+                                    <!--begin::Input-->
+                                    <select class="form-select form-select-solid" aria-label="Select example" name="country_id"
+                                        id="country_id" data-control="select2">
+                                        <option>Select Country</option>
+                                        @foreach($country as $countries)
+                                        <option value="{{$countries->id}}">{{$countries->country_name}}</option>
+                                        @endforeach
+
+                                    </select>
+                                    <!--end::Input-->
+                                    @if($errors->has('country_id'))
+                                    <span class="text-danger">{{ $errors->first('country_id') }}</span>
+                                    @endif
+                                    <div class="fv-plugins-message-container invalid-feedback"></div>
+                                </div>
+                                <!--end::Input group-->
+
+                                <!--begin::Input group-->
+                                <div class="fv-row mb-10 fv-plugins-icon-container">
+                                    <!--begin::Label-->
+                                    <label class="fs-5 fw-bold form-label mb-2">
+                                        <span class="required">Select State</span>
+                                    </label>
+                                    <!--end::Label-->
+
+                                    <!--begin::Input-->
+                                    <select class="form-select form-select-solid" aria-label="Select example" name="state_id" id="state_id"
+                                        data-control="select2">
+                                        <option value="">Select State</option>
+                                    </select>
+                                    <!--end::Input-->
+                                    @if($errors->has('state_id'))
+                                    <span class="text-danger">{{ $errors->first('state_id') }}</span>
+                                    @endif
+                                    <div class="fv-plugins-message-container invalid-feedback"></div>
+                                </div>
+                                <!--end::Input group-->
+
+                                <!--begin::Input group-->
+                                <div class="fv-row mb-10 fv-plugins-icon-container">
+                                    <!--begin::Label-->
+                                    <label class="fs-5 fw-bold form-label mb-2">
+                                        <span class="required">Pincode</span>
+                                    </label>
+                                    <!--end::Label-->
+
+                                    <!--begin::Input-->
+                                    <input class="form-control form-control-solid" placeholder="Pincode" name="pincode">
+                                    <!--end::Input-->
+                                    @if($errors->has('pincode'))
+                                    <span class="text-danger">{{ $errors->first('pincode') }}</span>
+                                    @endif
+                                    <div class="fv-plugins-message-container invalid-feedback"></div>
+                                </div>
+                                <!--end::Input group-->
+
                             </div>
-                            <!--end::Input group-->
+                            <!--end::Scroll-->
+                        </div>
+                        <!--end::Col-->
+                        <!--begin::Col-->
+                        <div class="col-sm-6">
+                            <!--begin::Scroll-->
+                            <div class="d-flex flex-column scroll-y me-n7 pe-p pe-md-7" id="kt_modal_add_role_scroll">
 
-                            <!--begin::Input group-->
-                            <div class="fv-row mb-10 fv-plugins-icon-container">
-                                <!--begin::Label-->
-                                <label class="fs-5 fw-bold form-label mb-2">
-                                    <span class="required">Company Logo</span>
-                                </label>
-                                <!--end::Label-->
+                                <!--begin::Input group-->
+                                <div class="fv-row mb-10 fv-plugins-icon-container">
+                                    <!--begin::Label-->
+                                    <label class="fs-5 fw-bold form-label mb-2">
+                                        <span class="required">Company Logo</span>
+                                    </label>
+                                    <!--end::Label-->
 
-                                <!--begin::Input-->
-                                <input type="file" class="form-control form-control-solid" placeholder="Upload Company Logo"
-                                title="Choose an Image please"  name="company_logo">
-                                <!--end::Input-->
-                                @if($errors->has('company_logo'))
-                                <span class="text-danger">{{ $errors->first('company_logo') }}</span>
-                                @endif
-                                <div class="fv-plugins-message-container invalid-feedback"></div>
+                                    <!--begin::Input-->
+                                    <input type="file" class="form-control form-control-solid" placeholder="Upload Company Logo"
+                                        title="Choose an Image please" name="company_logo">
+                                    <!--end::Input-->
+                                    @if($errors->has('company_logo'))
+                                    <span class="text-danger">{{ $errors->first('company_logo') }}</span>
+                                    @endif
+                                    <div class="fv-plugins-message-container invalid-feedback"></div>
+                                </div>
+                                <!--end::Input group-->
+
+                                <!--begin::Input group-->
+                                <div class="fv-row mb-10 fv-plugins-icon-container">
+                                    <!--begin::Label-->
+                                    <label class="fs-5 fw-bold form-label mb-2">
+                                        <span class="required">Select License</span>
+                                    </label>
+                                    <!--end::Label-->
+
+                                    <!--begin::Input-->
+                                    <select class="form-select form-select-solid" aria-label="Select example" name="license_no"
+                                        data-control="select2">
+                                        <option>Select License</option>
+                                        @foreach($license as $licenses)
+                                        <option value="{{$licenses->id}}">{{$licenses->license_name}}</option>
+                                        @endforeach
+
+                                    </select>
+                                    <!--end::Input-->
+                                    @if($errors->has('license_no'))
+                                    <span class="text-danger">{{ $errors->first('license_no') }}</span>
+                                    @endif
+                                    <div class="fv-plugins-message-container invalid-feedback"></div>
+                                </div>
+                                <!--end::Input group-->
+
+                                <!--begin::Input group-->
+                                <div class="fv-row mb-10 fv-plugins-icon-container">
+                                    <!--begin::Label-->
+                                    <label class="fs-5 fw-bold form-label mb-2">
+                                        <span class="required">Registered Address</span>
+                                    </label>
+                                    <!--end::Label-->
+
+                                    <!--begin::Input-->
+                                    <textarea class="form-control form-control-solid" placeholder="Registered Address"
+                                        name="registered_address" row="1"></textarea>
+                                    <!--end::Input-->
+                                    @if($errors->has('registered_address'))
+                                    <span class="text-danger">{{ $errors->first('registered_address') }}</span>
+                                    @endif
+                                    <div class="fv-plugins-message-container invalid-feedback"></div>
+                                </div>
+                                <!--end::Input group-->
+
+                                <!--begin::Input group-->
+                                <div class="fv-row mb-10 fv-plugins-icon-container">
+                                    <!--begin::Label-->
+                                    <label class="fs-5 fw-bold form-label mb-2">
+                                        <span class="required">Select City</span>
+                                    </label>
+                                    <!--end::Label-->
+
+                                    <!--begin::Input-->
+                                    <select class="form-select form-select-solid" aria-label="Select example" name="city_id" id="city_id"
+                                        data-control="select2">
+                                        <option value="">Select City</option>
+
+                                    </select>
+                                    <!--end::Input-->
+                                    @if($errors->has('city_id'))
+                                    <span class="text-danger">{{ $errors->first('city_id') }}</span>
+                                    @endif
+                                    <div class="fv-plugins-message-container invalid-feedback"></div>
+                                </div>
+                                <!--end::Input group-->
+
                             </div>
-                            <!--end::Input group-->
+                            <!--end::Scroll-->
+                        </div>
+                        <!--end::Col-->
+                    </div>
+                    <!--end::Row-->
 
-                            <!--begin::Input group-->
-                            <div class="fv-row mb-10 fv-plugins-icon-container">
-                                <!--begin::Label-->
-                                <label class="fs-5 fw-bold form-label mb-2">
-                                    <span class="required">CIN No.</span>
-                                </label>
-                                <!--end::Label-->
-
-                                <!--begin::Input-->
-                                <input class="form-control form-control-solid" placeholder="CIN No."
-                                    name="cin_no">
-                                <!--end::Input-->
-                                @if($errors->has('cin_no'))
-                                <span class="text-danger">{{ $errors->first('cin_no') }}</span>
-                                @endif
-                                <div class="fv-plugins-message-container invalid-feedback"></div>
-                            </div>
-                            <!--end::Input group-->
-
-                            <!--begin::Input group-->
-                            <div class="fv-row mb-10 fv-plugins-icon-container">
-                                <!--begin::Label-->
-                                <label class="fs-5 fw-bold form-label mb-2">
-                                    <span class="required">Select License</span>
-                                </label>
-                                <!--end::Label-->
-
-                                <!--begin::Input-->
-                                <select class="form-select form-select-solid" aria-label="Select example" name="license_no"  data-control="select2" >
-                                    <option>Select License</option>
-                                    @foreach($license as $licenses)
-                                    <option value="{{$licenses->id}}">{{$licenses->license_name}}</option>
-                                    @endforeach
-                                    
-                                </select>
-                                <!--end::Input-->
-                                @if($errors->has('license_no'))
-                                <span class="text-danger">{{ $errors->first('license_no') }}</span>
-                                @endif
-                                <div class="fv-plugins-message-container invalid-feedback"></div>
-                            </div>
-                            <!--end::Input group-->
-
-                            <!--begin::Input group-->
-                            <div class="fv-row mb-10 fv-plugins-icon-container">
-                                <!--begin::Label-->
-                                <label class="fs-5 fw-bold form-label mb-2">
-                                    <span class="required">Select Country</span>
-                                </label>
-                                <!--end::Label-->
-
-                                <!--begin::Input-->
-                                <select class="form-select form-select-solid" aria-label="Select example" name="country_id" id="country_id" data-control="select2" >
-                                    <option>Select Country</option>
-                                    @foreach($country as $countries)
-                                    <option value="{{$countries->id}}">{{$countries->country_name}}</option>
-                                    @endforeach
-                                    
-                                </select>
-                                <!--end::Input-->
-                                @if($errors->has('country_id'))
-                                <span class="text-danger">{{ $errors->first('country_id') }}</span>
-                                @endif
-                                <div class="fv-plugins-message-container invalid-feedback"></div>
-                            </div>
-                            <!--end::Input group-->
-
-                            <!--begin::Input group-->
-                            <div class="fv-row mb-10 fv-plugins-icon-container">
-                                <!--begin::Label-->
-                                <label class="fs-5 fw-bold form-label mb-2">
-                                    <span class="required">Registered Address</span>
-                                </label>
-                                <!--end::Label-->
-
-                                <!--begin::Input-->
-                                {{-- <input class="form-control form-control-solid" placeholder="Registered Address"
-                                    name="registered_address"> --}}
-                                <textarea class="form-control form-control-solid" placeholder="Registered Address"
-                                name="registered_address" row="2"></textarea>
-                                <!--end::Input-->
-                                @if($errors->has('registered_address'))
-                                <span class="text-danger">{{ $errors->first('registered_address') }}</span>
-                                @endif
-                                <div class="fv-plugins-message-container invalid-feedback"></div>
-                            </div>
-                            <!--end::Input group-->
-
-                            <!--begin::Input group-->
-                            <div class="fv-row mb-10 fv-plugins-icon-container">
-                                <!--begin::Label-->
-                                <label class="fs-5 fw-bold form-label mb-2">
-                                    <span class="required">Select State</span>
-                                </label>
-                                <!--end::Label-->
-
-                                <!--begin::Input-->
-                                <select class="form-select form-select-solid" aria-label="Select example" name="state_id" id="state_id" data-control="select2" >
-                                    <option value="">Select State</option>                                    
-                                </select>
-                                <!--end::Input-->
-                                @if($errors->has('state_id'))
-                                <span class="text-danger">{{ $errors->first('state_id') }}</span>
-                                @endif
-                                <div class="fv-plugins-message-container invalid-feedback"></div>
-                            </div>
-                            <!--end::Input group-->
-
-                            <!--begin::Input group-->
-                            <div class="fv-row mb-10 fv-plugins-icon-container">
-                                <!--begin::Label-->
-                                <label class="fs-5 fw-bold form-label mb-2">
-                                    <span class="required">Select City</span>
-                                </label>
-                                <!--end::Label-->
-
-                                <!--begin::Input-->
-                                <select class="form-select form-select-solid" aria-label="Select example" name="city_id" id="city_id" data-control="select2" >
-                                    <option value="">Select City</option>
-                                    
-                                </select>
-                                <!--end::Input-->
-                                @if($errors->has('city_id'))
-                                <span class="text-danger">{{ $errors->first('city_id') }}</span>
-                                @endif
-                                <div class="fv-plugins-message-container invalid-feedback"></div>
-                            </div>
-                            <!--end::Input group-->
-
-                            <!--begin::Input group-->
-                            <div class="fv-row mb-10 fv-plugins-icon-container">
-                                <!--begin::Label-->
-                                <label class="fs-5 fw-bold form-label mb-2">
-                                    <span class="required">Pincode</span>
-                                </label>
-                                <!--end::Label-->
-
-                                <!--begin::Input-->
-                                <input class="form-control form-control-solid" placeholder="Pincode"
-                                    name="pincode">
-                                <!--end::Input-->
-                                @if($errors->has('pincode'))
-                                <span class="text-danger">{{ $errors->first('pincode') }}</span>
-                                @endif
-                                <div class="fv-plugins-message-container invalid-feedback"></div>
-                            </div>
-                            <!--end::Input group-->
-
+                    <!--begin::Row-->
+                    <div class="row gx-9 h-100">
+                        <!--begin::Col-->
+                        <div class="col-md-12 mx-auto">
                             <!--begin::Actions-->
                             <div class="text-left pt-3">
-                                <button type="submit" class="btn btn-lg btn-primary"
-                                    data-kt-roles-modal-action="submit">
+                                <button type="submit" class="btn btn-lg btn-primary" data-kt-roles-modal-action="submit">
                                     <span class="indicator-label">
                                         Submit
                                     </span>
                                     <span class="indicator-progress">
-                                        Please wait... <span
-                                            class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                                        Please wait... <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
                                     </span>
                                 </button>
                             </div>
                             <!--end::Actions-->
-                    </form>
-                    <!--end::Form-->
-                </div>
-                <!--end::Card body-->
+                        </div>
+                        <!--end::Col-->
+                    </div>
+                    <!--end::Row-->
 
-                </div>
-                <!--end::Col-->
+                </form>
+                <!--end::Form-->
 
-                <!--begin::Col-->
-                <div class="col">
-
-                </div>
-                <!--end::Col-->
             </div>
-            <!--end::Row-->
-
-
-
+            <!--end::Body-->
         </div>
+        <!--end::Card widget 18-->
     </div>
     <!--end::Col-->
+
 </div>
 <!--end::Row-->
 

@@ -92,8 +92,11 @@
                     <!--begin:Menu link-->
                     <a class="menu-link {{ request()->is('admin/role') ? 'active' : '' }}" href="{{route('role')}}">
                         <span class="menu-icon">
+                            <i class="bi bi-people fs-3"></i>
+
                             <!--begin::Svg Icon | path: icons/duotune/general/gen014.svg-->
-                            <span class="svg-icon svg-icon-2"><svg width="24" height="24" viewBox="0 0 24 24"
+                            {{-- <span class="svg-icon svg-icon-2">
+                                <svg width="24" height="24" viewBox="0 0 24 24"
                                     fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <rect x="2" y="2" width="9" height="9" rx="2" fill="currentColor"></rect>
                                     <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="currentColor">
@@ -103,7 +106,7 @@
                                     <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="currentColor">
                                     </rect>
                                 </svg>
-                            </span>
+                            </span> --}}
                             <!--end::Svg Icon-->
                         </span>
                         <span class="menu-title">Role</span>
@@ -153,38 +156,98 @@
                 <div class="menu-sub menu-sub-accordion {{ request()->is('admin/master/*') ? 'show' : '' }}" kt-hidden-height="242" style=" ">
                     <!--begin:Menu item-->
                     <div class="menu-item">
-                        <!--begin:Menu link--><a class="menu-link" href="{{route('country_list')}}"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Country</span></a><!--end:Menu link-->
-                    </div>
-                    <!--end:Menu item--><!--begin:Menu item-->
-                    <div class="menu-item">
-                        <!--begin:Menu link--><a class="menu-link" href="{{route('state_list')}}"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">State</span></a><!--end:Menu link-->
-                    </div>
-                    <!--end:Menu item--><!--begin:Menu item-->
-                    <div class="menu-item">
-                        <!--begin:Menu link--><a class="menu-link" href="{{route('city_list')}}"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">City</span></a><!--end:Menu link-->
-                    </div>
-                    <!--end:Menu item--><!--begin:Menu item-->
-                    <div class="menu-item">
-                        <!--begin:Menu link--><a class="menu-link" href="{{route('region_list')}}"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Region</span></a><!--end:Menu link-->
-                    </div>
-                    <!--end:Menu item--><!--begin:Menu item-->
-                    <div class="menu-item">
-                        <!--begin:Menu link--><a class="menu-link" href="{{route('license-list')}}"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">License</span></a><!--end:Menu link-->
-                    </div>
-                    <!--end:Menu item--><!--begin:Menu item-->
-                    <div class="menu-item">
-                        <!--begin:Menu link--><a class="menu-link" href="{{route('currency-list')}}"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Currency</span></a><!--end:Menu link-->
+                        <!--begin:Menu link-->
+                        <a class="menu-link" href="{{route('country_list')}}">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Country</span>
+                        </a>
+                        <!--end:Menu link-->
                     </div>
                     <!--end:Menu item-->
+                    <!--begin:Menu item-->
+                    <div class="menu-item">
+                        <!--begin:Menu link-->
+                        <a class="menu-link" href="{{route('state_list')}}">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">State</span>
+                        </a>
+                        <!--end:Menu link-->
+                    </div>
+                    <!--end:Menu item-->
+                    <!--begin:Menu item-->
+                    <div class="menu-item">
+                        <!--begin:Menu link-->
+                        <a class="menu-link" href="{{route('city_list')}}">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">City</span>
+                        </a>
+                        <!--end:Menu link-->
+                    </div>
+                    <!--end:Menu item-->
+                    <!--begin:Menu item-->
+                    <div class="menu-item">
+                        <!--begin:Menu link-->
+                        <a class="menu-link" href="{{route('region_list')}}">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Region</span>
+                        </a>
+                        <!--end:Menu link-->
+                    </div>
                     <!--end:Menu item--><!--begin:Menu item-->
                     <div class="menu-item">
-                        <!--begin:Menu link--><a class="menu-link" href="{{route('timezone-list')}}"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Timezone</span></a><!--end:Menu link-->
+                        <!--begin:Menu link-->
+                        <a class="menu-link" href="{{route('license-list')}}">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">License</span>
+                        </a>
+                        <!--end:Menu link-->
+                    </div>
+                    <!--end:Menu item-->
+                    <!--begin:Menu item-->
+                    <div class="menu-item">
+                        <!--begin:Menu link-->
+                        <a class="menu-link" href="{{route('currency-list')}}">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Currency</span>
+                        </a>
+                        <!--end:Menu link-->
+                    </div>
+                    <!--end:Menu item-->
+                    <!--begin:Menu item-->
+                    <div class="menu-item">
+                        <!--begin:Menu link-->
+                        <a class="menu-link" href="{{route('timezone-list')}}">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Timezone</span>
+                        </a>
+                        <!--end:Menu link-->
                     </div>
                     <!--end:Menu item-->
 
                     <!--begin:Menu item-->
                     <div class="menu-item">
-                        <!--begin:Menu link--><a class="menu-link" href="{{route('countrytax-list')}}"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Country Tax</span></a><!--end:Menu link-->
+                        <!--begin:Menu link-->
+                        <a class="menu-link" href="{{route('countrytax-list')}}">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Country Tax</span>
+                        </a>
+                        <!--end:Menu link-->
                     </div>
                     <!--end:Menu item-->
                 </div>
@@ -194,19 +257,9 @@
                 <div class="menu-item">
                     <!--begin:Menu link-->
                     <a class="menu-link {{ request()->is('admin/company-list') ? 'active' : '' }}" href="{{route('company_list')}}">
-                        <span class="menu-icon">
+                        <span class="menu-icon">                            
                             <!--begin::Svg Icon | path: icons/duotune/general/gen014.svg-->
-                            <span class="svg-icon svg-icon-2"><svg width="24" height="24" viewBox="0 0 24 24"
-                                    fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <rect x="2" y="2" width="9" height="9" rx="2" fill="currentColor"></rect>
-                                    <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="currentColor">
-                                    </rect>
-                                    <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="currentColor">
-                                    </rect>
-                                    <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="currentColor">
-                                    </rect>
-                                </svg>
-                            </span>
+                                <i class="bi bi-briefcase fs-3"></i>
                             <!--end::Svg Icon-->
                         </span>
                         <span class="menu-title">Company</span>
@@ -219,15 +272,9 @@
                     <a class="menu-link {{ request()->is('admin/branch-list') ? 'active' : '' }}" href="{{route('branch_list')}}">
                         <span class="menu-icon">
                             <!--begin::Svg Icon | path: icons/duotune/general/gen014.svg-->
-                            <span class="svg-icon svg-icon-2"><svg width="24" height="24" viewBox="0 0 24 24"
-                                    fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <rect x="2" y="2" width="9" height="9" rx="2" fill="currentColor"></rect>
-                                    <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="currentColor">
-                                    </rect>
-                                    <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="currentColor">
-                                    </rect>
-                                    <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="currentColor">
-                                    </rect>
+                            <span class="svg-icon svg-icon-2">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M3.5,21 L20.5,21 C21.3284271,21 22,20.3284271 22,19.5 L22,8.5 C22,7.67157288 21.3284271,7 20.5,7 L10,7 L7.43933983,4.43933983 C7.15803526,4.15803526 6.77650439,4 6.37867966,4 L3.5,4 C2.67157288,4 2,4.67157288 2,5.5 L2,19.5 C2,20.3284271 2.67157288,21 3.5,21 Z" fill="currentColor" opacity="0.3"/>
                                 </svg>
                             </span>
                             <!--end::Svg Icon-->
@@ -242,17 +289,11 @@
                     <a class="menu-link {{ request()->is('admin/location_list') ? 'active' : '' }}" href="{{route('location_list')}}">
                         <span class="menu-icon">
                             <!--begin::Svg Icon | path: icons/duotune/general/gen014.svg-->
-                            <span class="svg-icon svg-icon-2"><svg width="24" height="24" viewBox="0 0 24 24"
-                                    fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <rect x="2" y="2" width="9" height="9" rx="2" fill="currentColor"></rect>
-                                    <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="currentColor">
-                                    </rect>
-                                    <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="currentColor">
-                                    </rect>
-                                    <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="currentColor">
-                                    </rect>
+                           <span class="svg-icon svg-icon-2">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">                                
+                                    <path d="M14,13.381038 L14,3.47213595 L7.99460483,15.4829263 L14,13.381038 Z M4.88230018,17.2353996 L13.2844582,0.431083506 C13.4820496,0.0359007077 13.9625881,-0.12427877 14.3577709,0.0733126292 C14.5125928,0.15072359 14.6381308,0.276261584 14.7155418,0.431083506 L23.1176998,17.2353996 C23.3152912,17.6305824 23.1551117,18.1111209 22.7599289,18.3087123 C22.5664522,18.4054506 22.3420471,18.4197165 22.1378777,18.3482572 L14,15.5 L5.86212227,18.3482572 C5.44509941,18.4942152 4.98871325,18.2744737 4.84275525,17.8574509 C4.77129597,17.6532815 4.78556182,17.4288764 4.88230018,17.2353996 Z" fill="currentColor" fill-rule="nonzero" transform="translate(14.000087, 9.191034) rotate(-315.000000) translate(-14.000087, -9.191034) "/>
                                 </svg>
-                            </span>
+                            </span> 
                             <!--end::Svg Icon-->
                         </span>
                         <span class="menu-title">Location</span>
@@ -311,15 +352,9 @@
                     <a class="menu-link {{ request()->is('admin/area_list') ? 'active' : '' }}" href="{{route('area_list')}}">
                         <span class="menu-icon">
                             <!--begin::Svg Icon | path: icons/duotune/general/gen014.svg-->
-                            <span class="svg-icon svg-icon-2"><svg width="24" height="24" viewBox="0 0 24 24"
-                                    fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <rect x="2" y="2" width="9" height="9" rx="2" fill="currentColor"></rect>
-                                    <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="currentColor">
-                                    </rect>
-                                    <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="currentColor">
-                                    </rect>
-                                    <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="currentColor">
-                                    </rect>
+                            <span class="svg-icon svg-icon-2">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M9.82829464,16.6565893 C7.02541569,15.7427556 5,13.1079084 5,10 C5,6.13400675 8.13400675,3 12,3 C15.8659932,3 19,6.13400675 19,10 C19,13.1079084 16.9745843,15.7427556 14.1717054,16.6565893 L12,21 L9.82829464,16.6565893 Z M12,12 C13.1045695,12 14,11.1045695 14,10 C14,8.8954305 13.1045695,8 12,8 C10.8954305,8 10,8.8954305 10,10 C10,11.1045695 10.8954305,12 12,12 Z" fill="currentColor"/>
                                 </svg>
                             </span>
                             <!--end::Svg Icon-->
@@ -334,15 +369,12 @@
                     <a class="menu-link {{ request()->is('admin/location-discount-list') ? 'active' : '' }}" href="{{route('location-discount-list')}}">
                         <span class="menu-icon">
                             <!--begin::Svg Icon | path: icons/duotune/general/gen014.svg-->
-                            <span class="svg-icon svg-icon-2"><svg width="24" height="24" viewBox="0 0 24 24"
-                                    fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <rect x="2" y="2" width="9" height="9" rx="2" fill="currentColor"></rect>
-                                    <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="currentColor">
-                                    </rect>
-                                    <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="currentColor">
-                                    </rect>
-                                    <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="currentColor">
-                                    </rect>
+                            <span class="svg-icon svg-icon-2">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <polygon fill="currentColor" opacity="0.3" points="12 20.0218549 8.47346039 21.7286168 6.86905972 18.1543453 3.07048824 17.1949849 4.13894342 13.4256452 1.84573388 10.2490577 5.08710286 8.04836581 5.3722735 4.14091196 9.2698837 4.53859595 12 1.72861679 14.7301163 4.53859595 18.6277265 4.14091196 18.9128971 8.04836581 22.1542661 10.2490577 19.8610566 13.4256452 20.9295118 17.1949849 17.1309403 18.1543453 15.5265396 21.7286168"/>
+                                    <polygon fill="currentColor" points="14.0890818 8.60255815 8.36079737 14.7014391 9.70868621 16.049328 15.4369707 9.950447"/>
+                                    <path d="M10.8543431,9.1753866 C10.8543431,10.1252593 10.085524,10.8938719 9.13585777,10.8938719 C8.18793881,10.8938719 7.41737243,10.1252593 7.41737243,9.1753866 C7.41737243,8.22551387 8.18793881,7.45690126 9.13585777,7.45690126 C10.085524,7.45690126 10.8543431,8.22551387 10.8543431,9.1753866" fill="currentColor" opacity="0.3"/>
+                                    <path d="M14.8641422,16.6221564 C13.9162233,16.6221564 13.1456569,15.8535438 13.1456569,14.9036711 C13.1456569,13.9520555 13.9162233,13.1851857 14.8641422,13.1851857 C15.8138085,13.1851857 16.5826276,13.9520555 16.5826276,14.9036711 C16.5826276,15.8535438 15.8138085,16.6221564 14.8641422,16.6221564 Z" fill="currentColor" opacity="0.3"/>
                                 </svg>
                             </span>
                             <!--end::Svg Icon-->
@@ -357,15 +389,10 @@
                     <a class="menu-link {{ request()->is('admin/counter-list') ? 'active' : '' }}" href="{{route('counter-list')}}">
                         <span class="menu-icon">
                             <!--begin::Svg Icon | path: icons/duotune/general/gen014.svg-->
-                            <span class="svg-icon svg-icon-2"><svg width="24" height="24" viewBox="0 0 24 24"
-                                    fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <rect x="2" y="2" width="9" height="9" rx="2" fill="currentColor"></rect>
-                                    <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="currentColor">
-                                    </rect>
-                                    <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="currentColor">
-                                    </rect>
-                                    <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="currentColor">
-                                    </rect>
+                            <span class="svg-icon svg-icon-2">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M5.5,2 L18.5,2 C19.3284271,2 20,2.67157288 20,3.5 L20,6.5 C20,7.32842712 19.3284271,8 18.5,8 L5.5,8 C4.67157288,8 4,7.32842712 4,6.5 L4,3.5 C4,2.67157288 4.67157288,2 5.5,2 Z M11,4 C10.4477153,4 10,4.44771525 10,5 C10,5.55228475 10.4477153,6 11,6 L13,6 C13.5522847,6 14,5.55228475 14,5 C14,4.44771525 13.5522847,4 13,4 L11,4 Z" fill="currentColor" opacity="0.3"/>
+                                    <path d="M5.5,9 L18.5,9 C19.3284271,9 20,9.67157288 20,10.5 L20,13.5 C20,14.3284271 19.3284271,15 18.5,15 L5.5,15 C4.67157288,15 4,14.3284271 4,13.5 L4,10.5 C4,9.67157288 4.67157288,9 5.5,9 Z M11,11 C10.4477153,11 10,11.4477153 10,12 C10,12.5522847 10.4477153,13 11,13 L13,13 C13.5522847,13 14,12.5522847 14,12 C14,11.4477153 13.5522847,11 13,11 L11,11 Z M5.5,16 L18.5,16 C19.3284271,16 20,16.6715729 20,17.5 L20,20.5 C20,21.3284271 19.3284271,22 18.5,22 L5.5,22 C4.67157288,22 4,21.3284271 4,20.5 L4,17.5 C4,16.6715729 4.67157288,16 5.5,16 Z M11,18 C10.4477153,18 10,18.4477153 10,19 C10,19.5522847 10.4477153,20 11,20 L13,20 C13.5522847,20 14,19.5522847 14,19 C14,18.4477153 13.5522847,18 13,18 L11,18 Z" fill="currentColor"/>
                                 </svg>
                             </span>
                             <!--end::Svg Icon-->
@@ -380,15 +407,10 @@
                     <a class="menu-link {{ request()->is('admin/dish-list') ? 'active' : '' }}" href="{{route('dish-list')}}">
                         <span class="menu-icon">
                             <!--begin::Svg Icon | path: icons/duotune/general/gen014.svg-->
-                            <span class="svg-icon svg-icon-2"><svg width="24" height="24" viewBox="0 0 24 24"
-                                    fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <rect x="2" y="2" width="9" height="9" rx="2" fill="currentColor"></rect>
-                                    <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="currentColor">
-                                    </rect>
-                                    <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="currentColor">
-                                    </rect>
-                                    <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="currentColor">
-                                    </rect>
+                            <span class="svg-icon svg-icon-2">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M3,16 L21,16 C21,18.209139 19.209139,20 17,20 L7,20 C4.790861,20 3,18.209139 3,16 Z M3,11 L21,11 L21,12 C21,13.1045695 20.1045695,14 19,14 L5,14 C3.8954305,14 3,13.1045695 3,12 L3,11 Z" fill="currentColor"/>
+                                    <path d="M3,5 L21,5 L21,7 C21,8.1045695 20.1045695,9 19,9 L5,9 C3.8954305,9 3,8.1045695 3,7 L3,5 Z" fill="currentColor" opacity="0.3"/>
                                 </svg>
                             </span>
                             <!--end::Svg Icon-->
