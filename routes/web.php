@@ -21,10 +21,12 @@ use App\Http\Controllers\admin\TaxController;
 use App\Http\Controllers\admin\LocationTaxController;
 use App\Http\Controllers\admin\AreaController;
 use App\Http\Controllers\admin\CounterController;
+use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\DishController;
 use App\Http\Controllers\admin\CountryTaxController;
 use App\Http\Controllers\admin\DishVariantController;
 use App\Http\Controllers\admin\OptionController;
+use App\Http\Controllers\admin\MenuController;
 
 
 /*
@@ -272,6 +274,18 @@ Route::group(['prefix' => 'admin'], function()
         Route::post('/update-counter', [CounterController::class, 'updateCounter'])->name('update-counter');
         Route::get('/counter-status/{id}/{status}', [CounterController::class, 'areaStatus'])->name('counter-status');
 
+
+        /**
+         * category Routes
+         */
+        Route::get('/category-list', [CategoryController::class, 'index'])->name('category-list');
+        Route::get('/add-category', [CategoryController::class, 'addCategory'])->name('add-category');
+        Route::post('/create-category', [CategoryController::class, 'createCategory'])->name('create-category');
+        Route::get('/edit-category/{id?}', [CategoryController::class, 'editCategory'])->name('edit-category');
+        Route::post('/update-category', [CategoryController::class, 'updateCategory'])->name('update-category');
+        Route::get('/category-status/{id}/{status}', [CategoryController::class, 'areaStatus'])->name('category-status');
+
+
         /**
          * Dish Routes
          */
@@ -302,7 +316,15 @@ Route::group(['prefix' => 'admin'], function()
         Route::post('/update-option', [OptionController::class, 'updateOption'])->name('update-option');
         Route::get('/option-status/{id}/{status}', [OptionController::class, 'optionStatus'])->name('option-status');
 
-
+        /**
+         * Dish Routes
+         */
+        Route::get('/menu-list', [MenuController::class, 'index'])->name('menu-list');
+        Route::get('/add-menu', [MenuController::class, 'addMenu'])->name('add-menu');
+        Route::post('/create-menu', [MenuController::class, 'createMenu'])->name('create-menu');
+        Route::get('/edit-menu/{id?}', [MenuController::class, 'editMenu'])->name('edit-menu');
+        Route::post('/update-menu', [MenuController::class, 'updateMenu'])->name('update-menu');
+        Route::get('/menu-status/{id}/{status}', [MenuController::class, 'menuStatus'])->name('menu-status');
         /**
          * User Routes
          */
