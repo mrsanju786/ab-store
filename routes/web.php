@@ -6,6 +6,7 @@ use App\Http\Controllers\user\CounterController;
 use App\Http\Controllers\user\CategoryController;
 use App\Http\Controllers\user\DishController;
 use App\Http\Controllers\user\MenuController;
+use App\Http\Controllers\user\CartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,4 +34,7 @@ Route::get('/category/{id}', [CategoryController::class, 'category'])->name('cat
 
 Route::get('/category-dish/{id}', [DishController::class, 'categoryDish'])->name('category-dish');
 Route::get('/dish/{id}', [DishController::class, 'dish'])->name('dish');
+
+Route::get('/add-to-cart/{id}', [CartController::class, 'addToCart'])->name('add-to-cart');
+Route::get('/cart', [CartController::class, 'cart'])->name('cart');
 

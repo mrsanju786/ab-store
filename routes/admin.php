@@ -266,7 +266,7 @@ Route::get('/', function () {
         Route::post('/update-counter', [CounterController::class, 'updateCounter'])->name('update-counter');
         Route::get('/counter-status/{id}/{status}', [CounterController::class, 'areaStatus'])->name('counter-status');
         Route::get('/get-counter-by-branch/{id}', [CounterController::class, 'getCounterByBranch'])->name('get-counter-by-branch');
-        Route::get('/get-menu/{id}', [CounterController::class, 'getMenu'])->name('get-menu');
+        
 
         Route::get('/get-counter/{id}', [CounterController::class, 'getCounter'])->name('getCounter');
 
@@ -331,6 +331,7 @@ Route::get('/', function () {
         Route::get('/edit-menu/{id?}', [MenuController::class, 'editMenu'])->name('edit-menu');
         Route::post('/update-menu', [MenuController::class, 'updateMenu'])->name('update-menu');
         Route::get('/menu-status/{id}/{status}', [MenuController::class, 'menuStatus'])->name('menu-status');
+        Route::get('/get-menu/{id}', [MenuController::class, 'getMenu'])->name('get-menu');
         /**
          * User Routes
          */
