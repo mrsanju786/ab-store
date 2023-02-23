@@ -105,7 +105,7 @@
 
                                     <!--begin::Input-->
                                     <input class="form-control form-control-solid" placeholder="Enter Menu Name"
-                                        name="menu_name">
+                                        name="menu_name" value="{{old('menu_name')}}">
                                     <!--end::Input-->
                                     @if($errors->has('menu_name'))
                                     <span class="text-danger">{{ $errors->first('menu_name') }}</span>
