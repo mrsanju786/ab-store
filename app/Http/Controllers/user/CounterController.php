@@ -4,11 +4,13 @@ namespace App\Http\Controllers\user;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Counter;
 
 class CounterController extends Controller
 {
     public function all_counter(){
 
-        return view('user-view.counters');
+        $counter = Counter::get();
+        return view('user-view.counters', compact('counter'));
     }
 }

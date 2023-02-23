@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\user\HomeController;
 use App\Http\Controllers\user\CounterController;
+use App\Http\Controllers\user\MenuController;
 
 
 /*
@@ -25,3 +26,5 @@ Route::get('/', function () {
 
 Route::get('/home', [HomeController::class, 'Home'])->name('home');
 Route::get('/counter', [CounterController::class, 'all_counter'])->name('all_counter');
+Route::get('/menu/{id}', [MenuController::class, 'all_menu'])->name('all_menu');
+Route::get('/category/{id}', [MenuController::class, 'all_category'])->name('all_category');
