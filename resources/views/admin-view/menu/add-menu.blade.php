@@ -258,25 +258,192 @@
                             </div>
                             <!--end::Row-->
 
-                            <!--begin::Row-->
-                            <div class="row gx-9 h-100">
-                                <!--begin::Col-->
-                                <div class="col-md-12 mx-auto">
-                                    <!--begin::Actions-->
-                                    <div class="text-left pt-3">
-                                        <button type="submit" class="btn btn-lg btn-primary" data-kt-roles-modal-action="submit">
-                                            <span class="indicator-label">
-                                                Submit
-                                            </span>
-                                            <span class="indicator-progress">
-                                                Please wait... <span
-                                                    class="spinner-border spinner-border-sm align-middle ms-2"></span>
-                                            </span>
-                                        </button>
-                                    </div>
-                                    <!--end::Actions-->
+                            <!--begin::Input group-->
+                            <div class="fv-row mb-10 fv-plugins-icon-container">
+                                <!--begin::Label-->
+                                <label class="fs-5 fw-bold form-label mb-2">
+                                    <span class="required">Select Branch</span>
+                                </label>
+                                <!--end::Label-->
+
+                                <!--begin::Input-->
+                                <select class="form-select form-select-solid" aria-label="Select example" name="branch_id" id="branch_id"  data-control="select2" >
+                                    <option>Select Branch</option>
+                                    
+                                </select>
+                                <!--end::Input-->
+                                @if($errors->has('branch_id'))
+                                <span class="text-danger">{{ $errors->first('branch_id') }}</span>
+                                @endif
+                                <div class="fv-plugins-message-container invalid-feedback"></div>
+                            </div>
+                            <!--end::Input group-->
+
+                            <!--begin::Input group-->
+                            <div class="fv-row mb-10 fv-plugins-icon-container">
+                                <!--begin::Label-->
+                                <label class="fs-5 fw-bold form-label mb-2">
+                                    <span class="required">Select Counter</span>
+                                </label>
+                                <!--end::Label-->
+
+                                <!--begin::Input-->
+                                <select class="form-select form-select-solid" aria-label="Select example" name="counter_id" id="counter_id" data-control="select2" >
+                                    <option>Select Counter</option>
+                                    
+                                </select>
+                                <!--end::Input-->
+                                @if($errors->has('counter_id'))
+                                <span class="text-danger">{{ $errors->first('counter_id') }}</span>
+                                @endif
+                                <div class="fv-plugins-message-container invalid-feedback"></div>
+                            </div>
+                            <!--end::Input group-->
+
+                            <!--begin::Scroll-->
+                            <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_add_role_scroll">
+                                <!--begin::Input group-->
+                                <div class="fv-row mb-10 fv-plugins-icon-container">
+                                    <!--begin::Label-->
+                                    <label class="fs-5 fw-bold form-label mb-2">
+                                        <span class="required">Menu Name</span>
+                                    </label>
+                                    <!--end::Label-->
+
+                                    <!--begin::Input-->
+                                    <input class="form-control form-control-solid" placeholder="Enter Menu Name"
+                                        name="menu_name" value="{{old('menu_name')}}">
+                                    <!--end::Input-->
+                                    @if($errors->has('menu_name'))
+                                    <span class="text-danger">{{ $errors->first('menu_name') }}</span>
+                                    @endif
+                                    <div class="fv-plugins-message-container invalid-feedback"></div>
                                 </div>
-                                <!--end::Col-->
+                                <!--end::Input group-->
+
+                                <!--begin::Input group-->
+                                <div class="fv-row mb-10 fv-plugins-icon-container">
+                                    <!--begin::Label-->
+                                    <label class="fs-5 fw-bold form-label mb-2">
+                                        <span class="required">From Time</span>
+                                    </label>
+                                    <!--end::Label-->
+
+                                    <!--begin::Input-->
+                                    <input type="time" class="form-control form-control-solid" placeholder="Enter From time"
+                                        name="from_time">
+                                    <!--end::Input-->
+                                    @if($errors->has('from_date'))
+                                    <span class="text-danger">{{ $errors->first('from_date') }}</span>
+                                    @endif
+                                    <div class="fv-plugins-message-container invalid-feedback"></div>
+                                </div>
+                                <!--end::Input group-->
+
+                                <!--begin::Input group-->
+                                <div class="fv-row mb-10 fv-plugins-icon-container">
+                                    <!--begin::Label-->
+                                    <label class="fs-5 fw-bold form-label mb-2">
+                                        <span class="required">To Time</span>
+                                    </label>
+                                    <!--end::Label-->
+
+                                    <!--begin::Input-->
+                                    <input type="time" class="form-control form-control-solid" placeholder="Enter To time"
+                                        name="to_time">
+                                    <!--end::Input-->
+                                    @if($errors->has('to_time'))
+                                    <span class="text-danger">{{ $errors->first('to_time') }}</span>
+                                    @endif
+                                    <div class="fv-plugins-message-container invalid-feedback"></div>
+                                </div>
+                                <!--end::Input group-->
+                               
+                                <!--begin::Input group-->
+                                <div class="fv-row mb-10 fv-plugins-icon-container">
+                                    <!--begin::Label-->
+                                    <label class="fs-5 fw-bold form-label mb-2">
+                                        <span class="required">Off Time</span>
+                                    </label>
+                                    <!--end::Label-->
+
+                                    <!--begin::Input-->
+                                    <input type="time" class="form-control form-control-solid" placeholder="Enter Off Time"
+                                        name="off_time">
+                                    <!--end::Input-->
+                                    @if($errors->has('off_time'))
+                                    <span class="text-danger">{{ $errors->first('off_time') }}</span>
+                                    @endif
+                                    <div class="fv-plugins-message-container invalid-feedback"></div>
+                                </div>
+                                <!--end::Input group-->
+
+                                <!--begin::Input group-->
+                                <div class="fv-row mb-10 fv-plugins-icon-container">
+                                    <!--begin::Label-->
+                                    <label class="fs-5 fw-bold form-label mb-2">
+                                        <span class="required">Repeat Days</span>
+                                    </label>
+                                    <br>
+                                    <!--end::Label-->
+
+                                    <!--begin::Input-->
+                                    <input class="form-check-input" name="repeat_days[]" type="checkbox" value="Monday" checked>
+                                        <span class="fw-semibold ps-2 fs-6">
+                                        Monday
+                                        </span>
+
+                                    <input class="form-check-input" name="repeat_days[]" type="checkbox" value="Tuesday">
+                                        <span class="fw-semibold ps-2 fs-6">
+                                        Tuesday
+                                        </span>
+                                    
+                                    <input class="form-check-input" name="repeat_days[]" type="checkbox" value="Wednesday">
+                                        <span class="fw-semibold ps-2 fs-6">
+                                        Wednesday
+                                        </span>
+
+                                    <input class="form-check-input" name="repeat_days[]" type="checkbox" value="Thursday">
+                                        <span class="fw-semibold ps-2 fs-6">
+                                        Thursday
+                                        </span>
+                                    
+                                    <input class="form-check-input" name="repeat_days[]" type="checkbox" value="Friday">
+                                        <span class="fw-semibold ps-2 fs-6">
+                                        Friday
+                                        </span>
+
+                                    <input class="form-check-input" name="repeat_days[]" type="checkbox" value="Saturday">
+                                        <span class="fw-semibold ps-2 fs-6">
+                                        Saturday
+                                        </span>
+
+                                    <input class="form-check-input" name="repeat_days[]" type="checkbox" value="Sunday">
+                                        <span class="fw-semibold ps-2 fs-6">
+                                        Sunday
+                                        </span>
+                                    <!--end::Input-->
+                                    @if($errors->has('repeat_days'))
+                                    <span class="text-danger">{{ $errors->first('repeat_days') }}</span>
+                                    @endif
+                                    <div class="fv-plugins-message-container invalid-feedback"></div>
+                                </div>
+                                <!--end::Input group-->
+
+                                <!--begin::Actions-->
+                                <div class="text-left pt-3">
+                                    <button type="submit" class="btn btn-lg btn-primary"
+                                        data-kt-roles-modal-action="submit">
+                                        <span class="indicator-label">
+                                            Submit
+                                        </span>
+                                        <span class="indicator-progress">
+                                            Please wait... <span
+                                                class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                                        </span>
+                                    </button>
+                                </div>
+                                <!--end::Actions-->
                             </div>
                             <!--end::Row-->
                         </form>
