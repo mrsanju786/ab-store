@@ -7,7 +7,7 @@
 <div>
 <h1>All Menu</h1>
 @foreach($menu as $menus)
-<a href="#">{{$menus->menu_name}}</a>
+<a href="#">{{$menus->menu_name}}</a><br>
 @endforeach
 </div>
 
