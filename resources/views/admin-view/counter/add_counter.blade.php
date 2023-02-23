@@ -66,7 +66,7 @@
                                 <div class="fv-row mb-10 fv-plugins-icon-container">
                                     <!--begin::Label-->
                                     <label class="fs-5 fw-bold form-label mb-2">
-                                        <span class="required">License No</span>
+                                        <span>License No</span>
                                     </label>
                                     <!--end::Label-->
 
@@ -113,7 +113,7 @@
                                 <div class="fv-row mb-10 fv-plugins-icon-container datadisplay">
                                     <!--begin::Label-->
                                     <label class="fs-5 fw-bold form-label mb-2">
-                                        <span class="required">License Expiry Date</span>
+                                        <span>License Expiry Date</span>
                                     </label>
                                     <!--end::Label-->
 

@@ -27,8 +27,6 @@ class CounterController extends Controller
 
         $request->validate([
             'counter_name' => 'required',
-            'license_no' => 'required',
-            'lincese_expiry_date' => 'required',
             'area_id' => 'required',
         ]);
 
@@ -54,8 +52,6 @@ class CounterController extends Controller
 
         $request->validate([
             'counter_name' => 'required',
-            'license_no' => 'required',
-            'lincese_expiry_date' => 'required',
             'area_id' => 'required',
         ]);
 
