@@ -8,9 +8,9 @@ use App\Models\Category;
 
 class CategoryController extends Controller
 {
-    public function Categories()
+    public function category($id)
     {
-        $category = Category::get();
-        return view('user-view.categories', compact('category'));
+        $category = Category::where('id', base64_decode($id))->get();
+        return view('user-view.category', compact('category'));
     }
 }
