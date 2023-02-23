@@ -17,18 +17,10 @@
                 </div>
                 <!--end::Card title-->
             </div>
-            <!--end::Card header-->                      
-        </div>
-    </div>
-    <!--end::Col-->
-
-    <!--begin::Col-->
-    <div class="col-lg-12">
-        <!--begin::Card widget 18-->
-        <div class="card card-flush">
+            <!--end::Card header-->          
+            
             <!--begin::Body-->
             <div class="card-body">
-
                 <!--begin::Form-->
                 <form action="{{route('update-category')}}" method="POST" enctype="multipart/form-data">
                     @csrf
@@ -247,13 +239,21 @@
 
                 </form>
                 <!--end::Form-->
-
             </div>
             <!--end::Body-->
         </div>
-        <!--end::Card widget 18-->
     </div>
     <!--end::Col-->
+
+    {{-- <!--begin::Col-->
+    <div class="col-lg-12">
+        <!--begin::Card widget 18-->
+        <div class="card card-flush">
+            
+        </div>
+        <!--end::Card widget 18-->
+    </div>
+    <!--end::Col--> --}}
 
 </div>
 <!--end::Row-->

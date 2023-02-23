@@ -70,7 +70,7 @@
                                 <div class="fv-row mb-10 fv-plugins-icon-container">
                                     <!--begin::Label-->
                                     <label class="fs-5 fw-bold form-label mb-2">
-                                        <span class="required">Dish Image</span>
+                                        <span>Dish Image</span>
                                     </label>
                                     <!--end::Label-->
 
@@ -100,7 +100,7 @@
                                     <!--end::Label-->
 
                                     <!--begin::Input-->
-                                    <input class="form-control form-control-solid" placeholder="Dish Hsn"
+                                    <input type="number" class="form-control form-control-solid" placeholder="Dish Hsn"
                                         name="dish_hsn" value="{{$dish->dish_hsn}}">
                                     <!--end::Input-->
                                     @if($errors->has('dish_hsn'))
@@ -185,6 +185,24 @@
                                     <div class="fv-plugins-message-container invalid-feedback"></div>
                                 </div>
                                 <!--end::Input group-->
+
+                                <!--begin::Input group-->
+                                <div class="fv-row mb-10 fv-plugins-icon-container">
+                                    
+                                    <!--begin::Input-->
+                                    <input class="form-check-input" name="chef_preparation" type="checkbox" value="1" {{($dish->chef_preparation == "1")? 'checked':''}}>
+                                        <span class="fw-semibold ps-2 fs-6">
+                                        Chef Preparation Required
+                                        </span>
+
+                                    <!--end::Input-->
+                                    @if($errors->has('tax_inc'))
+                                    <span class="text-danger">{{ $errors->first('tax_inc') }}</span>
+                                    @endif
+                                    <div class="fv-plugins-message-container invalid-feedback"></div>
+                                </div>
+                                <!--end::Input group-->
+
                                 <input type="hidden" name="dish_id" id="dish_id" value="{{$dish->id}}">
 
                                 <!--begin::Actions-->

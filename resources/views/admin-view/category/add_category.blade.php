@@ -80,7 +80,6 @@
                                         <span class="required">Category Name</span>
                                     </label>
                                     <!--end::Label-->
-
                                     <!--begin::Input-->
                                     <input class="form-control form-control-solid" placeholder="Enter Category Name"
                                         name="category_name">

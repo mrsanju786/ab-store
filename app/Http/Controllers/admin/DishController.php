@@ -28,7 +28,6 @@ class DishController extends Controller
 
         $request->validate([
             'dish_name' => 'required',
-            'dish_image' => 'required',
             'dish_hsn' => 'required',
             'counter_id' => 'required',
             'tax_inc' => 'required',
@@ -36,7 +35,6 @@ class DishController extends Controller
 
         ],[
             'dish_name.required'=>'Dish Name is Required',
-            'dish_image.required'=>'Dish Logo is Required',
             'dish_hsn.required'=>'CIN No. is required',
             'counter_id.required'=>'Registered Address is required',
             'tax_inc.required'=>'Tax option is required',
@@ -51,6 +49,7 @@ class DishController extends Controller
         $dish->counter_id = $request->counter_id;
         $dish->is_tax_inclusive = $request->tax_inc;
         $dish->has_variant = $request->dish_has_variant;
+        $dish->chef_preparation = !empty($request->chef_preparation)? $request->chef_preparation : 0;
         
         if ($request->file('dish_image')) {
             $imageFileType = $request->dish_image->getClientOriginalExtension();
@@ -61,6 +60,9 @@ class DishController extends Controller
             }
             Storage::disk('public')->put($dir . $imageName, file_get_contents($request->dish_image));
             $dish->dish_images = $imageName;
+        }else{
+
+            $dish->dish_images = "blank.jpg";
         }
 
         $dish->save();
@@ -109,6 +111,7 @@ class DishController extends Controller
         $dish->counter_id = $request->counter_id;
         $dish->is_tax_inclusive = $request->tax_inc;
         $dish->has_variant = $request->dish_has_variant;
+        $dish->chef_preparation = !empty($request->chef_preparation)? $request->chef_preparation : 0;
         
         if ($request->file('dish_image')) {
             $imageFileType = $request->company_logo->getClientOriginalExtension();

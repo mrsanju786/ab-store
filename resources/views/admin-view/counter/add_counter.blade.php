@@ -18,19 +18,9 @@
                 <!--end::Card title-->
             </div>
             <!--end::Card header-->
-        </div>
-    </div>
-    <!--end::Col-->
 
-
-
-    <!--begin::Col-->
-    <div class="col-lg-12">
-        <!--begin::Card widget 18-->
-        <div class="card card-flush">
             <!--begin::Body-->
             <div class="card-body">
-
                 <!--begin::Form-->
                 <form action="{{route('create-counter')}}" method="POST" enctype="multipart/form-data">
                     @csrf   
@@ -66,7 +56,7 @@
                                 <div class="fv-row mb-10 fv-plugins-icon-container">
                                     <!--begin::Label-->
                                     <label class="fs-5 fw-bold form-label mb-2">
-                                        <span class="required">License No</span>
+                                        <span>License No</span>
                                     </label>
                                     <!--end::Label-->
 
@@ -113,7 +103,7 @@
                                 <div class="fv-row mb-10 fv-plugins-icon-container datadisplay">
                                     <!--begin::Label-->
                                     <label class="fs-5 fw-bold form-label mb-2">
-                                        <span class="required">License Expiry Date</span>
+                                        <span>License Expiry Date</span>
                                     </label>
                                     <!--end::Label-->
 
@@ -156,18 +146,13 @@
                         <!--end::Col-->
                     </div>
                     <!--end::Row-->
-
                 </form>
                 <!--end::Form-->
-
             </div>
             <!--end::Body-->
         </div>
-        <!--end::Card widget 18-->
     </div>
     <!--end::Col-->
-
-
 </div>
 <!--end::Row-->
 
