@@ -70,6 +70,11 @@ class CounterController extends Controller
         return redirect()->route('counter-list')->with('success', 'Changes saved Successfully!');
     }
 
+    public function getCounterByBranch($id){
+        $counter = Counter::where('branch_id', $id)->get();
+        return $counter;
+    }
+
     public function getCounter($id){
 
         $location = Location::where('branch_id', $id)->get('id')->toArray();
@@ -78,4 +83,5 @@ class CounterController extends Controller
         return $counter;
 
     }
+
 }

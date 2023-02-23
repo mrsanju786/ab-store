@@ -265,6 +265,8 @@ Route::group(['prefix' => 'admin'], function()
         Route::get('/edit-counter/{id?}', [CounterController::class, 'editCounter'])->name('edit-counter');
         Route::post('/update-counter', [CounterController::class, 'updateCounter'])->name('update-counter');
         Route::get('/counter-status/{id}/{status}', [CounterController::class, 'areaStatus'])->name('counter-status');
+        Route::get('/get-counter-by-branch/{id}', [CounterController::class, 'getCounterByBranch'])->name('get-counter-by-branch');
+        Route::get('/get-menu/{id}', [CounterController::class, 'getMenu'])->name('get-menu');
 
         Route::get('/get-counter/{id}', [CounterController::class, 'getCounter'])->name('getCounter');
 
