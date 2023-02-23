@@ -60528,6 +60528,29 @@ html:not([data-theme=dark]) {
     width: auto;
 } 
 
+.timedisplay input[type="time"]:after {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 500;
+    content: "\f017";
+    color: #555;
+    padding: 0 5px;
+
+}
+
+.timedisplay input[type="time"]::-webkit-calendar-picker-indicator {    
+    background: transparent;
+    bottom: 0;
+    color: transparent;
+    cursor: default;
+    height: auto;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: auto;
+}
+
+
 /* Start Date and End Date css start */
 
 /***CALENDER START****/

@@ -18,22 +18,13 @@
                 <!--end::Card title-->
             </div>
             <!--end::Card header-->
-           </div>
-            </div>
-    <!--end::Col-->
-           
-             <!--begin::Col-->
-    <div class="col-lg-12">
-        <!--begin::Card widget 18-->
-        <div class="card card-flush">
+
             <!--begin::Body-->
             <div class="card-body">
-
-                        <!--begin::Form-->
-                        <form action="{{route('update-branch')}}" method="POST" enctype="multipart/form-data">
-                            @csrf
-
-                            <!--begin::Row-->
+                <!--begin::Form-->
+                <form action="{{route('update-branch')}}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <!--begin::Row-->
                     <div class="row gx-9 h-100">
                         <!--begin::Col-->
                         <div class="col-sm-6">
@@ -270,7 +261,7 @@
                         <!--end::Col-->
                     </div>
                     <!--end::Row-->
-                                  <!--begin::Row-->
+                    <!--begin::Row-->
                     <div class="row gx-9 h-100">
                         <!--begin::Col-->
                         <div class="col-md-12 mx-auto">
@@ -295,15 +286,14 @@
                         <!--end::Col-->
                     </div>
                     <!--end::Row-->
-                        </form>
-                        <!--end::Form-->
-                        
-                   </div>
+                </form>
+                <!--end::Form-->                        
+            </div>
             <!--end::Body-->
         </div>
-        <!--end::Card widget 18-->
     </div>
     <!--end::Col-->
+           
 
 </div>
 <!--end::Row-->

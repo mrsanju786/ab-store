@@ -17,15 +17,8 @@
                 </div>
                 <!--end::Card title-->
             </div>
-            <!--end::Card header-->           
-        </div>
-    </div>
-    <!--end::Col-->
-
-    <!--begin::Col-->
-    <div class="col-lg-12">
-        <!--begin::Card widget 18-->
-        <div class="card card-flush">
+            <!--end::Card header-->   
+                        
             <!--begin::Body-->
             <div class="card-body">
 
@@ -41,7 +34,7 @@
                             <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_add_role_scroll">
                                 <!--begin::Input group-->
                                 <div class="fv-row mb-10 fv-plugins-icon-container">
-                                   <!--begin::Label-->
+                                <!--begin::Label-->
                                     <label class="fs-5 fw-bold form-label mb-2">
                                         <span class="required">Select Area</span>
                                     </label>
@@ -68,7 +61,7 @@
                                         <span>License No</span>
                                     </label>
                                     <!--end::Label-->
-    
+
                                     <!--begin::Input-->
                                     <input class="form-control form-control-solid" placeholder="License No"
                                         name="license_no" value="{{$counter->license_no}}">
@@ -115,7 +108,7 @@
                                         <span>License Expiry Date</span>
                                     </label>
                                     <!--end::Label-->
-    
+
                                     <!--begin::Input-->
                                     <input type="date" class="form-control form-control-solid" placeholder="License Expiry Date"
                                         name="lincese_expiry_date" value="{{date('Y-m-d',strtotime($counter->license_expiry_date))}}"  min="{{date('Y-m-d')}}">
@@ -162,11 +155,10 @@
 
             </div>
             <!--end::Body-->
+
         </div>
-        <!--end::Card widget 18-->
     </div>
     <!--end::Col-->
-
 </div>
 <!--end::Row-->
 
