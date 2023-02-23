@@ -1,8 +1,32 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\user\HomeController;
-use App\Http\Controllers\user\CounterController;
+use App\Http\Controllers\admin\LoginRegisterController;
+use App\Http\Controllers\admin\RoleController;
+use App\Http\Controllers\admin\DashboardController;
+use App\Http\Controllers\admin\UserController;
+use App\Http\Controllers\admin\CompanyController;
+use App\Http\Controllers\admin\BranchController;
+use App\Http\Controllers\admin\FoodlicenseController;
+use App\Http\Controllers\admin\RegionController;
+use App\Http\Controllers\admin\LicenseController;
+use App\Http\Controllers\admin\CurrencyController;
+use App\Http\Controllers\admin\TimezoneController;
+use App\Http\Controllers\admin\CountryController;
+use App\Http\Controllers\admin\StateController;
+use App\Http\Controllers\admin\CityController;
+use App\Http\Controllers\admin\LocationController;
+use App\Http\Controllers\admin\LocationDiscountController;
+use App\Http\Controllers\admin\TaxController;
+use App\Http\Controllers\admin\LocationTaxController;
+use App\Http\Controllers\admin\AreaController;
+use App\Http\Controllers\admin\CounterController;
+use App\Http\Controllers\admin\CategoryController;
+use App\Http\Controllers\admin\DishController;
+use App\Http\Controllers\admin\CountryTaxController;
+use App\Http\Controllers\admin\DishVariantController;
+use App\Http\Controllers\admin\OptionController;
+use App\Http\Controllers\admin\MenuController;
 
 
 /*
@@ -20,10 +44,9 @@ use App\Http\Controllers\user\CounterController;
 //     return view('welcome');
 // });
 Route::get('/', function () {
-    return redirect()->route('home');
+    return redirect()->route('login');
 });
 
-<<<<<<< HEAD
 Route::group(['prefix' => 'admin'], function()
 {   
     
@@ -314,7 +337,3 @@ Route::group(['prefix' => 'admin'], function()
         Route::view('/test-dish', "admin-view.test_dish");
     });
 });
-=======
-Route::get('/home', [HomeController::class, 'Home'])->name('home');
-Route::get('/counter', [CounterController::class, 'all_counter'])->name('all_counter');
->>>>>>> 7561979add37c2e39a6a1c479c97031934dcc4be
