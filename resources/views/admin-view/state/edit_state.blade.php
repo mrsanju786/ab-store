@@ -18,18 +18,9 @@
                 <!--end::Card title-->
             </div>
             <!--end::Card header-->
-        
 
-        </div>
-    </div>
-    <!--end::Col-->
-
-    <!--begin::Col-->
-    <div class="col-lg-12">
-        <!--begin::Card widget 18-->
-        <div class="card card-flush">
-            <!--begin::Body-->
-            <div class="card-body">
+             <!--begin::Body-->
+             <div class="card-body">
 
                 <!--begin::Form-->
                 <form action="{{route('update-state')}}" method="POST" enctype="multipart/form-data">
@@ -170,10 +161,21 @@
 
             </div>
             <!--end::Body-->
+        
+
+        </div>
+    </div>
+    <!--end::Col-->
+
+    {{-- <!--begin::Col-->
+    <div class="col-lg-12">
+        <!--begin::Card widget 18-->
+        <div class="card card-flush">
+           
         </div>
         <!--end::Card widget 18-->
     </div>
-    <!--end::Col-->
+    <!--end::Col--> --}}
 
 
 </div>

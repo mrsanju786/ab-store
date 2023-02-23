@@ -18,22 +18,13 @@
                 <!--end::Card title-->
             </div>
             <!--end::Card header-->
-               </div>
-            </div>
-    <!--end::Col-->
-           
-           <!--begin::Col-->
-    <div class="col-lg-12">
-        <!--begin::Card widget 18-->
-        <div class="card card-flush">
+
             <!--begin::Body-->
             <div class="card-body">
-
-                        <!--begin::Form-->
-                        <form action="{{route('create-branch')}}" method="POST" enctype="multipart/form-data">
-                            @csrf
-
-                            <!--begin::Row-->
+                <!--start::Form-->
+                <form action="{{route('create-branch')}}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <!--begin::Row-->
                     <div class="row gx-9 h-100">
                         <!--begin::Col-->
                         <div class="col-sm-6">
@@ -110,6 +101,7 @@
                                     <!--end::Label-->
 
                                     <!--begin::Input-->
+                                <div class="fv-row mb-10 fv-plugins-icon-container">
                                     @php
                                     $code = "BRANCH-".uniqid();
                                     @endphp
@@ -120,6 +112,7 @@
                                     <span class="text-danger">{{ $errors->first('branch_code') }}</span>
                                     @endif
                                     <div class="fv-plugins-message-container invalid-feedback"></div>
+                                </div>
                                 <!-- </div> -->
                                 <!--end::Input group-->
 
@@ -150,8 +143,6 @@
                         <div class="col-sm-6">
                             <!--begin::Scroll-->
                             <div class="d-flex flex-column scroll-y me-n7 pe-p pe-md-7" id="kt_modal_add_role_scroll">
-
-
                                 <!--begin::Input group-->
                                 <div class="fv-row mb-10 fv-plugins-icon-container">
                                     <!--begin::Label-->
@@ -218,54 +209,44 @@
                                     <!--end::Label-->
 
                                     <!--begin::Input-->
-                                    <!-- <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                        <input type="checkbox" class="form-check-input" name="is_pos" id="is_pos"> &nbsp;POS &nbsp;
-                                        <input type="checkbox" class="form-check-input" name="is_pos" id="is_pos"> &nbsp;Self Ordering Kiosk
-                                        <input type="checkbox" class="form-check-input" name="is_pos" id="is_pos"> &nbsp;Qr Code Based web ordering
-                                        <input type="checkbox" class="form-check-input" name="is_pos" id="is_pos"> &nbsp;Mobile App Ordering
-                                        <input type="checkbox" class="form-check-input" name="is_pos" id="is_pos"> &nbsp;Table / Room Odering
-                                    </div> -->
-<br>
-<br>
-                                    <label class="form-check form-check-custom form-check-inline form-check-solid me-5 form-check-success">
-                                    <input class="form-check-input" name="is_pos" type="checkbox" value="1">
-                                    <span class="fw-semibold ps-2 fs-6">
-                                    POS
-                                    </span>
-                                    </label>
-<br>
-<br>
-                                    <label class="form-check form-check-custom form-check-inline form-check-solid me-5 form-check-success">
-                                    <input class="form-check-input" name="is_sok" type="checkbox" value="1">
-                                    <span class="fw-semibold ps-2 fs-6">
-                                    Self Ordering Kiosk
-                                    </span>
-                                    </label>
-<br>
-<br>
-                                    <label class="form-check form-check-custom form-check-inline form-check-solid me-5 form-check-success">
-                                    <input class="form-check-input" name="is_qrcode" type="checkbox" value="1">
-                                    <span class="fw-semibold ps-2 fs-6">
-                                    Qr Code Based web ordering
-                                    </span>
-                                    </label>
-<br>
-<br>
-                                    <label class="form-check form-check-custom form-check-inline form-check-solid me-5 form-check-success">
-                                    <input class="form-check-input" name="is_mobile_ordering" type="checkbox" value="1">
-                                    <span class="fw-semibold ps-2 fs-6">
-                                    Mobile App Ordering
-                                    </span>
-                                    </label>
-<br>
-<br>
-                                    <label class="form-check form-check-custom form-check-inline form-check-solid me-5 form-check-success">
-                                    <input class="form-check-input" name="is_table_room" type="checkbox" value="1">
-                                    <span class="fw-semibold ps-2 fs-6">
-                                    Table / Room Odering
-                                    </span>
-                                    </label>
-                                  <br>  
+                                        <ul class="list-style-none">
+                                            <li class="pt-3">
+                                                <label class="form-check form-check-custom form-check-inline form-check-solid me-5 form-check-success">
+                                                    <input class="form-check-input" name="is_pos" type="checkbox" value="1">
+                                                    <span class="fw-semibold ps-2 fs-6"> POS </span>
+                                                </label>
+                                            </li>
+                                            <li class="pt-3">
+                                                <label class="form-check form-check-custom form-check-inline form-check-solid me-5 form-check-success">
+                                                    <input class="form-check-input" name="is_sok" type="checkbox" value="1">
+                                                    <span class="fw-semibold ps-2 fs-6"> Self Ordering Kiosk </span>
+                                                </label>
+                                            </li>
+                                            <li class="pt-3">
+                                                <label class="form-check form-check-custom form-check-inline form-check-solid me-5 form-check-success">
+                                                    <input class="form-check-input" name="is_qrcode" type="checkbox" value="1">
+                                                    <span class="fw-semibold ps-2 fs-6">
+                                                    Qr Code Based web ordering
+                                                    </span>
+                                                </label>
+                                            </li>
+                                            <li class="pt-3">
+                                                <label class="form-check form-check-custom form-check-inline form-check-solid me-5 form-check-success">
+                                                    <input class="form-check-input" name="is_mobile_ordering" type="checkbox" value="1">
+                                                    <span class="fw-semibold ps-2 fs-6">
+                                                    Mobile App Ordering
+                                                    </span>
+                                                </label>
+                                            </li>
+                                            <li class="pt-3">
+                                                <label class="form-check form-check-custom form-check-inline form-check-solid me-5 form-check-success">
+                                                    <input class="form-check-input" name="is_table_room" type="checkbox" value="1">
+                                                    <span class="fw-semibold ps-2 fs-6">
+                                                    Table / Room Odering
+                                                    </span>
+                                                </label>
+                                            </li>
+                                        </ul>
                                     <!--end::Input-->
                                     @if($errors->has('contact_number'))
                                     <span class="text-danger">{{ $errors->first('contact_number') }}</span>
@@ -273,46 +254,43 @@
                                     <div class="fv-plugins-message-container invalid-feedback"></div>
                                 </div>
                                 <!--end::Input group-->
-
-                                </div>
+                            </div>
                             <!--end::Scroll-->
                         </div>
                         <!--end::Col-->
                     </div>
                     <!--end::Row-->
-                                  <!--begin::Row-->
+                    <!--begin::Row-->
                     <div class="row gx-9 h-100">
                         <!--begin::Col-->
                         <div class="col-md-12 mx-auto">
-                                <!--begin::Actions-->
-                                <div class="text-left pt-3">
-
-                                    <button type="submit" class="btn btn-lg btn-primary"
-                                        data-kt-roles-modal-action="submit">
-                                        <span class="indicator-label">
-                                            Submit
-                                        </span>
-                                        <span class="indicator-progress">
-                                            Please wait... <span
-                                                class="spinner-border spinner-border-sm align-middle ms-2"></span>
-                                        </span>
-                                    </button>
-                                </div>
-                                <!--end::Actions-->
-                                </div>
+                            <!--begin::Actions-->
+                            <div class="text-left pt-3">
+                                <button type="submit" class="btn btn-lg btn-primary"
+                                    data-kt-roles-modal-action="submit">
+                                    <span class="indicator-label">
+                                        Submit
+                                    </span>
+                                    <span class="indicator-progress">
+                                        Please wait... <span
+                                            class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                                    </span>
+                                </button>
+                            </div>
+                            <!--end::Actions-->
+                        </div>
                         <!--end::Col-->
                     </div>
                     <!--end::Row-->
-
-                        </form>
-                        <!--end::Form-->
-                        
-                    </div>
+                </form>
+                <!--end::Form-->                                
+            </div>
             <!--end::Body-->
+
         </div>
-        <!--end::Card widget 18-->
     </div>
     <!--end::Col-->
+           
 
 </div>
 <!--end::Row-->

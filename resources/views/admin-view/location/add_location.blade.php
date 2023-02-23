@@ -17,15 +17,8 @@
                 </div>
                 <!--end::Card title-->
             </div>
-            <!--end::Card header-->                   
-        </div>
-    </div>
-    <!--end::Col-->
-
-    <!--begin::Col-->
-    <div class="col-lg-12">
-        <!--begin::Card widget 18-->
-        <div class="card card-flush">
+            <!--end::Card header-->   
+            
             <!--begin::Body-->
             <div class="card-body">
 
@@ -140,7 +133,6 @@
                                     <div class="fv-plugins-message-container invalid-feedback"></div>
                                 </div>
                                 <!--end::Input group-->
-
                             </div>
                             <!--end::Scroll-->
                         </div>
@@ -149,7 +141,6 @@
                         <div class="col-sm-6">
                             <!--begin::Scroll-->
                             <div class="d-flex flex-column scroll-y me-n7 pe-p pe-md-7" id="kt_modal_add_role_scroll">
-
                                 <!--begin::Input group-->
                                 <div class="fv-row mb-10 fv-plugins-icon-container">
                                     <!--begin::Label-->
@@ -227,7 +218,6 @@
                                     <div class="fv-plugins-message-container invalid-feedback"></div>
                                 </div>
                                 <!--end::Input group-->
-
                             </div>
                             <!--end::Scroll-->
                         </div>
@@ -261,10 +251,22 @@
 
             </div>
             <!--end::Body-->
+            
+            
+
+        </div>
+    </div>
+    <!--end::Col-->
+
+    {{-- <!--begin::Col-->
+    <div class="col-lg-12">
+        <!--begin::Card widget 18-->
+        <div class="card card-flush">
+            
         </div>
         <!--end::Card widget 18-->
     </div>
-    <!--end::Col-->
+    <!--end::Col--> --}}
 
 </div>
 <!--end::Row-->

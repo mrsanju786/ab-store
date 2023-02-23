@@ -18,18 +18,9 @@
                 <!--end::Card title-->
             </div>
             <!--end::Card header-->
-            
-        </div>
-    </div>
-    <!--end::Col-->
 
-    <!--begin::Col-->
-    <div class="col-lg-12">
-        <!--begin::Card widget 18-->
-        <div class="card card-flush">
             <!--begin::Body-->
             <div class="card-body">
-
                 <!--begin::Form-->
                 <form action="{{route('update-country')}}" method="POST" enctype="multipart/form-data">
                     @csrf
@@ -67,7 +58,6 @@
                         <div class="col-sm-6">
                             <!--begin::Scroll-->
                             <div class="d-flex flex-column scroll-y me-n7 pe-p pe-md-7" id="kt_modal_add_role_scroll">
-
                                 <!--begin::Input group-->
                                 <div class="fv-row mb-10 fv-plugins-icon-container">
                                     <!--begin::Label-->
@@ -118,15 +108,11 @@
 
                 </form>
                 <!--end::Form-->
-
             </div>
-            <!--end::Body-->
+            <!--end::Body-->            
         </div>
-        <!--end::Card widget 18-->
     </div>
     <!--end::Col-->
-
-
 </div>
 <!--end::Row-->
 

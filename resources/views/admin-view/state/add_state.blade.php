@@ -18,14 +18,7 @@
                 <!--end::Card title-->
             </div>
             <!--end::Card header-->
-        </div>
-    </div>
-    <!--end::Col-->
 
-    <!--begin::Col-->
-    <div class="col-lg-12">
-        <!--begin::Card widget 18-->
-        <div class="card card-flush">
             <!--begin::Body-->
             <div class="card-body">
 
@@ -60,18 +53,15 @@
                                     <div class="fv-plugins-message-container invalid-feedback"></div>
                                 </div>
                                 <!--end::Input group-->
-
                                 <!--begin::Input group-->
                                 <div class="fv-row mb-10 fv-plugins-icon-container">
                                     <!--begin::Label-->
                                     <label class="fs-5 fw-bold form-label mb-2">
                                         <span class="required">State Name</span>
                                     </label>
-                                    <!--end::Label-->
-            
+                                    <!--end::Label-->            
                                     <!--begin::Input-->
-                                    <input class="form-control form-control-solid" placeholder="Enter State Name"
-                                        name="state_name">
+                                    <input class="form-control form-control-solid" placeholder="Enter State Name" name="state_name">
                                     <!--end::Input-->
                                     @if($errors->has('state_name'))
                                     <span class="text-danger">{{ $errors->first('state_name') }}</span>
@@ -79,7 +69,6 @@
                                     <div class="fv-plugins-message-container invalid-feedback"></div>
                                 </div>
                                 <!--end::Input group-->
-
                             </div>
                             <!--end::Scroll-->
                         </div>
@@ -88,7 +77,6 @@
                         <div class="col-sm-6">
                             <!--begin::Scroll-->
                             <div class="d-flex flex-column scroll-y me-n7 pe-p pe-md-7" id="kt_modal_add_role_scroll">
-
                                 <!--begin::Input group-->
                                 <div class="fv-row mb-10 fv-plugins-icon-container">
                                     <label class="fs-5 fw-bold form-label mb-2">
@@ -100,8 +88,7 @@
                                             <option>Select Region</option>
                                             @foreach($region as $regions)
                                             <option value="{{$countries->id}}">{{$regions->region_name}}</option>
-                                            @endforeach
-                                            
+                                            @endforeach                                            
                                     </select>
                                     <!--end::Input-->
                                     @if($errors->has('region_id'))
@@ -117,11 +104,9 @@
                                     <label class="fs-5 fw-bold form-label mb-2">
                                         <span class="required">State Code</span>
                                     </label>
-                                    <!--end::Label-->
-            
+                                    <!--end::Label-->    
                                     <!--begin::Input-->
-                                    <input class="form-control form-control-solid" placeholder="Enter State code"
-                                        name="state_code">
+                                    <input class="form-control form-control-solid" placeholder="Enter State code" name="state_code">
                                     <!--end::Input-->
                                     @if($errors->has('state_code'))
                                     <span class="text-danger">{{ $errors->first('state_code') }}</span>
@@ -129,7 +114,6 @@
                                     <div class="fv-plugins-message-container invalid-feedback"></div>
                                 </div>
                                 <!--end::Input group-->
-
                             </div>
                             <!--end::Scroll-->
                         </div>
@@ -165,10 +149,20 @@
 
             </div>
             <!--end::Body-->
+
+        </div>
+    </div>
+    <!--end::Col-->
+
+    {{-- <!--begin::Col-->
+    <div class="col-lg-12">
+        <!--begin::Card widget 18-->
+        <div class="card card-flush">
+            
         </div>
         <!--end::Card widget 18-->
     </div>
-    <!--end::Col-->
+    <!--end::Col--> --}}
 
 
 </div>
