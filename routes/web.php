@@ -5,7 +5,6 @@ use App\Http\Controllers\user\HomeController;
 use App\Http\Controllers\user\CounterController;
 use App\Http\Controllers\user\MenuController;
 
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
