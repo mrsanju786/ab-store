@@ -5,6 +5,7 @@ use App\Http\Controllers\user\HomeController;
 use App\Http\Controllers\user\CounterController;
 use App\Http\Controllers\user\CategoryController;
 use App\Http\Controllers\user\DishController;
+use App\Http\Controllers\user\MenuController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,7 +27,9 @@ Route::get('/', function () {
 
 Route::get('/home', [HomeController::class, 'Home'])->name('home');
 Route::get('/counter', [CounterController::class, 'all_counter'])->name('all_counter');
-
+Route::get('/menu/{id}', [MenuController::class, 'all_menu'])->name('all_menu');
 Route::get('/categories', [CategoryController::class, 'Categories'])->name('categories');
+Route::get('/category/{id}', [CategoryController::class, 'category'])->name('category');
 Route::get('/category-dish/{id}', [DishController::class, 'categoryDish'])->name('category-dish');
 Route::get('/dish/{id}', [DishController::class, 'dish'])->name('dish');
+

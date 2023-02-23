@@ -5,9 +5,9 @@
 @section('content')
 
 <div>
-<h1>All Counter</h1>
-@foreach($counter as $counters)
-<a href="{{route('all_menu')}}/{{base64_encode($counters->id)}}">{{$counters->counter_name}}</a>
+<h1>All Menu</h1>
+@foreach($menu as $menus)
+<a href="#">{{$menus->menu_name}}</a>
 @endforeach
 </div>
 
