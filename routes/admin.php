@@ -290,7 +290,7 @@ Route::get('/', function () {
         Route::get('/edit-category/{id?}', [CategoryController::class, 'editCategory'])->name('edit-category');
         Route::post('/update-category', [CategoryController::class, 'updateCategory'])->name('update-category');
         Route::get('/category-status/{id}/{status}', [CategoryController::class, 'areaStatus'])->name('category-status');
-
+        Route::get('/get-category/{id}', [CategoryController::class, 'getCategory'])->name('get-category');
 
         /**
          * Dish Routes

@@ -30,6 +30,7 @@ class DishController extends Controller
             'dish_name' => 'required',
             'dish_hsn' => 'required',
             'counter_id' => 'required',
+            'category_id' => 'required',
             'tax_inc' => 'required',
             'dish_has_variant' => 'required',
 
@@ -46,6 +47,7 @@ class DishController extends Controller
         $dish->dish_price = $request->dish_price;
         $dish->dish_code = $request->dish_code;
         $dish->dish_hsn = $request->dish_hsn;
+        $dish->category_id = $request->category_id;
         $dish->counter_id = $request->counter_id;
         $dish->is_tax_inclusive = $request->tax_inc;
         $dish->has_variant = $request->dish_has_variant;

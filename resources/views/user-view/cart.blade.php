@@ -4,7 +4,7 @@
 @endsection
 @section('content')
 
-@if($get_cart)
+@if(!$get_cart->isEmpty())
 <div>
     @php
     $total_price = 0;

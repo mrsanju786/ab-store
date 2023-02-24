@@ -120,7 +120,7 @@
                                     <!--end::Label-->
 
                                     <!--begin::Input-->
-                                    <select class="form-select form-select-solid" aria-label="Select example" name="counter_id"  data-control="select2" >
+                                    <select class="form-select form-select-solid" aria-label="Select example" name="counter_id" id="counter_id"  data-control="select2" >
                                         <option value="">Select Counter</option>
                                         @foreach($counter as $counters)
                                         <option value="{{$counters->id}}">{{$counters->counter_name}}</option>
@@ -129,6 +129,27 @@
                                     <!--end::Input-->
                                     @if($errors->has('counter_id'))
                                     <span class="text-danger">{{ $errors->first('counter_id') }}</span>
+                                    @endif
+                                    <div class="fv-plugins-message-container invalid-feedback"></div>
+                                </div>
+                                <!--end::Input group-->
+
+                                <!--begin::Input group-->
+                                <div class="fv-row mb-10 fv-plugins-icon-container">
+                                    <!--begin::Label-->
+                                    <label class="fs-5 fw-bold form-label mb-2">
+                                        <span class="required">Select Category</span>
+                                    </label>
+                                    <!--end::Label-->
+
+                                    <!--begin::Input-->
+                                    <select class="form-select form-select-solid" aria-label="Select example" name="category_id" id="category_id"  data-control="select2" >
+                                        <option value="">Select Category</option>
+
+                                    </select>
+                                    <!--end::Input-->
+                                    @if($errors->has('category_id'))
+                                    <span class="text-danger">{{ $errors->first('category_id') }}</span>
                                     @endif
                                     <div class="fv-plugins-message-container invalid-feedback"></div>
                                 </div>
@@ -325,38 +346,24 @@ $(document).ready(function() {
     });
 });
 
-$('#country_id').on('change', function(){
-    var country_id = $(this).val();
-    $.ajax({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
-        url: "{{ url('admin/master/get-state') }}/" + country_id,
-        type: "GET",
-        success: function(response) {
-            $.each(response,function(key, value)
-            {
-                $("#state_id").append('<option value=' + value.id + '>' + value.state_name + '</option>');
-            });
-        }
-    });
-});
-
-$('#state_id').on('change', function(){
-    var state_id = $(this).val();
-    $.ajax({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
-        url: "{{ url('admin/master/get-city') }}/" + state_id,
-        type: "GET",
-        success: function(response) {
-            $.each(response,function(key, value)
-            {
-                $("#city_id").append('<option value=' + value.id + '>' + value.city_name + '</option>');
-            });
-        }
-    });
+$('#counter_id').on('change', function(){
+    var counter_id = $(this).val();
+    $('#category_id option:gt(0)').remove();
+    if(counter_id){
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "{{ url('admin/get-category') }}/" + counter_id,
+            type: "GET",
+            success: function(response) {
+                $.each(response,function(key, value)
+                {
+                    $("#category_id").append('<option value=' + value.id + '>' + value.category_name + '</option>');
+                });
+            }
+        });
+    }
 });
 
 </script>

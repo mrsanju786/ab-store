@@ -120,4 +120,9 @@ class CategoryController extends Controller
         }
         return redirect()->route('category-list')->with('success', 'Changes saved Successfully!');
     }
+
+    public function getCategory($id){
+        $category = Category::where('counter_id', $id)->get();
+        return $category;
+    }
 }
