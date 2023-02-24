@@ -126,7 +126,6 @@
                                     <div class="fv-plugins-message-container invalid-feedback"></div>
                                 </div>
                                 <!--end::Input group-->
-
                             </div>
                             <!--end::Scroll-->
                         </div>
@@ -208,7 +207,6 @@
                                     <div class="fv-plugins-message-container invalid-feedback"></div>
                                 </div>
                                 <!--end::Input group-->
-
                             </div>
                             <!--end::Scroll-->
                         </div>
@@ -244,16 +242,6 @@
         </div>
     </div>
     <!--end::Col-->
-
-    {{-- <!--begin::Col-->
-    <div class="col-lg-12">
-        <!--begin::Card widget 18-->
-        <div class="card card-flush">
-            
-        </div>
-        <!--end::Card widget 18-->
-    </div>
-    <!--end::Col--> --}}
 
 </div>
 <!--end::Row-->

@@ -157,7 +157,7 @@
                                     <!--end::Input group-->
 
                                     <!--begin::Input group-->  
-                                    <div class="fv-row mb-10 fv-plugins-icon-container">
+                                    <div class="fv-row mb-10 fv-plugins-icon-container timedisplay">
                                         <!--begin::Label-->
                                         <label class="fs-5 fw-bold form-label mb-2">
                                             <span class="required">To Time</span>
@@ -362,8 +362,6 @@
     </div>--}}
 
 </div>
-
-
 
 
 @endsection
