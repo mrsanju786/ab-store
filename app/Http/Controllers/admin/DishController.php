@@ -114,7 +114,7 @@ class DishController extends Controller
         $dish->chef_preparation = !empty($request->chef_preparation)? $request->chef_preparation : 0;
         
         if ($request->file('dish_image')) {
-            $imageFileType = $request->company_logo->getClientOriginalExtension();
+            $imageFileType = $request->dish_image->getClientOriginalExtension();
             $imageName = \Carbon\Carbon::now()->toDateString() . "-" . uniqid() . "." . $imageFileType;
             $dir = "/upload/dish/";
             if (!Storage::disk('public')->exists($dir)) {

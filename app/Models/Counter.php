@@ -13,4 +13,8 @@ class Counter extends Model
 
         return $this->belongsTo(Area::class);
     }
+
+    public function Branch(){
+        return $this->belongsTo(Branch::class);
+    }
 }

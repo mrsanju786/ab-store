@@ -10,7 +10,6 @@ class Dish extends Model
     use HasFactory;
 
     public function counter(){
-
         return $this->belongsTo(Counter::class);
     }
 }

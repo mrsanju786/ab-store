@@ -121,10 +121,10 @@
 
                                     <!--begin::Input-->
                                     <select class="form-select form-select-solid" aria-label="Select example" name="counter_id"  data-control="select2" >
-                                        <option>Select Counter</option>
-                                        <option value="1">Counter 1</option>
-                                        <option value="2">Counter 2</option>
-                                        
+                                        <option value="">Select Counter</option>
+                                        @foreach($counter as $counters)
+                                        <option value="{{$counters->id}}">{{$counters->counter_name}}</option>
+                                        @endforeach
                                     </select>
                                     <!--end::Input-->
                                     @if($errors->has('counter_id'))
