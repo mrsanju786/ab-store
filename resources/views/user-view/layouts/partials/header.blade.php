@@ -18,10 +18,23 @@
         <!--begin::Mobile logo-->
         <div class="d-flex align-items-center flex-grow-1 flex-lg-grow-0">
             <a href="../../demo1/dist/index.html" class="d-lg-none">
-                <img alt="Logo" src="{{asset('admin_site/assets/media/logos/default-small.svg')}}" class="h-30px" />
+                <img alt="Logo" src="{{asset('admin_site/assets/media/logos/foodiisoft-logo-new.png')}}" class="h-30px" />
             </a>
         </div>
         <!--end::Mobile logo-->
+        <!--begin::Logo-->
+        <div class="app-sidebar-logo px-6" id="kt_app_sidebar_logo">
+            <!--begin::Logo image-->
+            {{-- <a href="{{route('dashboard')}}">
+                <img alt="Logo" src="{{asset('admin_site/assets/media/logos/foodiisoft-logo-new.png')}}"
+                    class="h-25px app-sidebar-logo-default" />
+                <img alt="Logo" src="{{asset('admin_site/assets/media/logos/foodiisoft-logo-new.png')}}"
+                    class="h-10px app-sidebar-logo-minimize" />
+            </a> --}}
+            <!--end::Logo image-->
+        </div>
+
+        <!--end::Logo-->
         <!--begin::Header wrapper-->
         <div class="d-flex align-items-stretch justify-content-between flex-lg-grow-1" id="kt_app_header_wrapper">
             <!--begin::Menu wrapper-->
@@ -133,7 +146,7 @@
                     <div class="cursor-pointer symbol symbol-30px symbol-md-40px" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
                         <img src="{{asset('admin_site/assets/media/avatars/300-1.jpg')}}" alt="user" />
                     </div>
-                    <!--begin::User account menu-->
+                    {{-- <!--begin::User account menu-->
                     <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg menu-state-color fw-semibold py-4 fs-6 w-275px" data-kt-menu="true">
                         <!--begin::Menu item-->
                         <div class="menu-item px-3">
@@ -289,7 +302,7 @@
                         </div>
                         <!--end::Menu item-->
                     </div>
-                    <!--end::User account menu-->
+                    <!--end::User account menu--> --}}
                     <!--end::Menu wrapper-->
                 </div>
                 <!--end::User menu-->
