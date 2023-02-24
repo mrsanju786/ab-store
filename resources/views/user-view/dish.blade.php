@@ -4,13 +4,73 @@
 @endsection
 @section('content')
 
-<div>
+{{-- <div>
     @foreach($dish as $dish_data)
         <h1>{{$dish_data->dish_name}}</h1>
         <h5>{{$dish_data->dish_price}}</h5>
-        <h5>{{$dish_data->dish_code}}</h5>
-        <a href="{{route('add-to-cart', [base64_encode($dish_data->id)])}}" class="btn btn-lg btn-primary">Add to Cart</a>
+        <h5></h5>        
     @endforeach
+</div> --}}
+
+<div class="row pt-5"  >
+    <!--begin::main-->
+        <div class="col-lg-12 col-12"> 
+            <div class="row">               
+                <div class="col-md-12 mx-auto">
+                    <div class="card card-flush h-md-100" id="kt_modal_add_role">
+                        <div class="row card-header">
+                            <div class="col-md-12 mx-auto">
+                                <!--begin::Card title-->
+                                    <div class="card-title pt-5">
+                                        <h1>Dish Details</h1>                            
+                                    </div>
+                                <!--end::Card title-->
+                            </div>
+                            <div class="col-md-12 mx-auto">
+                                <!--begin::menu-->
+                                <div class="mt-5 d-flex justify-content-start">
+                                    <!--begin::Card body-->
+                                    <div class="card-body ">                        
+                                        <!--begin::Row-->
+                                        <div class="row gx-9 h-100">                        
+                                            <!--begin::Col-->
+                                            @foreach($dish as $dish_data)
+                                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 pt-md-5">
+                                                <div class="card counter-card text-center">
+                                                    <div class="pt-4">
+                                                        <img src="{{asset('admin_site/assets/media/product-new/card-1.png')}}" class="img-fluid  w-50">                                        
+                                                    </div>                                    
+                                                    <div class="card-body pt-7">     
+                                                        <div class="counter-name">
+                                                            {{$dish_data->dish_name}}
+                                                        </div>       
+                                                        <div class="counter-price pt-4">
+                                                            {{$dish_data->dish_price}}
+                                                        </div> 
+                                                        <div class="counter-code pt-2">
+                                                            {{$dish_data->dish_code}}
+                                                        </div>
+                                                        <div class="pt-2">
+                                                            <a href="{{route('add-to-cart', [base64_encode($dish_data->id)])}}" class="btn btn-lg btn-primary">Add to Cart</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            @endforeach 
+                                            <!--end::Col--> 
+                                        </div>
+                                        <!--end::Row-->                            
+                                    </div>
+                                    <!--end::Card body--> 
+                                </div>
+                                <!--end::menu-->
+                            </div>    
+                        </div>
+                    </div>                
+                </div>
+            </div>
+        </div>
+    <!--end::main-->
 </div>
 
 @endsection

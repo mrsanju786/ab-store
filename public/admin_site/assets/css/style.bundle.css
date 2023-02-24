@@ -61657,5 +61657,17 @@ a#more-btn {
     font-weight: 500;
 }
 
+.counter-price {
+    font-size: 16px;
+    color: #353935;
+    font-weight: 500;
+}
+
+.counter-code {
+    font-size: 13px;
+    color: #353935;
+    font-weight: 500;
+}
+
 /* counter page css end*/
 /* USER DASH BORAD CSS END */
