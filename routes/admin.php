@@ -86,11 +86,11 @@ Route::get('/', function () {
         Route::get('/edit-role/{id}', [RoleController::class, 'editRole'])->name('edit-role');
         Route::post('/update-role/{id}', [RoleController::class, 'updateRole'])->name('update-role');
 
-        Route::get('/user', [UserController::class, 'user'])->name('user');
+        Route::get('/user-list', [UserController::class, 'index'])->name('user-list');
         Route::get('/add-user', [UserController::class, 'addUser'])->name('add-user');
         Route::post('/create-user', [UserController::class, 'createUser'])->name('create-user');
         Route::get('/edit-user/{id}', [UserController::class, 'editUser'])->name('edit-user');
-        Route::post('/update-user/{id}', [UserController::class, 'updateUser'])->name('update-user');
+        Route::post('/update-user', [UserController::class, 'updateUser'])->name('update-user');
         
         Route::group(['prefix' => 'master'], function()
         {
