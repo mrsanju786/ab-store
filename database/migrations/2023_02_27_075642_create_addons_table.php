@@ -19,6 +19,7 @@ class CreateAddonsTable extends Migration
             $table->double('addon_price', 9, 2);
             $table->integer('addon_for_all')->nullable();
             $table->integer('dish_id');
+            $table->string('variant_id')->nullable();
             $table->timestamps();
         });
     }
