@@ -27,6 +27,8 @@ use App\Http\Controllers\admin\CountryTaxController;
 use App\Http\Controllers\admin\DishVariantController;
 use App\Http\Controllers\admin\OptionController;
 use App\Http\Controllers\admin\MenuController;
+use App\Http\Controllers\admin\ExtraController;
+use App\Http\Controllers\admin\AddOnController;
 
 
 /*
@@ -346,5 +348,25 @@ Route::get('/', function () {
         // });
         
         Route::view('/test-dish', "admin-view.test_dish");
+
+        /**
+         * extras Routes
+         */
+        Route::get('/extra-list/{id}', [ExtraController::class, 'index'])->name('extra-list');
+        Route::get('/add-extra/{id}', [ExtraController::class, 'addExtra'])->name('add-extra');
+        Route::post('/create-extra', [ExtraController::class, 'createExtra'])->name('create-extra');
+        Route::get('/edit-extra/{id?}', [ExtraController::class, 'editExtra'])->name('edit-extra');
+        Route::post('/update-extra/{id?}', [ExtraController::class, 'updateExtra'])->name('update-extra');
+        Route::get('/extra-status/{id}/{status}', [ExtraController::class, 'extraStatus'])->name('extra-status');
+
+        /**
+         * addon Routes
+         */
+        Route::get('/addon-list/{id}', [AddonController::class, 'index'])->name('addon-list');
+        Route::get('/add-addon/{id}', [AddonController::class, 'addAddon'])->name('add-addon');
+        Route::post('/create-addon', [AddonController::class, 'createAddon'])->name('create-addon');
+        Route::get('/edit-addon/{id?}', [AddonController::class, 'editAddon'])->name('edit-addon');
+        Route::post('/update-addon/{id?}', [AddonController::class, 'updateAddon'])->name('update-addon');
+        Route::get('/addon-status/{id}/{status}', [AddonController::class, 'AddonStatus'])->name('addon-status');
     });
 // });
