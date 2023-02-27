@@ -3,24 +3,6 @@
 <title>Foodisoft | Dashboard</title>
 @endsection
 @section('content')
-{{-- @if(!$get_cart->isEmpty())
-<div>
-    @php
-    $total_price = 0;
-    @endphp
-    @foreach($get_cart as $cart_data)
-        <div class="row"> 
-        </div>
-        @php
-        $total_price += $cart_data->total_price;
-        @endphp
-    @endforeach
-</div>
-@else
-<div>
-    <h1>Your Cart is empty</h1>
-</div>
-@endif --}}
 
 <div class="row pt-5">
     <!--begin::main-->
@@ -106,33 +88,7 @@
                                     <!--end::Col-->                                     
                                 </div>
                                 @endif                              
-                            </div>
-                            {{-- <div class="col-md-12 mx-auto">
-                                <!--begin::menu-->
-                                <div class="mt-5 d-flex justify-content-start">
-                                    <!--begin::Card body-->
-                                    <div class="card-body ">                        
-                                        <!--begin::Row-->
-                                        <div class="row gx-9 h-100">                        
-                                            <!--begin::Col-->
-                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pt-md-5">
-                                                <div class="card counter-card text-center">
-                                                    <div class="pt-4">
-                                                        <img src="{{asset('admin_site/assets/media/product-new/card-1.png')}}" class="img-fluid  w-50">                                        
-                                                    </div>                                    
-                                                    <div class="card-body pt-7">
-                                                        <div class="counter-name">jha dfskhasdkfjl</div>               
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!--end::Col--> 
-                                        </div>
-                                        <!--end::Row-->                            
-                                    </div>
-                                    <!--end::Card body--> 
-                                </div>
-                                <!--end::menu-->
-                                </div> --}}
+                            </div>                            
                         </div>
                     </div>                
                 </div>
