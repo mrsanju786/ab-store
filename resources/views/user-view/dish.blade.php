@@ -4,13 +4,6 @@
 @endsection
 @section('content')
 
-{{-- <div>
-    @foreach($dish as $dish_data)
-        <h1>{{$dish_data->dish_name}}</h1>
-        <h5>{{$dish_data->dish_price}}</h5>
-        <h5></h5>        
-    @endforeach
-</div> --}}
 
 <div class="row pt-5"  >
     <!--begin::main-->
