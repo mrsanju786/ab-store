@@ -119,7 +119,7 @@
                                     <!--end::Label-->
 
                                     <!--begin::Input-->
-                                    <select class="form-select form-select-solid" aria-label="Select example" name="counter_id"  data-control="select2" >
+                                    <select class="form-select form-select-solid" aria-label="Select example" name="counter_id" id="counter_id" data-control="select2" >
                                         <option>Select Counter</option>
                                         @foreach($counter as $counters)
                                         <option value="{{$counters->id}}" {{($dish->counter_id == $counters->id)? 'selected': ''}}>{{$counters->counter_name}}</option>
@@ -129,6 +129,27 @@
                                     <!--end::Input-->
                                     @if($errors->has('counter_id'))
                                     <span class="text-danger">{{ $errors->first('counter_id') }}</span>
+                                    @endif
+                                    <div class="fv-plugins-message-container invalid-feedback"></div>
+                                </div>
+                                <!--end::Input group-->
+
+                                <!--begin::Input group-->
+                                <div class="fv-row mb-10 fv-plugins-icon-container">
+                                    <!--begin::Label-->
+                                    <label class="fs-5 fw-bold form-label mb-2">
+                                        <span class="required">Select Category</span>
+                                    </label>
+                                    <!--end::Label-->
+
+                                    <!--begin::Input-->
+                                    <select class="form-select form-select-solid" aria-label="Select example" name="category_id" id="category_id"  data-control="select2" >
+                                        <option value="">Select Category</option>
+
+                                    </select>
+                                    <!--end::Input-->
+                                    @if($errors->has('category_id'))
+                                    <span class="text-danger">{{ $errors->first('category_id') }}</span>
                                     @endif
                                     <div class="fv-plugins-message-container invalid-feedback"></div>
                                 </div>
@@ -316,7 +337,7 @@
                                 <!--end::Card title-->   
                                 <!--begin::Create campaign button-->
                                 <div class="card-toolbar">
-                                    <a href="#" type="button" class="btn  btn-sm btn-primary"  data-bs-toggle="modal" data-bs-target="#kt_modal_create_campaign">Add</a>
+                                    <a href="{{route('add-extra', base64_encode($dish->id))}}" type="button" class="btn  btn-sm btn-primary">Add</a>
                                 </div>
                                 <!--end::Create campaign button-->
                             </div>                               
@@ -325,11 +346,113 @@
                         <div class="col-md-12">
                             <!--begin::Body-->
                             <div class="card-body pt-5">
-                                <div class="d-flex justify-content-between">
-                                    <div class="fw-bold">Name  </div>
-                                    <div class="fw-bold">Price </div>
-                                    <div class="fw-bold">Action  </div>
+                            <div class="table-responsive">
+                                    <!--begin::Table-->
+                                    <table class="table table-row-dashed align-middle gs-0 gy-3 my-0">
+                                        <!--begin::Table head-->
+                                        <thead>
+                                            <tr class="fs-7 fw-bold text-dark-600 borderbottom">
+                                                <th class="p-0 pb-3 min-w-100px">Name</th>
+                                                <th class="p-0 pb-3 w-125px">Price</th>
+                                                <th class="p-0 pb-3 w-50px">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <!--end::Table head-->
+                                        <!--begin::Table body-->
+                                        <tbody>
+                                            @foreach($extra as $extras)
+                                            <tr>
+                                                <td class="p-0 py-3 w-125px">
+                                                    <span class="text-gray-600 fw-bold fs-6">{{$extras->extras_name}}</span>
+                                                </td>
+                                                <td class="p-0 py-3 w-125px">
+                                                    <span class="text-gray-600 fw-bold fs-6">{{$extras->extras_price}}</span>
+                                                </td>
+                                                <td class="p-0 py-3 w-125px">
+                                                    <div class="card-toolbar">
+                                                        <a href="{{route('edit-extra', base64_encode($extras->id))}}" type="button" class="btn btn-sm btn-primary mx-2"
+                                                        >Edit </a>
+                                                        <!-- <a href="#" type="button" class="btn btn-sm btn-danger"
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#kt_modal_create_campaign">Delete</a> -->
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            @endforeach
+                                        </tbody>
+                                        <!--end::Table body-->
+                                    </table>
+                                    <!--end::Table-->
+                                </div>
+                            </div>                                
+                            <!--end::Body-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-6">               
+            <div class="col-md-12 mx-auto">
+                <div class="card card-flush h-md-100" id="kt_modal_add_role">                                                     
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card-header py-7">
+                                    <!--begin::Card title-->
+                                    <div class="card-title">
+                                    <h2>AddOns</h2>
+                                </div>
+                                <!--end::Card title-->   
+                                <!--begin::Create campaign button-->
+                                <div class="card-toolbar">
+                                    <a href="{{route('add-addon', base64_encode($dish->id))}}" type="button" class="btn  btn-sm btn-primary">Add</a>
+                                </div>
+                                <!--end::Create campaign button-->
+                            </div>                               
+                        </div> 
+
+                        <div class="col-md-12">
+                            <!--begin::Body-->
+                            <div class="card-body pt-5">
+                                <div class="table-responsive">
+                                        <!--begin::Table-->
+                                        <table class="table table-row-dashed align-middle gs-0 gy-3 my-0">
+                                            <!--begin::Table head-->
+                                            <thead>
+                                                <tr class="fs-7 fw-bold text-dark-600 borderbottom">
+                                                    <th class="p-0 pb-3 min-w-100px">Name</th>
+                                                    <th class="p-0 pb-3 w-125px">Price</th>
+                                                    <th class="p-0 pb-3 w-50px">Action</th>
+                                                </tr>
+                                            </thead>
+                                            <!--end::Table head-->
+                                            <!--begin::Table body-->
+                                            <tbody>
+                                                @foreach($addon as $addons)
+                                                <tr>
+                                                    <td class="p-0 py-3 w-125px">
+                                                        <span class="text-gray-600 fw-bold fs-6">{{$addons->addon_name}}</span>
+                                                    </td>
+                                                    <td class="p-0 py-3 w-125px">
+                                                        <span class="text-gray-600 fw-bold fs-6">{{$addons->addon_price}}</span>
+                                                    </td>
+                                                    <td class="p-0 py-3 w-125px">
+                                                        <div class="card-toolbar">
+                                                            <a href="{{route('edit-addon', base64_encode($addons->id))}}" type="button" class="btn btn-sm btn-primary mx-2"
+                                                            >Edit </a>
+                                                            <!-- <a href="#" type="button" class="btn btn-sm btn-danger"
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#kt_modal_create_campaign">Delete</a> -->
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                @endforeach
+                                            </tbody>
+                                            <!--end::Table body-->
+                                        </table>
+                                        <!--end::Table-->
                                     </div>
+                                </div>
                             </div>                                
                             <!--end::Body-->
                         </div>
@@ -363,6 +486,27 @@ $(document).ready(function() {
         }
 
     });
+
+    var counter_id = "{{$dish->counter_id}}";
+    $('#category_id option:gt(0)').remove();
+    if(counter_id){
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "{{ url('admin/get-category') }}/" + counter_id,
+            type: "GET",
+            success: function(response) {
+                var cat = "{{$dish->category_id}}";
+                $.each(response,function(key, value)
+                {
+                    $("#category_id").append('<option value=' + value.id + '>' + value.category_name + '</option>');
+                });
+                $('#category_id option[value='+cat+']').attr('selected','selected');
+            }
+        });
+    }
+    
 });
 
 $('#country_id').on('change', function(){
@@ -397,6 +541,26 @@ $('#state_id').on('change', function(){
             });
         }
     });
+});
+
+$('#counter_id').on('change', function(){
+    var counter_id = $(this).val();
+    $('#category_id option:gt(0)').remove();
+    if(counter_id){
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "{{ url('admin/get-category') }}/" + counter_id,
+            type: "GET",
+            success: function(response) {
+                $.each(response,function(key, value)
+                {
+                    $("#category_id").append('<option value=' + value.id + '>' + value.category_name + '</option>');
+                });
+            }
+        });
+    }
 });
 
 </script>

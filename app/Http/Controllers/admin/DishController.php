@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Dish;
 use App\Models\Counter;
 use App\Models\DishVariant;
+use App\Models\Extra;
+use App\Models\Addon;
 use Storage;
 use Auth;
 
@@ -84,11 +86,13 @@ class DishController extends Controller
         $dish = Dish::find(base64_decode($id));
         $counter = Counter::get();
         $variant = DishVariant::where('dish_id', $dish->id)->get();
-        return view('admin-view.dish.edit-dish', compact('dish','counter', 'variant'));
+        $extra = Extra::where('dish_id', $dish->id)->get();
+        $addon = Addon::where('dish_id', $dish->id)->get();
+        return view('admin-view.dish.edit-dish', compact('dish','counter', 'variant', 'extra', 'addon'));
     }
 
     public function updateDish(Request $request){
-
+        
         $request->validate([
             'dish_name' => 'required',
             'dish_hsn' => 'required',
@@ -99,7 +103,7 @@ class DishController extends Controller
 
         ],[
             'dish_name.required'=>'Dish Name is Required',
-            'dish_hsn.required'=>'CIN No. is required',
+            'dish_hsn.required'=>'HSN No is required',
             'counter_id.required'=>'Registered Address is required',
             'tax_inc.required'=>'Tax option is required',
             'dish_has_variant.required'=>'state_id is required',
