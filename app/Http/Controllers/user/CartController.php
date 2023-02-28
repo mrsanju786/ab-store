@@ -17,7 +17,9 @@ class CartController extends Controller
         if($check_cart->exists()){
             $total_quantity = $check_cart->value('quantity');
             $total_quantity = $total_quantity+1;
-            $check_cart->update(['quantity' => $total_quantity]);
+            $total_price = $check_cart->value('total_price');
+            $total_price = $total_quantity*$total_price;
+            $check_cart->update(['quantity' => $total_quantity, 'total_price' => $total_price]);
         } else {
             $add_to_cart = new Cart();
             $add_to_cart->dish_id = $dish->id;
