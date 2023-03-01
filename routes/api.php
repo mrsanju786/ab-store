@@ -30,5 +30,6 @@ Route::group(['middleware' => ['auth:api']], function(){
     Route::get('/category-list', [APIController::class, 'categoryList']);
     Route::get('/location-list', [APIController::class, 'LocationList']);
     Route::get('/area-list', [APIController::class, 'AreaList']);
-    Route::get('/location-discount', [APIController::class, 'LocationDiscountList']);
+    Route::get('/counter-wise-dish', [APIController::class, 'counterWiseDish']);
+   
 });

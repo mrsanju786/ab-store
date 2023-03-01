@@ -289,6 +289,59 @@ class APIController extends Controller
         
     }
 
+
+    //get counter,menu, category and dish
+    public function counterWiseDish(Request $request){
+        try {
+
+            $validator = Validator::make($request->all(), [
+                'branch_id'    => 'required',
+            ]);
+
+            if ($validator->fails()) {
+                return response()->json(['errors' => $validator->errors()->all() ]);
+            }
+
+            $branch_id = $request->branch_id;
+            //get counter list
+            $counterList = Counter::where('branch_id',$branch_id)->orderBy('id','desc')->get();
+            $menu_list =[];
+            foreach($counterList as $value){
+                //get menu list
+                $menuList = Menu::where('counter_id',$value->id)
+                                ->where('is_active',1)
+                                ->orderBy('id','desc')
+                                ->get();
+                $menu_list =   $menuList; 
+  
+            }
+            $category_list =[];
+            foreach($menu_list as $value){
+                //find menu wise multiple category
+                $categoryId = CategoryHasMenu::where('menu_id',$value->id)->pluck('category_id');
+                //get category list
+                $categoryList = Category::whereIn('id',$categoryId)
+                                    ->where('is_active',1)
+                                    ->orderBy('id','desc')
+                                    ->get();
+                $category_list =   $categoryList; 
+            }
+
+            $dish_list =[];
+            foreach($category_list as $value){
+                //get dish list
+                $dishList = Dish::where('category_id',$value->id)
+                                    ->where('is_active',1)
+                                    ->orderBy('id','desc')
+                                    ->get();
+                $dish_list =   $dishList; 
+            }
+           
+return response()->json(['message'=>'Counter Dish List!','dish_image_url'=>'https://foodiisoft-v3.e-go.biz/foodisoft3.0/public/storage/upload/dish/','category_image_url'=>'https://foodiisoft-v3.e-go.biz/foodisoft3.0/public/storage/upload/category/','status'=>true,'data'=>['counter_list'=>$counterList,'menu_list'=>$menu_list,'category_list'=>$category_list,'dish_list'=>$dish_list]]);                
+        }catch (\Exception $e) {
+            return response()->json(['errors' => $e], 403);
+        }
+    }
    
   
 }
