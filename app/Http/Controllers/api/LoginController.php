@@ -26,7 +26,7 @@ class LoginController extends Controller
                 return response()->json(['errors' => $validator->errors()->all() ]);
             }
         
-            if (Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')])) {
+            if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
                 $user = Auth::user(); 
                 $token = $user->createToken('Foodisoft')->accessToken;
             
