@@ -39,9 +39,9 @@
                     <tr class="fw-bold text-muted">
                         <th class="min-w-50px">#</th>
                         <th class="min-w-150px">Zone Name</th>
-                        <th class="min-w-150px">Start Time</th>
+                        <!-- <th class="min-w-150px">Start Time</th>
                         <th class="min-w-150px">GMT Offset</th>
-                        <th class="min-w-150px">Dst</th>
+                        <th class="min-w-150px">Dst</th> -->
                         <th class="min-w-150px">Country</th>
                         <th class="min-w-100px text-end">Actions</th>
                     </tr>
@@ -61,7 +61,7 @@
                             <span class="text-dark fw-bold d-block fs-6">{{$timezones->zone_name}}</span>
                         </td>
 
-                        <td>
+                        <!-- <td>
                             <span class="text-dark fw-bold d-block fs-6">{{$timezones->start_time}}</span>
                         </td>
 
@@ -71,7 +71,7 @@
 
                         <td>
                             <span class="text-dark fw-bold d-block fs-6">{{$timezones->dst}}</span>
-                        </td>
+                        </td> -->
 
                         <td>
                             <span class="text-dark fw-bold d-block fs-6">{{$timezones->country->country_name}}</span>
