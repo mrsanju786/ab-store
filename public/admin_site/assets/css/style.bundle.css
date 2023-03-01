@@ -60528,16 +60528,20 @@ html:not([data-theme=dark]) {
     width: auto;
 }
 
-.timedisplay input[type="time"]:after {
+.timedisplayicon{
+    right: 15px !important;
+    top: 14px !important;
+}
+
+ .timedisplay input[type="time"]:after {
     font-family: "Font Awesome 5 Free";
     font-weight: 500;
     content: "\f017";
     color: #555;
     padding: 0 5px;
-
 }
 
-.timedisplay input[type="time"]::-webkit-calendar-picker-indicator {
+.timedisplay input[type="time"]::-webkit-calendar-picker-indicator  {
     background: transparent;
     bottom: 0;
     color: transparent;
@@ -60548,8 +60552,7 @@ html:not([data-theme=dark]) {
     right: 0;
     top: 0;
     width: auto;
-}
-
+} 
 
 /* Start Date and End Date css start */
 
@@ -61640,12 +61643,12 @@ a#more-btn {
 }
 
 /* counter page css start*/
-
-.counter-card{
+.counter-card {
     border: 1px solid rgba(44, 131, 211, 0.05);
-                                box-shadow: 10px 10px 20px 4px rgba(0, 0, 0, 0.05);
-                                border-radius: 20px;
+    box-shadow: 10px 10px 20px 4px rgba(0, 0, 0, 0.05);
+    border-radius: 20px;
 }
+
 .counter-discount {
     color: #DC3335;
     font-size: 16px;
@@ -61668,6 +61671,6 @@ a#more-btn {
     color: #353935;
     font-weight: 500;
 }
-
 /* counter page css end*/
+
 /* USER DASH BORAD CSS END */
