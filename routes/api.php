@@ -31,7 +31,11 @@ Route::group(['middleware' => ['auth:api']], function(){
     Route::get('/location-list', [APIController::class, 'LocationList']);
     Route::get('/area-list', [APIController::class, 'AreaList']);
     Route::get('/counter-wise-dish', [APIController::class, 'counterWiseDish']);
-    Route::post('/add-to-cart', [APIController::class, 'addToCart']);
-    Route::get('/cart-list', [APIController::class, 'cart']);
+    
+   
    
 });
+
+    Route::post('/add-to-cart', [APIController::class, 'addToCart']);
+    Route::get('/cart-list', [APIController::class, 'cartList']);
+    Route::post('/save-order', [APIController::class, 'orderPlaced']);
