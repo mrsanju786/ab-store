@@ -60,6 +60,30 @@
                                 <div class="fv-row mb-10 fv-plugins-icon-container">
                                     <!--begin::Label-->
                                     <label class="fs-5 fw-bold form-label mb-2">
+                                        <span class="required">Select Timezone</span>
+                                    </label>
+                                    <!--end::Label-->
+                    
+                                    <!--begin::Input-->
+                                    <select class="form-select form-select-solid" aria-label="Select example" name="zone_name" data-control="select2">
+                                        <option value="">Select Timezone</option>
+                                        @foreach($timezone_list as $timezones)
+                                        <option value="{{$timezones}}">{{$timezones}}</option>
+                                        @endforeach
+                                        
+                                    </select>
+                                    <!--end::Input-->
+                                    @if($errors->has('zone_name'))
+                                    <span class="text-danger">{{ $errors->first('zone_name') }}</span>
+                                    @endif
+                                    <div class="fv-plugins-message-container invalid-feedback"></div>
+                                </div>
+                                <!--end::Input group-->
+
+                                <!--begin::Input group-->
+                                {{--<div class="fv-row mb-10 fv-plugins-icon-container">
+                                    <!--begin::Label-->
+                                    <label class="fs-5 fw-bold form-label mb-2">
                                         <span class="required">Start Time</span>
                                     </label>
                                     <!--end::Label-->
@@ -72,11 +96,11 @@
                                     <span class="text-danger">{{ $errors->first('start_time') }}</span>
                                     @endif
                                     <div class="fv-plugins-message-container invalid-feedback"></div>
-                                </div>
+                                </div>--}}
                                 <!--end::Input group-->
 
                                 <!--begin::Input group-->
-                                <div class="fv-row mb-10 fv-plugins-icon-container">
+                                {{--<div class="fv-row mb-10 fv-plugins-icon-container">
                                     <!--begin::Label-->
                                     <label class="fs-5 fw-bold form-label mb-2">
                                         <span class="required">Dst</span>
@@ -91,7 +115,7 @@
                                     <span class="text-danger">{{ $errors->first('dst') }}</span>
                                     @endif
                                     <div class="fv-plugins-message-container invalid-feedback"></div>
-                                </div>
+                                </div>--}}
                                 <!--end::Input group-->
 
                             </div>
@@ -104,7 +128,7 @@
                             <div class="d-flex flex-column scroll-y me-n7 pe-p pe-md-7" id="kt_modal_add_role_scroll">
 
                                 <!--begin::Input group-->
-                                <div class="fv-row mb-10 fv-plugins-icon-container">
+                                {{--<div class="fv-row mb-10 fv-plugins-icon-container">
                                     <!--begin::Label-->
                                     <label class="fs-5 fw-bold form-label mb-2">
                                         <span class="required">Zone name</span>
@@ -119,11 +143,11 @@
                                     <span class="text-danger">{{ $errors->first('zone_name') }}</span>
                                     @endif
                                     <div class="fv-plugins-message-container invalid-feedback"></div>
-                                </div>
+                                </div>--}}
                                 <!--end::Input group-->
 
                                 <!--begin::Input group-->
-                                <div class="fv-row mb-10 fv-plugins-icon-container">
+                                {{--<div class="fv-row mb-10 fv-plugins-icon-container">
                                     <!--begin::Label-->
                                     <label class="fs-5 fw-bold form-label mb-2">
                                         <span class="required">GMT Offset</span>
@@ -138,7 +162,7 @@
                                     <span class="text-danger">{{ $errors->first('gmt_offset') }}</span>
                                     @endif
                                     <div class="fv-plugins-message-container invalid-feedback"></div>
-                                </div>
+                                </div>--}}
                                 <!--end::Input group-->
 
 

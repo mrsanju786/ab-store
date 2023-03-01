@@ -125,6 +125,24 @@
                                     </div>
                                     <!--end::time period-->                                        
 
+                                    <!--begin::Input group-->
+                                    <div class="fv-row mb-10 fv-plugins-icon-container timedisplay">
+                                        <!--begin::Label-->
+                                        <label class="fs-5 fw-bold form-label mb-2">
+                                            <span class="required">Cut off Time</span>
+                                        </label>
+                                        <!--end::Label-->
+    
+                                        <!--begin::Input-->
+                                        <input type="time" class="form-control form-control-solid" placeholder="Enter Off Time"
+                                            name="off_time">
+                                        <!--end::Input-->
+                                        @if($errors->has('off_time'))
+                                        <span class="text-danger">{{ $errors->first('off_time') }}</span>
+                                        @endif
+                                        <div class="fv-plugins-message-container invalid-feedback"></div>
+                                    </div>                                    
+                                    <!--end::Input group-->                                   
                                 </div>
                                 <!--end::Col-->
 

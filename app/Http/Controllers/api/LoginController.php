@@ -16,24 +16,28 @@ class LoginController extends Controller
     //login users
     public function login(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'email'    => 'required|email',
-            'password' => 'required|min:6',
-        ]);
+        try {
+            $validator = Validator::make($request->all(), [
+                'email'    => 'required|email',
+                'password' => 'required|min:6',
+            ]);
 
-        if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()->all() ]);
+            if ($validator->fails()) {
+                return response()->json(['errors' => $validator->errors()->all() ]);
+            }
+        
+            $credentials = $request->only('email', 'password');
+            if (Auth::attempt($credentials)) {
+                $user = Auth::user(); 
+                $token = $user->createToken('Foodisoft')->accessToken;
+            
+                return response()->json(['message'=>'User Login Successfully!','status'=>true,'token'=>$token,'data'=>$user]);
+            
+            }
+            return response()->json(['message'=>'Email and Password is worng!','status'=>false]);
+        }catch (\Exception $e) {
+            return response()->json(['errors' => $e], 403);
         }
-       
-        if (Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')])) {
-            $user = Auth::user(); 
-            $token = $user->createToken('Foodisoft')->accessToken;
-           
-            return response()->json(['message'=>'User Login Successfully!','status'=>'success','token'=>$token,'data'=>$user]);
-           
-        }
-        return response()->json(['message'=>'Email and Password is worng!','status'=>'false']);
-     
     }
     
     //user logout
