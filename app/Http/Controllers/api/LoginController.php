@@ -16,7 +16,7 @@ class LoginController extends Controller
     //login users
     public function login(Request $request)
     {
-        try {
+        // try {
             $validator = Validator::make($request->all(), [
                 'email'    => 'required|email',
                 'password' => 'required|min:6',
@@ -26,7 +26,8 @@ class LoginController extends Controller
                 return response()->json(['errors' => $validator->errors()->all() ]);
             }
         
-            if (Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')])) {
+            $credentials = $request->only('email', 'password');
+            if (Auth::attempt($credentials)) {
                 $user = Auth::user(); 
                 $token = $user->createToken('Foodisoft')->accessToken;
             
@@ -34,9 +35,9 @@ class LoginController extends Controller
             
             }
             return response()->json(['message'=>'Email and Password is worng!','status'=>false]);
-        }catch (\Exception $e) {
-            return response()->json(['errors' => $e], 403);
-        }
+        // }catch (\Exception $e) {
+        //     return response()->json(['errors' => $e], 403);
+        // }
     }
     
     //user logout

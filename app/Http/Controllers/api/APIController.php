@@ -17,6 +17,7 @@ use App\Models\Dish;
 use App\Models\Menu;
 use App\Models\Category;
 use App\Models\Location;
+use App\Models\Cart;
 use Storage;
 use Auth;
 use Validator,Redirect,Response;
@@ -289,6 +290,116 @@ class APIController extends Controller
         
     }
 
+
+    //get counter,menu, category and dish
+    public function counterWiseDish(Request $request){
+        try {
+
+            $validator = Validator::make($request->all(), [
+                'branch_id'    => 'required',
+            ]);
+
+            if ($validator->fails()) {
+                return response()->json(['errors' => $validator->errors()->all() ]);
+            }
+
+            $branch_id = $request->branch_id;
+            //get counter list
+            $counterList = Counter::where('branch_id',$branch_id)->orderBy('id','desc')->get();
+            $menu_list =[];
+            foreach($counterList as $value){
+                //get menu list
+                $menuList = Menu::where('counter_id',$value->id)
+                                ->where('is_active',1)
+                                ->orderBy('id','desc')
+                                ->get();
+                $menu_list =   $menuList; 
+  
+            }
+            $category_list =[];
+            foreach($menu_list as $value){
+                //find menu wise multiple category
+                $categoryId = CategoryHasMenu::where('menu_id',$value->id)->pluck('category_id');
+                //get category list
+                $categoryList = Category::whereIn('id',$categoryId)
+                                    ->where('is_active',1)
+                                    ->orderBy('id','desc')
+                                    ->get();
+                $category_list =   $categoryList; 
+            }
+
+            $dish_list =[];
+            foreach($category_list as $value){
+                //get dish list
+                $dishList = Dish::where('category_id',$value->id)
+                                    ->where('is_active',1)
+                                    ->orderBy('id','desc')
+                                    ->get();
+                $dish_list =   $dishList; 
+            }
+           
+            return response()->json(['message'=>'Counter Dish List!','dish_image_url'=>'https://foodiisoft-v3.e-go.biz/foodisoft3.0/public/storage/upload/dish/','category_image_url'=>'https://foodiisoft-v3.e-go.biz/foodisoft3.0/public/storage/upload/category/','status'=>true,'data'=>['counter_list'=>$counterList,'menu_list'=>$menu_list,'category_list'=>$category_list,'dish_list'=>$dish_list]]);                
+        }catch (\Exception $e) {
+            return response()->json(['errors' => $e], 403);
+        }
+    }
+    
+    //add to cart
+    public function addToCart(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'dish_id'    =>'required',
+            'ip_address' =>'nullable',
+            'user_id'    =>'nullable',
+            'quantity'   =>'required',
+            'price'      =>'required'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()->all() ]);
+        }
+
+        $dish_id    = $request->dish_id;
+        $ip_address = $request->ip_address;
+        $user_id    = $request->user_id;
+        $quantity   = $request->quantity;
+        $price      = $request->price;
+        //check dish data
+        $dish = Dish::where('id', $dish_id)->first();
+
+        $check_cart = Cart::where('dish_id', $dish_id)
+                          ->where('ip_address', $ip_address)
+                          ->orWhere('user_id', $user_id)
+                          ->first();
+        if($check_cart->exists()){
+            return response()->json(['message'=>'Dish added already!','status'=>true,'data'=>[]]);                
+        } else {
+            $add_to_cart = new Cart();
+            $add_to_cart->dish_id     = $dish->id;
+            $add_to_cart->dish_price  = $price;
+            $add_to_cart->quantity    = $quantity;
+            $add_to_cart->total_price = $price;
+            $add_to_cart->ip_address  = $ip_address ?? Null;
+            $add_to_cart->user_id     = $user_id ?? Null;           
+            $add_to_cart->save();
+        }
+        return response()->json(['message'=>'Dish added to cart successfully!','status'=>true,'data'=>[]]);                
+       
+    }
+    
+    //cart list
+    public function cart(Request $request)
+    {
+        $ip_address = $request->ip_address;
+        $user_id    = $request->user_id;
+
+        $cartList = Cart::with('Dish')
+                        ->where('ip_address', $ip_address)
+                        ->orWhere('user_id', $user_id)
+                        ->get();
+
+        return response()->json(['message'=>'Cart List!','image_url'=>'https://foodiisoft-v3.e-go.biz/foodisoft3.0/public/storage/upload/dish/','status'=>true,'data'=>$cartList]);                
+    }
    
   
 }
