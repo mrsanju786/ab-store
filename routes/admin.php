@@ -29,6 +29,8 @@ use App\Http\Controllers\admin\OptionController;
 use App\Http\Controllers\admin\MenuController;
 use App\Http\Controllers\admin\ExtraController;
 use App\Http\Controllers\admin\AddOnController;
+use App\Http\Controllers\admin\DiscountController;
+
 
 
 /*
@@ -185,6 +187,17 @@ Route::get('/', function () {
             Route::get('/get-company-city/{id}', [CityController::class, 'getCompanyCity'])->name('get-company-city');
 
             Route::get('/get-country-tax/{id}', [CountrytaxController::class, 'getCountryTax'])->name('getCountryTax');
+
+            /**
+             * Discount Routes
+             */
+            Route::get('/discount-list', [DiscountController::class, 'index'])->name('discount-list');
+            Route::get('/add-discount', [DiscountController::class, 'addDiscount'])->name('add-discount');
+            Route::post('/create-discount', [DiscountController::class, 'createDiscount'])->name('create-discount');
+            Route::get('/edit-discount/{id}', [DiscountController::class, 'editDiscount'])->name('edit-discount');
+            Route::post('/update-discount', [DiscountController::class, 'updateDiscount'])->name('update-discount');
+            Route::get('/discount-status/{id}/{status}', [DiscountController::class, 'discountStatus'])->name('discount-status');
+
         });
 
         /**

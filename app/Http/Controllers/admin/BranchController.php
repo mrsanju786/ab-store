@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Branch;
 use App\Models\Region;
 use App\Models\Company;
+use App\Models\Discount;
 use Storage;
 use Auth;
 
@@ -20,9 +21,10 @@ class BranchController extends Controller
 
     public function addBranch()
     {
+        $discount = Discount::get();
         $region_list = Region::where('is_active', 1)->get();
         $company = Company::where('is_active', 1)->get();
-        return view('admin-view.branch.add_branch', compact('region_list','company'));
+        return view('admin-view.branch.add_branch', compact('region_list','company','discount'));
     }
 
     public function createBranch(Request $request){
@@ -51,6 +53,7 @@ class BranchController extends Controller
         $branch->company_id = $request->company_id;
         $branch->city_id = $request->city_id;
         $branch->tax_ids = implode(",", $request->tax_id);
+        $branch->discount_ids = $request->discount_id;
         $branch->save();
 
         return redirect()->route('branch_list')->with('success', 'Branch Added Successfully!');
@@ -58,9 +61,10 @@ class BranchController extends Controller
     }
 
     public function editBranch($id){
+        $discount = Discount::get();
         $branch = Branch::find(base64_decode($id));
         $company = Company::get();
-        return view('admin-view.branch.edit_branch', compact('branch','company'));
+        return view('admin-view.branch.edit_branch', compact('branch','company','discount'));
     }
 
     public function updateBranch(Request $request){
@@ -90,6 +94,7 @@ class BranchController extends Controller
         $branch->company_id = $request->company_id;
         $branch->city_id = $request->city_id;
         $branch->tax_ids = implode(",", $request->tax_id);
+        $branch->discount_ids = $request->discount_id;
         $branch->save();
 
         return redirect()->route('branch_list')->with('success', 'Changes saved Successfully!');
