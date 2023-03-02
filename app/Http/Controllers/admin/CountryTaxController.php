@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\CountryTax;
 use App\Models\Country;
+use App\Models\Company;
 use Auth;
 
 class CountryTaxController extends Controller
@@ -72,5 +73,12 @@ class CountryTaxController extends Controller
         $countrytax->is_active = $request->status;
         $countrytax->save();
         return redirect()->back()->with('success','Countrytax status updated!');
+    }
+
+    public function getCountryTax($id){
+
+        $company = Company::where('id', $id)->first();
+        $countryTax = CountryTax::where('country_id', $company->country_id)->get();
+        return $countryTax;
     }
 }

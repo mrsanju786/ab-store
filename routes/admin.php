@@ -183,6 +183,8 @@ Route::get('/', function () {
             Route::get('/countrytax-status/{id}/{status}', [CountrytaxController::class, 'countrytaxStatus'])->name('countrytax-status');
 
             Route::get('/get-company-city/{id}', [CityController::class, 'getCompanyCity'])->name('get-company-city');
+
+            Route::get('/get-country-tax/{id}', [CountrytaxController::class, 'getCountryTax'])->name('getCountryTax');
         });
 
         /**
@@ -303,6 +305,10 @@ Route::get('/', function () {
         Route::get('/edit-dish/{id?}', [DishController::class, 'editDish'])->name('edit-dish');
         Route::post('/update-dish', [DishController::class, 'updateDish'])->name('update-dish');
         Route::get('/dish-status/{id}/{status}', [DishController::class, 'dishStatus'])->name('dish-status');
+
+        Route::get('/get-branch-tax/{id}', [DishController::class, 'getBranchTax'])->name('getBranchTax');
+
+        Route::get('/export-dish', [DishController::class, 'exportDish'])->name('exportDish');
 
         /**
          * Dish Variant Routes

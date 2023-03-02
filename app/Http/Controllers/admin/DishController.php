@@ -9,8 +9,13 @@ use App\Models\Counter;
 use App\Models\DishVariant;
 use App\Models\Extra;
 use App\Models\Addon;
+use App\Models\Category;
+use App\Models\Branch;
+use App\Models\CountryTax;
+use App\Models\DishHasTax;
 use Storage;
 use Auth;
+use Maatwebsite\Excel\Facades\Excel;
 
 class DishController extends Controller
 {
@@ -35,6 +40,7 @@ class DishController extends Controller
             'category_id' => 'required',
             'tax_inc' => 'required',
             'dish_has_variant' => 'required',
+            'tax_id' => 'required',
 
         ],[
             'dish_name.required'=>'Dish Name is Required',
@@ -71,6 +77,11 @@ class DishController extends Controller
 
         $dish->save();
 
+        $dishTax = new DishHasTax();
+        $dishTax->tax_id = $request->tax_id;
+        $dishTax->dish_id = $dish->id;
+        $dishTax->save();
+
         if($request->dish_has_variant == 1){
 
             return redirect()->route('edit-dish', ['id'=>base64_encode($dish->id)])->with('success', 'Saved Successfully!');
@@ -88,7 +99,9 @@ class DishController extends Controller
         $variant = DishVariant::where('dish_id', $dish->id)->get();
         $extra = Extra::where('dish_id', $dish->id)->get();
         $addon = Addon::where('dish_id', $dish->id)->get();
-        return view('admin-view.dish.edit-dish', compact('dish','counter', 'variant', 'extra', 'addon'));
+        $dish_tax = DishHasTax::where('dish_id', $dish->id)->first();
+        $dishTax =  $dish_tax->tax_id;
+        return view('admin-view.dish.edit-dish', compact('dish','counter', 'variant', 'extra', 'addon','dishTax'));
     }
 
     public function updateDish(Request $request){
@@ -100,6 +113,7 @@ class DishController extends Controller
             'category_id' => 'required',
             'tax_inc' => 'required',
             'dish_has_variant' => 'required',
+            'tax_id' => 'required',
 
         ],[
             'dish_name.required'=>'Dish Name is Required',
@@ -133,6 +147,10 @@ class DishController extends Controller
         }
 
         $dish->save();
+
+        $dishTax = DishHasTax::where('dish_id', $id)->first();
+        $dishTax->tax_id = $request->tax_id;
+        $dishTax->save();
         
         return redirect()->route('edit-dish', ['id'=>base64_encode($id)])->with('success', 'Changes saved Successfully!');
     }
@@ -143,5 +161,18 @@ class DishController extends Controller
         $size->is_active = $request->status;
         $size->save();
         return redirect()->back()->with('success','Dish status updated!');
+    }
+
+    public function getBranchTax($id){
+
+        $category = Category::find($id);
+        $tax_detail = Branch::find($category->branch_id)->first();
+        $tax_id = explode(",", $tax_detail->tax_ids);
+        $tax = CountryTax::whereIn('id', $tax_id)->get();
+        return $tax;
+    }
+
+    public function exportDish(){
+
     }
 }
