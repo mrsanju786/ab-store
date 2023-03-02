@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\api\LoginController;
 use App\Http\Controllers\api\APIController;
+use App\Http\Controllers\api\POSController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -36,6 +37,6 @@ Route::group(['middleware' => ['auth:api']], function(){
    
 });
 
-    Route::post('/add-to-cart', [APIController::class, 'addToCart']);
-    Route::get('/cart-list', [APIController::class, 'cartList']);
-    Route::post('/save-order', [APIController::class, 'orderPlaced']);
+    Route::post('/add-to-cart', [POSController::class, 'addToCart']);
+    Route::get('/cart-list', [POSController::class, 'cartList']);
+    Route::post('/save-order', [POSController::class, 'orderPlaced']);
