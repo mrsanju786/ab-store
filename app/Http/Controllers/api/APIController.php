@@ -291,12 +291,61 @@ class APIController extends Controller
 
             $category_id = $request->category_id;
 
-            $dishList = Dish::with(['counter'])->where('category_id',$category_id)
+            $dishList = Dish::with(['counter','dishVariant'])->where('category_id',$category_id)
                             ->where('is_active',1)
                             ->orderBy('id','desc')
                             ->get();
-                                    
-            return response()->json(['message'=>'Dish List!','image_url'=>'https://foodiisoft-v3.e-go.biz/foodisoft3.0/public/storage/upload/dish/','status'=>true,'data'=>$dishList]);                
+           
+            $array =[];
+            foreach($dishList as $dish){
+                //get tax 
+                $taxPercent =Null;
+                $taxName =Null;
+                $tax_withdish_amount =0;
+                if($dish->is_tax_inclusive ==1){
+
+                $dish_has_taxes = DB::table('dish_has_taxes')
+                                    ->where('dish_id',$dish->id)
+                                    ->first();
+
+                //country tax  
+                if(!empty($dish_has_taxes)) {
+                    $tax = DB::table('country_taxes')
+                                ->where('id',$dish_has_taxes->tax_id)
+                                ->first();
+                    
+                    $taxPercent = $tax->tax_percent;
+                    $taxName    = $tax->name; 
+                }
+                   $tax_with_dish_amount = $dish->dish_price + (($dish->dish_price *$taxPercent) /100);
+
+                }else{
+                   $tax_with_dish_amount = $dish->dish_price;
+                }
+
+                $array[] =array(
+                    "id"       => $dish->id,
+                    "dish_name"=>$dish->dish_name,
+                    "dish_price"=> $tax_with_dish_amount,
+                    "dish_code"=> $dish->dish_code,
+                    "dish_images"=> $dish->dish_images,
+                    "has_variant"=> $dish->has_variant,
+                    "is_tax_inclusive"=> $dish->is_tax_inclusive,
+                    "is_discount"=> $dish->is_discount,
+                    "category_id"=> $dish->category_id,
+                    "counter_id"=> $dish->counter_id,
+                    "chef_preparation"=> $dish->chef_preparation,
+                    "dish_hsn"=> $dish->dish_hsn,
+                    "edited_at"=> $dish->edited_at,
+                    "edited_by"=> $dish->edited_by,
+                    "is_active"=> $dish->is_active,
+                    "created_at"=>$dish->created_at,
+                    "updated_at"=> $dish->updated_at,
+                    'dish_variant'=>$dish->dishVariant ?? Null,
+                    'counter'=>$dish->counter ?? Null
+                );
+            }                        
+            return response()->json(['message'=>'Dish List!','image_url'=>'https://foodiisoft-v3.e-go.biz/foodisoft3.0/public/storage/upload/dish/','status'=>true,'data'=>$array]);                
         }catch (\Throwable $th) {
             Log::debug($th);
             return response()->json(['status' => 'error', 'message' => 'Something went wrong.'], 400);
