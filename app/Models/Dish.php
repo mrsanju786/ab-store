@@ -12,4 +12,8 @@ class Dish extends Model
     public function counter(){
         return $this->belongsTo(Counter::class);
     }
+
+    public function dishVariant(){
+        return $this->hasMany(DishVariant::class,'id');
+    }
 }

@@ -345,11 +345,60 @@ class APIController extends Controller
             $dish_list =[];
             foreach($category_list as $value){
                 //get dish list
-                $dishList = Dish::where('category_id',$value->id)
+                $dishList = Dish::with('dishVariant')->where('category_id',$value->id)
                                     ->where('is_active',1)
                                     ->orderBy('id','desc')
                                     ->get();
-                $dish_list =   $dishList; 
+                $array =[];
+                foreach($dishList as $dish){
+                    //get tax 
+                    $taxPercent =Null;
+                    $taxName =Null;
+                    $tax_withdish_amount =0;
+                    if($dish->is_tax_inclusive ==1){
+
+                        $dish_has_taxes = DB::table('dish_has_taxes')
+                                            ->where('dish_id',$dish->id)
+                                            ->first();
+                        
+                        //country tax  
+                        if(!empty($dish_has_taxes)) {
+                            $tax = DB::table('country_taxes')
+                                        ->where('id',$dish_has_taxes->tax_id)
+                                        ->first();
+                            
+                            $taxPercent = $tax->tax_percent;
+                            $taxName    = $tax->name; 
+                        }
+                        $tax_with_dish_amount = $dish->dish_price + (($dish->dish_price *$taxPercent) /100);
+                       
+                    }else{
+                        $tax_with_dish_amount = $dish->dish_price;
+                    }
+                    
+                    $array[] =array(
+                        "id"       => $dish->id,
+                        "dish_name"=>$dish->dish_name,
+                        "dish_price"=> $tax_with_dish_amount,
+                        "dish_code"=> $dish->dish_code,
+                        "dish_images"=> $dish->dish_images,
+                        "has_variant"=> $dish->has_variant,
+                        "is_tax_inclusive"=> $dish->is_tax_inclusive,
+                        "is_discount"=> $dish->is_discount,
+                        "category_id"=> $dish->category_id,
+                        "counter_id"=> $dish->counter_id,
+                        "chef_preparation"=> $dish->chef_preparation,
+                        "dish_hsn"=> $dish->dish_hsn,
+                        "edited_at"=> $dish->edited_at,
+                        "edited_by"=> $dish->edited_by,
+                        "is_active"=> $dish->is_active,
+                        "created_at"=>$dish->created_at,
+                        "updated_at"=> $dish->updated_at,
+                        'dish_variant'=>$dish->dishVariant ?? Null
+                    );
+                }
+                                    
+                $dish_list =   $array; 
             }
            
             return response()->json(['message'=>'Counter Dish List!','dish_image_url'=>'https://foodiisoft-v3.e-go.biz/foodisoft3.0/public/storage/upload/dish/','category_image_url'=>'https://foodiisoft-v3.e-go.biz/foodisoft3.0/public/storage/upload/category/','status'=>true,'data'=>['counter_list'=>$counterList,'menu_list'=>$menu_list,'category_list'=>$category_list,'dish_list'=>$dish_list]]);                
