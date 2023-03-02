@@ -27,7 +27,7 @@
                     @csrf
                     <!--begin::Scroll-->
                     <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_add_role_scroll">
-                        
+
                         <!--begin::Row-->
                         <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
                             <!--begin::Col-->
@@ -54,9 +54,9 @@
                             <!--end::Col-->
                             <!--begin::Col-->
                             <div class="col">
-                                
+
                             </div>
-                            <!--end::Col-->            
+                            <!--end::Col-->
                         </div>
                         <!--end::Row-->
 
@@ -72,11 +72,10 @@
                                 <table class="table align-middle table-row-dashed fs-6 gy-5">
                                     <!--begin::Table body-->
                                     <tbody class="text-gray-600 fw-semibold">
-                                        <!--begin::Table row-->
+                                        <!--begin::Administrator Access row-->
                                         <tr>
                                             <td class="text-gray-800">
                                                 Administrator Access
-
                                                 <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip"
                                                     aria-label="Allows a full access to the system"
                                                     data-bs-original-title="Allows a full access to the system"
@@ -84,7 +83,8 @@
                                             </td>
                                             <td>
                                                 <!--begin::Checkbox-->
-                                                <label class="form-check form-check-custom form-check-solid form-check-success me-9 form-check-success">
+                                                <label
+                                                    class="form-check form-check-custom form-check-solid form-check-success me-9 form-check-success">
                                                     <input class="form-check-input" type="checkbox" value=""
                                                         id="kt_roles_select_all">
                                                     <span class="form-check-label" for="kt_roles_select_all">
@@ -94,10 +94,10 @@
                                                 <!--end::Checkbox-->
                                             </td>
                                         </tr>
-                                        <!--end::Table row-->
+                                        <!--end::Administrator Access row-->
 
-                                                                                <!--begin::Table row-->
-                                                                                <tr>
+                                        <!--begin::Dashboard row-->
+                                        <tr>
                                             <!--begin::Label-->
                                             <td class="text-gray-800">Dashboard</td>
                                             <!--end::Label-->
@@ -109,54 +109,72 @@
                                                     <!--begin::Checkbox-->
                                                     <label
                                                         class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
-                                                        <input class="form-check-input" type="checkbox" value="dashboard"
-                                                            name="permission[]">
+                                                        <input class="form-check-input" type="checkbox"
+                                                            value="dashboard" name="permission[]">
                                                         <span class="form-check-label">
-                                                            Access
+                                                            View
                                                         </span>
                                                     </label>
                                                     <!--end::Checkbox-->
 
-                                                                                                        <!--begin::Checkbox-->
-                                                                                                        <label
+                                                </div>
+                                                <!--end::Wrapper-->
+                                            </td>
+                                            <!--end::Options-->
+
+                                        </tr>
+                                        <!--end::Dashboard row-->
+
+                                        <!--begin::Dashboard row-->
+                                        <tr>
+                                            <!--begin::Label-->
+                                            <td class="text-gray-800">Role</td>
+                                            <!--end::Label-->
+
+                                            <!--begin::Options-->
+                                            <td>
+                                                <!--begin::Wrapper-->
+                                                <div class="d-flex">
+                                                    <!--begin::Checkbox-->
+                                                    <label
                                                         class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
                                                         <input class="form-check-input" type="checkbox" value="role"
                                                             name="permission[]">
                                                         <span class="form-check-label">
-                                                        Role
+                                                            View
                                                         </span>
                                                     </label>
                                                     <!--end::Checkbox-->
 
-                                                                                                        <!--begin::Checkbox-->
-                                                                                                        <label
+                                                    <!--begin::Checkbox-->
+                                                    <label
                                                         class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
-                                                        <input class="form-check-input" type="checkbox" value="add-role"
+                                                        <input class="form-check-input" type="checkbox" value="create-role"
                                                             name="permission[]">
                                                         <span class="form-check-label">
-                                                        Add Role
+                                                            Add
                                                         </span>
                                                     </label>
                                                     <!--end::Checkbox-->
 
-                                                                                                        <!--begin::Checkbox-->
-                                                                                                        <label
+                                                    <!--begin::Checkbox-->
+                                                    <label
                                                         class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
-                                                        <input class="form-check-input" type="checkbox" value="edit-role"
-                                                            name="permission[]">
+                                                        <input class="form-check-input" type="checkbox"
+                                                            value="edit-role" name="permission[]">
                                                         <span class="form-check-label">
-                                                        Edit Role
+                                                            Edit
                                                         </span>
                                                     </label>
                                                     <!--end::Checkbox-->
 
-                                                                                                        <!--begin::Checkbox-->
-                                                                                                        <label
+                                                    <!--begin::Checkbox-->
+                                                    <label
                                                         class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
-                                                        <input class="form-check-input" type="checkbox" value="update-role"
-                                                            name="permission[]">
+                                                        <input class="form-check-input" type="checkbox"
+                                                            value="update-role" name="permission[]">
                                                         <span class="form-check-label">
-                                                            Update Role
+                                                            Update
                                                         </span>
                                                     </label>
                                                     <!--end::Checkbox-->
@@ -165,14 +183,14 @@
                                                 <!--end::Wrapper-->
                                             </td>
                                             <!--end::Options-->
-                                            
-                                        </tr>
-                                        <!--end::Table row-->
 
-                                        <!--begin::Table row-->
+                                        </tr>
+                                        <!--end::Dashboard row-->
+
+                                        <!--begin::Dashboard row-->
                                         <tr>
                                             <!--begin::Label-->
-                                            <td class="text-gray-800">User Management</td>
+                                            <td class="text-gray-800">User</td>
                                             <!--end::Label-->
 
                                             <!--begin::Options-->
@@ -182,10 +200,10 @@
                                                     <!--begin::Checkbox-->
                                                     <label
                                                         class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
-                                                        <input class="form-check-input" type="checkbox" value="Read"
+                                                        <input class="form-check-input" type="checkbox" value="user-list"
                                                             name="permission[]">
                                                         <span class="form-check-label">
-                                                            Read
+                                                            View
                                                         </span>
                                                     </label>
                                                     <!--end::Checkbox-->
@@ -193,36 +211,48 @@
                                                     <!--begin::Checkbox-->
                                                     <label
                                                         class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
-                                                        <input class="form-check-input" type="checkbox" value="Write"
+                                                        <input class="form-check-input" type="checkbox" value="create-user"
                                                             name="permission[]">
                                                         <span class="form-check-label">
-                                                            Write
+                                                            Add
                                                         </span>
                                                     </label>
                                                     <!--end::Checkbox-->
 
                                                     <!--begin::Checkbox-->
                                                     <label
-                                                        class="form-check form-check-sm form-check-custom form-check-solid form-check-success">
-                                                        <input class="form-check-input" type="checkbox" value="Create"
-                                                            name="permission[]">
-                                                        <span class="form-check-label" "="">
-                                                                        Create
+                                                        class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
+                                                        <input class="form-check-input" type="checkbox"
+                                                            value="edit-user" name="permission[]">
+                                                        <span class="form-check-label">
+                                                            Edit
                                                         </span>
                                                     </label>
                                                     <!--end::Checkbox-->
+
+                                                    <!--begin::Checkbox-->
+                                                    <label
+                                                        class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
+                                                        <input class="form-check-input" type="checkbox"
+                                                            value="update-user" name="permission[]">
+                                                        <span class="form-check-label">
+                                                            Update
+                                                        </span>
+                                                    </label>
+                                                    <!--end::Checkbox-->
+
                                                 </div>
                                                 <!--end::Wrapper-->
                                             </td>
                                             <!--end::Options-->
-                                        </tr>
-                                        <!--end::Table row-->
 
-                                        <!--begin::Table row-->
+                                        </tr>
+                                        <!--end::Dashboard row-->
+
+                                        <!--begin::Company row-->
                                         <tr>
                                             <!--begin::Label-->
-                                            <td class=" text-gray-800">Content Management
-                                            </td>
+                                            <td class="text-gray-800">Company</td>
                                             <!--end::Label-->
 
                                             <!--begin::Options-->
@@ -232,10 +262,10 @@
                                                     <!--begin::Checkbox-->
                                                     <label
                                                         class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
-                                                        <input class="form-check-input" type="checkbox" value="Read1"
-                                                            name="permission[]">
+                                                        <input class="form-check-input" type="checkbox"
+                                                            value="company-list" name="permission[]">
                                                         <span class="form-check-label">
-                                                            Read
+                                                            View
                                                         </span>
                                                     </label>
                                                     <!--end::Checkbox-->
@@ -243,35 +273,518 @@
                                                     <!--begin::Checkbox-->
                                                     <label
                                                         class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
-                                                        <input class="form-check-input" type="checkbox" value="Write1"
+                                                        <input class="form-check-input" type="checkbox" value="create-company"
                                                             name="permission[]">
                                                         <span class="form-check-label">
-                                                            Write
+                                                            Add
                                                         </span>
                                                     </label>
                                                     <!--end::Checkbox-->
 
                                                     <!--begin::Checkbox-->
                                                     <label
-                                                        class="form-check form-check-sm form-check-custom form-check-solid form-check-success">
-                                                        <input class="form-check-input" type="checkbox" value="Create1"
-                                                            name="permission[]">
-                                                        <span class="form-check-label" "="">
-                                                                        Create
-                                                                    </span>
-                                                                </label>
-                                                                <!--end::Checkbox-->
-                                                            </div>
-                                                            <!--end::Wrapper-->
-                                                        </td>
-                                                        <!--end::Options-->
-                                                    </tr>
-                                                    <!--end::Table row-->
-                                                                                            <!--begin::Table row-->
-                                                    <tr>
-                                                        <!--begin::Label-->
-                                                        <td class=" text-gray-800">Financial Management
+                                                        class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
+                                                        <input class="form-check-input" type="checkbox"
+                                                            value="edit-company" name="permission[]">
+                                                        <span class="form-check-label">
+                                                            Edit
+                                                        </span>
+                                                    </label>
+                                                    <!--end::Checkbox-->
+
+                                                    <!--begin::Checkbox-->
+                                                    <label
+                                                        class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
+                                                        <input class="form-check-input" type="checkbox"
+                                                            value="update-company" name="permission[]">
+                                                        <span class="form-check-label">
+                                                            Update
+                                                        </span>
+                                                    </label>
+                                                    <!--end::Checkbox-->
+
+                                                </div>
+                                                <!--end::Wrapper-->
                                             </td>
+                                            <!--end::Options-->
+
+                                        </tr>
+                                        <!--end::Company row-->
+
+                                        <!--begin::Master Setting row-->
+                                        <tr>
+                                            <!--begin::Label-->
+                                            <td class="text-gray-800 align-top">Master Setting</td>
+                                            <!--end::Label-->
+
+                                            <!--begin::Options-->
+                                            <td>                                                
+                                                <!--begin::Table-->
+                                                    <table class="table align-middle table-row-dashed fs-6 gy-5">
+                                                        <!--begin::Table body-->
+                                                        <tbody class="text-gray-600 fw-semibold">
+                                                            
+                                                            <!--begin::Country row-->
+                                                            <tr>
+                                                                <!--begin::Label-->
+                                                                <td class="text-gray-800">Country</td>
+                                                                <!--end::Label-->
+                                                                <!--begin::Options-->
+                                                                <td>
+                                                                    <!--begin::Wrapper-->
+                                                                    <div class="d-flex">
+                                                                        <!--begin::Checkbox-->
+                                                                        <label
+                                                                            class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
+                                                                            <input class="form-check-input" type="checkbox" value="country-list" name="permission[]">
+                                                                            <span class="form-check-label">
+                                                                                View
+                                                                            </span>
+                                                                        </label>
+                                                                        <!--end::Checkbox-->
+
+                                                                        <!--begin::Checkbox-->
+                                                                        <label
+                                                                            class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
+                                                                            <input class="form-check-input" type="checkbox" value="create-country" name="permission[]">
+                                                                            <span class="form-check-label">
+                                                                                Add
+                                                                            </span>
+                                                                        </label>
+                                                                        <!--end::Checkbox-->
+
+                                                                        <!--begin::Checkbox-->
+                                                                        <label
+                                                                            class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
+                                                                            <input class="form-check-input" type="checkbox" value="edit-country" name="permission[]">
+                                                                            <span class="form-check-label">
+                                                                                Edit
+                                                                            </span>
+                                                                        </label>
+                                                                        <!--end::Checkbox-->
+
+                                                                        <!--begin::Checkbox-->
+                                                                        <label
+                                                                            class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
+                                                                            <input class="form-check-input" type="checkbox" value="update-country" name="permission[]">
+                                                                            <span class="form-check-label">
+                                                                                Update
+                                                                            </span>
+                                                                        </label>
+                                                                        <!--end::Checkbox-->
+
+                                                                    </div>
+                                                                    <!--end::Wrapper-->
+                                                                </td>
+                                                                <!--end::Options-->
+                                                            </tr>
+                                                            <!--end::Country row-->
+
+                                                            <!--begin::State row-->
+                                                            <tr>
+                                                                <!--begin::Label-->
+                                                                <td class="text-gray-800">State</td>
+                                                                <!--end::Label-->
+                                                                <!--begin::Options-->
+                                                                <td>
+                                                                    <!--begin::Wrapper-->
+                                                                    <div class="d-flex">
+                                                                        <!--begin::Checkbox-->
+                                                                        <label
+                                                                            class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
+                                                                            <input class="form-check-input" type="checkbox" value="state-list" name="permission[]">
+                                                                            <span class="form-check-label">
+                                                                                View
+                                                                            </span>
+                                                                        </label>
+                                                                        <!--end::Checkbox-->
+
+                                                                        <!--begin::Checkbox-->
+                                                                        <label
+                                                                            class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
+                                                                            <input class="form-check-input" type="checkbox" value="create-state" name="permission[]">
+                                                                            <span class="form-check-label">
+                                                                                Add
+                                                                            </span>
+                                                                        </label>
+                                                                        <!--end::Checkbox-->
+
+                                                                        <!--begin::Checkbox-->
+                                                                        <label
+                                                                            class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
+                                                                            <input class="form-check-input" type="checkbox" value="edit-state" name="permission[]">
+                                                                            <span class="form-check-label">
+                                                                                Edit
+                                                                            </span>
+                                                                        </label>
+                                                                        <!--end::Checkbox-->
+
+                                                                        <!--begin::Checkbox-->
+                                                                        <label
+                                                                            class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
+                                                                            <input class="form-check-input" type="checkbox" value="update-state" name="permission[]">
+                                                                            <span class="form-check-label">
+                                                                                Update
+                                                                            </span>
+                                                                        </label>
+                                                                        <!--end::Checkbox-->
+
+                                                                    </div>
+                                                                    <!--end::Wrapper-->
+                                                                </td>
+                                                                <!--end::Options-->
+                                                            </tr>
+                                                            <!--end::State row-->
+
+                                                            <!--begin::City row-->
+                                                            <tr>
+                                                                <!--begin::Label-->
+                                                                <td class="text-gray-800">City</td>
+                                                                <!--end::Label-->
+                                                                <!--begin::Options-->
+                                                                <td>
+                                                                    <!--begin::Wrapper-->
+                                                                    <div class="d-flex">
+                                                                        <!--begin::Checkbox-->
+                                                                        <label
+                                                                            class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
+                                                                            <input class="form-check-input" type="checkbox" value="city-list" name="permission[]">
+                                                                            <span class="form-check-label">
+                                                                                View
+                                                                            </span>
+                                                                        </label>
+                                                                        <!--end::Checkbox-->
+
+                                                                        <!--begin::Checkbox-->
+                                                                        <label
+                                                                            class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
+                                                                            <input class="form-check-input" type="checkbox" value="create-city" name="permission[]">
+                                                                            <span class="form-check-label">
+                                                                                Add
+                                                                            </span>
+                                                                        </label>
+                                                                        <!--end::Checkbox-->
+
+                                                                        <!--begin::Checkbox-->
+                                                                        <label
+                                                                            class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
+                                                                            <input class="form-check-input" type="checkbox" value="edit-city" name="permission[]">
+                                                                            <span class="form-check-label">
+                                                                                Edit
+                                                                            </span>
+                                                                        </label>
+                                                                        <!--end::Checkbox-->
+
+                                                                        <!--begin::Checkbox-->
+                                                                        <label
+                                                                            class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
+                                                                            <input class="form-check-input" type="checkbox" value="update-city" name="permission[]">
+                                                                            <span class="form-check-label">
+                                                                                Update
+                                                                            </span>
+                                                                        </label>
+                                                                        <!--end::Checkbox-->
+
+                                                                    </div>
+                                                                    <!--end::Wrapper-->
+                                                                </td>
+                                                                <!--end::Options-->
+                                                            </tr>
+                                                            <!--end::City row-->
+
+                                                            <!--begin::Region row-->
+                                                            <tr>
+                                                                <!--begin::Label-->
+                                                                <td class="text-gray-800">Region</td>
+                                                                <!--end::Label-->
+                                                                <!--begin::Options-->
+                                                                <td>
+                                                                    <!--begin::Wrapper-->
+                                                                    <div class="d-flex">
+                                                                        <!--begin::Checkbox-->
+                                                                        <label
+                                                                            class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
+                                                                            <input class="form-check-input" type="checkbox" value="region-list" name="permission[]">
+                                                                            <span class="form-check-label">
+                                                                                View
+                                                                            </span>
+                                                                        </label>
+                                                                        <!--end::Checkbox-->
+
+                                                                        <!--begin::Checkbox-->
+                                                                        <label
+                                                                            class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
+                                                                            <input class="form-check-input" type="checkbox" value="create-region" name="permission[]">
+                                                                            <span class="form-check-label">
+                                                                                Add
+                                                                            </span>
+                                                                        </label>
+                                                                        <!--end::Checkbox-->
+
+                                                                        <!--begin::Checkbox-->
+                                                                        <label
+                                                                            class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
+                                                                            <input class="form-check-input" type="checkbox" value="edit-region" name="permission[]">
+                                                                            <span class="form-check-label">
+                                                                                Edit
+                                                                            </span>
+                                                                        </label>
+                                                                        <!--end::Checkbox-->
+
+                                                                        <!--begin::Checkbox-->
+                                                                        <label
+                                                                            class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
+                                                                            <input class="form-check-input" type="checkbox" value="update-region" name="permission[]">
+                                                                            <span class="form-check-label">
+                                                                                Update
+                                                                            </span>
+                                                                        </label>
+                                                                        <!--end::Checkbox-->
+
+                                                                    </div>
+                                                                    <!--end::Wrapper-->
+                                                                </td>
+                                                                <!--end::Options-->
+                                                            </tr>
+                                                            <!--end::Region row-->
+                                                            
+                                                            <!--begin::License row-->
+                                                            <tr>
+                                                                <!--begin::Label-->
+                                                                <td class="text-gray-800">License</td>
+                                                                <!--end::Label-->
+                                                                <!--begin::Options-->
+                                                                <td>
+                                                                    <!--begin::Wrapper-->
+                                                                    <div class="d-flex">
+                                                                        <!--begin::Checkbox-->
+                                                                        <label
+                                                                            class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
+                                                                            <input class="form-check-input" type="checkbox" value="license-list" name="permission[]">
+                                                                            <span class="form-check-label">
+                                                                                View
+                                                                            </span>
+                                                                        </label>
+                                                                        <!--end::Checkbox-->
+
+                                                                        <!--begin::Checkbox-->
+                                                                        <label
+                                                                            class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
+                                                                            <input class="form-check-input" type="checkbox" value="create-license" name="permission[]">
+                                                                            <span class="form-check-label">
+                                                                                Add
+                                                                            </span>
+                                                                        </label>
+                                                                        <!--end::Checkbox-->
+
+                                                                        <!--begin::Checkbox-->
+                                                                        <label
+                                                                            class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
+                                                                            <input class="form-check-input" type="checkbox" value="edit-license" name="permission[]">
+                                                                            <span class="form-check-label">
+                                                                                Edit
+                                                                            </span>
+                                                                        </label>
+                                                                        <!--end::Checkbox-->
+
+                                                                        <!--begin::Checkbox-->
+                                                                        <label
+                                                                            class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
+                                                                            <input class="form-check-input" type="checkbox" value="update-license" name="permission[]">
+                                                                            <span class="form-check-label">
+                                                                                Update
+                                                                            </span>
+                                                                        </label>
+                                                                        <!--end::Checkbox-->
+
+                                                                    </div>
+                                                                    <!--end::Wrapper-->
+                                                                </td>
+                                                                <!--end::Options-->
+                                                            </tr>
+                                                            <!--end::License row-->
+                                                            
+                                                            <!--begin::Currency row-->
+                                                            <tr>
+                                                                <!--begin::Label-->
+                                                                <td class="text-gray-800">Currency</td>
+                                                                <!--end::Label-->
+                                                                <!--begin::Options-->
+                                                                <td>
+                                                                    <!--begin::Wrapper-->
+                                                                    <div class="d-flex">
+                                                                        <!--begin::Checkbox-->
+                                                                        <label
+                                                                            class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
+                                                                            <input class="form-check-input" type="checkbox" value="currency-list" name="permission[]">
+                                                                            <span class="form-check-label">
+                                                                                View
+                                                                            </span>
+                                                                        </label>
+                                                                        <!--end::Checkbox-->
+
+                                                                        <!--begin::Checkbox-->
+                                                                        <label
+                                                                            class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
+                                                                            <input class="form-check-input" type="checkbox" value="create-currency" name="permission[]">
+                                                                            <span class="form-check-label">
+                                                                                Add
+                                                                            </span>
+                                                                        </label>
+                                                                        <!--end::Checkbox-->
+
+                                                                        <!--begin::Checkbox-->
+                                                                        <label
+                                                                            class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
+                                                                            <input class="form-check-input" type="checkbox" value="edit-currency" name="permission[]">
+                                                                            <span class="form-check-label">
+                                                                                Edit
+                                                                            </span>
+                                                                        </label>
+                                                                        <!--end::Checkbox-->
+
+                                                                        <!--begin::Checkbox-->
+                                                                        <label
+                                                                            class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
+                                                                            <input class="form-check-input" type="checkbox" value="update-currency" name="permission[]">
+                                                                            <span class="form-check-label">
+                                                                                Update
+                                                                            </span>
+                                                                        </label>
+                                                                        <!--end::Checkbox-->
+
+                                                                    </div>
+                                                                    <!--end::Wrapper-->
+                                                                </td>
+                                                                <!--end::Options-->
+                                                            </tr>
+                                                            <!--end::Currency row-->
+                                                            
+                                                            <!--begin::Timezone row-->
+                                                            <tr>
+                                                                <!--begin::Label-->
+                                                                <td class="text-gray-800">Timezone</td>
+                                                                <!--end::Label-->
+                                                                <!--begin::Options-->
+                                                                <td>
+                                                                    <!--begin::Wrapper-->
+                                                                    <div class="d-flex">
+                                                                        <!--begin::Checkbox-->
+                                                                        <label
+                                                                            class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
+                                                                            <input class="form-check-input" type="checkbox" value="timezone-list" name="permission[]">
+                                                                            <span class="form-check-label">
+                                                                                View
+                                                                            </span>
+                                                                        </label>
+                                                                        <!--end::Checkbox-->
+
+                                                                        <!--begin::Checkbox-->
+                                                                        <label
+                                                                            class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
+                                                                            <input class="form-check-input" type="checkbox" value="create-timezone" name="permission[]">
+                                                                            <span class="form-check-label">
+                                                                                Add
+                                                                            </span>
+                                                                        </label>
+                                                                        <!--end::Checkbox-->
+
+                                                                        <!--begin::Checkbox-->
+                                                                        <label
+                                                                            class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
+                                                                            <input class="form-check-input" type="checkbox" value="edit-timezone" name="permission[]">
+                                                                            <span class="form-check-label">
+                                                                                Edit
+                                                                            </span>
+                                                                        </label>
+                                                                        <!--end::Checkbox-->
+
+                                                                        <!--begin::Checkbox-->
+                                                                        <label
+                                                                            class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
+                                                                            <input class="form-check-input" type="checkbox" value="update-timezone" name="permission[]">
+                                                                            <span class="form-check-label">
+                                                                                Update
+                                                                            </span>
+                                                                        </label>
+                                                                        <!--end::Checkbox-->
+
+                                                                    </div>
+                                                                    <!--end::Wrapper-->
+                                                                </td>
+                                                                <!--end::Options-->
+                                                            </tr>
+                                                            <!--end::Timezone row-->
+                                                            
+                                                            <!--begin::Country Tax row-->
+                                                            <tr>
+                                                                <!--begin::Label-->
+                                                                <td class="text-gray-800">Country Tax</td>
+                                                                <!--end::Label-->
+                                                                <!--begin::Options-->
+                                                                <td>
+                                                                    <!--begin::Wrapper-->
+                                                                    <div class="d-flex">
+                                                                        <!--begin::Checkbox-->
+                                                                        <label
+                                                                            class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
+                                                                            <input class="form-check-input" type="checkbox" value="country-list" name="permission[]">
+                                                                            <span class="form-check-label">
+                                                                                View
+                                                                            </span>
+                                                                        </label>
+                                                                        <!--end::Checkbox-->
+
+                                                                        <!--begin::Checkbox-->
+                                                                        <label
+                                                                            class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
+                                                                            <input class="form-check-input" type="checkbox" value="create-country" name="permission[]">
+                                                                            <span class="form-check-label">
+                                                                                Add
+                                                                            </span>
+                                                                        </label>
+                                                                        <!--end::Checkbox-->
+
+                                                                        <!--begin::Checkbox-->
+                                                                        <label
+                                                                            class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
+                                                                            <input class="form-check-input" type="checkbox" value="edit-country" name="permission[]">
+                                                                            <span class="form-check-label">
+                                                                                Edit
+                                                                            </span>
+                                                                        </label>
+                                                                        <!--end::Checkbox-->
+
+                                                                        <!--begin::Checkbox-->
+                                                                        <label
+                                                                            class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
+                                                                            <input class="form-check-input" type="checkbox" value="update-country" name="permission[]">
+                                                                            <span class="form-check-label">
+                                                                                Update
+                                                                            </span>
+                                                                        </label>
+                                                                        <!--end::Checkbox-->
+
+                                                                    </div>
+                                                                    <!--end::Wrapper-->
+                                                                </td>
+                                                                <!--end::Options-->
+                                                            </tr>
+                                                            <!--end::Country Tax row-->
+                                                            
+                                                        </tbody>
+                                                        <!--begin::Table body-->
+                                                    </table>
+                                                <!--begin::Table-->
+                                            </td>
+                                            <!--end::Options-->
+                                        </tr>
+                                        <!--end::Master Setting row-->
+
+                                        <!--begin::Branch row-->
+                                        <tr>
+                                            <!--begin::Label-->
+                                            <td class="text-gray-800">Branch</td>
                                             <!--end::Label-->
 
                                             <!--begin::Options-->
@@ -281,10 +794,10 @@
                                                     <!--begin::Checkbox-->
                                                     <label
                                                         class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
-                                                        <input class="form-check-input" type="checkbox" value=""
-                                                            name="permission[]">
+                                                        <input class="form-check-input" type="checkbox"
+                                                            value="branch-list" name="permission[]">
                                                         <span class="form-check-label">
-                                                            Read
+                                                            View
                                                         </span>
                                                     </label>
                                                     <!--end::Checkbox-->
@@ -292,35 +805,48 @@
                                                     <!--begin::Checkbox-->
                                                     <label
                                                         class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
-                                                        <input class="form-check-input" type="checkbox" value=""
+                                                        <input class="form-check-input" type="checkbox" value="create-branch"
                                                             name="permission[]">
                                                         <span class="form-check-label">
-                                                            Write
+                                                            Add
                                                         </span>
                                                     </label>
                                                     <!--end::Checkbox-->
 
                                                     <!--begin::Checkbox-->
                                                     <label
-                                                        class="form-check form-check-sm form-check-custom form-check-solid form-check-success">
-                                                        <input class="form-check-input" type="checkbox" value=""
-                                                            name="permission[]">
-                                                        <span class="form-check-label" "="">
-                                                                        Create
-                                                                    </span>
-                                                                </label>
-                                                                <!--end::Checkbox-->
-                                                            </div>
-                                                            <!--end::Wrapper-->
-                                                        </td>
-                                                        <!--end::Options-->
-                                                    </tr>
-                                                    <!--end::Table row-->
-                                                                                            <!--begin::Table row-->
-                                                    <tr>
-                                                        <!--begin::Label-->
-                                                        <td class=" text-gray-800">Reporting
+                                                        class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
+                                                        <input class="form-check-input" type="checkbox"
+                                                            value="edit-branch" name="permission[]">
+                                                        <span class="form-check-label">
+                                                            Edit
+                                                        </span>
+                                                    </label>
+                                                    <!--end::Checkbox-->
+
+                                                    <!--begin::Checkbox-->
+                                                    <label
+                                                        class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
+                                                        <input class="form-check-input" type="checkbox"
+                                                            value="update-branch" name="permission[]">
+                                                        <span class="form-check-label">
+                                                            Update
+                                                        </span>
+                                                    </label>
+                                                    <!--end::Checkbox-->
+
+                                                </div>
+                                                <!--end::Wrapper-->
                                             </td>
+                                            <!--end::Options-->
+
+                                        </tr>
+                                        <!--end::Branch row-->
+
+                                        <!--begin::Location row-->
+                                        <tr>
+                                            <!--begin::Label-->
+                                            <td class="text-gray-800">Location</td>
                                             <!--end::Label-->
 
                                             <!--begin::Options-->
@@ -330,10 +856,10 @@
                                                     <!--begin::Checkbox-->
                                                     <label
                                                         class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
-                                                        <input class="form-check-input" type="checkbox" value=""
-                                                            name="permission[]">
+                                                        <input class="form-check-input" type="checkbox"
+                                                            value="location-list" name="permission[]">
                                                         <span class="form-check-label">
-                                                            Read
+                                                            View
                                                         </span>
                                                     </label>
                                                     <!--end::Checkbox-->
@@ -341,35 +867,48 @@
                                                     <!--begin::Checkbox-->
                                                     <label
                                                         class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
-                                                        <input class="form-check-input" type="checkbox" value=""
+                                                        <input class="form-check-input" type="checkbox" value="create-location"
                                                             name="permission[]">
                                                         <span class="form-check-label">
-                                                            Write
+                                                            Add
                                                         </span>
                                                     </label>
                                                     <!--end::Checkbox-->
 
                                                     <!--begin::Checkbox-->
                                                     <label
-                                                        class="form-check form-check-sm form-check-custom form-check-solid form-check-success">
-                                                        <input class="form-check-input" type="checkbox" value=""
-                                                            name="permission[]">
-                                                        <span class="form-check-label" "="">
-                                                                        Create
-                                                                    </span>
-                                                                </label>
-                                                                <!--end::Checkbox-->
-                                                            </div>
-                                                            <!--end::Wrapper-->
-                                                        </td>
-                                                        <!--end::Options-->
-                                                    </tr>
-                                                    <!--end::Table row-->
-                                                                                            <!--begin::Table row-->
-                                                    <tr>
-                                                        <!--begin::Label-->
-                                                        <td class=" text-gray-800">Payroll
+                                                        class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
+                                                        <input class="form-check-input" type="checkbox"
+                                                            value="edit-location" name="permission[]">
+                                                        <span class="form-check-label">
+                                                            Edit
+                                                        </span>
+                                                    </label>
+                                                    <!--end::Checkbox-->
+
+                                                    <!--begin::Checkbox-->
+                                                    <label
+                                                        class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
+                                                        <input class="form-check-input" type="checkbox"
+                                                            value="update-location" name="permission[]">
+                                                        <span class="form-check-label">
+                                                            Update
+                                                        </span>
+                                                    </label>
+                                                    <!--end::Checkbox-->
+
+                                                </div>
+                                                <!--end::Wrapper-->
                                             </td>
+                                            <!--end::Options-->
+
+                                        </tr>
+                                        <!--end::Location row-->
+
+                                        <!--begin::Area row-->
+                                        <tr>
+                                            <!--begin::Label-->
+                                            <td class="text-gray-800">Area</td>
                                             <!--end::Label-->
 
                                             <!--begin::Options-->
@@ -379,10 +918,10 @@
                                                     <!--begin::Checkbox-->
                                                     <label
                                                         class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
-                                                        <input class="form-check-input" type="checkbox" value=""
-                                                            name="permission[]">
+                                                        <input class="form-check-input" type="checkbox"
+                                                            value="area-list" name="permission[]">
                                                         <span class="form-check-label">
-                                                            Read
+                                                            View
                                                         </span>
                                                     </label>
                                                     <!--end::Checkbox-->
@@ -390,35 +929,48 @@
                                                     <!--begin::Checkbox-->
                                                     <label
                                                         class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
-                                                        <input class="form-check-input" type="checkbox" value=""
+                                                        <input class="form-check-input" type="checkbox" value="create-area"
                                                             name="permission[]">
                                                         <span class="form-check-label">
-                                                            Write
+                                                            Add
                                                         </span>
                                                     </label>
                                                     <!--end::Checkbox-->
 
                                                     <!--begin::Checkbox-->
                                                     <label
-                                                        class="form-check form-check-sm form-check-custom form-check-solid form-check-success">
-                                                        <input class="form-check-input" type="checkbox" value=""
-                                                            name="permission[]">
-                                                        <span class="form-check-label" "="">
-                                                                        Create
-                                                                    </span>
-                                                                </label>
-                                                                <!--end::Checkbox-->
-                                                            </div>
-                                                            <!--end::Wrapper-->
-                                                        </td>
-                                                        <!--end::Options-->
-                                                    </tr>
-                                                    <!--end::Table row-->
-                                                                                            <!--begin::Table row-->
-                                                    <tr>
-                                                        <!--begin::Label-->
-                                                        <td class=" text-gray-800">Disputes Management
+                                                        class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
+                                                        <input class="form-check-input" type="checkbox"
+                                                            value="edit-area" name="permission[]">
+                                                        <span class="form-check-label">
+                                                            Edit
+                                                        </span>
+                                                    </label>
+                                                    <!--end::Checkbox-->
+
+                                                    <!--begin::Checkbox-->
+                                                    <label
+                                                        class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
+                                                        <input class="form-check-input" type="checkbox"
+                                                            value="update-area" name="permission[]">
+                                                        <span class="form-check-label">
+                                                            Update
+                                                        </span>
+                                                    </label>
+                                                    <!--end::Checkbox-->
+
+                                                </div>
+                                                <!--end::Wrapper-->
                                             </td>
+                                            <!--end::Options-->
+
+                                        </tr>
+                                        <!--end::Area row-->
+
+                                        <!--begin::Location Discount row-->
+                                        <tr>
+                                            <!--begin::Label-->
+                                            <td class="text-gray-800">Location Discount</td>
                                             <!--end::Label-->
 
                                             <!--begin::Options-->
@@ -428,10 +980,10 @@
                                                     <!--begin::Checkbox-->
                                                     <label
                                                         class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
-                                                        <input class="form-check-input" type="checkbox" value=""
-                                                            name="permission[]">
+                                                        <input class="form-check-input" type="checkbox"
+                                                            value="location-discount-list" name="permission[]">
                                                         <span class="form-check-label">
-                                                            Read
+                                                            View
                                                         </span>
                                                     </label>
                                                     <!--end::Checkbox-->
@@ -439,35 +991,48 @@
                                                     <!--begin::Checkbox-->
                                                     <label
                                                         class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
-                                                        <input class="form-check-input" type="checkbox" value=""
+                                                        <input class="form-check-input" type="checkbox" value="create-location-discount"
                                                             name="permission[]">
                                                         <span class="form-check-label">
-                                                            Write
+                                                            Add
                                                         </span>
                                                     </label>
                                                     <!--end::Checkbox-->
 
                                                     <!--begin::Checkbox-->
                                                     <label
-                                                        class="form-check form-check-sm form-check-custom form-check-solid form-check-success">
-                                                        <input class="form-check-input" type="checkbox" value=""
-                                                            name="permission[]">
-                                                        <span class="form-check-label" "="">
-                                                                        Create
-                                                                    </span>
-                                                                </label>
-                                                                <!--end::Checkbox-->
-                                                            </div>
-                                                            <!--end::Wrapper-->
-                                                        </td>
-                                                        <!--end::Options-->
-                                                    </tr>
-                                                    <!--end::Table row-->
-                                                                                            <!--begin::Table row-->
-                                                    <tr>
-                                                        <!--begin::Label-->
-                                                        <td class=" text-gray-800">API Controls
+                                                        class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
+                                                        <input class="form-check-input" type="checkbox"
+                                                            value="edit-location-discount" name="permission[]">
+                                                        <span class="form-check-label">
+                                                            Edit
+                                                        </span>
+                                                    </label>
+                                                    <!--end::Checkbox-->
+
+                                                    <!--begin::Checkbox-->
+                                                    <label
+                                                        class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
+                                                        <input class="form-check-input" type="checkbox"
+                                                            value="update-location-discount" name="permission[]">
+                                                        <span class="form-check-label">
+                                                            Update
+                                                        </span>
+                                                    </label>
+                                                    <!--end::Checkbox-->
+
+                                                </div>
+                                                <!--end::Wrapper-->
                                             </td>
+                                            <!--end::Options-->
+
+                                        </tr>
+                                        <!--end::Location Discount row-->
+
+                                        <!--begin::Counter row-->
+                                        <tr>
+                                            <!--begin::Label-->
+                                            <td class="text-gray-800">Counter</td>
                                             <!--end::Label-->
 
                                             <!--begin::Options-->
@@ -477,10 +1042,10 @@
                                                     <!--begin::Checkbox-->
                                                     <label
                                                         class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
-                                                        <input class="form-check-input" type="checkbox" value=""
-                                                            name="permission[]">
+                                                        <input class="form-check-input" type="checkbox"
+                                                            value="counter-list" name="permission[]">
                                                         <span class="form-check-label">
-                                                            Read
+                                                            View
                                                         </span>
                                                     </label>
                                                     <!--end::Checkbox-->
@@ -488,35 +1053,48 @@
                                                     <!--begin::Checkbox-->
                                                     <label
                                                         class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
-                                                        <input class="form-check-input" type="checkbox" value=""
+                                                        <input class="form-check-input" type="checkbox" value="create-counter"
                                                             name="permission[]">
                                                         <span class="form-check-label">
-                                                            Write
+                                                            Add
                                                         </span>
                                                     </label>
                                                     <!--end::Checkbox-->
 
                                                     <!--begin::Checkbox-->
                                                     <label
-                                                        class="form-check form-check-sm form-check-custom form-check-solid form-check-success">
-                                                        <input class="form-check-input" type="checkbox" value=""
-                                                            name="permission[]">
-                                                        <span class="form-check-label" "="">
-                                                                        Create
-                                                                    </span>
-                                                                </label>
-                                                                <!--end::Checkbox-->
-                                                            </div>
-                                                            <!--end::Wrapper-->
-                                                        </td>
-                                                        <!--end::Options-->
-                                                    </tr>
-                                                    <!--end::Table row-->
-                                                                                            <!--begin::Table row-->
-                                                    <tr>
-                                                        <!--begin::Label-->
-                                                        <td class=" text-gray-800">Database Management
+                                                        class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
+                                                        <input class="form-check-input" type="checkbox"
+                                                            value="edit-counter" name="permission[]">
+                                                        <span class="form-check-label">
+                                                            Edit
+                                                        </span>
+                                                    </label>
+                                                    <!--end::Checkbox-->
+
+                                                    <!--begin::Checkbox-->
+                                                    <label
+                                                        class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
+                                                        <input class="form-check-input" type="checkbox"
+                                                            value="update-counter" name="permission[]">
+                                                        <span class="form-check-label">
+                                                            Update
+                                                        </span>
+                                                    </label>
+                                                    <!--end::Checkbox-->
+
+                                                </div>
+                                                <!--end::Wrapper-->
                                             </td>
+                                            <!--end::Options-->
+
+                                        </tr>
+                                        <!--end::Counter row-->
+
+                                        <!--begin::Menu row-->
+                                        <tr>
+                                            <!--begin::Label-->
+                                            <td class="text-gray-800">Menu</td>
                                             <!--end::Label-->
 
                                             <!--begin::Options-->
@@ -526,10 +1104,10 @@
                                                     <!--begin::Checkbox-->
                                                     <label
                                                         class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
-                                                        <input class="form-check-input" type="checkbox" value=""
-                                                            name="permission[]">
+                                                        <input class="form-check-input" type="checkbox"
+                                                            value="menu-list" name="permission[]">
                                                         <span class="form-check-label">
-                                                            Read
+                                                            View
                                                         </span>
                                                     </label>
                                                     <!--end::Checkbox-->
@@ -537,35 +1115,48 @@
                                                     <!--begin::Checkbox-->
                                                     <label
                                                         class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
-                                                        <input class="form-check-input" type="checkbox" value=""
+                                                        <input class="form-check-input" type="checkbox" value="create-menu"
                                                             name="permission[]">
                                                         <span class="form-check-label">
-                                                            Write
+                                                            Add
                                                         </span>
                                                     </label>
                                                     <!--end::Checkbox-->
 
                                                     <!--begin::Checkbox-->
                                                     <label
-                                                        class="form-check form-check-sm form-check-custom form-check-solid form-check-success">
-                                                        <input class="form-check-input" type="checkbox" value=""
-                                                            name="permission[]">
-                                                        <span class="form-check-label" "="">
-                                                                        Create
-                                                                    </span>
-                                                                </label>
-                                                                <!--end::Checkbox-->
-                                                            </div>
-                                                            <!--end::Wrapper-->
-                                                        </td>
-                                                        <!--end::Options-->
-                                                    </tr>
-                                                    <!--end::Table row-->
-                                                                                            <!--begin::Table row-->
-                                                    <tr>
-                                                        <!--begin::Label-->
-                                                        <td class=" text-gray-800">Repository Management
+                                                        class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
+                                                        <input class="form-check-input" type="checkbox"
+                                                            value="edit-menu" name="permission[]">
+                                                        <span class="form-check-label">
+                                                            Edit
+                                                        </span>
+                                                    </label>
+                                                    <!--end::Checkbox-->
+
+                                                    <!--begin::Checkbox-->
+                                                    <label
+                                                        class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
+                                                        <input class="form-check-input" type="checkbox"
+                                                            value="update-menu" name="permission[]">
+                                                        <span class="form-check-label">
+                                                            Update
+                                                        </span>
+                                                    </label>
+                                                    <!--end::Checkbox-->
+
+                                                </div>
+                                                <!--end::Wrapper-->
                                             </td>
+                                            <!--end::Options-->
+
+                                        </tr>
+                                        <!--end::Menu row-->
+
+                                        <!--begin::Category row-->
+                                        <tr>
+                                            <!--begin::Label-->
+                                            <td class="text-gray-800">Category</td>
                                             <!--end::Label-->
 
                                             <!--begin::Options-->
@@ -575,10 +1166,10 @@
                                                     <!--begin::Checkbox-->
                                                     <label
                                                         class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
-                                                        <input class="form-check-input" type="checkbox" value=""
-                                                            name="permission[]">
+                                                        <input class="form-check-input" type="checkbox"
+                                                            value="category-list" name="permission[]">
                                                         <span class="form-check-label">
-                                                            Read
+                                                            View
                                                         </span>
                                                     </label>
                                                     <!--end::Checkbox-->
@@ -586,56 +1177,131 @@
                                                     <!--begin::Checkbox-->
                                                     <label
                                                         class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
-                                                        <input class="form-check-input" type="checkbox" value=""
+                                                        <input class="form-check-input" type="checkbox" value="create-category"
                                                             name="permission[]">
                                                         <span class="form-check-label">
-                                                            Write
+                                                            Add
                                                         </span>
                                                     </label>
                                                     <!--end::Checkbox-->
 
                                                     <!--begin::Checkbox-->
                                                     <label
-                                                        class="form-check form-check-sm form-check-custom form-check-solid form-check-success">
-                                                        <input class="form-check-input" type="checkbox" value=""
+                                                        class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
+                                                        <input class="form-check-input" type="checkbox"
+                                                            value="edit-category" name="permission[]">
+                                                        <span class="form-check-label">
+                                                            Edit
+                                                        </span>
+                                                    </label>
+                                                    <!--end::Checkbox-->
+
+                                                    <!--begin::Checkbox-->
+                                                    <label
+                                                        class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
+                                                        <input class="form-check-input" type="checkbox"
+                                                            value="update-category" name="permission[]">
+                                                        <span class="form-check-label">
+                                                            Update
+                                                        </span>
+                                                    </label>
+                                                    <!--end::Checkbox-->
+
+                                                </div>
+                                                <!--end::Wrapper-->
+                                            </td>
+                                            <!--end::Options-->
+
+                                        </tr>
+                                        <!--end::Category row-->                                        
+
+                                        <!--begin::Dish row-->
+                                        <tr>
+                                            <!--begin::Label-->
+                                            <td class="text-gray-800">Dish</td>
+                                            <!--end::Label-->
+
+                                            <!--begin::Options-->
+                                            <td>
+                                                <!--begin::Wrapper-->
+                                                <div class="d-flex">
+                                                    <!--begin::Checkbox-->
+                                                    <label
+                                                        class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
+                                                        <input class="form-check-input" type="checkbox"
+                                                            value="dish-list" name="permission[]">
+                                                        <span class="form-check-label">
+                                                            View
+                                                        </span>
+                                                    </label>
+                                                    <!--end::Checkbox-->
+
+                                                    <!--begin::Checkbox-->
+                                                    <label
+                                                        class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
+                                                        <input class="form-check-input" type="checkbox" value="create-dish"
                                                             name="permission[]">
-                                                        <span class="form-check-label" "="">
-                                                                        Create
-                                                                    </span>
-                                                                </label>
-                                                                <!--end::Checkbox-->
-                                                            </div>
-                                                            <!--end::Wrapper-->
-                                                        </td>
-                                                        <!--end::Options-->
-                                                    </tr>
-                                                    <!--end::Table row-->
-                                                                                    </tbody>
-                                            <!--end::Table body-->
-                                        </table>
-                                        <!--end::Table-->
-                                    </div>
-                                    <!--end::Table wrapper-->
-                                </div>
-                                <!--end::Permissions-->
+                                                        <span class="form-check-label">
+                                                            Add
+                                                        </span>
+                                                    </label>
+                                                    <!--end::Checkbox-->
+
+                                                    <!--begin::Checkbox-->
+                                                    <label
+                                                        class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
+                                                        <input class="form-check-input" type="checkbox"
+                                                            value="edit-dish" name="permission[]">
+                                                        <span class="form-check-label">
+                                                            Edit
+                                                        </span>
+                                                    </label>
+                                                    <!--end::Checkbox-->
+
+                                                    <!--begin::Checkbox-->
+                                                    <label
+                                                        class="form-check form-check-sm form-check-custom form-check-solid form-check-success me-5 me-lg-20">
+                                                        <input class="form-check-input" type="checkbox"
+                                                            value="update-dish" name="permission[]">
+                                                        <span class="form-check-label">
+                                                            Update
+                                                        </span>
+                                                    </label>
+                                                    <!--end::Checkbox-->
+
+                                                </div>
+                                                <!--end::Wrapper-->
+                                            </td>
+                                            <!--end::Options-->
+
+                                        </tr>
+                                        <!--end::Dish row-->
+
+                                    </tbody>
+                                    <!--end::Table body-->
+                                </table>
+                                <!--end::Table-->
                             </div>
-                            <!--end::Scroll-->
+                            <!--end::Table wrapper-->
+                        </div>
+                        <!--end::Permissions-->
+                    </div>
+                    <!--end::Scroll-->
 
-                            <!--begin::Actions-->
-                            <div class="text-left pt-3">
-
-                                                            <button type="submit" class="btn btn-lg btn-primary"
-                                                                data-kt-roles-modal-action="submit">
-                                                                <span class="indicator-label">
-                                                                    Submit
-                                                                </span>
-                                                                <span class="indicator-progress">
-                                                                    Please wait... <span
-                                                                        class="spinner-border spinner-border-sm align-middle ms-2"></span>
-                                                                </span>
-                                                            </button>
-                                                </div>
-                                                <!--end::Actions-->
+                    <!--begin::Actions-->
+                    <div class=" text-left pt-3">
+                        <button type="submit" class="btn btn-lg btn-primary"
+                            data-kt-roles-modal-action="submit">
+                            <span class="indicator-label">
+                                Submit
+                            </span>
+                            <span class="indicator-progress">
+                                Please wait... <span
+                                    class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                            </span>
+                        </button>
+                    </div>
+                    <!--end::Actions-->
                 </form>
                 <!--end::Form-->
             </div>
@@ -650,20 +1316,20 @@
 
 @section('scripts')
 <script type="text/javascript">
-$(document).ready(function() {
-    $('#kt_modal_add_role_form #kt_roles_select_all').on('click', function() {
+    $(document).ready(function () {
+        $('#kt_modal_add_role_form #kt_roles_select_all').on('click', function () {
 
-        if ($(this).is(':checked')) {
-            $.each($('#kt_modal_add_role_form [name="permission[]"]'), function() {
-                $(this).prop('checked', true);
-            });
-        } else {
-            $.each($('#kt_modal_add_role_form [name="permission[]"]'), function() {
-                $(this).prop('checked', false);
-            });
-        }
+            if ($(this).is(':checked')) {
+                $.each($('#kt_modal_add_role_form [name="permission[]"]'), function () {
+                    $(this).prop('checked', true);
+                });
+            } else {
+                $.each($('#kt_modal_add_role_form [name="permission[]"]'), function () {
+                    $(this).prop('checked', false);
+                });
+            }
 
+        });
     });
-});
 </script>
 @endsection

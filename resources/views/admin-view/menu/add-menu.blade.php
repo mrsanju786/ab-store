@@ -4,11 +4,82 @@
 @endsection
 @section('content')
 
+<style>
+
+.ui-timepicker-wrapper {
+	overflow-y: auto;
+	max-height: 150px;
+	width: auto;
+	background: #fff;
+	border: 1px solid #ddd;
+	-webkit-box-shadow:0 5px 10px rgba(0,0,0,0.2);
+	-moz-box-shadow:0 5px 10px rgba(0,0,0,0.2);
+	box-shadow:0 5px 10px rgba(0,0,0,0.2);
+	outline: none;
+	z-index: 10052;
+	margin: 0;
+}
+
+.ui-timepicker-wrapper .ui-timepicker-list li {
+    padding-right: 20px;
+}
+
+.ui-timepicker-list {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.ui-timepicker-duration {
+	margin-left: 5px; color: #888;
+}
+
+.ui-timepicker-list:hover .ui-timepicker-duration {
+	color: #888;
+}
+
+.ui-timepicker-list li {
+	padding: 3px 0 3px 5px;
+	cursor: pointer;
+	white-space: nowrap;
+	color: #000;
+	list-style: none;
+	margin: 0;
+}
+
+.ui-timepicker-list:hover .ui-timepicker-selected {
+	background: #fff; color: #000;
+}
+
+li.ui-timepicker-selected,
+.ui-timepicker-list li:hover,
+.ui-timepicker-list .ui-timepicker-selected:hover {
+	background: #1980EC; color: #fff;
+}
+
+li.ui-timepicker-selected .ui-timepicker-duration,
+.ui-timepicker-list li:hover .ui-timepicker-duration {
+	color: #ccc;
+}
+
+.ui-timepicker-list li.ui-timepicker-disabled,
+.ui-timepicker-list li.ui-timepicker-disabled:hover,
+.ui-timepicker-list li.ui-timepicker-selected.ui-timepicker-disabled {
+	color: #888;
+	cursor: default;
+}
+
+.ui-timepicker-list li.ui-timepicker-disabled:hover,
+.ui-timepicker-list li.ui-timepicker-selected.ui-timepicker-disabled {
+	background: #f2f2f2;
+}
+
+</style>
 
 <div class="row">
 
-    <div class="col-lg-12 col-12"> 
-        <div class="row">               
+    <div class="col-lg-12 col-12">
+        <div class="row">
             <div class="col-md-12 mx-auto">
                 <div class="card card-flush h-md-100" id="kt_modal_add_role">
                     <!--begin::Card header-->
@@ -25,7 +96,7 @@
                     <div class="card-body ">
                         <!--begin::Form-->
                         <form action="{{route('create-menu')}}" method="POST" enctype="multipart/form-data">
-                            @csrf                            
+                            @csrf
                             <!--begin::Row-->
                             <div class="row gx-9 h-100">
                                 <!--begin::Col-->
@@ -37,14 +108,15 @@
                                             <span class="required">Select Company</span>
                                         </label>
                                         <!--end::Label-->
-        
+
                                         <!--begin::Input-->
-                                        <select class="form-select form-select-solid" aria-label="Select example" name="company_id" id="company_id" data-control="select2" >
+                                        <select class="form-select form-select-solid" aria-label="Select example"
+                                            name="company_id" id="company_id" data-control="select2">
                                             <option value="">Select Company</option>
                                             @foreach($company as $companies)
                                             <option value="{{$companies->id}}">{{$companies->company_name}}</option>
                                             @endforeach
-                                            
+
                                         </select>
                                         <!--end::Input-->
                                         @if($errors->has('company_id'))
@@ -61,11 +133,11 @@
                                             <span class="required">Select Counter</span>
                                         </label>
                                         <!--end::Label-->
-        
+
                                         <!--begin::Input-->
-                                        <select class="form-select form-select-solid" aria-label="Select example" name="counter_id" id="counter_id" data-control="select2" >
+                                        <select class="form-select form-select-solid" aria-label="Select example"
+                                            name="counter_id" id="counter_id" data-control="select2">
                                             <option>Select Counter</option>
-                                            
                                         </select>
                                         <!--end::Input-->
                                         @if($errors->has('counter_id'))
@@ -75,23 +147,54 @@
                                     </div>
                                     <!--end::Input group-->
 
-                                    <!--begin::Input group-->   
-                                    <div class="fv-row mb-10 fv-plugins-icon-container timedisplay">
-                                        <!--begin::Label-->
-                                        <label class="fs-5 fw-bold form-label mb-2">
-                                            <span class="required">From Time</span>
-                                        </label>
-                                        <!--end::Label-->    
-                                        <!--begin::Input-->
-                                        <input type="time" class="form-control form-control-solid" placeholder="Enter From time"
-                                            name="from_time">
-                                        <!--end::Input-->
-                                        @if($errors->has('from_date'))
-                                        <span class="text-danger">{{ $errors->first('from_date') }}</span>
-                                        @endif
-                                        <div class="fv-plugins-message-container invalid-feedback"></div>
-                                    </div>                                 
-                                    <!--end::Input group-->                                    
+                                    <!--begin::time period-->
+                                    <div id="basicExample">
+                                        <div class="fv-row mb-10 fv-plugins-icon-container">
+                                            <!--begin::Label-->
+                                            <label class="fs-5 fw-bold form-label mb-2">
+                                                <span class="required">From Time</span>
+                                            </label>
+                                            <!--end::Label-->
+                                            <!--begin::Input-->
+                                            <div class="d-flex justify-content-start position-relative">
+                                                <div class=" w-100">
+                                                    <input type="text"name="from_date" class="time start form-control form-control-solid"  placeholder="Enter From Time"/>
+                                                </div>
+                                                <div class="position-absolute timedisplayicon">
+                                                    <i class="bi bi-clock fw-bold"></i>
+                                                </div>
+                                            </div>
+                                            <!--end::Input--> 
+                                            @if($errors->has('from_date'))
+                                            <span class="text-danger">{{ $errors->first('from_date') }}</span>
+                                            @endif
+                                            <div class="fv-plugins-message-container invalid-feedback"></div>
+                                        </div>                                
+
+                                        <div class="fv-row mb-10 fv-plugins-icon-container">
+                                            <!--begin::Label-->
+                                            <label class="fs-5 fw-bold form-label mb-2">
+                                                <span class="required">To Time</span>
+                                            </label>
+                                            <!--end::Label-->
+
+                                            <!--begin::Input-->
+                                            <div class="d-flex justify-content-start position-relative">
+                                                <div class=" w-100">
+                                                    <input type="text" name="to_time" class="time end form-control form-control-solid" placeholder="Enter To Time"/>
+                                                </div>
+                                                <div class="position-absolute timedisplayicon">
+                                                    <i class="bi bi-clock fw-bold"></i>
+                                                </div>
+                                            </div>
+                                            <!--end::Input-->
+                                            @if($errors->has('to_time'))
+                                            <span class="text-danger">{{ $errors->first('to_time') }}</span>
+                                            @endif
+                                            <div class="fv-plugins-message-container invalid-feedback"></div>
+                                        </div>
+                                    </div>
+                                    <!--end::time period-->                                        
 
                                     <!--begin::Input group-->
                                     <div class="fv-row mb-10 fv-plugins-icon-container timedisplay">
@@ -123,11 +226,12 @@
                                             <span class="required">Select Branch</span>
                                         </label>
                                         <!--end::Label-->
-        
+
                                         <!--begin::Input-->
-                                        <select class="form-select form-select-solid" aria-label="Select example" name="branch_id" id="branch_id"  data-control="select2" >
+                                        <select class="form-select form-select-solid" aria-label="Select example"
+                                            name="branch_id" id="branch_id" data-control="select2">
                                             <option>Select Branch</option>
-                                            
+
                                         </select>
                                         <!--end::Input-->
                                         @if($errors->has('branch_id'))
@@ -137,14 +241,14 @@
                                     </div>
                                     <!--end::Input group-->
 
-                                    <!--begin::Input group--> 
+                                    <!--begin::Input group-->
                                     <div class="fv-row mb-10 fv-plugins-icon-container">
                                         <!--begin::Label-->
                                         <label class="fs-5 fw-bold form-label mb-2">
                                             <span class="required">Menu Name</span>
                                         </label>
                                         <!--end::Label-->
-    
+
                                         <!--begin::Input-->
                                         <input class="form-control form-control-solid" placeholder="Enter Menu Name"
                                             name="menu_name">
@@ -153,27 +257,28 @@
                                         <span class="text-danger">{{ $errors->first('menu_name') }}</span>
                                         @endif
                                         <div class="fv-plugins-message-container invalid-feedback"></div>
-                                    </div>                                   
+                                    </div>
                                     <!--end::Input group-->
 
-                                    <!--begin::Input group-->  
+                                    <!--begin::Input group-->
                                     <div class="fv-row mb-10 fv-plugins-icon-container timedisplay">
                                         <!--begin::Label-->
                                         <label class="fs-5 fw-bold form-label mb-2">
-                                            <span class="required">To Time</span>
+                                            <span class="required">Off Time</span>
                                         </label>
                                         <!--end::Label-->
-    
                                         <!--begin::Input-->
-                                        <input type="time" class="form-control form-control-solid" placeholder="Enter To time"
-                                            name="to_time">
+                                        <input type="time" class="form-control form-control-solid"
+                                            placeholder="Enter Off Time" name="off_time">
                                         <!--end::Input-->
-                                        @if($errors->has('to_time'))
-                                        <span class="text-danger">{{ $errors->first('to_time') }}</span>
+                                        @if($errors->has('off_time'))
+                                        <span class="text-danger">{{ $errors->first('off_time') }}</span>
                                         @endif
-                                        <div class="fv-plugins-message-container invalid-feedback"></div>
-                                    </div>                                  
+                                        <div class="fv-plugins-message-container invalid-feedback"></div>                                        
+                                    </div>
                                     <!--end::Input group-->
+
+                                    
 
                                     <!--begin::Input group-->
                                     <div class="fv-row mb-10 fv-plugins-icon-container">
@@ -193,22 +298,26 @@
                                                     <div class="fv-row mb-10 fv-plugins-icon-container">
                                                         <ul class="list-style-none">
                                                             <li class="pt-4">
-                                                                <input class="form-check-input" name="repeat_days[]" type="checkbox" value="Monday" checked>
+                                                                <input class="form-check-input" name="repeat_days[]"
+                                                                    type="checkbox" value="Monday" checked>
                                                                 <span class="fw-semibold ps-2 fs-6">Monday </span>
                                                             </li>
                                                             <li class="pt-4">
-                                                                <input class="form-check-input" name="repeat_days[]" type="checkbox" value="Tuesday">
+                                                                <input class="form-check-input" name="repeat_days[]"
+                                                                    type="checkbox" value="Tuesday">
                                                                 <span class="fw-semibold ps-2 fs-6">Tuesday </span>
                                                             </li>
                                                             <li class="pt-4">
-                                                                <input class="form-check-input" name="repeat_days[]" type="checkbox" value="Wednesday">
+                                                                <input class="form-check-input" name="repeat_days[]"
+                                                                    type="checkbox" value="Wednesday">
                                                                 <span class="fw-semibold ps-2 fs-6">Wednesday </span>
                                                             </li>
                                                             <li class="pt-4">
-                                                                <input class="form-check-input" name="repeat_days[]" type="checkbox" value="Thursday">
+                                                                <input class="form-check-input" name="repeat_days[]"
+                                                                    type="checkbox" value="Thursday">
                                                                 <span class="fw-semibold ps-2 fs-6">Thursday</span>
                                                             </li>
-                                                        </ul>  
+                                                        </ul>
                                                     </div>
                                                     <!--end::Input group-->
 
@@ -225,15 +334,18 @@
                                                     <div class="fv-row mb-10 fv-plugins-icon-container">
                                                         <ul class="list-style-none">
                                                             <li class="pt-4">
-                                                                <input class="form-check-input" name="repeat_days[]" type="checkbox" value="Friday">
+                                                                <input class="form-check-input" name="repeat_days[]"
+                                                                    type="checkbox" value="Friday">
                                                                 <span class="fw-semibold ps-2 fs-6">Friday</span>
                                                             </li>
                                                             <li class="pt-4">
-                                                                <input class="form-check-input" name="repeat_days[]" type="checkbox" value="Saturday">
+                                                                <input class="form-check-input" name="repeat_days[]"
+                                                                    type="checkbox" value="Saturday">
                                                                 <span class="fw-semibold ps-2 fs-6">Saturday</span>
                                                             </li>
                                                             <li class="pt-4">
-                                                                <input class="form-check-input" name="repeat_days[]" type="checkbox" value="Sunday">
+                                                                <input class="form-check-input" name="repeat_days[]"
+                                                                    type="checkbox" value="Sunday">
                                                                 <span class="fw-semibold ps-2 fs-6">Sunday</span>
                                                             </li>
                                                         </ul>
@@ -264,7 +376,8 @@
                                 <div class="col-md-12 mx-auto">
                                     <!--begin::Actions-->
                                     <div class="text-left pt-3">
-                                        <button type="submit" class="btn btn-lg btn-primary" data-kt-roles-modal-action="submit">
+                                        <button type="submit" class="btn btn-lg btn-primary"
+                                            data-kt-roles-modal-action="submit">
                                             <span class="indicator-label">
                                                 Submit
                                             </span>
@@ -282,145 +395,159 @@
                         </form>
                         <!--end::Form-->
                     </div>
-                    <!--end::Card body-->                
-                </div>                
+                    <!--end::Card body-->
+                </div>
             </div>
         </div>
     </div>
 
-    {{--<div class="col-lg-6 col-12">         
-        <div class="row ">               
+    {{--<div class="col-lg-6 col-12">
+        <div class="row ">
             <div class="col-md-12 mx-auto">
-                <div class="card card-flush h-md-100" id="kt_modal_add_role">                                                     
+                <div class="card card-flush h-md-100" id="kt_modal_add_role">
                     <div class="row">
                         <div class="col-md-12">
                             <div class="card-header py-7">
-                                    <!--begin::Card title-->
-                                    <div class="card-title">
-                                    <h2>Variants  </h2>
+                                <!--begin::Card title-->
+                                <div class="card-title">
+                                    <h2>Variants </h2>
                                 </div>
-                                <!--end::Card title-->   
+                                <!--end::Card title-->
                                 <!--begin::Create campaign button-->
                                 <div class="card-toolbar">
-                                    <a href="#" type="button" class="btn btn-sm btn-primary"  data-bs-toggle="modal" data-bs-target="#kt_modal_create_campaign">Add</a>
+                                    <a href="#" type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal"
+                                        data-bs-target="#kt_modal_create_campaign">Add</a>
                                 </div>
                                 <!--end::Create campaign button-->
-                            </div>                               
-                        </div> 
+                            </div>
+                        </div>
 
                         <div class="col-md-12">
                             <!--begin::Body-->
                             <div class="card-body pt-5">
                                 <div class="d-flex justify-content-between">
-                                    <div class="fw-bold">Name  </div>
+                                    <div class="fw-bold">Name </div>
                                     <div class="fw-bold">Price </div>
-                                    <div class="fw-bold">For  </div>
+                                    <div class="fw-bold">For </div>
                                 </div>
-                            </div>                                
-                            <!--end::Body-->
-                        </div> 
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row mt-6">               
-            <div class="col-md-12 mx-auto">
-                <div class="card card-flush h-md-100" id="kt_modal_add_role">                                                     
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="card-header py-7">
-                                    <!--begin::Card title-->
-                                    <div class="card-title">
-                                    <h2>Extras  </h2>
-                                </div>
-                                <!--end::Card title-->   
-                                <!--begin::Create campaign button-->
-                                <div class="card-toolbar">
-                                    <a href="#" type="button" class="btn  btn-sm btn-primary"  data-bs-toggle="modal" data-bs-target="#kt_modal_create_campaign">Add</a>
-                                </div>
-                                <!--end::Create campaign button-->
-                            </div>                               
-                        </div> 
-
-                        <div class="col-md-12">
-                            <!--begin::Body-->
-                            <div class="card-body pt-5">
-                                <div class="d-flex justify-content-between">
-                                    <div class="fw-bold">Name  </div>
-                                    <div class="fw-bold">Price </div>
-                                    <div class="fw-bold">For  </div>
-                                    </div>
-                            </div>                                
+                            </div>
                             <!--end::Body-->
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        
+
+        <div class="row mt-6">
+            <div class="col-md-12 mx-auto">
+                <div class="card card-flush h-md-100" id="kt_modal_add_role">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card-header py-7">
+                                <!--begin::Card title-->
+                                <div class="card-title">
+                                    <h2>Extras </h2>
+                                </div>
+                                <!--end::Card title-->
+                                <!--begin::Create campaign button-->
+                                <div class="card-toolbar">
+                                    <a href="#" type="button" class="btn  btn-sm btn-primary" data-bs-toggle="modal"
+                                        data-bs-target="#kt_modal_create_campaign">Add</a>
+                                </div>
+                                <!--end::Create campaign button-->
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <!--begin::Body-->
+                            <div class="card-body pt-5">
+                                <div class="d-flex justify-content-between">
+                                    <div class="fw-bold">Name </div>
+                                    <div class="fw-bold">Price </div>
+                                    <div class="fw-bold">For </div>
+                                </div>
+                            </div>
+                            <!--end::Body-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>--}}
-
 </div>
-
 
 @endsection
 
 @section('scripts')
+
 <script type="text/javascript">
-$(document).ready(function() {
-    $('#kt_modal_add_role_form #kt_roles_select_all').on('click', function() {
+    $(document).ready(function () {
+        $('#kt_modal_add_role_form #kt_roles_select_all').on('click', function () {
 
-        if ($(this).is(':checked')) {
-            $.each($('#kt_modal_add_role_form [name="permission[]"]'), function() {
-                $(this).prop('checked', true);
-            });
-        } else {
-            $.each($('#kt_modal_add_role_form [name="permission[]"]'), function() {
-                $(this).prop('checked', false);
-            });
-        }
+            if ($(this).is(':checked')) {
+                $.each($('#kt_modal_add_role_form [name="permission[]"]'), function () {
+                    $(this).prop('checked', true);
+                });
+            } else {
+                $.each($('#kt_modal_add_role_form [name="permission[]"]'), function () {
+                    $(this).prop('checked', false);
+                });
+            }
 
+        });
     });
-});
 
-$('#company_id').on('change', function(){
-    $("#branch_id").empty();
-    $("#branch_id").append('<option value="">Select Company</option>');
-    var company_id = $(this).val();
-    $.ajax({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
-        url: "{{ url('admin/get-branch') }}/" + company_id,
-        type: "GET",
-        success: function(response) { 
-            $.each(response,function(key, value)
-            {
-                $("#branch_id").append('<option value=' + value.id + '>' + value.name + '</option>');
-            });
-        }
+    $('#company_id').on('change', function () {
+        $("#branch_id").empty();
+        $("#branch_id").append('<option value="">Select Company</option>');
+        var company_id = $(this).val();
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "{{ url('admin/get-branch') }}/" + company_id,
+            type: "GET",
+            success: function (response) {
+                $.each(response, function (key, value) {
+                    $("#branch_id").append('<option value=' + value.id + '>' + value.name + '</option>');
+                });
+            }
+        });
     });
-});
 
-$('#branch_id').on('change', function(){
-    $("#counter_id").empty();
-    $("#counter_id").append('<option value="">Select Counter</option>');
-    var branch_id = $(this).val();
-    $.ajax({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
-        url: "{{ url('admin/get-counter') }}/" + branch_id,
-        type: "GET",
-        success: function(response) {
-            $.each(response,function(key, value)
-            {
-                $("#counter_id").append('<option value=' + value.id + '>' + value.counter_name + '</option>');
-            });
-        }
+    $('#branch_id').on('change', function () {
+        $("#counter_id").empty();
+        $("#counter_id").append('<option value="">Select Counter</option>');
+        var branch_id = $(this).val();
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "{{ url('admin/get-counter') }}/" + branch_id,
+            type: "GET",
+            success: function (response) {
+                $.each(response, function (key, value) {
+                    $("#counter_id").append('<option value=' + value.id + '>' + value.counter_name + '</option>');
+                });
+            }
+        });
     });
-});
-
 </script>
+
+<!-- dipak time start -->
+<script src="{{asset('admin_site/assets/js/jquery.timepicker.js')}}"></script>
+<script src="{{asset('admin_site/assets/js/datepair.js')}}"></script>
+<script type="text/javascript">
+    $('#basicExample .time').timepicker({
+        'showDuration': false,
+        'timeFormat': 'H:i',
+        'step': function (i) {
+            return (i % 2) ? 1 : 1;
+        }
+    });
+    var basicExampleEl = document.getElementById('basicExample');
+    var datepair = new Datepair(basicExampleEl);
+</script>
+<!-- dipak time end -->
+
 @endsection
