@@ -20,8 +20,8 @@ class BranchController extends Controller
 
     public function addBranch()
     {
-        $region_list = Region::get();
-        $company = Company::get();
+        $region_list = Region::where('is_active', 1)->get();
+        $company = Company::where('is_active', 1)->get();
         return view('admin-view.branch.add_branch', compact('region_list','company'));
     }
 
@@ -50,6 +50,7 @@ class BranchController extends Controller
         $branch->is_table_room = $request->is_table_room ?? 0;
         $branch->company_id = $request->company_id;
         $branch->city_id = $request->city_id;
+        $branch->tax_ids = implode(",", $request->tax_id);
         $branch->save();
 
         return redirect()->route('branch_list')->with('success', 'Branch Added Successfully!');
@@ -88,6 +89,7 @@ class BranchController extends Controller
         $branch->is_table_room = $request->is_table_room ?? 0;
         $branch->company_id = $request->company_id;
         $branch->city_id = $request->city_id;
+        $branch->tax_ids = implode(",", $request->tax_id);
         $branch->save();
 
         return redirect()->route('branch_list')->with('success', 'Changes saved Successfully!');

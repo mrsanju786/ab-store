@@ -159,6 +159,27 @@
                                 <div class="fv-row mb-10 fv-plugins-icon-container">
                                     <!--begin::Label-->
                                     <label class="fs-5 fw-bold form-label mb-2">
+                                        <span class="required">Select Tax</span>
+                                    </label>
+                                    <!--end::Label-->
+
+                                    <!--begin::Input-->
+                                    <select class="form-select form-select-solid" aria-label="Select example" name="tax_id" id="tax_id"  data-control="select2" >
+                                        <option value="">Select Tax</option>
+
+                                    </select>
+                                    <!--end::Input-->
+                                    @if($errors->has('tax_id'))
+                                    <span class="text-danger">{{ $errors->first('tax_id') }}</span>
+                                    @endif
+                                    <div class="fv-plugins-message-container invalid-feedback"></div>
+                                </div>
+                                <!--end::Input group-->
+
+                                <!--begin::Input group-->
+                                <div class="fv-row mb-10 fv-plugins-icon-container">
+                                    <!--begin::Label-->
+                                    <label class="fs-5 fw-bold form-label mb-2">
                                         <span>Tax Inclusive</span>
                                     </label>
                                     <!--end::Label-->
@@ -506,6 +527,27 @@ $(document).ready(function() {
             }
         });
     }
+
+    
+    var cat_id = "{{$dish->category_id}}";
+    $('#tax_id option:gt(0)').remove();
+    if(cat_id){
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "{{ url('admin/get-branch-tax') }}/" + cat_id,
+            type: "GET",
+            success: function(response) {
+                var Dish_tax = "{{$dishTax}}";
+                $.each(response,function(key, value)
+                {
+                    $("#tax_id").append('<option value=' + value.id + '>' + value.name + '</option>');
+                });
+                $('#tax_id option[value='+Dish_tax+']').attr('selected','selected');
+            }
+        });
+    }
     
 });
 
@@ -557,6 +599,26 @@ $('#counter_id').on('change', function(){
                 $.each(response,function(key, value)
                 {
                     $("#category_id").append('<option value=' + value.id + '>' + value.category_name + '</option>');
+                });
+            }
+        });
+    }
+});
+
+$('#category_id').on('change', function(){
+    var category_id = $(this).val();
+    $('#tax_id option:gt(0)').remove();
+    if(category_id){
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "{{ url('admin/get-branch-tax') }}/" + category_id,
+            type: "GET",
+            success: function(response) {
+                $.each(response,function(key, value)
+                {
+                    $("#tax_id").append('<option value=' + value.id + '>' + value.name + '</option>');
                 });
             }
         });

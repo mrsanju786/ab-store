@@ -204,6 +204,27 @@
                                 <div class="fv-row mb-10 fv-plugins-icon-container">
                                     <!--begin::Label-->
                                     <label class="fs-5 fw-bold form-label mb-2">
+                                        <span class="required">Select Tax</span>
+                                    </label>
+                                    <!--end::Label-->
+
+                                    <!--begin::Input-->
+                                    <select class="form-select form-select-solid" aria-label="Select example" name="tax_id[]" id="tax_id" data-control="select2" data-allow-clear="true" multiple="multiple">
+                                        <option value="">Select Tax</option>
+                                  
+                                    </select>
+                                    <!--end::Input-->
+                                    @if($errors->has('tax_id'))
+                                    <span class="text-danger">{{ $errors->first('tax_id') }}</span>
+                                    @endif
+                                    <div class="fv-plugins-message-container invalid-feedback"></div>
+                                </div>
+                                <!--end::Input group-->
+
+                                <!--begin::Input group-->
+                                <div class="fv-row mb-10 fv-plugins-icon-container">
+                                    <!--begin::Label-->
+                                    <label class="fs-5 fw-bold form-label mb-2">
                                         <span class="required">Branch Service</span>
                                     </label>
                                     <!--end::Label-->
@@ -329,6 +350,25 @@ $('#company_id').on('change', function(){
             $.each(response,function(key, value)
             {
                 $("#city_id").append('<option value=' + value.id + '>' + value.city_name + '</option>');
+            });
+        }
+    });
+});
+
+$('#company_id').on('change', function(){
+    $("#tax_id").empty();
+    $("#tax_id").append('<option value="">Select Tax</option>');
+    var company_id = $(this).val();
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        url: "{{ url('admin/master/get-country-tax') }}/" + company_id,
+        type: "GET",
+        success: function(response) {
+            $.each(response,function(key, value)
+            {
+                $("#tax_id").append('<option value=' + value.id + '>' + value.name + '</option>');
             });
         }
     });
