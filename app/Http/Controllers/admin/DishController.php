@@ -15,6 +15,7 @@ use App\Models\CountryTax;
 use App\Models\DishHasTax;
 use Storage;
 use Auth;
+use Maatwebsite\Excel\Facades\Excel;
 
 class DishController extends Controller
 {
@@ -169,5 +170,9 @@ class DishController extends Controller
         $tax_id = explode(",", $tax_detail->tax_ids);
         $tax = CountryTax::whereIn('id', $tax_id)->get();
         return $tax;
+    }
+
+    public function exportDish(){
+
     }
 }
