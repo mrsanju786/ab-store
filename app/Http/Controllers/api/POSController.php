@@ -148,7 +148,7 @@ class POSController extends Controller
     }
 
     //save order
-    public function orderPlaced(Request $request)
+    public function saveOrder(Request $request)
     {
       try {
         
@@ -212,11 +212,59 @@ class POSController extends Controller
             $order->table_id      = $request->table_id;
             $order->save();
 
-            $get_cart = Cart::where('user_id', $user_id)->delete();
+            // $get_cart = Cart::where('user_id', $request->user_id)->delete();
 
             DB::commit();
 
             return response()->json(['message'=>'Your order has been placed successfully!','status'=>true,'data'=>['order_id'=>$order->id]]);                
+
+        }catch (\Throwable $th) {
+            DB::rollback();
+            Log::debug($th);
+            return response()->json(['status' => 'error', 'message' => 'Something went wrong.'], 400);
+        }
+    }
+
+    //save order details
+    public function svaeOrderDetails(Request $request)
+    {
+      try {
+        
+            $validator = Validator::make($request->all(), [
+                'order_id'         => 'nullable',
+                'dish_id'          => 'nullable',
+                'dish_variant_id'  => 'nullable',
+                'dish_name'        => 'nullable',
+                'order_quantity'   => 'nullable',
+                'order_status'     => 'nullable',
+                'cd_status'        => 'nullable',
+                'dish_price'       => 'nullable',
+            ]);   
+            
+            if ($validator->fails()) {
+                return response()->json(['errors' => $validator->errors()->all() ]);
+            }
+                
+            DB::beginTransaction();
+
+            $orderDetails = new orderDetail();
+            $orderDetails->order_id          = $request->order_id;
+            $orderDetails->dish_id           = $request->dish_id;
+            $orderDetails->dish_variant_id   = $request->dish_variant_id;
+            $orderDetails->dish_name         = $request->dish_name;
+            $orderDetails->order_quantity    = $request->order_quantity;
+            $orderDetails->order_status      = $request->order_status;
+            $orderDetails->order_status      = $request->order_status;    
+            $orderDetails->cd_status         = $request->cd_status;
+            $orderDetails->dish_price        = $request->dish_price;
+            $orderDetails->dish_variant_price = $request->dish_variant_price;
+            $orderDetails->save();
+
+            // $get_cart = Cart::where('user_id', $request->user_id)->delete();
+
+            DB::commit();
+
+            return response()->json(['message'=>'Your order details has been saved successfully!','status'=>true,'data'=>[]]);                
 
         }catch (\Throwable $th) {
             DB::rollback();
