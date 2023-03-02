@@ -9,6 +9,7 @@ use App\Models\State;
 use App\Models\Branch;
 use App\Models\Country;
 use App\Models\Company;
+use App\Models\Discount;
 use Auth;
 use Carbon\Carbon;
 
@@ -21,9 +22,10 @@ class LocationController extends Controller
 
     public function addLocation()
     {
+        $discount = Discount::get();
         $state = State::get();
         $branch = Branch::where('is_active', 1)->get();
-        return view('admin-view.location.add_location', compact('state','branch'));
+        return view('admin-view.location.add_location', compact('state','branch','discount'));
     }
 
     public function createLocation(Request $request){
@@ -55,6 +57,7 @@ class LocationController extends Controller
         $branch_detail = Branch::find($request->branch_id);
         $company = Company::find($branch_detail->company_id);
         $location->country_id = $company->country_id;
+        $location->discount_ids = $request->discount_id;
         $location->save();
 
         return redirect()->route('location_list')->with('success', 'Location Added Successfully!');
@@ -65,7 +68,8 @@ class LocationController extends Controller
         $location = Location::find(base64_decode($id));
         $branch = Branch::where('is_active', 1)->get();
         $state = State::get();
-        return view('admin-view.location.edit_location', compact('location','branch','state'));
+        $discount = Discount::get();
+        return view('admin-view.location.edit_location', compact('location','branch','state','discount'));
     }
 
     public function updateLocation(Request $request){
@@ -82,8 +86,10 @@ class LocationController extends Controller
             'branch_id' => 'required',
         ]);
 
-        $id = $request->branch_id;
-        $location = Location::find($id);
+        // $id = $request->branch_id;
+        $location_id = $request->location_id;
+        // dd($request->location_id);
+        $location = Location::find($location_id);
         $location->address = $request->location_address;
         $location->state_id = $request->state_id;
         $location->city_id = $request->city_id;
@@ -98,6 +104,7 @@ class LocationController extends Controller
         $branch_detail = Branch::find($request->branch_id);
         $company = Company::find($branch_detail->company_id);
         $location->country_id = $company->country_id;
+        $location->discount_ids = $request->discount_id;
         $location->save();
 
         return redirect()->route('location_list')->with('success', 'Changes saved Successfully!');
