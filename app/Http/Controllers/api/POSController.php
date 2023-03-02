@@ -153,73 +153,64 @@ class POSController extends Controller
       try {
         
             $validator = Validator::make($request->all(), [
-                'user_id'     => 'required',
-                'total_price' => 'required',
+                'user_id'     => 'nullable',
+                'order_number' => 'nullable',
+                'order_status' => 'nullable',
+                'cd_status' => 'nullable',
+                'order_date' => 'nullable',
+                'branch_id' => 'nullable',
+                'order_through' => 'nullable',
+                'sub_total' => 'nullable',
+                'tax_amount' => 'nullable',
+                'discount_name' => 'nullable',
+                'discount_type' => 'nullable',
+                'discount_amount' => 'nullable',
+                'mode_of_transaction' => 'nullable',
+                'payment_timestamp' => 'nullable',
+                'order_prepared_by' => 'nullable',
+                'order_closed_by' => 'nullable',
+                'grand_total' => 'nullable',
+                'invoice_number' => 'nullable',
+                'paid_or_cancel' => 'nullable',
+                'refund_through' => 'nullable',
+                'instruction' => 'nullable',
+                'transaction_id' => 'nullable',
+                'table_id' => 'nullable',
             ]);   
             
             if ($validator->fails()) {
                 return response()->json(['errors' => $validator->errors()->all() ]);
             }
-            
-            //request parameter
-            $user_id         = $request->user_id;
-            $total_price     = $request->total_price;
-            $payment_method  = $request->payment_method;
-
-            if($payment_method=='online'){
-                $via_payment = "online";
-            }else{
-                $via_payment = "online";
-            }
-
-            $order_through   = $request->order_through;
-            if($order_through=='app'){
-                $order_type = "app";
-            }else{
-                $order_type = "web";
-            }
-            
-            //get cart details
-            $get_cart = Cart::with('Dish.counter.branch')
-                            ->where('user_id', $user_id)
-                            ->get();
-            
-            //get branch id
-            $branch_id = Null;
-            foreach ($get_cart as $cart_data) {
-                $branch_id = $cart_data->Dish->counter->branch->id;
-            }                
+                
             DB::beginTransaction();
 
             $order = new order();
-            $order->order_number  = "ORDER-".uniqid();
-            $order->user_id       = $user_id ?? Null;
-            $order->branch_id     = $branch_id;
-            $order->order_through = $order_type;    
-            $order->sub_total     = $total_price;
-            $order->tax_amount    = 0;
-            $order->tax_percent   = 0;
-            $order->mode_of_transaction = $via_payment;
-            $order->payment_timestamp   = \Carbon\Carbon::now();
-            $order->grand_total    = $total_price;
-            $order->invoice_number = "#".uniqid();
+            $order->order_number  = $request->order_number;
+            $order->user_id       = $request->user_id;
+            $order->order_status  = $request->order_status;
+            $order->cd_status     = $request->cd_status;
+            $order->order_date    = $request->order_date;
+            $order->branch_id     = $request->branch_id;
+            $order->order_through = $request->order_through;    
+            $order->sub_total     = $request->sub_total;
+            $order->tax_amount    = $request->tax_amount;
+            $order->tax_percent   = $request->tax_percent;
+            $order->discount_name   = $request->discount_name;
+            $order->discount_type   = $request->discount_type;
+            $order->discount_amount   = $request->discount_amount;
+            $order->mode_of_transaction = $request->mode_of_transaction;
+            $order->payment_timestamp   = $request->payment_timestamp;
+            $order->order_prepared_by   = $request->order_prepared_by;
+            $order->order_closed_by   = $request->order_closed_by;
+            $order->order_closed_time   = $request->order_closed_time;
+            $order->grand_total    = $request->grand_total;
+            $order->invoice_number = $request->invoice_number;
+            $order->paid_or_cancel = $request->paid_or_cancel;
+            $order->refund_through = $request->refund_through;
+            $order->instruction = $request->instruction;
+            $order->transaction_id = $request->transaction_id;
+            $order->table_id      = $request->table_id;
             $order->save();
-
-            //store order details
-            $sub_total =0;
-            foreach ($get_cart as $cart_data) {
-                $sub_total += $cart_data->total_price;
-            
-                $order_detail = new orderDetail();
-                $order_detail->order_id = $order->id;
-                $order_detail->dish_id = $cart_data->dish_id;
-                $order_detail->dish_variant_id = 0;
-                $order_detail->dish_variant_price = 0;    
-                $order_detail->dish_name = $cart_data->dish->dish_name;
-                $order_detail->order_quantity = $cart_data->quantity;
-                $order_detail->dish_price = $cart_data->dish_price;
-                $order_detail->save();
-            }
 
             $get_cart = Cart::where('user_id', $user_id)->delete();
 

@@ -20,6 +20,7 @@ use App\Models\Location;
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\OrderDetail;
+use App\Models\DishVariant;
 use Storage;
 use Auth;
 use Redirect;
@@ -298,35 +299,99 @@ class APIController extends Controller
            
             $array =[];
             foreach($dishList as $dish){
-                //get tax 
-                $taxPercent =Null;
-                $taxName =Null;
-                $tax_withdish_amount =0;
-                if($dish->is_tax_inclusive ==1){
-
-                $dish_has_taxes = DB::table('dish_has_taxes')
-                                    ->where('dish_id',$dish->id)
-                                    ->first();
-
-                //country tax  
-                if(!empty($dish_has_taxes)) {
-                    $tax = DB::table('country_taxes')
-                                ->where('id',$dish_has_taxes->tax_id)
-                                ->first();
+                $taxPercent =0;
+                    $taxName =Null;
+                    $dish_tax =0;
+                    $discount_percent =0;
+                    $discount_name =Null;
+                    $discount_dish_amount =0;
+                    $tax_with_dish_amount =0;
+                    $dish_discount_with_tax=0;
+                    $tax=0;
+                    $discount=0;
+                    //get discount
+                    $discount_amount =0;
+                    if(!empty($dish->discount_ids)){
+                        $discount = DB::table('discounts')
+                                        ->where('id',$dish->discount_ids)
+                                        ->where('is_active',1)
+                                        ->first();  
+                                        
+                        $discount_percent =$discount->discount_percent;
+                        $discount_name    =$discount->discount_name; 
+                        $discount_amount  =($dish->dish_price *$discount->discount_percent)/100; 
+                        $discount_dish_amount =$dish->dish_price-$discount_amount;
+                                          
+                    }
+                    //dish tax
+                    if($dish->is_tax_inclusive ==1){
+                        
+                        //get tax on dish
+                        $dish_has_taxes = DB::table('dish_has_taxes')
+                                            ->where('dish_id',$dish->id)
+                                            ->first();
+                        
+                        //country tax  
+                        if(!empty($dish_has_taxes)) {
+                            $tax = DB::table('country_taxes')
+                                        ->where('id',$dish_has_taxes->tax_id)
+                                        ->where('is_active',1)
+                                        ->first();
+                            
+                            $taxPercent = $tax->tax_percent;
+                            $taxName    = $tax->name; 
+                        }
+                        $dish_tax  = ($dish->dish_price *$taxPercent) /100;
+                        $tax_with_dish_amount =$dish->dish_price+$dish_tax;
+                        $dish_discount_with_tax = ($discount_dish_amount * $taxPercent)/100;
+                    }
+                    //get final price
+                    $final_price  = 0;
+                    if($discount_dish_amount || $dish_discount_with_tax){
+                        $final_price  = $discount_dish_amount +  $dish_discount_with_tax;
+                    }elseif($discount_dish_amount){
+                        $final_price  = $discount_dish_amount;
+                    }elseif($tax_with_dish_amount){
+                        $final_price  = $tax_with_dish_amount;
+                    }else{
+                        $final_price  = $dish->dish_price;
+                    }
+                //get dish variant 
+                $dish_variant = [];
+                $variant_price =0;
+                $discount_variant_price =0;
+                $dishvariant = DishVariant::where('dish_id',$dish->id)->get(); 
+                foreach($dishvariant as $variant){
                     
-                    $taxPercent = $tax->tax_percent;
-                    $taxName    = $tax->name; 
-                }
-                   $tax_with_dish_amount = $dish->dish_price + (($dish->dish_price *$taxPercent) /100);
-
-                }else{
-                   $tax_with_dish_amount = $dish->dish_price;
-                }
-
+                    if($discount_percent || $taxPercent){
+                        $discount_percent =!empty($discount->discount_percent) ? $discount->discount_percent : 0;
+                        $taxPercent = !empty($tax->tax_percent) ? $tax->tax_percent :0;
+                        $discount_variant_price = $variant->variant_price - ($variant->variant_price * $discount_percent)/100;
+                        $variant_price = $discount_variant_price + ($discount_variant_price * $taxPercent)/100;
+                    }elseif($discount_percent){
+                        $discount_percent =!empty($discount->discount_percent) ? $discount->discount_percent : 0;
+                        $variant_price = $variant->variant_price - ($variant->variant_price * $discount_percent)/100;
+                    }elseif($taxPercent){
+                        $taxPercent = !empty($tax->tax_percent) ? $tax->tax_percent :0;
+                        $variant_price = $variant->variant_price + ($variant->variant_price * $taxPercent)/100;
+                    }else{
+                        $variant_price = $variant->variant_price;
+                    }
+                    
+                    $dish_variant[] = array(
+                        "id"           => $variant->id,
+                        "variant_name" => $variant->variant_name,
+                        "variant_price"=> $variant_price  ?? 0,
+                        "dish_id"      => $variant->dish_id,
+                        "created_at"   => $variant->created_at,
+                        "updated_at"   => $variant->updated_at
+                    ); 
+                }   
+                
                 $array[] =array(
                     "id"       => $dish->id,
                     "dish_name"=>$dish->dish_name,
-                    "dish_price"=> $tax_with_dish_amount,
+                    "dish_price"=> $final_price ?? Null,
                     "dish_code"=> $dish->dish_code,
                     "dish_images"=> $dish->dish_images,
                     "has_variant"=> $dish->has_variant,
@@ -336,12 +401,16 @@ class APIController extends Controller
                     "counter_id"=> $dish->counter_id,
                     "chef_preparation"=> $dish->chef_preparation,
                     "dish_hsn"=> $dish->dish_hsn,
+                    "tax_name"=> $taxName,
+                    "tax_percent"=> $taxPercent,
+                    "discount_name"=> $discount_name,
+                    "discount_percent"=> $discount_percent,
                     "edited_at"=> $dish->edited_at,
                     "edited_by"=> $dish->edited_by,
                     "is_active"=> $dish->is_active,
                     "created_at"=>$dish->created_at,
                     "updated_at"=> $dish->updated_at,
-                    'dish_variant'=>$dish->dishVariant ?? Null,
+                    'dish_variant'=>$dish_variant ?? Null,
                     'counter'=>$dish->counter ?? Null
                 );
             }                        
@@ -400,12 +469,35 @@ class APIController extends Controller
                                     ->get();
                 $array =[];
                 foreach($dishList as $dish){
-                    //get tax 
-                    $taxPercent =Null;
+                    
+                    $taxPercent =0;
                     $taxName =Null;
-                    $tax_withdish_amount =0;
+                    $dish_tax =0;
+                    $tax =0;
+                    $discount =0;
+                    $discount_percent =0;
+                    $discount_name =Null;
+                    $discount_dish_amount =0;
+                    $tax_with_dish_amount =0;
+                    $dish_discount_with_tax=0;
+                    //get discount
+                    $discount_amount =0;
+                    if(!empty($dish->discount_ids)){
+                        $discount = DB::table('discounts')
+                                        ->where('id',$dish->discount_ids)
+                                        ->where('is_active',1)
+                                        ->first();  
+                                        
+                        $discount_percent =$discount->discount_percent;
+                        $discount_name    =$discount->discount_name; 
+                        $discount_amount  =($dish->dish_price *$discount->discount_percent)/100; 
+                        $discount_dish_amount =$dish->dish_price-$discount_amount;
+                                          
+                    }
+                    //dish tax
                     if($dish->is_tax_inclusive ==1){
-
+                        
+                        //get tax on dish
                         $dish_has_taxes = DB::table('dish_has_taxes')
                                             ->where('dish_id',$dish->id)
                                             ->first();
@@ -414,21 +506,63 @@ class APIController extends Controller
                         if(!empty($dish_has_taxes)) {
                             $tax = DB::table('country_taxes')
                                         ->where('id',$dish_has_taxes->tax_id)
+                                        ->where('is_active',1)
                                         ->first();
                             
                             $taxPercent = $tax->tax_percent;
                             $taxName    = $tax->name; 
                         }
-                        $tax_with_dish_amount = $dish->dish_price + (($dish->dish_price *$taxPercent) /100);
-                       
+                        $dish_tax  = ($dish->dish_price *$taxPercent) /100;
+                        $tax_with_dish_amount =$dish->dish_price+$dish_tax;
+                        $dish_discount_with_tax = ($discount_dish_amount * $taxPercent)/100;
+                    }
+                    //get final price
+                    $final_price  = 0;
+                    if($discount_dish_amount || $dish_discount_with_tax){
+                        $final_price  = $discount_dish_amount +  $dish_discount_with_tax;
+                    }elseif($discount_dish_amount){
+                        $final_price  = $discount_dish_amount;
+                    }elseif($tax_with_dish_amount){
+                        $final_price  = $tax_with_dish_amount;
                     }else{
-                        $tax_with_dish_amount = $dish->dish_price;
+                        $final_price  = $dish->dish_price;
                     }
                     
+                     //get dish variant 
+                    $dish_variant = [];
+                    $variant_price =0;
+                    $discount_variant_price =0;
+                    $dishvariant = DishVariant::where('dish_id',$dish->id)->get(); 
+                    foreach($dishvariant as $variant){
+                        
+                        if($discount_percent || $taxPercent){
+                            $discount_percent =!empty($discount->discount_percent) ? $discount->discount_percent : 0;
+                            $taxPercent = !empty($tax->tax_percent) ? $tax->tax_percent :0;
+                            $discount_variant_price = $variant->variant_price - ($variant->variant_price * $discount_percent)/100;
+                            $variant_price = $discount_variant_price + ($discount_variant_price * $taxPercent)/100;
+                        }elseif($discount_percent){
+                            $discount_percent =!empty($discount->discount_percent) ? $discount->discount_percent : 0;
+                            $variant_price = $variant->variant_price - ($variant->variant_price * $discount_percent)/100;
+                        }elseif($taxPercent){
+                            $taxPercent = !empty($tax->tax_percent) ? $tax->tax_percent :0;
+                            $variant_price = $variant->variant_price + ($variant->variant_price * $taxPercent)/100;
+                        }else{
+                            $variant_price = $variant->variant_price;
+                        }
+                        
+                        $dish_variant[] = array(
+                            "id"           => $variant->id,
+                            "variant_name" => $variant->variant_name,
+                            "variant_price"=> $variant_price  ?? 0,
+                            "dish_id"      => $variant->dish_id,
+                            "created_at"   => $variant->created_at,
+                            "updated_at"   => $variant->updated_at
+                        ); 
+                    }   
                     $array[] =array(
                         "id"       => $dish->id,
                         "dish_name"=>$dish->dish_name,
-                        "dish_price"=> $tax_with_dish_amount,
+                        "dish_price"=> $final_price,
                         "dish_code"=> $dish->dish_code,
                         "dish_images"=> $dish->dish_images,
                         "has_variant"=> $dish->has_variant,
@@ -438,12 +572,16 @@ class APIController extends Controller
                         "counter_id"=> $dish->counter_id,
                         "chef_preparation"=> $dish->chef_preparation,
                         "dish_hsn"=> $dish->dish_hsn,
+                        "tax_name"=> $taxName,
+                        "tax_percent"=> $taxPercent,
+                        "discount_name"=> $discount_name,
+                        "discount_percent"=> $discount_percent,
                         "edited_at"=> $dish->edited_at,
                         "edited_by"=> $dish->edited_by,
                         "is_active"=> $dish->is_active,
                         "created_at"=>$dish->created_at,
                         "updated_at"=> $dish->updated_at,
-                        'dish_variant'=>$dish->dishVariant ?? Null
+                        'dish_variant'=>$dish_variant ?? Null
                     );
                 }
                                     
