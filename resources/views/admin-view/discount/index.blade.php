@@ -9,12 +9,12 @@
     <!--begin::Header-->
     <div class="card-header border-0 pt-5">
         <h3 class="card-title align-items-start flex-column">
-            <span class="card-label fw-bold fs-3 mb-1">User</span>
+            <span class="card-label fw-bold fs-3 mb-1">Discount</span>
         </h3>
 
         <div class="card-toolbar" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="hover"
             data-bs-original-title="Click to add a user" data-kt-initialized="1">
-            <a href="{{route('add-user')}}" class="btn btn-sm btn-light btn-active-primary">
+            <a href="{{route('add-discount')}}" class="btn btn-sm btn-light btn-active-primary">
                 <!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
                 <span class="svg-icon svg-icon-3"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
@@ -22,7 +22,7 @@
                             transform="rotate(-90 11.364 20.364)" fill="currentColor"></rect>
                         <rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="currentColor"></rect>
                     </svg></span>
-                <!--end::Svg Icon--> Add User
+                <!--end::Svg Icon--> Add Discount
             </a>
         </div>
     </div>
@@ -38,9 +38,8 @@
                 <thead>
                     <tr class="fw-bold text-muted">
                         <th class="min-w-50px">#</th>
-                        <th class="min-w-150px">Name</th>
-                        <th class="min-w-150px">Email</th>
-                        <th class="min-w-150px">Role</th>
+                        <th class="min-w-150px">Discount Name</th>
+                        <th class="min-w-150px">Discount Percent</th>
                         <th class="min-w-100px text-end">Actions</th>
                     </tr>
                 </thead>
@@ -49,28 +48,23 @@
                 <!--begin::Table body-->
                 <tbody>
                     @php $i = 1; @endphp
-                    @foreach($user as $users)
+                    @foreach($discount as $discounts)
                     <tr>
                         <td>
                             <span class="text-dark fw-bold d-block fs-7">{{$i}}</span>
                         </td>
 
                         <td>
-                            <span class="text-dark fw-bold d-block fs-6">{{$users->name}}</span>
+                            <span class="text-dark fw-bold d-block fs-6">{{$discounts->discount_name}}</span>
                         </td>
 
                         <td>
-                            <span class="text-dark fw-bold d-block fs-6">{{$users->email}}</span>
+                            <span class="text-dark fw-bold d-block fs-6">{{$discounts->discount_percent}}</span>
                         </td>
-
-                        <td>
-                            <span class="text-dark fw-bold d-block fs-6">{{$users->getRoleNames()[0] ?? "NA"}}</span>
-                        </td>
-
 
                         <td>
                             <div class="d-flex justify-content-end flex-shrink-0">
-                                <a href="{{route('edit-user',[base64_encode($users['id'])])}}" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
+                                <a href="{{route('edit-discount',[base64_encode($discounts['id'])])}}" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
                                     <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
                                     <span class="svg-icon svg-icon-3"><svg width="24" height="24" viewBox="0 0 24 24"
                                             fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -87,7 +81,7 @@
                             </div>
                         </td>
                     </tr>
-                    @php($i++)
+                    @php ($i++)
                     @endforeach
                 </tbody>
                 <!--end::Table body-->

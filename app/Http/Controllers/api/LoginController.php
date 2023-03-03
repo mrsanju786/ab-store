@@ -35,8 +35,10 @@ class LoginController extends Controller
             
             }
             return response()->json(['message'=>'Email and Password is worng!','status'=>false]);
-        }catch (\Exception $e) {
-            return response()->json(['errors' => $e], 403);
+        }catch (\Throwable $th) {
+            DB::rollback();
+            Log::debug($th);
+            return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
         }
     }
     
@@ -44,6 +46,6 @@ class LoginController extends Controller
     public function logout() {
         Session::flush();
         Auth::guard('web')->logout();
-        return response()->json(['message'=>'User Logout successfully!','status'=>'false']);
+        return response()->json(['message'=>'User Logout successfully!','status'=>true]);
     }
 }

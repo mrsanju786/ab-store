@@ -250,6 +250,19 @@
                         <!--end:Menu link-->
                     </div>
                     <!--end:Menu item-->
+
+                    <!--begin:Menu item-->
+                    <div class="menu-item">
+                        <!--begin:Menu link-->
+                        <a class="menu-link" href="{{route('discount-list')}}">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Discount</span>
+                        </a>
+                        <!--end:Menu link-->
+                    </div>
+                    <!--end:Menu item-->
                 </div>
                 <!--end:Menu sub-->
                 </div>
@@ -364,7 +377,7 @@
                     <!--end:Menu link-->
                 </div>
 
-                <div class="menu-item">
+                {{-- <div class="menu-item">
                     <!--begin:Menu link-->
                     <a class="menu-link {{ request()->is('admin/location-discount-list') ? 'active' : '' }}" href="{{route('location-discount-list')}}">
                         <span class="menu-icon">
@@ -382,7 +395,7 @@
                         <span class="menu-title">Location Discount</span>
                     </a>
                     <!--end:Menu link-->
-                </div>
+                </div> --}}
 
                 <div class="menu-item">
                     <!--begin:Menu link-->
