@@ -57,7 +57,7 @@ class APIController extends Controller
             return response()->json(['message'=>'Company List!','image_url'=>'https://foodiisoft-v3.e-go.biz/foodisoft3.0/public/storage/upload/company/','status'=>true,'data'=>$companyList]);                
         }catch (\Throwable $th) {
             Log::debug($th);
-            return response()->json(['status' => 'error', 'message' => 'Something went wrong.'], 400);
+            return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
         }
         
     }
@@ -91,7 +91,7 @@ class APIController extends Controller
             return response()->json(['message'=>'Branch List!','status'=>true,'data'=>$branchList]);                
         }catch (\Throwable $th) {
             Log::debug($th);
-            return response()->json(['status' => 'error', 'message' => 'Something went wrong.'], 400);
+            return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
         }
         
     }
@@ -127,7 +127,7 @@ class APIController extends Controller
             return response()->json(['message'=>'Location List!','image_url'=>'','status'=>true,'data'=>$locationList]);                
         }catch (\Throwable $th) {
             Log::debug($th);
-            return response()->json(['status' => 'error', 'message' => 'Something went wrong.'], 400);
+            return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
         }
         
     }
@@ -167,7 +167,7 @@ class APIController extends Controller
             return response()->json(['message'=>'Area List!','image_url'=>'','status'=>true,'data'=>$areaList]);                
         }catch (\Throwable $th) {
             Log::debug($th);
-            return response()->json(['status' => 'error', 'message' => 'Something went wrong.'], 400);
+            return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
         }
         
     }
@@ -205,7 +205,7 @@ class APIController extends Controller
             return response()->json(['message'=>'Counter List!','status'=>true,'data'=>$counterList]);                
         }catch (\Throwable $th) {
             Log::debug($th);
-            return response()->json(['status' => 'error', 'message' => 'Something went wrong.'], 400);
+            return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
         }
         
     }
@@ -245,7 +245,7 @@ class APIController extends Controller
             return response()->json(['message'=>'Menu List!','status'=>true,'data'=>$menuList]);                
         }catch (\Throwable $th) {
             Log::debug($th);
-            return response()->json(['status' => 'error', 'message' => 'Something went wrong.'], 400);
+            return response()->json(['status' =>false, 'message' => 'Something went wrong.'], 400);
         }
         
     }
@@ -274,7 +274,7 @@ class APIController extends Controller
             return response()->json(['message'=>'Category List!','image_url'=>'https://foodiisoft-v3.e-go.biz/foodisoft3.0/public/storage/upload/category/','status'=>true,'data'=>$categoryList]);                
         }catch (\Throwable $th) {
             Log::debug($th);
-            return response()->json(['status' => 'error', 'message' => 'Something went wrong.'], 400);
+            return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
         }
         
     }
@@ -417,7 +417,7 @@ class APIController extends Controller
             return response()->json(['message'=>'Dish List!','image_url'=>'https://foodiisoft-v3.e-go.biz/foodisoft3.0/public/storage/upload/dish/','status'=>true,'data'=>$array]);                
         }catch (\Throwable $th) {
             Log::debug($th);
-            return response()->json(['status' => 'error', 'message' => 'Something went wrong.'], 400);
+            return response()->json(['status' =>false, 'message' => 'Something went wrong.'], 400);
         }
         
     }
@@ -591,7 +591,7 @@ class APIController extends Controller
             return response()->json(['message'=>'Counter Dish List!','dish_image_url'=>'https://foodiisoft-v3.e-go.biz/foodisoft3.0/public/storage/upload/dish/','category_image_url'=>'https://foodiisoft-v3.e-go.biz/foodisoft3.0/public/storage/upload/category/','status'=>true,'data'=>['counter_list'=>$counterList,'menu_list'=>$menu_list,'category_list'=>$category_list,'dish_list'=>$dish_list]]);                
         }catch (\Throwable $th) {
             Log::debug($th);
-            return response()->json(['status' => 'error', 'message' => 'Something went wrong.'], 400);
+            return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
         }
     }
    

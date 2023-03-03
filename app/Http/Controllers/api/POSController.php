@@ -96,7 +96,7 @@ class POSController extends Controller
         }catch (\Throwable $th) {
             DB::rollback();
             Log::debug($th);
-            return response()->json(['status' => 'error', 'message' => 'Something went wrong.'], 400);
+            return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
         }
     }
 
@@ -143,7 +143,7 @@ class POSController extends Controller
         }catch (\Throwable $th) {
            
             Log::debug($th);
-            return response()->json(['status' => 'error', 'message' => 'Something went wrong.'], 400);
+            return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
         }           
     }
 
@@ -221,7 +221,7 @@ class POSController extends Controller
         }catch (\Throwable $th) {
             DB::rollback();
             Log::debug($th);
-            return response()->json(['status' => 'error', 'message' => 'Something went wrong.'], 400);
+            return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
         }
     }
 
@@ -270,7 +270,7 @@ class POSController extends Controller
         }catch (\Throwable $th) {
             DB::rollback();
             Log::debug($th);
-            return response()->json(['status' => 'error', 'message' => 'Something went wrong.'], 400);
+            return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
         }
     }
 
@@ -316,7 +316,7 @@ class POSController extends Controller
         }catch (\Throwable $th) {
             DB::rollback();
             Log::debug($th);
-            return response()->json(['status' => 'error', 'message' => 'Something went wrong.'], 400);
+            return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
         }
     }
 }
