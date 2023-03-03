@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\api\LoginController;
 use App\Http\Controllers\api\APIController;
 use App\Http\Controllers\api\POSController;
+use App\Http\Controllers\api\MobileAppController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -33,7 +34,12 @@ Route::group(['middleware' => ['auth:api']], function(){
     Route::get('/area-list', [APIController::class, 'AreaList']);
     Route::get('/counter-wise-dish', [POSController::class, 'counterWiseDish']);
     
-   
+    
+    //mobile app routes
+    Route::get('/counter-list', [MobileAppController::class, 'counterList']);
+    Route::get('/menu-list', [MobileAppController::class, 'menuList']);
+    Route::get('/category-list', [MobileAppController::class, 'categoryList']);
+    Route::get('/dish-list', [MobileAppController::class, 'dishList']);
    
 });
     //pos route

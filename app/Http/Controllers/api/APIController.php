@@ -211,7 +211,7 @@ class APIController extends Controller
     }
 
      //menu list
-     public function menuList(Request $request){
+    public function menuList(Request $request){
         try {
            
             $validator = Validator::make($request->all(), [
@@ -242,7 +242,7 @@ class APIController extends Controller
                             ->where('is_active',1)
                             ->orderBy('id','desc')
                             ->get();                     
-            return response()->json(['message'=>'Menu List!','status'=>true,'data'=>$menuList]);                
+            return response()->json(['message'=>'Menu List!','image_url'=>'https://foodiisoft-v3.e-go.biz/foodisoft3.0/public/storage/upload/company/','status'=>true,'data'=>$menuList]);                
         }catch (\Throwable $th) {
             Log::debug($th);
             return response()->json(['status' =>false, 'message' => 'Something went wrong.'], 400);
