@@ -53,7 +53,7 @@ class MobileAppController extends Controller
                                 ->where('locations.pincode',$pincode)
                                 ->where('locations.is_active',1)
                                 ->first();
-            return $location;
+            // return $location;
             //get counter list                    
             $counterList  = Counter::with('Branch')
                                    ->where('area_id',$location->area_id)
