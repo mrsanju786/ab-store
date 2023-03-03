@@ -16,4 +16,8 @@ class Dish extends Model
     public function dishVariant(){
         return $this->hasMany(DishVariant::class,'id');
     }
+
+    public function category(){
+        return $this->belongsTo(Category::class,'id');
+    }
 }

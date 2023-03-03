@@ -31,12 +31,12 @@ Route::group(['middleware' => ['auth:api']], function(){
     Route::get('/category-list', [APIController::class, 'categoryList']);
     Route::get('/location-list', [APIController::class, 'LocationList']);
     Route::get('/area-list', [APIController::class, 'AreaList']);
-    Route::get('/counter-wise-dish', [APIController::class, 'counterWiseDish']);
+    Route::get('/counter-wise-dish', [POSController::class, 'counterWiseDish']);
     
    
    
 });
-
+    //pos route
     Route::post('/add-to-cart', [POSController::class, 'addToCart']);
     Route::get('/cart-list', [POSController::class, 'cartList']);
     Route::post('/save-order', [POSController::class, 'saveOrder']);
