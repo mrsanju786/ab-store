@@ -13,6 +13,9 @@ use App\Models\Category;
 use App\Models\Branch;
 use App\Models\CountryTax;
 use App\Models\DishHasTax;
+use App\Models\Discount;
+use App\Imports\DishImport;
+use App\Exports\DishExport;
 use Storage;
 use Auth;
 use Maatwebsite\Excel\Facades\Excel;
@@ -27,8 +30,9 @@ class DishController extends Controller
 
     public function addDish(){
 
+        $discount = Discount::get();
         $counter = Counter::get();
-        return view('admin-view.dish.add-dish', compact('counter'));
+        return view('admin-view.dish.add-dish', compact('counter','discount'));
     }
 
     public function createDish(Request $request){
@@ -59,6 +63,7 @@ class DishController extends Controller
         $dish->counter_id = $request->counter_id;
         $dish->is_tax_inclusive = $request->tax_inc;
         $dish->has_variant = $request->dish_has_variant;
+        $dish->discount_ids = $request->discount_id;
         $dish->chef_preparation = !empty($request->chef_preparation)? $request->chef_preparation : 0;
         
         if ($request->file('dish_image')) {
@@ -101,7 +106,8 @@ class DishController extends Controller
         $addon = Addon::where('dish_id', $dish->id)->get();
         $dish_tax = DishHasTax::where('dish_id', $dish->id)->first();
         $dishTax =  $dish_tax->tax_id;
-        return view('admin-view.dish.edit-dish', compact('dish','counter', 'variant', 'extra', 'addon','dishTax'));
+        $discount = Discount::get();
+        return view('admin-view.dish.edit-dish', compact('dish','counter', 'variant', 'extra', 'addon','dishTax','discount'));
     }
 
     public function updateDish(Request $request){
@@ -133,6 +139,7 @@ class DishController extends Controller
         $dish->category_id = $request->category_id;
         $dish->is_tax_inclusive = $request->tax_inc;
         $dish->has_variant = $request->dish_has_variant;
+        $dish->discount_ids = $request->discount_id;
         $dish->chef_preparation = !empty($request->chef_preparation)? $request->chef_preparation : 0;
         
         if ($request->file('dish_image')) {
@@ -173,6 +180,18 @@ class DishController extends Controller
     }
 
     public function exportDish(){
+        
+        return Excel::download(new DishExport, 'dishes.xlsx');
+    }
 
+    public function importDishView(){
+        return view('admin-view.dish.import-dish');
+    }
+
+    public function importDish() 
+    {
+        Excel::import(new DishImport,request()->file('file'));
+               
+        return back()->with('success','Imported Successfully!');
     }
 }

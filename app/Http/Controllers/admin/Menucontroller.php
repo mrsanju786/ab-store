@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Menu;
 use App\Models\Company;
 
-class Menucontroller extends Controller
+class MenuController extends Controller
 {
     public function index(){
 

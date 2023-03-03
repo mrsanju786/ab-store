@@ -158,15 +158,15 @@ li.ui-timepicker-selected .ui-timepicker-duration,
                                             <!--begin::Input-->
                                             <div class="d-flex justify-content-start position-relative">
                                                 <div class=" w-100">
-                                                    <input type="text"name="from_date" class="time start form-control form-control-solid"  placeholder="Enter From Time"/>
+                                                    <input type="text"name="from_time" class="time start form-control form-control-solid"  placeholder="Enter From Time"/>
                                                 </div>
                                                 <div class="position-absolute timedisplayicon">
                                                     <i class="bi bi-clock fw-bold"></i>
                                                 </div>
                                             </div>
                                             <!--end::Input--> 
-                                            @if($errors->has('from_date'))
-                                            <span class="text-danger">{{ $errors->first('from_date') }}</span>
+                                            @if($errors->has('from_time'))
+                                            <span class="text-danger">{{ $errors->first('from_time') }}</span>
                                             @endif
                                             <div class="fv-plugins-message-container invalid-feedback"></div>
                                         </div>                                
@@ -196,24 +196,7 @@ li.ui-timepicker-selected .ui-timepicker-duration,
                                     </div>
                                     <!--end::time period-->                                        
 
-                                    <!--begin::Input group-->
-                                    <div class="fv-row mb-10 fv-plugins-icon-container timedisplay">
-                                        <!--begin::Label-->
-                                        <label class="fs-5 fw-bold form-label mb-2">
-                                            <span class="required">Cut off Time</span>
-                                        </label>
-                                        <!--end::Label-->
-    
-                                        <!--begin::Input-->
-                                        <input type="time" class="form-control form-control-solid" placeholder="Enter Off Time"
-                                            name="off_time">
-                                        <!--end::Input-->
-                                        @if($errors->has('off_time'))
-                                        <span class="text-danger">{{ $errors->first('off_time') }}</span>
-                                        @endif
-                                        <div class="fv-plugins-message-container invalid-feedback"></div>
-                                    </div>                                    
-                                    <!--end::Input group-->                                   
+                                                                       
                                 </div>
                                 <!--end::Col-->
 
@@ -268,8 +251,17 @@ li.ui-timepicker-selected .ui-timepicker-duration,
                                         </label>
                                         <!--end::Label-->
                                         <!--begin::Input-->
-                                        <input type="time" class="form-control form-control-solid"
-                                            placeholder="Enter Off Time" name="off_time">
+                                        <!-- <input type="time" class="form-control form-control-solid"
+                                            placeholder="Enter Off Time" name="off_time"> -->
+                                        <select class="form-select form-select-solid" aria-label="Select example"
+                                            name="off_time" id="off_time" data-control="select2">
+                                            <option value="">Select Off time</option>
+                                            <option value="1:00">Before 1 Hour</option>
+                                            <option value="2:00">Before 2 Hours</option>
+                                            <option value="3:00">Before 3 Hours</option>
+                                            <option value="4:00">Before 4 Hours</option>
+                                            <option value="5:00">Before 5 Hours</option>
+                                        </select>
                                         <!--end::Input-->
                                         @if($errors->has('off_time'))
                                         <span class="text-danger">{{ $errors->first('off_time') }}</span>
@@ -277,7 +269,6 @@ li.ui-timepicker-selected .ui-timepicker-duration,
                                         <div class="fv-plugins-message-container invalid-feedback"></div>                                        
                                     </div>
                                     <!--end::Input group-->
-
                                     
 
                                     <!--begin::Input group-->
