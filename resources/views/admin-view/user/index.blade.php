@@ -64,7 +64,7 @@
                         </td>
 
                         <td>
-                            <span class="text-dark fw-bold d-block fs-6">{{$users->getRoleNames()[0]}}</span>
+                            <span class="text-dark fw-bold d-block fs-6">{{$users->getRoleNames()[0] ?? "NA"}}</span>
                         </td>
 
 
