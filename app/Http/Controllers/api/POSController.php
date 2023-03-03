@@ -246,26 +246,73 @@ class POSController extends Controller
             }
                 
             DB::beginTransaction();
-
-            $orderDetails = new orderDetail();
-            $orderDetails->order_id          = $request->order_id;
-            $orderDetails->dish_id           = $request->dish_id;
-            $orderDetails->dish_variant_id   = $request->dish_variant_id;
-            $orderDetails->dish_name         = $request->dish_name;
-            $orderDetails->order_quantity    = $request->order_quantity;
-            $orderDetails->order_status      = $request->order_status;
-            $orderDetails->order_status      = $request->order_status;    
-            $orderDetails->cd_status         = $request->cd_status;
-            $orderDetails->dish_price        = $request->dish_price;
-            $orderDetails->dish_variant_price = $request->dish_variant_price;
-            $orderDetails->save();
-
-            // $get_cart = Cart::where('user_id', $request->user_id)->delete();
-
+            $jsons =  json_decode($request->getContent(), true);
+           
+            foreach ($jsons as $key => $json) {
+                $orderDetails = new orderDetail();
+                $orderDetails->order_id          = $json['order_id'] ?? Null;
+                $orderDetails->dish_id           = $json['dish_id'] ?? Null;
+                $orderDetails->dish_variant_id   = $json['dish_variant_id'] ?? 0;
+                $orderDetails->dish_name         = $json['dish_name'] ?? Null;
+                $orderDetails->order_quantity    = $json['order_quantity'] ?? Null;
+                $orderDetails->order_status      = $json['order_status'] ?? Null;
+                $orderDetails->order_status      = $json['order_status'] ?? Null;    
+                $orderDetails->cd_status         = $json['cd_status'] ?? Null;
+                $orderDetails->dish_price        = $json['dish_price'] ?? Null;
+                $orderDetails->dish_variant_price = $json['dish_variant_price'] ?? Null;
+                $orderDetails->save();
+            }
+           
             DB::commit();
 
             return response()->json(['message'=>'Your order details has been saved successfully!','status'=>true,'data'=>[]]);                
 
+        }catch (\Throwable $th) {
+            DB::rollback();
+            Log::debug($th);
+            return response()->json(['status' => 'error', 'message' => 'Something went wrong.'], 400);
+        }
+    }
+
+    //bulk/multiple  order save 
+    public function bulkOrderSave(Request $request){
+        try {
+
+            DB::beginTransaction();
+
+            $jsons =  json_decode($request->getContent(), true);
+           
+            foreach ($jsons as $key => $json) {
+                $order = new order();
+                $order->order_number  = $json['order_number'] ?? Null;
+                $order->user_id       = $json['user_id'] ?? Null;
+                $order->order_status  = $json['order_status'] ?? Null;
+                $order->cd_status     = $json['cd_status'] ?? Null;
+                $order->order_date    = $json['order_date'] ?? Null;
+                $order->branch_id     = $json['branch_id'] ?? Null;
+                $order->order_through = $json['order_through'] ?? Null;    
+                $order->sub_total     = $json['sub_total'] ?? Null;
+                $order->tax_amount    = $json['tax_amount'] ?? Null;
+                $order->tax_percent   = $json['tax_percent'] ?? Null;
+                $order->discount_name   = $json['discount_name'] ?? Null;
+                $order->discount_type   = $json['discount_type'] ?? Null;
+                $order->discount_amount   = $json['discount_amount'] ?? Null;
+                $order->mode_of_transaction = $json['mode_of_transaction'] ?? Null;
+                $order->payment_timestamp   = $json['payment_timestamp'] ?? Null;
+                $order->order_prepared_by   = $json['order_prepared_by'] ?? Null;
+                $order->order_closed_by   = $json['order_closed_by'] ?? Null;
+                $order->order_closed_time   = $json['order_closed_time'] ?? Null;
+                $order->grand_total    = $json['grand_total'] ?? Null;
+                $order->invoice_number = $json['invoice_number'] ?? Null;
+                $order->paid_or_cancel = $json['paid_or_cancel'] ?? Null;
+                $order->refund_through = $json['refund_through'] ?? Null;
+                $order->instruction = $json['instruction'] ?? Null;
+                $order->transaction_id = $json['transaction_id'] ?? Null;
+                $order->table_id       = $json['table_id'] ?? Null;
+                $order->save();
+            }
+            DB::commit();
+            return response()->json(['message'=>'Your order has been placed successfully!','status'=>true,'data'=>[]]);                
         }catch (\Throwable $th) {
             DB::rollback();
             Log::debug($th);

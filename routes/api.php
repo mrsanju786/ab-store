@@ -41,3 +41,4 @@ Route::group(['middleware' => ['auth:api']], function(){
     Route::get('/cart-list', [POSController::class, 'cartList']);
     Route::post('/save-order', [POSController::class, 'saveOrder']);
     Route::post('/save-order-details', [POSController::class, 'svaeOrderDetails']);
+    Route::post('/multiple-order-save', [POSController::class, 'bulkOrderSave']);
