@@ -490,4 +490,22 @@ class POSController extends Controller
             return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
         }
     }
+    
+    //company list
+    public function companyList(){
+        try {
+       
+            $companyList = Company::with(['foodLicense','country','state','cities' ,'country.countryTax','country.currency'])
+                                    ->where('is_active',1)
+                                    ->orderBy('id','desc')
+                                    ->get(); 
+                  
+            return response()->json(['message'=>'Company List!','image_url'=>'https://foodiisoft-v3.e-go.biz/foodisoft3.0/public/storage/upload/company/','status'=>true,'data'=>$companyList]);                
+        }catch (\Throwable $th) {
+            Log::debug($th);
+            return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
+        }
+        
+    }
+
 }

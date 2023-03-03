@@ -33,13 +33,15 @@ Route::group(['middleware' => ['auth:api']], function(){
     Route::get('/location-list', [APIController::class, 'LocationList']);
     Route::get('/area-list', [APIController::class, 'AreaList']);
     Route::get('/counter-wise-dish', [POSController::class, 'counterWiseDish']);
-    
+    Route::get('/company-list', [POSController::class, 'companyList']);
+
     
     //mobile app routes
     Route::get('/counter-list', [MobileAppController::class, 'counterList']);
     Route::get('/menu-list', [MobileAppController::class, 'menuList']);
     Route::get('/category-list', [MobileAppController::class, 'categoryList']);
     Route::get('/dish-list', [MobileAppController::class, 'dishList']);
+    
    
 });
     //pos route
@@ -48,3 +50,4 @@ Route::group(['middleware' => ['auth:api']], function(){
     Route::post('/save-order', [POSController::class, 'saveOrder']);
     Route::post('/save-order-details', [POSController::class, 'svaeOrderDetails']);
     Route::post('/multiple-order-save', [POSController::class, 'bulkOrderSave']);
+    

@@ -124,7 +124,7 @@ class MobileAppController extends Controller
     }
 
      //dish list
-     public function dishList(Request $request){
+    public function dishList(Request $request){
         try {
 
             $validator = Validator::make($request->all(), [
@@ -267,4 +267,7 @@ class MobileAppController extends Controller
         }
         
     }
+   
+    
+
 }
