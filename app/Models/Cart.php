@@ -13,4 +13,9 @@ class Cart extends Model
         return $this->belongsTo(Dish::class, 'dish_id', 'id');
     }
 
+    public function dish_variants()
+    {
+        return $this->belongsTo(DishVariant::class, 'dish_id', 'id');
+    }
+
 }

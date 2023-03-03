@@ -20,6 +20,7 @@ use App\Models\Location;
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\OrderDetail;
+use App\Models\DishVariant;
 use Storage;
 use Auth;
 use Redirect;
@@ -56,7 +57,7 @@ class APIController extends Controller
             return response()->json(['message'=>'Company List!','image_url'=>'https://foodiisoft-v3.e-go.biz/foodisoft3.0/public/storage/upload/company/','status'=>true,'data'=>$companyList]);                
         }catch (\Throwable $th) {
             Log::debug($th);
-            return response()->json(['status' => 'error', 'message' => 'Something went wrong.'], 400);
+            return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
         }
         
     }
@@ -90,7 +91,7 @@ class APIController extends Controller
             return response()->json(['message'=>'Branch List!','status'=>true,'data'=>$branchList]);                
         }catch (\Throwable $th) {
             Log::debug($th);
-            return response()->json(['status' => 'error', 'message' => 'Something went wrong.'], 400);
+            return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
         }
         
     }
@@ -126,7 +127,7 @@ class APIController extends Controller
             return response()->json(['message'=>'Location List!','image_url'=>'','status'=>true,'data'=>$locationList]);                
         }catch (\Throwable $th) {
             Log::debug($th);
-            return response()->json(['status' => 'error', 'message' => 'Something went wrong.'], 400);
+            return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
         }
         
     }
@@ -166,7 +167,7 @@ class APIController extends Controller
             return response()->json(['message'=>'Area List!','image_url'=>'','status'=>true,'data'=>$areaList]);                
         }catch (\Throwable $th) {
             Log::debug($th);
-            return response()->json(['status' => 'error', 'message' => 'Something went wrong.'], 400);
+            return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
         }
         
     }
@@ -204,13 +205,13 @@ class APIController extends Controller
             return response()->json(['message'=>'Counter List!','status'=>true,'data'=>$counterList]);                
         }catch (\Throwable $th) {
             Log::debug($th);
-            return response()->json(['status' => 'error', 'message' => 'Something went wrong.'], 400);
+            return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
         }
         
     }
 
      //menu list
-     public function menuList(Request $request){
+    public function menuList(Request $request){
         try {
            
             $validator = Validator::make($request->all(), [
@@ -241,10 +242,10 @@ class APIController extends Controller
                             ->where('is_active',1)
                             ->orderBy('id','desc')
                             ->get();                     
-            return response()->json(['message'=>'Menu List!','status'=>true,'data'=>$menuList]);                
+            return response()->json(['message'=>'Menu List!','image_url'=>'https://foodiisoft-v3.e-go.biz/foodisoft3.0/public/storage/upload/company/','status'=>true,'data'=>$menuList]);                
         }catch (\Throwable $th) {
             Log::debug($th);
-            return response()->json(['status' => 'error', 'message' => 'Something went wrong.'], 400);
+            return response()->json(['status' =>false, 'message' => 'Something went wrong.'], 400);
         }
         
     }
@@ -273,7 +274,7 @@ class APIController extends Controller
             return response()->json(['message'=>'Category List!','image_url'=>'https://foodiisoft-v3.e-go.biz/foodisoft3.0/public/storage/upload/category/','status'=>true,'data'=>$categoryList]);                
         }catch (\Throwable $th) {
             Log::debug($th);
-            return response()->json(['status' => 'error', 'message' => 'Something went wrong.'], 400);
+            return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
         }
         
     }
@@ -291,15 +292,132 @@ class APIController extends Controller
 
             $category_id = $request->category_id;
 
-            $dishList = Dish::with(['counter'])->where('category_id',$category_id)
+            $dishList = Dish::with(['counter','dishVariant'])->where('category_id',$category_id)
                             ->where('is_active',1)
                             ->orderBy('id','desc')
                             ->get();
-                                    
-            return response()->json(['message'=>'Dish List!','image_url'=>'https://foodiisoft-v3.e-go.biz/foodisoft3.0/public/storage/upload/dish/','status'=>true,'data'=>$dishList]);                
+           
+            $array =[];
+            foreach($dishList as $dish){
+                $taxPercent =0;
+                    $taxName =Null;
+                    $dish_tax =0;
+                    $discount_percent =0;
+                    $discount_name =Null;
+                    $discount_dish_amount =0;
+                    $tax_with_dish_amount =0;
+                    $dish_discount_with_tax=0;
+                    $tax=0;
+                    $discount=0;
+                    //get discount
+                    $discount_amount =0;
+                    if(!empty($dish->discount_ids)){
+                        $discount = DB::table('discounts')
+                                        ->where('id',$dish->discount_ids)
+                                        ->where('is_active',1)
+                                        ->first();  
+                                        
+                        $discount_percent =$discount->discount_percent;
+                        $discount_name    =$discount->discount_name; 
+                        $discount_amount  =($dish->dish_price *$discount->discount_percent)/100; 
+                        $discount_dish_amount =$dish->dish_price-$discount_amount;
+                                          
+                    }
+                    //dish tax
+                    if($dish->is_tax_inclusive ==1){
+                        
+                        //get tax on dish
+                        $dish_has_taxes = DB::table('dish_has_taxes')
+                                            ->where('dish_id',$dish->id)
+                                            ->first();
+                        
+                        //country tax  
+                        if(!empty($dish_has_taxes)) {
+                            $tax = DB::table('country_taxes')
+                                        ->where('id',$dish_has_taxes->tax_id)
+                                        ->where('is_active',1)
+                                        ->first();
+                            
+                            $taxPercent = $tax->tax_percent;
+                            $taxName    = $tax->name; 
+                        }
+                        $dish_tax  = ($dish->dish_price *$taxPercent) /100;
+                        $tax_with_dish_amount =$dish->dish_price+$dish_tax;
+                        $dish_discount_with_tax = ($discount_dish_amount * $taxPercent)/100;
+                    }
+                    //get final price
+                    $final_price  = 0;
+                    if($discount_dish_amount || $dish_discount_with_tax){
+                        $final_price  = $discount_dish_amount +  $dish_discount_with_tax;
+                    }elseif($discount_dish_amount){
+                        $final_price  = $discount_dish_amount;
+                    }elseif($tax_with_dish_amount){
+                        $final_price  = $tax_with_dish_amount;
+                    }else{
+                        $final_price  = $dish->dish_price;
+                    }
+                //get dish variant 
+                $dish_variant = [];
+                $variant_price =0;
+                $discount_variant_price =0;
+                $dishvariant = DishVariant::where('dish_id',$dish->id)->get(); 
+                foreach($dishvariant as $variant){
+                    
+                    if($discount_percent || $taxPercent){
+                        $discount_percent =!empty($discount->discount_percent) ? $discount->discount_percent : 0;
+                        $taxPercent = !empty($tax->tax_percent) ? $tax->tax_percent :0;
+                        $discount_variant_price = $variant->variant_price - ($variant->variant_price * $discount_percent)/100;
+                        $variant_price = $discount_variant_price + ($discount_variant_price * $taxPercent)/100;
+                    }elseif($discount_percent){
+                        $discount_percent =!empty($discount->discount_percent) ? $discount->discount_percent : 0;
+                        $variant_price = $variant->variant_price - ($variant->variant_price * $discount_percent)/100;
+                    }elseif($taxPercent){
+                        $taxPercent = !empty($tax->tax_percent) ? $tax->tax_percent :0;
+                        $variant_price = $variant->variant_price + ($variant->variant_price * $taxPercent)/100;
+                    }else{
+                        $variant_price = $variant->variant_price;
+                    }
+                    
+                    $dish_variant[] = array(
+                        "id"           => $variant->id,
+                        "variant_name" => $variant->variant_name,
+                        "variant_price"=> $variant_price  ?? 0,
+                        "dish_id"      => $variant->dish_id,
+                        "created_at"   => $variant->created_at,
+                        "updated_at"   => $variant->updated_at
+                    ); 
+                }   
+                
+                $array[] =array(
+                    "id"       => $dish->id,
+                    "dish_name"=>$dish->dish_name,
+                    "dish_price"=> $final_price ?? Null,
+                    "dish_code"=> $dish->dish_code,
+                    "dish_images"=> $dish->dish_images,
+                    "has_variant"=> $dish->has_variant,
+                    "is_tax_inclusive"=> $dish->is_tax_inclusive,
+                    "is_discount"=> $dish->is_discount,
+                    "category_id"=> $dish->category_id,
+                    "counter_id"=> $dish->counter_id,
+                    "chef_preparation"=> $dish->chef_preparation,
+                    "dish_hsn"=> $dish->dish_hsn,
+                    "tax_name"=> $taxName,
+                    "tax_percent"=> $taxPercent,
+                    "discount_name"=> $discount_name,
+                    "discount_percent"=> $discount_percent,
+                    "edited_at"=> $dish->edited_at,
+                    "edited_by"=> $dish->edited_by,
+                    "is_active"=> $dish->is_active,
+                    "created_at"=>$dish->created_at,
+                    "updated_at"=> $dish->updated_at,
+                    'dish_variant'=>$dish_variant ?? Null,
+                    'counter'=>$dish->counter ?? Null
+                );
+            }                        
+            return response()->json(['message'=>'Dish List!','image_url'=>'https://foodiisoft-v3.e-go.biz/foodisoft3.0/public/storage/upload/dish/','status'=>true,'data'=>$array]);                
         }catch (\Throwable $th) {
             Log::debug($th);
-            return response()->json(['status' => 'error', 'message' => 'Something went wrong.'], 400);
+            return response()->json(['status' =>false, 'message' => 'Something went wrong.'], 400);
         }
         
     }
@@ -345,198 +463,136 @@ class APIController extends Controller
             $dish_list =[];
             foreach($category_list as $value){
                 //get dish list
-                $dishList = Dish::where('category_id',$value->id)
+                $dishList = Dish::with('dishVariant')->where('category_id',$value->id)
                                     ->where('is_active',1)
                                     ->orderBy('id','desc')
                                     ->get();
-                $dish_list =   $dishList; 
+                $array =[];
+                foreach($dishList as $dish){
+                    
+                    $taxPercent =0;
+                    $taxName =Null;
+                    $dish_tax =0;
+                    $tax =0;
+                    $discount =0;
+                    $discount_percent =0;
+                    $discount_name =Null;
+                    $discount_dish_amount =0;
+                    $tax_with_dish_amount =0;
+                    $dish_discount_with_tax=0;
+                    //get discount
+                    $discount_amount =0;
+                    if(!empty($dish->discount_ids)){
+                        $discount = DB::table('discounts')
+                                        ->where('id',$dish->discount_ids)
+                                        ->where('is_active',1)
+                                        ->first();  
+                                        
+                        $discount_percent =$discount->discount_percent;
+                        $discount_name    =$discount->discount_name; 
+                        $discount_amount  =($dish->dish_price *$discount->discount_percent)/100; 
+                        $discount_dish_amount =$dish->dish_price-$discount_amount;
+                                          
+                    }
+                    //dish tax
+                    if($dish->is_tax_inclusive ==1){
+                        
+                        //get tax on dish
+                        $dish_has_taxes = DB::table('dish_has_taxes')
+                                            ->where('dish_id',$dish->id)
+                                            ->first();
+                        
+                        //country tax  
+                        if(!empty($dish_has_taxes)) {
+                            $tax = DB::table('country_taxes')
+                                        ->where('id',$dish_has_taxes->tax_id)
+                                        ->where('is_active',1)
+                                        ->first();
+                            
+                            $taxPercent = $tax->tax_percent;
+                            $taxName    = $tax->name; 
+                        }
+                        $dish_tax  = ($dish->dish_price *$taxPercent) /100;
+                        $tax_with_dish_amount =$dish->dish_price+$dish_tax;
+                        $dish_discount_with_tax = ($discount_dish_amount * $taxPercent)/100;
+                    }
+                    //get final price
+                    $final_price  = 0;
+                    if($discount_dish_amount || $dish_discount_with_tax){
+                        $final_price  = $discount_dish_amount +  $dish_discount_with_tax;
+                    }elseif($discount_dish_amount){
+                        $final_price  = $discount_dish_amount;
+                    }elseif($tax_with_dish_amount){
+                        $final_price  = $tax_with_dish_amount;
+                    }else{
+                        $final_price  = $dish->dish_price;
+                    }
+                    
+                     //get dish variant 
+                    $dish_variant = [];
+                    $variant_price =0;
+                    $discount_variant_price =0;
+                    $dishvariant = DishVariant::where('dish_id',$dish->id)->get(); 
+                    foreach($dishvariant as $variant){
+                        
+                        if($discount_percent || $taxPercent){
+                            $discount_percent =!empty($discount->discount_percent) ? $discount->discount_percent : 0;
+                            $taxPercent = !empty($tax->tax_percent) ? $tax->tax_percent :0;
+                            $discount_variant_price = $variant->variant_price - ($variant->variant_price * $discount_percent)/100;
+                            $variant_price = $discount_variant_price + ($discount_variant_price * $taxPercent)/100;
+                        }elseif($discount_percent){
+                            $discount_percent =!empty($discount->discount_percent) ? $discount->discount_percent : 0;
+                            $variant_price = $variant->variant_price - ($variant->variant_price * $discount_percent)/100;
+                        }elseif($taxPercent){
+                            $taxPercent = !empty($tax->tax_percent) ? $tax->tax_percent :0;
+                            $variant_price = $variant->variant_price + ($variant->variant_price * $taxPercent)/100;
+                        }else{
+                            $variant_price = $variant->variant_price;
+                        }
+                        
+                        $dish_variant[] = array(
+                            "id"           => $variant->id,
+                            "variant_name" => $variant->variant_name,
+                            "variant_price"=> $variant_price  ?? 0,
+                            "dish_id"      => $variant->dish_id,
+                            "created_at"   => $variant->created_at,
+                            "updated_at"   => $variant->updated_at
+                        ); 
+                    }   
+                    $array[] =array(
+                        "id"       => $dish->id,
+                        "dish_name"=>$dish->dish_name,
+                        "dish_price"=> $final_price,
+                        "dish_code"=> $dish->dish_code,
+                        "dish_images"=> $dish->dish_images,
+                        "has_variant"=> $dish->has_variant,
+                        "is_tax_inclusive"=> $dish->is_tax_inclusive,
+                        "is_discount"=> $dish->is_discount,
+                        "category_id"=> $dish->category_id,
+                        "counter_id"=> $dish->counter_id,
+                        "chef_preparation"=> $dish->chef_preparation,
+                        "dish_hsn"=> $dish->dish_hsn,
+                        "tax_name"=> $taxName,
+                        "tax_percent"=> $taxPercent,
+                        "discount_name"=> $discount_name,
+                        "discount_percent"=> $discount_percent,
+                        "edited_at"=> $dish->edited_at,
+                        "edited_by"=> $dish->edited_by,
+                        "is_active"=> $dish->is_active,
+                        "created_at"=>$dish->created_at,
+                        "updated_at"=> $dish->updated_at,
+                        'dish_variant'=>$dish_variant ?? Null
+                    );
+                }
+                                    
+                $dish_list =   $array; 
             }
            
             return response()->json(['message'=>'Counter Dish List!','dish_image_url'=>'https://foodiisoft-v3.e-go.biz/foodisoft3.0/public/storage/upload/dish/','category_image_url'=>'https://foodiisoft-v3.e-go.biz/foodisoft3.0/public/storage/upload/category/','status'=>true,'data'=>['counter_list'=>$counterList,'menu_list'=>$menu_list,'category_list'=>$category_list,'dish_list'=>$dish_list]]);                
         }catch (\Throwable $th) {
             Log::debug($th);
-            return response()->json(['status' => 'error', 'message' => 'Something went wrong.'], 400);
-        }
-    }
-    
-    //add to cart
-    public function addToCart(Request $request)
-    {
-        try {
-            $validator = Validator::make($request->all(), [
-                'dish_id'    =>'required',
-                'ip_address' =>'nullable',
-                'user_id'    =>'nullable',
-                'quantity'   =>'required',
-                'price'      =>'required'
-            ]);
-
-            if ($validator->fails()) {
-                return response()->json(['errors' => $validator->errors()->all() ]);
-            }
-
-            $dish_id    = $request->dish_id;
-            $ip_address = $request->ip_address;
-            $user_id    = $request->user_id;
-            $quantity   = $request->quantity;
-            $price      = $request->price;
-            //check dish data
-            $dish = Dish::where('id', $dish_id)->first();
-            //db begin
-            DB::beginTransaction();
-
-            $add_to_cart = new Cart();
-            $add_to_cart->dish_id     = $dish->id;
-            $add_to_cart->dish_price  = $price;
-            $add_to_cart->quantity    = $quantity;
-            $add_to_cart->total_price = $price * $quantity;
-            $add_to_cart->ip_address  = $ip_address ?? Null;
-            $add_to_cart->user_id     = $user_id ?? Null;           
-            $add_to_cart->save();
-
-            //db commit
-            DB::commit();
-            return response()->json(['message'=>'Dish added to cart successfully!','status'=>true,'data'=>[]]);                
-        }catch (\Throwable $th) {
-            DB::rollback();
-            Log::debug($th);
-            return response()->json(['status' => 'error', 'message' => 'Something went wrong.'], 400);
-        }
-    }
-    
-    //cart list
-    public function cartList(Request $request)
-    {
-        try {
-            if($request->ip_address){
-                $validator = Validator::make($request->all(), [
-                    'ip_address'    => 'required',
-                ]);
-            }elseif($request->user_id){
-                $validator = Validator::make($request->all(), [
-                    'user_id'    => 'required',
-                ]);
-    
-                
-            }else{
-                $validator = Validator::make($request->all(), [
-                    'ip_address'    => 'required',
-                    'user_id'    => 'required',
-                ]);
-    
-            }
-            
-            if ($validator->fails()) {
-                return response()->json(['errors' => $validator->errors()->all() ]);
-            }
-
-            $ip_address = $request->ip_address;
-            $user_id    = $request->user_id;
-
-            if($ip_address){
-                $cartList = Cart::with('Dish')
-                                ->where('ip_address', $ip_address)
-                                ->get();
-            }else{
-                $cartList = Cart::with('Dish')
-                                ->where('user_id', $user_id)
-                                ->get();
-            }
-            
-            return response()->json(['message'=>'Cart List!','image_url'=>'https://foodiisoft-v3.e-go.biz/foodisoft3.0/public/storage/upload/dish/','status'=>true,'data'=>$cartList]);   
-        }catch (\Throwable $th) {
-           
-            Log::debug($th);
-            return response()->json(['status' => 'error', 'message' => 'Something went wrong.'], 400);
-        }           
-    }
-
-    //save order
-    public function orderPlaced(Request $request)
-    {
-      try {
-        
-            $validator = Validator::make($request->all(), [
-                'user_id'     => 'required',
-                'total_price' => 'required',
-            ]);   
-            
-            if ($validator->fails()) {
-                return response()->json(['errors' => $validator->errors()->all() ]);
-            }
-            
-            //request parameter
-            $user_id         = $request->user_id;
-            $total_price     = $request->total_price;
-            $payment_method  = $request->payment_method;
-
-            if($payment_method=='online'){
-                $via_payment = "online";
-            }else{
-                $via_payment = "online";
-            }
-
-            $order_through   = $request->order_through;
-            if($order_through=='app'){
-                $order_type = "app";
-            }else{
-                $order_type = "web";
-            }
-            
-            //get cart details
-            $get_cart = Cart::with('Dish.counter.branch')
-                            ->where('user_id', $user_id)
-                            ->get();
-            
-            //get branch id
-            $branch_id = Null;
-            foreach ($get_cart as $cart_data) {
-                $branch_id = $cart_data->Dish->counter->branch->id;
-            }                
-            DB::beginTransaction();
-
-            $order = new order();
-            $order->order_number  = "ORDER-".uniqid();
-            $order->user_id       = $user_id ?? Null;
-            $order->branch_id     = $branch_id;
-            $order->order_through = $order_type;    
-            $order->sub_total     = $total_price;
-            $order->tax_amount    = 0;
-            $order->tax_percent   = 0;
-            $order->mode_of_transaction = $via_payment;
-            $order->payment_timestamp   = \Carbon\Carbon::now();
-            $order->grand_total    = $total_price;
-            $order->invoice_number = "#".uniqid();
-            $order->save();
-
-            //store order details
-            $sub_total =0;
-            foreach ($get_cart as $cart_data) {
-                $sub_total += $cart_data->total_price;
-            
-                $order_detail = new orderDetail();
-                $order_detail->order_id = $order->id;
-                $order_detail->dish_id = $cart_data->dish_id;
-                $order_detail->dish_variant_id = 0;
-                $order_detail->dish_variant_price = 0;    
-                $order_detail->dish_name = $cart_data->dish->dish_name;
-                $order_detail->order_quantity = $cart_data->quantity;
-                $order_detail->dish_price = $cart_data->dish_price;
-                $order_detail->save();
-            }
-
-            $get_cart = Cart::where('user_id', $user_id)->delete();
-
-            DB::commit();
-
-            return response()->json(['message'=>'Your order has been placed successfully!','status'=>true,'data'=>['order_id'=>$order->id]]);                
-
-        }catch (\Throwable $th) {
-            DB::rollback();
-            Log::debug($th);
-            return response()->json(['status' => 'error', 'message' => 'Something went wrong.'], 400);
+            return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
         }
     }
    
-  
 }
