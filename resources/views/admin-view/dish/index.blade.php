@@ -14,6 +14,11 @@
 
         <div class="card-toolbar" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="hover"
             data-bs-original-title="Click to add a user" data-kt-initialized="1">
+            <a href="{{route('export-dish')}}" class="btn btn-sm btn-primary">
+                <!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
+                <!--end::Svg Icon--> Export All Dishes
+            </a>
+            &nbsp;
             <a href="{{route('add-dish')}}" class="btn btn-sm btn-light btn-active-primary">
                 <!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
                 <span class="svg-icon svg-icon-3"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"

@@ -321,7 +321,9 @@ Route::get('/', function () {
 
         Route::get('/get-branch-tax/{id}', [DishController::class, 'getBranchTax'])->name('getBranchTax');
 
-        Route::get('/export-dish', [DishController::class, 'exportDish'])->name('exportDish');
+        Route::get('/export-dish', [DishController::class, 'exportDish'])->name('export-dish');
+        Route::post('/import-dish', [DishController::class, 'importDish'])->name('import-dish');
+        Route::get('/import-dish-view', [DishController::class, 'importDishView'])->name('import-dish-view');
 
         /**
          * Dish Variant Routes

@@ -99,13 +99,22 @@
                                 <div class="fv-row mb-10 fv-plugins-icon-container">
                                     <!--begin::Label-->
                                     <label class="fs-5 fw-bold form-label mb-2">
-                                        <span class="required">Off Time</span>
+                                        <span class="required">Cut Off Time</span>
                                     </label>
                                     <!--end::Label-->
     
                                     <!--begin::Input-->
-                                    <input type="time" class="form-control form-control-solid" placeholder="Enter Off Time"
-                                        name="off_time" value="{{$menu->offtime}}">
+                                    <!-- <input type="time" class="form-control form-control-solid" placeholder="Enter Off Time"
+                                        name="off_time" value="{{$menu->offtime}}"> -->
+                                    <select class="form-select form-select-solid" aria-label="Select example"
+                                        name="off_time" id="off_time" data-control="select2">
+                                        <option value="">Select Off time</option>
+                                        <option value="1:00" {{($menu->offtime == "1:00")?'selected' : ''}}>Before 1 Hour</option>
+                                        <option value="2:00" {{($menu->offtime == "2:00")?'selected' : ''}}>Before 2 Hours</option>
+                                        <option value="3:00" {{($menu->offtime == "3:00")?'selected' : ''}}>Before 3 Hours</option>
+                                        <option value="4:00" {{($menu->offtime == "4:00")?'selected' : ''}}>Before 4 Hours</option>
+                                        <option value="5:00" {{($menu->offtime == "5:00")?'selected' : ''}}>Before 5 Hours</option>
+                                    </select>
                                     <!--end::Input-->
                                     @if($errors->has('off_time'))
                                     <span class="text-danger">{{ $errors->first('off_time') }}</span>

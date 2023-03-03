@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Counter;
 use App\Models\Area;
 use App\Models\Location;
+use App\Models\Discount;
 
 class CounterController extends Controller
 {
@@ -19,8 +20,9 @@ class CounterController extends Controller
 
     public function addCounter()
     {
+        $discount = Discount::get();
         $area = Area::where('is_active', 1)->get();
-        return view('admin-view.counter.add_counter', compact('area'));
+        return view('admin-view.counter.add_counter', compact('area', 'discount'));
     }
 
     public function createCounter(Request $request){
@@ -35,6 +37,7 @@ class CounterController extends Controller
         $counter->license_no = $request->license_no;
         $counter->license_expiry_date = $request->lincese_expiry_date;
         $counter->area_id = $request->area_id;
+        $counter->discount_ids = $request->discount_id;
         $counter->save();
 
         return redirect()->route('counter-list')->with('success', 'Counter Added Successfully!');
@@ -42,10 +45,10 @@ class CounterController extends Controller
     }
 
     public function editCounter($id){
-
+        $discount = Discount::get();
         $counter = Counter::find(base64_decode($id));
         $area = Area::where('is_active', 1)->get();
-        return view('admin-view.counter.edit_counter', compact('counter','area'));
+        return view('admin-view.counter.edit_counter', compact('counter','area','discount'));
     }
 
     public function updateCounter(Request $request){
@@ -61,6 +64,7 @@ class CounterController extends Controller
         $counter->license_no = $request->license_no;
         $counter->license_expiry_date = $request->lincese_expiry_date;
         $counter->area_id = $request->area_id;
+        $counter->discount_ids = $request->discount_id;
         $counter->save();
 
         return redirect()->route('counter-list')->with('success', 'Changes saved Successfully!');

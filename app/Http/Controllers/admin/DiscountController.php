@@ -31,7 +31,7 @@ class DiscountController extends Controller
         $discount->discount_percent = $request->discount_percent;
         $discount->save();
 
-        return redirect()->route('discount_list')->with('success', 'Discount Added Successfully!');
+        return redirect()->route('discount-list')->with('success', 'Discount Added Successfully!');
 
     }
 
@@ -53,7 +53,7 @@ class DiscountController extends Controller
         $discount->discount_percent = $request->discount_percent;
         $discount->save();
 
-        return redirect()->route('discount_list')->with('success', 'Changes saved Successfully!');
+        return redirect()->route('discount-list')->with('success', 'Changes saved Successfully!');
     }
 
     public function discountStatus(Request $request)

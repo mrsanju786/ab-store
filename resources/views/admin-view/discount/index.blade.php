@@ -81,6 +81,7 @@
                             </div>
                         </td>
                     </tr>
+                    @php ($i++)
                     @endforeach
                 </tbody>
                 <!--end::Table body-->

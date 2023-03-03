@@ -180,6 +180,30 @@
                                 <div class="fv-row mb-10 fv-plugins-icon-container">
                                     <!--begin::Label-->
                                     <label class="fs-5 fw-bold form-label mb-2">
+                                        <span>Select Discount</span>
+                                    </label>
+                                    <!--end::Label-->
+
+                                    <!--begin::Input-->
+                                    <select class="form-select form-select-solid" aria-label="Select example" name="discount_id" id="discount_id" data-control="select2">
+                                        <option value="">Select Discount</option>
+                                        @foreach($discount as $discounts)
+                                        <option value="{{$discounts->id}}">{{$discounts->discount_name}}</option>
+                                        @endforeach
+                                  
+                                    </select>
+                                    <!--end::Input-->
+                                    @if($errors->has('discount_id'))
+                                    <span class="text-danger">{{ $errors->first('discount_id') }}</span>
+                                    @endif
+                                    <div class="fv-plugins-message-container invalid-feedback"></div>
+                                </div>
+                                <!--end::Input group-->
+
+                                <!--begin::Input group-->
+                                <div class="fv-row mb-10 fv-plugins-icon-container">
+                                    <!--begin::Label-->
+                                    <label class="fs-5 fw-bold form-label mb-2">
                                         <span class="required">Tax Inclusive</span>
                                     </label>
                                     <!--end::Label-->
