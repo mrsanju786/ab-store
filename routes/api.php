@@ -33,14 +33,14 @@ Route::group(['middleware' => ['auth:api']], function(){
     Route::get('/location-list', [APIController::class, 'LocationList']);
     Route::get('/area-list', [APIController::class, 'AreaList']);
     Route::get('/counter-wise-dish', [POSController::class, 'counterWiseDish']);
-    Route::get('/company-list', [POSController::class, 'companyList']);
+    Route::get('/pos/company-list', [POSController::class, 'companyList']);
 
     
     //mobile app routes
-    Route::get('/counter-list', [MobileAppController::class, 'counterList']);
-    Route::get('/menu-list', [MobileAppController::class, 'menuList']);
-    Route::get('/category-list', [MobileAppController::class, 'categoryList']);
-    Route::get('/dish-list', [MobileAppController::class, 'dishList']);
+    Route::get('get-counter-list', [MobileAppController::class, 'counterList']);
+    Route::get('get-menu-list', [MobileAppController::class, 'menuList']);
+    Route::get('get-category-list', [MobileAppController::class, 'categoryList']);
+    Route::get('get-dish-list', [MobileAppController::class, 'dishList']);
     
    
 });
