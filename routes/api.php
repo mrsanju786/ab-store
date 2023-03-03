@@ -37,10 +37,10 @@ Route::group(['middleware' => ['auth:api']], function(){
 
     
     //mobile app routes
-    Route::get('get-counter-list', [MobileAppController::class, 'counterList']);
-    Route::get('get-menu-list', [MobileAppController::class, 'menuList']);
-    Route::get('get-category-list', [MobileAppController::class, 'categoryList']);
-    Route::get('get-dish-list', [MobileAppController::class, 'dishList']);
+    Route::get('get-counter-list', [MobileAppController::class, 'getCounterList']);
+    Route::get('get-menu-list', [MobileAppController::class, 'getMenuList']);
+    Route::get('get-category-list', [MobileAppController::class, 'getCategoryList']);
+    Route::get('get-dish-list', [MobileAppController::class, 'getDishList']);
     
    
 });
