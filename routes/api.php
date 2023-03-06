@@ -32,6 +32,8 @@ Route::group(['middleware' => ['auth:api']], function(){
     Route::get('/category-list', [APIController::class, 'categoryList']);
     Route::get('/location-list', [APIController::class, 'LocationList']);
     Route::get('/area-list', [APIController::class, 'AreaList']);
+
+    
     Route::get('/counter-wise-dish', [POSController::class, 'counterWiseDish']);
     Route::get('/pos/company-list', [POSController::class, 'companyList']);
 
@@ -50,4 +52,15 @@ Route::group(['middleware' => ['auth:api']], function(){
     Route::post('/save-order', [POSController::class, 'saveOrder']);
     Route::post('/save-order-details', [POSController::class, 'svaeOrderDetails']);
     Route::post('/multiple-order-save', [POSController::class, 'bulkOrderSave']);
+
+    //order route
+    Route::get('/order-list', [POSController::class, 'orderList']);
+    Route::get('/order-details', [POSController::class, 'orderDetailsList']);
     
+
+    //mobile application route
+    Route::post('mobile/save-order', [MobileAppController::class, 'saveOrder']);
+    Route::post('mobile/save-order-details', [MobileAppController::class, 'svaeOrderDetails']);
+    Route::post('mobile/multiple-order-save', [MobileAppController::class, 'bulkOrderSave']);
+    Route::get('mobile/order-list', [MobileAppController::class, 'orderList']);
+    Route::get('mobile/order-details', [MobileAppController::class, 'orderDetailsList']);

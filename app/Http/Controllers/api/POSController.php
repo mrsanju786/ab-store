@@ -383,7 +383,7 @@ class POSController extends Controller
             $order->table_id      = $request['table_id'];
             $order->save();
 
-            // $get_cart = Cart::where('user_id', $request->user_id)->delete();
+            $get_cart = Cart::where('user_id', $request->user_id)->delete();
 
             DB::commit();
 
@@ -482,6 +482,8 @@ class POSController extends Controller
                 $order->table_id       = $json['table_id'] ?? Null;
                 $order->save();
             }
+
+            $get_cart = Cart::where('user_id', $request->user_id)->delete();
             DB::commit();
             return response()->json(['message'=>'Your order has been placed successfully!','status'=>true,'data'=>[]]);                
         }catch (\Throwable $th) {
@@ -498,7 +500,7 @@ class POSController extends Controller
             $companyList = Company::with(['foodLicense','country','state','cities' ,'country.countryTax','country.currency'])
                                     ->where('is_active',1)
                                     ->orderBy('id','desc')
-                                    ->get(); 
+                                    ->first(); 
                   
             return response()->json(['message'=>'Company List!','image_url'=>'https://foodiisoft-v3.e-go.biz/foodisoft3.0/public/storage/upload/company/','status'=>true,'data'=>$companyList]);                
         }catch (\Throwable $th) {
@@ -506,6 +508,52 @@ class POSController extends Controller
             return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
         }
         
+    }
+
+    //order list
+    public function orderList(Request $request){
+        try{
+            $user_id = $request->user_id;
+            $orders = Order::with('user')->where('user_id',$user_id)->orderBy('id','desc')->get();
+            foreach($orders as $order){
+                $orderDetailsList = OrderDetail::with(['dish','dish_variant','dish.counter','dish.counter.area'])->where('order_id',$order->id)->orderBy('id','desc')->get();
+                
+                $order_list = [];
+                foreach($orderDetailsList as $value){
+                    $order_list[]=array(
+                        'id' =>$value->id,
+                        'dish_name' =>$value->dish->dish_name,
+                        'dish_image'=>$value->dish->dish_images, 
+                        'price'     =>$value->dish_price,
+                        'counter_name' =>$value->dish->counter->counter_name,
+                        'counter_address' =>$value->dish->counter->counter_address,
+                        'order_status'    =>$value->order_status,
+                        'cd_status'    =>$value->cd_status,
+                        'quantity'        =>$value->order_quantity,
+                        'total_price' =>$value->dish_price * $value->order_quantity
+                     );
+                }
+            }
+            
+            return response()->json(['message'=>'Order List!','image_url'=>'https://foodiisoft-v3.e-go.biz/foodisoft3.0/public/storage/upload/dish/','status'=>true,'data'=>$order_list]);                
+        }catch (\Throwable $th) {
+            
+            Log::debug($th);
+            return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
+        }
+    }
+   
+    //order details list
+    public function orderDetailsList(Request $request){
+        try{
+            $order_id = $request->order_id;
+            $orderDetailsList = OrderDetail::with(['dish','dish_variant'])->where('order_id',$order_id)->orderBy('id','desc')->get();
+            return response()->json(['message'=>'Order Details List!','status'=>true,'data'=>$orderDetailsList]);                
+        }catch (\Throwable $th) {
+            
+            Log::debug($th);
+            return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
+        }
     }
 
 }
