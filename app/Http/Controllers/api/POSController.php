@@ -324,9 +324,9 @@ class POSController extends Controller
       try {
         
             $validator = Validator::make($request->all(), [
-                'user_id'     => 'nullable',
-                'order_number' => 'nullable',
-                'order_status' => 'nullable',
+                'user_id'     => 'required',
+                'order_number' => 'required',
+                'order_status' => 'required',
                 'cd_status' => 'nullable',
                 'order_date' => 'nullable',
                 'branch_id' => 'nullable',
