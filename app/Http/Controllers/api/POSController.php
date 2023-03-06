@@ -21,6 +21,7 @@ use App\Models\Cart;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\DishVariant;
+use App\Models\userHasCompany;
 use Storage;
 use Auth;
 use Redirect;
@@ -494,11 +495,13 @@ class POSController extends Controller
     }
     
     //company list
-    public function companyList(){
+    public function companyList(Request $request){
         try {
-       
+            $user_id     = Auth::user()->id;
+            $user        = userHasCompany::where('user_id',$user_id)->first();
             $companyList = Company::with(['foodLicense','country','state','cities' ,'country.countryTax','country.currency'])
                                     ->where('is_active',1)
+                                    ->where('id',$user->company_id)
                                     ->orderBy('id','desc')
                                     ->first(); 
                   
