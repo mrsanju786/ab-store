@@ -15,7 +15,7 @@
                     <div class="card-header">
                         <!--begin::Card title-->
                         <div class="card-title">
-                            <h2>Add Dish</h2>
+                            <h2>Import Dish</h2>
                         </div>
                         <!--end::Card title-->
                     </div>
@@ -61,6 +61,10 @@
                                     </button>
                                 </div>
                                 <!--end::Actions-->
+
+                                <div class="text-left pt-3">
+                                    Click On <a href="{{asset('admin_site/assets/sample.csv')}}">Sample.csv</a> to View Sample Import file.
+                                </div>
                             </div>
                         </form>
                         <!--end::Form-->
