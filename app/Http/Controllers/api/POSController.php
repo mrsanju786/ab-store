@@ -356,7 +356,7 @@ class POSController extends Controller
             DB::beginTransaction();
 
             $order = new order();
-            $order->order_number  = $request['order_number'];
+            $order->order_number  = "ORDER-".uniqid();
             $order->user_id       = $request['user_id'];
             $order->order_status  = $request['order_status'];
             $order->cd_status     = $request['cd_status'];
@@ -375,7 +375,7 @@ class POSController extends Controller
             $order->order_closed_by   = $request['order_closed_by'];
             $order->order_closed_time   = $request['order_closed_time'];
             $order->grand_total    = $request['grand_total'];
-            $order->invoice_number = $request['invoice_number'];
+            $order->invoice_number = "#".uniqid();
             $order->paid_or_cancel = $request['paid_or_cancel'];
             $order->refund_through = $request['refund_through'];
             $order->instruction = $request['instruction'];
