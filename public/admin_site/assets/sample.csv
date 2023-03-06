@@ -1,0 +1,3 @@
+dish_name,dish_price,dish_code,dish_images,has_variant,is_tax_inclusive,is_discount,category_id,counter_id,discount_ids,chef_preparation,dish_hsn
+Test dish1,123,OLL123,blank.jpg,1,1,0,1,1,2,1,98765
+Test dish2,123,OLL1234,blank.jpg,1,1,0,1,1,1,1,654323
