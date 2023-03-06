@@ -36,7 +36,7 @@ class MobileAppController extends Controller
         $this->middleware('auth:api');
     }
     //get counter location wise
-    public function counterList(Request $request){
+    public function getCounterList(Request $request){
         try{
 
             $validator = Validator::make($request->all(), [
@@ -50,10 +50,10 @@ class MobileAppController extends Controller
             //get location id
             $location = Location::join('areas','areas.location_id','=','locations.id')
                                 ->select('locations.id as location_id','areas.id as area_id','areas.area_name')
-                                ->where('pincode',$pincode)
+                                ->where('locations.pincode',$pincode)
                                 ->where('locations.is_active',1)
                                 ->first();
-            
+            // return $location;
             //get counter list                    
             $counterList  = Counter::with('Branch')
                                    ->where('area_id',$location->area_id)
@@ -68,7 +68,7 @@ class MobileAppController extends Controller
     }
 
      //menu list
-    public function menuList(Request $request){
+    public function getMenuList(Request $request){
         try {
            
             $validator = Validator::make($request->all(), [
@@ -95,7 +95,7 @@ class MobileAppController extends Controller
     }
 
     //category list
-    public function categoryList(Request $request){
+    public function getCategoryList(Request $request){
         try {
             
             $validator = Validator::make($request->all(), [
@@ -124,7 +124,7 @@ class MobileAppController extends Controller
     }
 
      //dish list
-     public function dishList(Request $request){
+    public function getDishList(Request $request){
         try {
 
             $validator = Validator::make($request->all(), [
@@ -267,4 +267,7 @@ class MobileAppController extends Controller
         }
         
     }
+   
+    
+
 }

@@ -324,9 +324,9 @@ class POSController extends Controller
       try {
         
             $validator = Validator::make($request->all(), [
-                'user_id'     => 'nullable',
-                'order_number' => 'nullable',
-                'order_status' => 'nullable',
+                'user_id'     => 'required',
+                'order_number' => 'required',
+                'order_status' => 'required',
                 'cd_status' => 'nullable',
                 'order_date' => 'nullable',
                 'branch_id' => 'nullable',
@@ -356,31 +356,31 @@ class POSController extends Controller
             DB::beginTransaction();
 
             $order = new order();
-            $order->order_number  = $request->order_number;
-            $order->user_id       = $request->user_id;
-            $order->order_status  = $request->order_status;
-            $order->cd_status     = $request->cd_status;
-            $order->order_date    = $request->order_date;
-            $order->branch_id     = $request->branch_id;
-            $order->order_through = $request->order_through;    
-            $order->sub_total     = $request->sub_total;
-            $order->tax_amount    = $request->tax_amount;
-            $order->tax_percent   = $request->tax_percent;
-            $order->discount_name   = $request->discount_name;
-            $order->discount_type   = $request->discount_type;
-            $order->discount_amount   = $request->discount_amount;
-            $order->mode_of_transaction = $request->mode_of_transaction;
-            $order->payment_timestamp   = $request->payment_timestamp;
-            $order->order_prepared_by   = $request->order_prepared_by;
-            $order->order_closed_by   = $request->order_closed_by;
-            $order->order_closed_time   = $request->order_closed_time;
-            $order->grand_total    = $request->grand_total;
-            $order->invoice_number = $request->invoice_number;
-            $order->paid_or_cancel = $request->paid_or_cancel;
-            $order->refund_through = $request->refund_through;
-            $order->instruction = $request->instruction;
-            $order->transaction_id = $request->transaction_id;
-            $order->table_id      = $request->table_id;
+            $order->order_number  = $request['order_number'];
+            $order->user_id       = $request['user_id'];
+            $order->order_status  = $request['order_status'];
+            $order->cd_status     = $request['cd_status'];
+            $order->order_date    = $request['order_date'];
+            $order->branch_id     = $request['branch_id'];
+            $order->order_through = $request['order_through'];    
+            $order->sub_total     = $request['sub_total'];
+            $order->tax_amount    = $request['tax_amount'];
+            $order->tax_percent   = $request['tax_percent'];
+            $order->discount_name   = $request['discount_name'];
+            $order->discount_type   = $request['discount_type'];
+            $order->discount_amount   = $request['discount_amount'];
+            $order->mode_of_transaction = $request['mode_of_transaction'];
+            $order->payment_timestamp   = $request['payment_timestamp'];
+            $order->order_prepared_by   = $request['order_prepared_by'];
+            $order->order_closed_by   = $request['order_closed_by'];
+            $order->order_closed_time   = $request['order_closed_time'];
+            $order->grand_total    = $request['grand_total'];
+            $order->invoice_number = $request['invoice_number'];
+            $order->paid_or_cancel = $request['paid_or_cancel'];
+            $order->refund_through = $request['refund_through'];
+            $order->instruction = $request['instruction'];
+            $order->transaction_id = $request['transaction_id'];
+            $order->table_id      = $request['table_id'];
             $order->save();
 
             // $get_cart = Cart::where('user_id', $request->user_id)->delete();
@@ -490,4 +490,22 @@ class POSController extends Controller
             return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
         }
     }
+    
+    //company list
+    public function companyList(){
+        try {
+       
+            $companyList = Company::with(['foodLicense','country','state','cities' ,'country.countryTax','country.currency'])
+                                    ->where('is_active',1)
+                                    ->orderBy('id','desc')
+                                    ->get(); 
+                  
+            return response()->json(['message'=>'Company List!','image_url'=>'https://foodiisoft-v3.e-go.biz/foodisoft3.0/public/storage/upload/company/','status'=>true,'data'=>$companyList]);                
+        }catch (\Throwable $th) {
+            Log::debug($th);
+            return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
+        }
+        
+    }
+
 }
