@@ -267,7 +267,246 @@ class MobileAppController extends Controller
         }
         
     }
+
+
+    //save order
+    public function saveOrder(Request $request)
+    {
+      try {
+        
+            $validator = Validator::make($request->all(), [
+                'user_id'     => 'required',
+                'order_number' => 'required',
+                'order_status' => 'required',
+                'cd_status' => 'nullable',
+                'order_date' => 'nullable',
+                'branch_id' => 'nullable',
+                'order_through' => 'nullable',
+                'sub_total' => 'nullable',
+                'tax_amount' => 'nullable',
+                'discount_name' => 'nullable',
+                'discount_type' => 'nullable',
+                'discount_amount' => 'nullable',
+                'mode_of_transaction' => 'nullable',
+                'payment_timestamp' => 'nullable',
+                'order_prepared_by' => 'nullable',
+                'order_closed_by' => 'nullable',
+                'grand_total' => 'nullable',
+                'invoice_number' => 'nullable',
+                'paid_or_cancel' => 'nullable',
+                'refund_through' => 'nullable',
+                'instruction' => 'nullable',
+                'transaction_id' => 'nullable',
+                'table_id' => 'nullable',
+            ]);   
+            
+            if ($validator->fails()) {
+                return response()->json(['errors' => $validator->errors()->all() ]);
+            }
+                
+            DB::beginTransaction();
+
+            $order = new order();
+            $order->order_number  = $request['order_number'];
+            $order->user_id       = $request['user_id'];
+            $order->order_status  = $request['order_status'];
+            $order->cd_status     = $request['cd_status'];
+            $order->order_date    = $request['order_date'];
+            $order->branch_id     = $request['branch_id'];
+            $order->order_through = $request['order_through'];    
+            $order->sub_total     = $request['sub_total'];
+            $order->tax_amount    = $request['tax_amount'];
+            $order->tax_percent   = $request['tax_percent'];
+            $order->discount_name   = $request['discount_name'];
+            $order->discount_type   = $request['discount_type'];
+            $order->discount_amount   = $request['discount_amount'];
+            $order->mode_of_transaction = $request['mode_of_transaction'];
+            $order->payment_timestamp   = $request['payment_timestamp'];
+            $order->order_prepared_by   = $request['order_prepared_by'];
+            $order->order_closed_by   = $request['order_closed_by'];
+            $order->order_closed_time   = $request['order_closed_time'];
+            $order->grand_total    = $request['grand_total'];
+            $order->invoice_number = $request['invoice_number'];
+            $order->paid_or_cancel = $request['paid_or_cancel'];
+            $order->refund_through = $request['refund_through'];
+            $order->instruction = $request['instruction'];
+            $order->transaction_id = $request['transaction_id'];
+            $order->table_id      = $request['table_id'];
+            $order->save();
+
+            $get_cart = Cart::where('user_id', $request->user_id)->delete();
+
+            DB::commit();
+
+            return response()->json(['message'=>'Your order has been placed successfully!','status'=>true,'data'=>['order_id'=>$order->id]]);                
+
+        }catch (\Throwable $th) {
+            DB::rollback();
+            Log::debug($th);
+            return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
+        }
+    }
+
+    //save order details
+    public function svaeOrderDetails(Request $request)
+    {
+      try {
+        
+            $validator = Validator::make($request->all(), [
+                'order_id'         => 'nullable',
+                'dish_id'          => 'nullable',
+                'dish_variant_id'  => 'nullable',
+                'dish_name'        => 'nullable',
+                'order_quantity'   => 'nullable',
+                'order_status'     => 'nullable',
+                'cd_status'        => 'nullable',
+                'dish_price'       => 'nullable',
+            ]);   
+            
+            if ($validator->fails()) {
+                return response()->json(['errors' => $validator->errors()->all() ]);
+            }
+                
+            DB::beginTransaction();
+            $jsons =  json_decode($request->getContent(), true);
+           
+            foreach ($jsons as $key => $json) {
+                $orderDetails = new orderDetail();
+                $orderDetails->order_id          = $json['order_id'] ?? Null;
+                $orderDetails->dish_id           = $json['dish_id'] ?? Null;
+                $orderDetails->dish_variant_id   = $json['dish_variant_id'] ?? 0;
+                $orderDetails->dish_name         = $json['dish_name'] ?? Null;
+                $orderDetails->order_quantity    = $json['order_quantity'] ?? Null;
+                $orderDetails->order_status      = $json['order_status'] ?? Null;
+                $orderDetails->order_status      = $json['order_status'] ?? Null;    
+                $orderDetails->cd_status         = $json['cd_status'] ?? Null;
+                $orderDetails->dish_price        = $json['dish_price'] ?? Null;
+                $orderDetails->dish_variant_price = $json['dish_variant_price'] ?? Null;
+                $orderDetails->save();
+            }
+           
+            DB::commit();
+
+            return response()->json(['message'=>'Your order details has been saved successfully!','status'=>true,'data'=>[]]);                
+
+        }catch (\Throwable $th) {
+            DB::rollback();
+            Log::debug($th);
+            return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
+        }
+    }
+
+    //bulk/multiple  order save 
+    public function bulkOrderSave(Request $request){
+        try {
+
+            DB::beginTransaction();
+
+            $jsons =  json_decode($request->getContent(), true);
+           
+            foreach ($jsons as $key => $json) {
+                $order = new order();
+                $order->order_number  = $json['order_number'] ?? Null;
+                $order->user_id       = $json['user_id'] ?? Null;
+                $order->order_status  = $json['order_status'] ?? Null;
+                $order->cd_status     = $json['cd_status'] ?? Null;
+                $order->order_date    = $json['order_date'] ?? Null;
+                $order->branch_id     = $json['branch_id'] ?? Null;
+                $order->order_through = $json['order_through'] ?? Null;    
+                $order->sub_total     = $json['sub_total'] ?? Null;
+                $order->tax_amount    = $json['tax_amount'] ?? Null;
+                $order->tax_percent   = $json['tax_percent'] ?? Null;
+                $order->discount_name   = $json['discount_name'] ?? Null;
+                $order->discount_type   = $json['discount_type'] ?? Null;
+                $order->discount_amount   = $json['discount_amount'] ?? Null;
+                $order->mode_of_transaction = $json['mode_of_transaction'] ?? Null;
+                $order->payment_timestamp   = $json['payment_timestamp'] ?? Null;
+                $order->order_prepared_by   = $json['order_prepared_by'] ?? Null;
+                $order->order_closed_by   = $json['order_closed_by'] ?? Null;
+                $order->order_closed_time   = $json['order_closed_time'] ?? Null;
+                $order->grand_total    = $json['grand_total'] ?? Null;
+                $order->invoice_number = $json['invoice_number'] ?? Null;
+                $order->paid_or_cancel = $json['paid_or_cancel'] ?? Null;
+                $order->refund_through = $json['refund_through'] ?? Null;
+                $order->instruction = $json['instruction'] ?? Null;
+                $order->transaction_id = $json['transaction_id'] ?? Null;
+                $order->table_id       = $json['table_id'] ?? Null;
+                $order->save();
+            }
+
+            $get_cart = Cart::where('user_id', $request->user_id)->delete();
+            DB::commit();
+            return response()->json(['message'=>'Your order has been placed successfully!','status'=>true,'data'=>[]]);                
+        }catch (\Throwable $th) {
+            DB::rollback();
+            Log::debug($th);
+            return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
+        }
+    }
+
+    //order list
+    //order list
+    public function orderList(Request $request){
+        try{
+            $user_id = $request->user_id;
+            $orders = Order::with('user')->where('user_id',$user_id)->orderBy('id','desc')->get();
+            foreach($orders as $order){
+                $orderDetailsList = OrderDetail::with(['dish','dish_variant','dish.counter','dish.counter.area'])->where('order_id',$order->id)->orderBy('id','desc')->get();
+                $orde_number = Null;
+                $grand_total = 0;
+                $order_status = Null;
+                $cd__status = Null;
+                $sub_total =0;
+                $tax_amount =0;
+                $discount_amount =0;
+                $order_through =0;
+                $orde_number = $order->order_number;
+                $grand_total = $order->grand_total;
+                $order_status = $order->order_status;
+                $cd__status = $order->cd__status;
+                $sub_total  =$order->sub_total;
+                $tax_amount  =$order->tax_amount;
+                $discount_amount  =$order->discount_amount;
+                $order_through  =$order->order_through;
+
+                $order_list = [];
+                foreach($orderDetailsList as $value){
+                    $order_list[]=array(
+                        'id' =>$value->id,
+                        'dish_name' =>$value->dish->dish_name,
+                        'dish_image'=>$value->dish->dish_images, 
+                        'price'     =>$value->dish_price,
+                        'counter_name' =>$value->dish->counter->counter_name,
+                        'counter_address' =>$value->dish->counter->counter_address,
+                        'order_status'    =>$value->order_status,
+                        'cd_status'    =>$value->cd_status,
+                        'quantity'        =>$value->order_quantity,
+                        'total_price' =>$value->dish_price * $value->order_quantity
+                     );
+                }
+            }
+            
+            return response()->json(['message'=>'Order List!','image_url'=>'https://foodiisoft-v3.e-go.biz/foodisoft3.0/public/storage/upload/dish/','status'=>true,'data'=>$order_list,'orde_number'=>$orde_number,
+            'grand_total'=>$grand_total,'order_status'=>$order_status,'cd__status'=>$cd__status,'sub_total'=>$sub_total,
+             'tax_amount'=>$tax_amount,'discount_amount'=>$discount_amount,'order_through'=>$order_through]);                
+        }catch (\Throwable $th) {
+            
+            Log::debug($th);
+            return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
+        }
+    }
    
-    
+    //order details list
+    public function orderDetailsList(Request $request){
+        try{
+            $order_id = $request->order_id;
+            $orderDetailsList = OrderDetail::with(['dish','dish_variant'])->where('order_id',$order_id)->orderBy('id','desc')->get();
+            return response()->json(['message'=>'Order Details List!','status'=>true,'data'=>$orderDetailsList]);                
+        }catch (\Throwable $th) {
+            
+            Log::debug($th);
+            return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
+        }
+    }
 
 }
