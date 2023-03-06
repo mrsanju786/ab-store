@@ -28,6 +28,7 @@ class DishImport implements ToModel, WithHeadingRow
             'discount_ids'    => $row['discount_ids'],
             'chef_preparation'    => $row['chef_preparation'],
             'dish_hsn'    => $row['dish_hsn'],
+            'stock_quantity'    => $row['stock_quantity'],
         ]);
     }
 }

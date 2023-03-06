@@ -23,6 +23,7 @@ class Dish extends Model
         'chef_preparation',
         'dish_hsn',
         'edited_at',
+        'stock_quantity',
         'edited_by',
         'is_active',
         'created_at',
