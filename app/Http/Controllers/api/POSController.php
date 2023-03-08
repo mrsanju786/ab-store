@@ -197,7 +197,7 @@ class POSController extends Controller
                 $dish_list =   $array; 
             }
            
-            return response()->json(['message'=>'Counter Dish List!','dish_image_url'=>'https://foodiisoft-v3.e-go.biz/foodisoft3.0/public/storage/upload/dish/','category_image_url'=>'https://foodiisoft-v3.e-go.biz/foodisoft3.0/public/storage/upload/category/','status'=>true,'data'=>['counter_list'=>$counterList,'menu_list'=>$menu_list,'category_list'=>$category_list,'dish_list'=>$dish_list]]);                
+            return response()->json(['message'=>'Counter Dish List!','dish_image_url'=>env('IMAGE_URL')."/dish/",'category_image_url'=>env('IMAGE_URL')."/category/",'status'=>true,'data'=>['counter_list'=>$counterList,'menu_list'=>$menu_list,'category_list'=>$category_list,'dish_list'=>$dish_list]]);                
         }catch (\Throwable $th) {
             Log::debug($th);
             return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
@@ -311,7 +311,7 @@ class POSController extends Controller
                                 ->get();
             }
             
-            return response()->json(['message'=>'Cart List!','image_url'=>'https://foodiisoft-v3.e-go.biz/foodisoft3.0/public/storage/upload/dish/','status'=>true,'data'=>$cartList]);   
+            return response()->json(['message'=>'Cart List!','image_url'=>env('IMAGE_URL')."/dish/",'status'=>true,'data'=>$cartList]);   
         }catch (\Throwable $th) {
            
             Log::debug($th);
@@ -505,7 +505,7 @@ class POSController extends Controller
                                     ->orderBy('id','desc')
                                     ->first(); 
                   
-            return response()->json(['message'=>'Company List!','image_url'=>'https://foodiisoft-v3.e-go.biz/foodisoft3.0/public/storage/upload/company/','status'=>true,'data'=>$companyList]);                
+            return response()->json(['message'=>'Company List!','image_url'=>env('IMAGE_URL')."/company/",'status'=>true,'data'=>$companyList]);                
         }catch (\Throwable $th) {
             Log::debug($th);
             return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
@@ -554,7 +554,7 @@ class POSController extends Controller
                 }
             }
             
-            return response()->json(['message'=>'Order List!','image_url'=>'https://foodiisoft-v3.e-go.biz/foodisoft3.0/public/storage/upload/dish/','status'=>true,'data'=>$order_list,'orde_number'=>$orde_number,
+            return response()->json(['message'=>'Order List!','image_url'=>env('IMAGE_URL')."/dish/",'status'=>true,'data'=>$order_list,'orde_number'=>$orde_number,
             'grand_total'=>$grand_total,'order_status'=>$order_status,'cd__status'=>$cd__status,'sub_total'=>$sub_total,
              'tax_amount'=>$tax_amount,'discount_amount'=>$discount_amount,'order_through'=>$order_through]);                
         }catch (\Throwable $th) {
