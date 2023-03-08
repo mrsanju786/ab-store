@@ -57,7 +57,7 @@ class RoleController extends Controller
         }
     }
 
-    public function update(Request $request, $id) {
+    public function update(Request $request) {
         try{
 
             $validator = Validator::make($request->all(), [
@@ -68,7 +68,8 @@ class RoleController extends Controller
                 return response()->json(['errors' => $validator->errors()->all() ]);
             }
 
-            $edit_role = Role::find(base64_decode($id));
+            $id = $request->role_id;
+            $edit_role = Role::find($id);
             $edit_role->name = $request->role_name;
             $edit_role->save();
 

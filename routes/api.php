@@ -9,6 +9,12 @@ use App\Http\Controllers\api\MobileAppController;
 
 //admin route controller
 use App\Http\Controllers\api\AdminApi\RoleController;
+use App\Http\Controllers\api\AdminApi\DashboardController;
+use App\Http\Controllers\api\AdminApi\CompanyController;
+use App\Http\Controllers\api\AdminApi\BranchController;
+use App\Http\Controllers\api\AdminApi\LocationController;
+use App\Http\Controllers\api\AdminApi\AreaController;
+use App\Http\Controllers\api\AdminApi\CounterController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -71,8 +77,60 @@ Route::group(['middleware' => ['auth:api']], function(){
 
     //admin side apis route
     Route::group(['prefix'=>'admin','middleware' => ['auth:api']], function(){
+         /**
+         * dashboard Routes
+         */
+        Route::get('/dashboard', [DashboardController::class, 'dashboard']);
+        /**
+         * role Routes
+         */
         Route::get('/role', [RoleController::class, 'role']);
         Route::get('/permissions', [RoleController::class, 'PermissionList']);
         Route::post('/store', [RoleController::class, 'store']);
-        Route::post('/update/{id}', [RoleController::class, 'update']);
+        Route::post('/update', [RoleController::class, 'update']);
+
+        /**
+         * Company Routes
+         */
+        Route::get('/company-list', [CompanyController::class, 'index']);
+        Route::get('/license-list', [CompanyController::class, 'licenseList']);
+        Route::post('/create-company', [CompanyController::class, 'createCompany']);
+        Route::post('/update-company', [CompanyController::class, 'updateCompany']);
+        Route::post('/company-status', [CompanyController::class, 'companyStatus']);
+            
+        /**
+         * Branch Routes
+         */
+        Route::get('/branch-list', [BranchController::class, 'index']);
+        Route::get('/region-list', [BranchController::class, 'regionList']);
+        Route::post('/create-branch', [BranchController::class, 'createBranch']);
+        Route::get('/edit-branch/{id}', [BranchController::class, 'editBranch']);
+        Route::post('/update-branch', [BranchController::class, 'updateBranch']);
+        Route::post('/branch-status', [BranchController::class, 'branchStatus']);
+
+        Route::get('/get-branch/{id}', [BranchController::class, 'getBranch']);
+
+        /**
+         * Location Routes
+         */
+        Route::get('/location-list', [LocationController::class, 'index']);
+        Route::post('/create-location', [LocationController::class, 'createLocation']);
+        Route::post('/update-location', [LocationController::class, 'updateLocation']);
+        Route::post('/location-status', [LocationController::class, 'locationStatus']);
+        /**
+         * Area Routes
+         */
+        Route::get('/area-list', [AreaController::class, 'index']);
+        Route::post('/create-area', [AreaController::class, 'createArea']);
+        Route::post('/update-area', [AreaController::class, 'updateArea']);
+        Route::post('/area-status', [AreaController::class, 'areaStatus']);
+
+        /**
+         * counter Routes
+         */
+        Route::get('/counter-list', [CounterController::class, 'index']);
+        Route::post('/create-counter', [CounterController::class, 'createCounter']);
+        Route::post('/update-counter', [CounterController::class, 'updateCounter']);
+        Route::get('/counter-status/{id}/{status}', [CounterController::class, 'areaStatus']);
+        Route::get('/get-counter-by-branch/{id}', [CounterController::class, 'getCounterByBranch']);
     });     
