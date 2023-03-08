@@ -82,7 +82,7 @@ class CompanyController extends Controller
         $company_has_region->region_id = $region_id;
         $company_has_region->save();
 
-        return redirect()->route('company_list')->with('success', 'Company Added Successfully!');
+        return redirect()->route('company-list')->with('success', 'Company Added Successfully!');
 
     }
 
@@ -141,7 +141,7 @@ class CompanyController extends Controller
         
         $company_has_region = CompanyHasRegion::where('company_id',$id)->update(['region_id'=>$region_id]);
 
-        return redirect()->route('company_list')->with('success', 'Changes saved Successfully!');
+        return redirect()->route('company-list')->with('success', 'Changes saved Successfully!');
     }
 
     public function companyStatus(Request $request)

@@ -19,6 +19,8 @@ use App\Exports\DishExport;
 use Storage;
 use Auth;
 use Maatwebsite\Excel\Facades\Excel;
+use DB;
+use Illuminate\Support\Arr;
 
 class DishController extends Controller
 {
@@ -187,6 +189,7 @@ class DishController extends Controller
     }
 
     public function importDishView(){
+
         return view('admin-view.dish.import-dish');
     }
 
@@ -195,5 +198,24 @@ class DishController extends Controller
         Excel::import(new DishImport,request()->file('file'));
                
         return back()->with('success','Imported Successfully!');
+    }
+
+    public function updateDishView(){
+
+        return view('admin-view.dish.update-dish');
+    }
+
+    public function updateDishexcel(){
+
+        $data = Excel::toArray(new DishImport, request()->file('file')); 
+
+        collect(head($data))
+            ->each(function ($row, $key) {
+                DB::table('dishes')
+                    ->where('id', $row['id'])
+                    ->update(Arr::except($row, ['id']));
+            });
+
+        return back()->with('success','Updated Successfully!');
     }
 }

@@ -127,7 +127,7 @@ Route::get('/', function () {
             /**
              * Foodlicense Routes
              */
-            Route::get('/foodlicense-list', [FoodlicenseController::class, 'index'])->name('foodlicense_list');
+            Route::get('/foodlicense-list', [FoodlicenseController::class, 'index'])->name('foodlicense-list');
             Route::get('/add-foodlicense', [FoodlicenseController::class, 'addFoodlicense'])->name('add-foodlicense');
             Route::post('/create-foodlicense', [FoodlicenseController::class, 'createFoodlicense'])->name('create-foodlicense');
             Route::get('/edit-foodlicense/{id}', [FoodlicenseController::class, 'editFoodlicense'])->name('edit-foodlicense');
@@ -137,7 +137,7 @@ Route::get('/', function () {
             /**
              * Region Routes
              */
-            Route::get('/region-list', [RegionController::class, 'index'])->name('region_list');
+            Route::get('/region-list', [RegionController::class, 'index'])->name('region-list');
             Route::get('/add-region', [RegionController::class, 'addRegion'])->name('add-region');
             Route::post('/create-region', [RegionController::class, 'createRegion'])->name('create-region');
             Route::get('/edit-region/{id}', [RegionController::class, 'editRegion'])->name('edit-region');
@@ -148,7 +148,7 @@ Route::get('/', function () {
             /**
              * Country Routes
              */
-            Route::get('/country-list', [CountryController::class, 'index'])->name('country_list');
+            Route::get('/country-list', [CountryController::class, 'index'])->name('country-list');
             Route::get('/add-country', [CountryController::class, 'addCountry'])->name('add-country');
             Route::post('/create-country', [CountryController::class, 'createCountry'])->name('create-country');
             Route::get('/edit-country/{id}', [CountryController::class, 'editCountry'])->name('edit-country');
@@ -157,7 +157,7 @@ Route::get('/', function () {
             /**
              * State Routes
              */
-            Route::get('/state-list', [StateController::class, 'index'])->name('state_list');
+            Route::get('/state-list', [StateController::class, 'index'])->name('state-list');
             Route::get('/add-state', [StateController::class, 'addState'])->name('add-state');
             Route::post('/create-state', [StateController::class, 'createState'])->name('create-state');
             Route::get('/edit-state/{id}', [StateController::class, 'editState'])->name('edit-state');
@@ -167,7 +167,7 @@ Route::get('/', function () {
             /**
              * City Routes
              */
-            Route::get('/city-list', [CityController::class, 'index'])->name('city_list');
+            Route::get('/city-list', [CityController::class, 'index'])->name('city-list');
             Route::get('/add-city', [CityController::class, 'addCity'])->name('add-city');
             Route::post('/create-city', [CityController::class, 'createCity'])->name('create-city');
             Route::get('/edit-city/{id}', [CityController::class, 'editCity'])->name('edit-city');
@@ -203,7 +203,7 @@ Route::get('/', function () {
         /**
          * Company Routes
          */
-        Route::get('/company-list', [CompanyController::class, 'index'])->name('company_list');
+        Route::get('/company-list', [CompanyController::class, 'index'])->name('company-list');
         Route::get('/add-company', [CompanyController::class, 'addCompany'])->name('add-company');
         Route::post('/create-company', [CompanyController::class, 'createCompany'])->name('create-company');
         Route::get('/edit-company/{id}', [CompanyController::class, 'editCompany'])->name('edit-company');
@@ -214,7 +214,7 @@ Route::get('/', function () {
         /**
          * Branch Routes
          */
-        Route::get('/branch-list', [BranchController::class, 'index'])->name('branch_list');
+        Route::get('/branch-list', [BranchController::class, 'index'])->name('branch-list');
         Route::get('/add-branch', [BranchController::class, 'addBranch'])->name('add-branch');
         Route::post('/create-branch', [BranchController::class, 'createBranch'])->name('create-branch');
         Route::get('/edit-branch/{id}', [BranchController::class, 'editBranch'])->name('edit-branch');
@@ -226,7 +226,7 @@ Route::get('/', function () {
         /**
          * Location Routes
          */
-        Route::get('/location-list', [LocationController::class, 'index'])->name('location_list');
+        Route::get('/location-list', [LocationController::class, 'index'])->name('location-list');
         Route::get('/add-location', [LocationController::class, 'addLocation'])->name('add-location');
         Route::post('/create-location', [LocationController::class, 'createLocation'])->name('create-location');
         Route::get('/edit-location/{id}', [LocationController::class, 'editLocation'])->name('edit-location');
@@ -266,7 +266,7 @@ Route::get('/', function () {
         /**
          * Area Routes
          */
-        Route::get('/area-list', [AreaController::class, 'index'])->name('area_list');
+        Route::get('/area-list', [AreaController::class, 'index'])->name('area-list');
         Route::get('/add-area', [AreaController::class, 'addArea'])->name('add-area');
         Route::post('/create-area', [AreaController::class, 'createArea'])->name('create-area');
         Route::get('/edit-area/{id}', [AreaController::class, 'editArea'])->name('edit-area');
@@ -324,6 +324,9 @@ Route::get('/', function () {
         Route::get('/export-dish', [DishController::class, 'exportDish'])->name('export-dish');
         Route::post('/import-dish', [DishController::class, 'importDish'])->name('import-dish');
         Route::get('/import-dish-view', [DishController::class, 'importDishView'])->name('import-dish-view');
+
+        Route::get('/update-dish-view', [DishController::class, 'updateDishView'])->name('update-dish-view');
+        Route::post('/update-dish-excel', [DishController::class, 'updateDishexcel'])->name('update-dish-excel');
 
         /**
          * Dish Variant Routes
