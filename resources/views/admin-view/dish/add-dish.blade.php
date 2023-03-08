@@ -204,6 +204,25 @@
                                 <div class="fv-row mb-10 fv-plugins-icon-container">
                                     <!--begin::Label-->
                                     <label class="fs-5 fw-bold form-label mb-2">
+                                        <span>Stock Quantity</span>
+                                    </label>
+                                    <!--end::Label-->
+
+                                    <!--begin::Input-->
+                                    <input input type="number" class="form-control form-control-solid" placeholder="Stock Quantity"
+                                        name="stock_quantity">
+                                    <!--end::Input-->
+                                    @if($errors->has('stock_quantity'))
+                                    <span class="text-danger">{{ $errors->first('stock_quantity') }}</span>
+                                    @endif
+                                    <div class="fv-plugins-message-container invalid-feedback"></div>
+                                </div>
+                                <!--end::Input group-->
+
+                                <!--begin::Input group-->
+                                <div class="fv-row mb-10 fv-plugins-icon-container">
+                                    <!--begin::Label-->
+                                    <label class="fs-5 fw-bold form-label mb-2">
                                         <span class="required">Tax Inclusive</span>
                                     </label>
                                     <!--end::Label-->
