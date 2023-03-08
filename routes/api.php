@@ -6,6 +6,9 @@ use App\Http\Controllers\api\LoginController;
 use App\Http\Controllers\api\APIController;
 use App\Http\Controllers\api\POSController;
 use App\Http\Controllers\api\MobileAppController;
+
+//admin route controller
+use App\Http\Controllers\api\AdminApi\RoleController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -64,3 +67,12 @@ Route::group(['middleware' => ['auth:api']], function(){
     Route::post('mobile/multiple-order-save', [MobileAppController::class, 'bulkOrderSave']);
     Route::get('mobile/order-list', [MobileAppController::class, 'orderList']);
     Route::get('mobile/order-details', [MobileAppController::class, 'orderDetailsList']);
+
+
+    //admin side apis route
+    Route::group(['prefix'=>'admin','middleware' => ['auth:api']], function(){
+        Route::get('/role', [RoleController::class, 'role']);
+        Route::get('/permissions', [RoleController::class, 'PermissionList']);
+        Route::post('/store', [RoleController::class, 'store']);
+        Route::post('/update/{id}', [RoleController::class, 'update']);
+    });     
