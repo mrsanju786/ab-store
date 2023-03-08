@@ -22,6 +22,7 @@ use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\DishVariant;
 use App\Models\userHasCompany;
+use App\Models\OpeningClosingBalance;
 use Storage;
 use Auth;
 use Redirect;
@@ -577,6 +578,40 @@ class POSController extends Controller
             $order_id = $request->order_id;
             $orderDetailsList = OrderDetail::with(['dish','dish_variant'])->where('order_id',$order_id)->orderBy('id','desc')->get();
             return response()->json(['message'=>'Order Details List!','status'=>true,'data'=>$orderDetailsList]);                
+        }catch (\Throwable $th) {
+            
+            Log::debug($th);
+            return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
+        }
+    }
+    
+    //get opening ,closing balance list
+    public function openingClosingBlance(Request $request){
+        try{
+            $user_id = $request->user_id;
+            $data = OpeningClosingBalance::where('user_id',$user_id)->get();
+            $opening_balance =[];
+            $closing_balance =[];
+            foreach($data as $value){
+                $opening_balance[] =array(
+                    'id'              =>$value->id,
+                    'login_time'      =>$value->login_time,
+                    'opening_balance' =>$value->opening_balance,
+                    'op_coupon'       => $value->op_coupon,
+                    'op_coin'         =>$value->op_coin,
+                    'op_cash'         =>$value->op_cash
+                );
+
+                $closing_balance[] =array(
+                    'id'              =>$value->id,
+                    'logout_time'     =>$value->logout_time,
+                    'closing_balance' =>$value->closing_balance,
+                    'cl_coupon'       => $value->cl_coupon,
+                    'cl_coin'         =>$value->cl_coin,
+                    'cl_cash'         =>$value->cl_cash
+                );
+            }
+            return response()->json(['message'=>'Opening Closing Balance List!','status'=>true,'data'=>['opening_balance'=>$opening_balance,'closing_balance'=>$closing_balance]]);                
         }catch (\Throwable $th) {
             
             Log::debug($th);

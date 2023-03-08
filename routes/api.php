@@ -15,6 +15,9 @@ use App\Http\Controllers\api\AdminApi\BranchController;
 use App\Http\Controllers\api\AdminApi\LocationController;
 use App\Http\Controllers\api\AdminApi\AreaController;
 use App\Http\Controllers\api\AdminApi\CounterController;
+use App\Http\Controllers\api\AdminApi\MenuController;
+use App\Http\Controllers\api\AdminApi\CategoryController;
+use App\Http\Controllers\api\AdminApi\DishController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -66,7 +69,9 @@ Route::group(['middleware' => ['auth:api']], function(){
     Route::get('/order-list', [POSController::class, 'orderList']);
     Route::get('/order-details', [POSController::class, 'orderDetailsList']);
     
-
+    //opening Closing Blance route
+    Route::get('/opening-closing-balance', [POSController::class, 'openingClosingBlance']);
+    
     //mobile application route
     Route::post('mobile/save-order', [MobileAppController::class, 'saveOrder']);
     Route::post('mobile/save-order-details', [MobileAppController::class, 'svaeOrderDetails']);
@@ -133,4 +138,34 @@ Route::group(['middleware' => ['auth:api']], function(){
         Route::post('/update-counter', [CounterController::class, 'updateCounter']);
         Route::get('/counter-status/{id}/{status}', [CounterController::class, 'areaStatus']);
         Route::get('/get-counter-by-branch/{id}', [CounterController::class, 'getCounterByBranch']);
+
+        /**
+         * Dish Routes
+         */
+        Route::get('/menu-list', [MenuController::class, 'index']);
+        Route::post('/create-menu', [MenuController::class, 'createMenu']);
+        Route::post('/update-menu', [MenuController::class, 'updateMenu']);
+        Route::post('/menu-status', [MenuController::class, 'menuStatus']);
+        Route::get('/get-menu/{id}', [MenuController::class, 'getMenu']);
+
+        /**
+         * category Routes
+         */
+        Route::get('/category-list', [CategoryController::class, 'index']);
+        Route::post('/create-category', [CategoryController::class, 'createCategory']);
+        Route::post('/update-category', [CategoryController::class, 'updateCategory']);
+        Route::get('/get-category/{id}', [CategoryController::class, 'getCategory']);
+
+         /**
+         * Dish Routes
+         */
+        Route::get('/dish-list', [DishController::class, 'index']);
+        Route::post('/create-dish', [DishController::class, 'createDish']);
+        Route::post('/update-dish', [DishController::class, 'updateDish']);
+        Route::post('/dish-status', [DishController::class, 'dishStatus']);
+
+        Route::get('/get-branch-tax/{id}', [DishController::class, 'getBranchTax']);
+        Route::get('/export-dish', [DishController::class, 'exportDish']);
+        Route::post('/import-dish', [DishController::class, 'importDish']);
+        Route::post('/update-dish-excel', [DishController::class, 'updateDishexcel']);
     });     
