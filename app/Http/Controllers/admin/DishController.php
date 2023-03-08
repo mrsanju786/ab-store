@@ -64,6 +64,7 @@ class DishController extends Controller
         $dish->is_tax_inclusive = $request->tax_inc;
         $dish->has_variant = $request->dish_has_variant;
         $dish->discount_ids = $request->discount_id;
+        $dish->stock_quantity = $request->stock_quantity;
         $dish->chef_preparation = !empty($request->chef_preparation)? $request->chef_preparation : 0;
         
         if ($request->file('dish_image')) {
@@ -105,7 +106,7 @@ class DishController extends Controller
         $extra = Extra::where('dish_id', $dish->id)->get();
         $addon = Addon::where('dish_id', $dish->id)->get();
         $dish_tax = DishHasTax::where('dish_id', $dish->id)->first();
-        $dishTax =  $dish_tax->tax_id;
+        $dishTax =  $dish_tax ? $dish_tax->tax_id : "";
         $discount = Discount::get();
         return view('admin-view.dish.edit-dish', compact('dish','counter', 'variant', 'extra', 'addon','dishTax','discount'));
     }
@@ -140,6 +141,7 @@ class DishController extends Controller
         $dish->is_tax_inclusive = $request->tax_inc;
         $dish->has_variant = $request->dish_has_variant;
         $dish->discount_ids = $request->discount_id;
+        $dish->stock_quantity = $request->stock_quantity;
         $dish->chef_preparation = !empty($request->chef_preparation)? $request->chef_preparation : 0;
         
         if ($request->file('dish_image')) {
