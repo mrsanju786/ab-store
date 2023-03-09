@@ -59,7 +59,7 @@ class MobileAppController extends Controller
                                    ->where('area_id',$location->area_id)
                                    ->orderBy('id','desc')
                                    ->get();                    
-            return response()->json(['message'=>'Counter List!','image_url'=>'https://foodiisoft-v3.e-go.biz/foodisoft3.0/public/storage/upload/company/','status'=>true,'data'=>$counterList]);                                
+            return response()->json(['message'=>'Counter List!','image_url'=>env('IMAGE_URL')."/company/",'status'=>true,'data'=>$counterList]);                                
         }catch (\Throwable $th) {
            
             Log::debug($th);
@@ -86,7 +86,7 @@ class MobileAppController extends Controller
                             ->orderBy('id','desc')
                             ->get();  
 
-            return response()->json(['message'=>'Menu List!','image_url'=>'https://foodiisoft-v3.e-go.biz/foodisoft3.0/public/storage/upload/company/','status'=>true,'data'=>$menuList]);                
+            return response()->json(['message'=>'Menu List!','image_url'=>env('IMAGE_URL')."/company/",'status'=>true,'data'=>$menuList]);                
         }catch (\Throwable $th) {
             Log::debug($th);
             return response()->json(['status' =>false, 'message' => 'Something went wrong.'], 400);
@@ -115,7 +115,7 @@ class MobileAppController extends Controller
                                    ->orderBy('id','desc')
                                    ->get();
                                     
-            return response()->json(['message'=>'Category List!','image_url'=>'https://foodiisoft-v3.e-go.biz/foodisoft3.0/public/storage/upload/category/','status'=>true,'data'=>$categoryList]);                
+            return response()->json(['message'=>'Category List!','image_url'=>env('IMAGE_URL')."/category/",'status'=>true,'data'=>$categoryList]);                
         }catch (\Throwable $th) {
             Log::debug($th);
             return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
@@ -260,7 +260,7 @@ class MobileAppController extends Controller
                     'counter'=>$dish->counter ?? Null
                 );
             }                        
-            return response()->json(['message'=>'Dish List!','image_url'=>'https://foodiisoft-v3.e-go.biz/foodisoft3.0/public/storage/upload/dish/','status'=>true,'data'=>$array]);                
+            return response()->json(['message'=>'Dish List!','image_url'=>env('IMAGE_URL')."/dish/",'status'=>true,'data'=>$array]);                
         }catch (\Throwable $th) {
             Log::debug($th);
             return response()->json(['status' =>false, 'message' => 'Something went wrong.'], 400);
@@ -445,33 +445,28 @@ class MobileAppController extends Controller
     }
 
     //order list
-    //order list
+   
     public function orderList(Request $request){
         try{
             $user_id = $request->user_id;
+            $orderList   = [];
+            $orde_number = Null;
+            $grand_total = 0;
+            $order_status = Null;
+            $cd_status = Null;
+            $sub_total =0;
+            $tax_amount =0;
+            $discount_amount =0;
+            $order_through =0;
+                
             $orders = Order::with('user')->where('user_id',$user_id)->orderBy('id','desc')->get();
             foreach($orders as $order){
-                $orderDetailsList = OrderDetail::with(['dish','dish_variant','dish.counter','dish.counter.area'])->where('order_id',$order->id)->orderBy('id','desc')->get();
-                $orde_number = Null;
-                $grand_total = 0;
-                $order_status = Null;
-                $cd__status = Null;
-                $sub_total =0;
-                $tax_amount =0;
-                $discount_amount =0;
-                $order_through =0;
-                $orde_number = $order->order_number;
-                $grand_total = $order->grand_total;
-                $order_status = $order->order_status;
-                $cd__status = $order->cd__status;
-                $sub_total  =$order->sub_total;
-                $tax_amount  =$order->tax_amount;
-                $discount_amount  =$order->discount_amount;
-                $order_through  =$order->order_through;
 
-                $order_list = [];
+                $orderDetailsList = OrderDetail::with(['dish','dish_variant','dish.counter','dish.counter.area'])->where('order_id',$order->id)->orderBy('id','desc')->get();
+                
+                $order_details = [];
                 foreach($orderDetailsList as $value){
-                    $order_list[]=array(
+                    $order_details[]=array(
                         'id' =>$value->id,
                         'dish_name' =>$value->dish->dish_name,
                         'dish_image'=>$value->dish->dish_images, 
@@ -484,11 +479,23 @@ class MobileAppController extends Controller
                         'total_price' =>$value->dish_price * $value->order_quantity
                      );
                 }
+
+                $orderList[]=array(
+                    'id' =>$order->id,
+                    'order_number' =>$order->order_number,
+                    'grand_total' => $order->grand_total,
+                    'order_status'=> $order->order_status,
+                    'cd_status' => $order->cd_status,
+                    'sub_total'  =>$order->sub_total,
+                    'tax_amount'  =>$order->tax_amount,
+                    'discount_amount'  =>$order->discount_amount,
+                    'order_through'  =>$order->order_through,
+                    'dishes'  =>$order_details
+                 );
+
             }
             
-            return response()->json(['message'=>'Order List!','image_url'=>'https://foodiisoft-v3.e-go.biz/foodisoft3.0/public/storage/upload/dish/','status'=>true,'data'=>$order_list,'orde_number'=>$orde_number,
-            'grand_total'=>$grand_total,'order_status'=>$order_status,'cd__status'=>$cd__status,'sub_total'=>$sub_total,
-             'tax_amount'=>$tax_amount,'discount_amount'=>$discount_amount,'order_through'=>$order_through]);                
+            return response()->json(['message'=>'Order List!','image_url'=>env('IMAGE_URL')."/dish/",'status'=>true,'data'=>$orderList]);                
         }catch (\Throwable $th) {
             
             Log::debug($th);

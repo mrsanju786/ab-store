@@ -21,6 +21,8 @@ use App\Models\Cart;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\DishVariant;
+use App\Models\userHasCompany;
+use App\Models\OpeningClosingBalance;
 use Storage;
 use Auth;
 use Redirect;
@@ -96,10 +98,10 @@ class POSController extends Controller
                                         ->where('is_active',1)
                                         ->first();  
                                         
-                        $discount_percent =$discount->discount_percent;
-                        $discount_name    =$discount->discount_name; 
-                        $discount_amount  =($dish->dish_price *$discount->discount_percent)/100; 
-                        $discount_dish_amount =$dish->dish_price-$discount_amount;
+                        $discount_percent =$discount ? $discount->discount_percent : 0;
+                        $discount_name    =$discount ? $discount->discount_name :0; 
+                        $discount_amount  =$discount ? ($dish->dish_price *$discount->discount_percent)/100 :0; 
+                        $discount_dish_amount =$discount ? $dish->dish_price-$discount_amount :0;
                                           
                     }
                     //dish tax
@@ -117,12 +119,12 @@ class POSController extends Controller
                                         ->where('is_active',1)
                                         ->first();
                             
-                            $taxPercent = $tax->tax_percent;
-                            $taxName    = $tax->name; 
+                            $taxPercent = $tax ? $tax->tax_percent : 0;
+                            $taxName    = $tax ? $tax->name :0; 
                         }
-                        $dish_tax  = ($dish->dish_price *$taxPercent) /100;
-                        $tax_with_dish_amount =$dish->dish_price+$dish_tax;
-                        $dish_discount_with_tax = ($discount_dish_amount * $taxPercent)/100;
+                        $dish_tax  = $tax ? ($dish->dish_price *$taxPercent) /100 :0;
+                        $tax_with_dish_amount =$tax ? $dish->dish_price+$dish_tax :0;
+                        $dish_discount_with_tax = $tax ? ($discount_dish_amount * $taxPercent)/100 :0;
                     }
                     //get final price
                     $final_price  = 0;
@@ -196,7 +198,7 @@ class POSController extends Controller
                 $dish_list =   $array; 
             }
            
-            return response()->json(['message'=>'Counter Dish List!','dish_image_url'=>'https://foodiisoft-v3.e-go.biz/foodisoft3.0/public/storage/upload/dish/','category_image_url'=>'https://foodiisoft-v3.e-go.biz/foodisoft3.0/public/storage/upload/category/','status'=>true,'data'=>['counter_list'=>$counterList,'menu_list'=>$menu_list,'category_list'=>$category_list,'dish_list'=>$dish_list]]);                
+            return response()->json(['message'=>'Counter Dish List!','dish_image_url'=>env('IMAGE_URL')."/dish/",'category_image_url'=>env('IMAGE_URL')."/category/",'status'=>true,'data'=>['counter_list'=>$counterList,'menu_list'=>$menu_list,'category_list'=>$category_list,'dish_list'=>$dish_list]]);                
         }catch (\Throwable $th) {
             Log::debug($th);
             return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
@@ -310,7 +312,7 @@ class POSController extends Controller
                                 ->get();
             }
             
-            return response()->json(['message'=>'Cart List!','image_url'=>'https://foodiisoft-v3.e-go.biz/foodisoft3.0/public/storage/upload/dish/','status'=>true,'data'=>$cartList]);   
+            return response()->json(['message'=>'Cart List!','image_url'=>env('IMAGE_URL')."/dish/",'status'=>true,'data'=>$cartList]);   
         }catch (\Throwable $th) {
            
             Log::debug($th);
@@ -494,15 +496,17 @@ class POSController extends Controller
     }
     
     //company list
-    public function companyList(){
+    public function companyList(Request $request){
         try {
-       
+            $user_id     = Auth::user()->id;
+            $user        = userHasCompany::where('user_id',$user_id)->first();
             $companyList = Company::with(['foodLicense','country','state','cities' ,'country.countryTax','country.currency'])
                                     ->where('is_active',1)
+                                    ->where('id',$user->company_id)
                                     ->orderBy('id','desc')
                                     ->first(); 
                   
-            return response()->json(['message'=>'Company List!','image_url'=>'https://foodiisoft-v3.e-go.biz/foodisoft3.0/public/storage/upload/company/','status'=>true,'data'=>$companyList]);                
+            return response()->json(['message'=>'Company List!','image_url'=>env('IMAGE_URL')."/company/",'status'=>true,'data'=>$companyList]);                
         }catch (\Throwable $th) {
             Log::debug($th);
             return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
@@ -514,29 +518,24 @@ class POSController extends Controller
     public function orderList(Request $request){
         try{
             $user_id = $request->user_id;
+            $orderList   = [];
+            $orde_number = Null;
+            $grand_total = 0;
+            $order_status = Null;
+            $cd_status = Null;
+            $sub_total =0;
+            $tax_amount =0;
+            $discount_amount =0;
+            $order_through =0;
+                
             $orders = Order::with('user')->where('user_id',$user_id)->orderBy('id','desc')->get();
             foreach($orders as $order){
-                $orderDetailsList = OrderDetail::with(['dish','dish_variant','dish.counter','dish.counter.area'])->where('order_id',$order->id)->orderBy('id','desc')->get();
-                $orde_number = Null;
-                $grand_total = 0;
-                $order_status = Null;
-                $cd__status = Null;
-                $sub_total =0;
-                $tax_amount =0;
-                $discount_amount =0;
-                $order_through =0;
-                $orde_number = $order->order_number;
-                $grand_total = $order->grand_total;
-                $order_status = $order->order_status;
-                $cd__status = $order->cd__status;
-                $sub_total  =$order->sub_total;
-                $tax_amount  =$order->tax_amount;
-                $discount_amount  =$order->discount_amount;
-                $order_through  =$order->order_through;
 
-                $order_list = [];
+                $orderDetailsList = OrderDetail::with(['dish','dish_variant','dish.counter','dish.counter.area'])->where('order_id',$order->id)->orderBy('id','desc')->get();
+                
+                $order_details = [];
                 foreach($orderDetailsList as $value){
-                    $order_list[]=array(
+                    $order_details[]=array(
                         'id' =>$value->id,
                         'dish_name' =>$value->dish->dish_name,
                         'dish_image'=>$value->dish->dish_images, 
@@ -549,11 +548,23 @@ class POSController extends Controller
                         'total_price' =>$value->dish_price * $value->order_quantity
                      );
                 }
+
+                $orderList[]=array(
+                    'id' =>$order->id,
+                    'order_number' =>$order->order_number,
+                    'grand_total' => $order->grand_total,
+                    'order_status'=> $order->order_status,
+                    'cd_status' => $order->cd_status,
+                    'sub_total'  =>$order->sub_total,
+                    'tax_amount'  =>$order->tax_amount,
+                    'discount_amount'  =>$order->discount_amount,
+                    'order_through'  =>$order->order_through,
+                    'dishes'  =>$order_details
+                 );
+
             }
             
-            return response()->json(['message'=>'Order List!','image_url'=>'https://foodiisoft-v3.e-go.biz/foodisoft3.0/public/storage/upload/dish/','status'=>true,'data'=>$order_list,'orde_number'=>$orde_number,
-            'grand_total'=>$grand_total,'order_status'=>$order_status,'cd__status'=>$cd__status,'sub_total'=>$sub_total,
-             'tax_amount'=>$tax_amount,'discount_amount'=>$discount_amount,'order_through'=>$order_through]);                
+            return response()->json(['message'=>'Order List!','image_url'=>env('IMAGE_URL')."/dish/",'status'=>true,'data'=>$orderList]);                
         }catch (\Throwable $th) {
             
             Log::debug($th);
@@ -567,6 +578,40 @@ class POSController extends Controller
             $order_id = $request->order_id;
             $orderDetailsList = OrderDetail::with(['dish','dish_variant'])->where('order_id',$order_id)->orderBy('id','desc')->get();
             return response()->json(['message'=>'Order Details List!','status'=>true,'data'=>$orderDetailsList]);                
+        }catch (\Throwable $th) {
+            
+            Log::debug($th);
+            return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
+        }
+    }
+    
+    //get opening ,closing balance list
+    public function openingClosingBlance(Request $request){
+        try{
+            $user_id = $request->user_id;
+            $data = OpeningClosingBalance::where('user_id',$user_id)->get();
+            $opening_balance =[];
+            $closing_balance =[];
+            foreach($data as $value){
+                $opening_balance[] =array(
+                    'id'              =>$value->id,
+                    'login_time'      =>$value->login_time,
+                    'opening_balance' =>$value->opening_balance,
+                    'op_coupon'       => $value->op_coupon,
+                    'op_coin'         =>$value->op_coin,
+                    'op_cash'         =>$value->op_cash
+                );
+
+                $closing_balance[] =array(
+                    'id'              =>$value->id,
+                    'logout_time'     =>$value->logout_time,
+                    'closing_balance' =>$value->closing_balance,
+                    'cl_coupon'       => $value->cl_coupon,
+                    'cl_coin'         =>$value->cl_coin,
+                    'cl_cash'         =>$value->cl_cash
+                );
+            }
+            return response()->json(['message'=>'Opening Closing Balance List!','status'=>true,'data'=>['opening_balance'=>$opening_balance,'closing_balance'=>$closing_balance]]);                
         }catch (\Throwable $th) {
             
             Log::debug($th);
