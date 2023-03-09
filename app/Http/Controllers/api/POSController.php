@@ -98,10 +98,10 @@ class POSController extends Controller
                                         ->where('is_active',1)
                                         ->first();  
                                         
-                        $discount_percent =$discount->discount_percent;
-                        $discount_name    =$discount->discount_name; 
-                        $discount_amount  =($dish->dish_price *$discount->discount_percent)/100; 
-                        $discount_dish_amount =$dish->dish_price-$discount_amount;
+                        $discount_percent =$discount ? $discount->discount_percent : 0;
+                        $discount_name    =$discount ? $discount->discount_name :0; 
+                        $discount_amount  =$discount ? ($dish->dish_price *$discount->discount_percent)/100 :0; 
+                        $discount_dish_amount =$discount ? $dish->dish_price-$discount_amount :0;
                                           
                     }
                     //dish tax
@@ -119,12 +119,12 @@ class POSController extends Controller
                                         ->where('is_active',1)
                                         ->first();
                             
-                            $taxPercent = $tax->tax_percent;
-                            $taxName    = $tax->name; 
+                            $taxPercent = $tax ? $tax->tax_percent : 0;
+                            $taxName    = $tax ? $tax->name :0; 
                         }
-                        $dish_tax  = ($dish->dish_price *$taxPercent) /100;
-                        $tax_with_dish_amount =$dish->dish_price+$dish_tax;
-                        $dish_discount_with_tax = ($discount_dish_amount * $taxPercent)/100;
+                        $dish_tax  = $tax ? ($dish->dish_price *$taxPercent) /100 :0;
+                        $tax_with_dish_amount =$tax ? $dish->dish_price+$dish_tax :0;
+                        $dish_discount_with_tax = $tax ? ($discount_dish_amount * $taxPercent)/100 :0;
                     }
                     //get final price
                     $final_price  = 0;
