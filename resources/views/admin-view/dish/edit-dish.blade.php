@@ -114,6 +114,30 @@
                                 <div class="fv-row mb-10 fv-plugins-icon-container">
                                     <!--begin::Label-->
                                     <label class="fs-5 fw-bold form-label mb-2">
+                                        <span class="required">Select Dish Type</span>
+                                    </label>
+                                    <!--begin::Input-->
+                                    <select class="form-select form-select-solid" aria-label="Select example" name="dish_type"
+                                        id="dish_type" data-control="select2">
+                                        <option value="">Select Dish Type</option>
+                                        <option value="Veg" {{($dish->dish_type == 'Veg')?'selected':''}}>Veg</option>
+                                        <option value="Non-Veg" {{($dish->dish_type == 'Non-Veg')?'selected':''}}>Non-Veg
+                                        </option>
+                                        <option value="Beverages" {{($dish->dish_type ==
+                                            'Beverages')?'selected':''}}>Beverages</option>
+                                    </select>
+                                    <!--end::Input-->
+                                    @if($errors->has('dish_type'))
+                                    <span class="text-danger">{{ $errors->first('dish_type') }}</span>
+                                    @endif
+                                    <div class="fv-plugins-message-container invalid-feedback"></div>
+                                </div>
+                                <!--end::Input group-->
+
+                                <!--begin::Input group-->
+                                <div class="fv-row mb-10 fv-plugins-icon-container">
+                                    <!--begin::Label-->
+                                    <label class="fs-5 fw-bold form-label mb-2">
                                         <span class="required">Select Counter</span>
                                     </label>
                                     <!--end::Label-->

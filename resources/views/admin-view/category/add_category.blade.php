@@ -98,28 +98,6 @@
                                 </div>                  
                                 <!--end::Input group-->
 
-                                <!--begin::Input group-->
-                                <div class="fv-row mb-10 fv-plugins-icon-container">
-                                    <!--begin::Label-->
-                                    <label class="fs-5 fw-bold form-label mb-2">
-                                        <span class="required">Select Category Type</span>
-                                    </label>
-                                    <!--begin::Input-->
-                                    <select class="form-select form-select-solid" aria-label="Select example" name="category_type"
-                                        id="category_type" data-control="select2">
-                                        <option value="">Select Category Type</option>
-                                        <option value="Veg">Veg</option>
-                                        <option value="Non-Veg">Non-Veg</option>
-                                        <option value="Beverages">Beverages</option>
-                                    </select>
-                                    <!--end::Input-->
-                                    @if($errors->has('counter_id'))
-                                    <span class="text-danger">{{ $errors->first('counter_id') }}</span>
-                                    @endif
-                                    <div class="fv-plugins-message-container invalid-feedback"></div>
-                                </div>
-                                <!--end::Input group -->
-
                             </div>
                             <!--end::Scroll-->
                         </div>

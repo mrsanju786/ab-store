@@ -247,7 +247,7 @@ li.ui-timepicker-selected .ui-timepicker-duration,
                                     <div class="fv-row mb-10 fv-plugins-icon-container timedisplay">
                                         <!--begin::Label-->
                                         <label class="fs-5 fw-bold form-label mb-2">
-                                            <span class="required">Off Time</span>
+                                            <span>Off Time</span>
                                         </label>
                                         <!--end::Label-->
                                         <!--begin::Input-->

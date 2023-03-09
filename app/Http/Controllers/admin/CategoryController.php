@@ -33,7 +33,6 @@ class CategoryController extends Controller
             'category_name' => 'required',
             'branch_id' => 'required',
             'counter_id' => 'required',
-            'category_type' => 'required',
         ]);
 
         $category = new Category();
@@ -41,7 +40,6 @@ class CategoryController extends Controller
         $category->item_type = $request->item_type;
         $category->branch_id = $request->branch_id;
         $category->counter_id = $request->counter_id;
-        $category->category_type = $request->category_type;
 
         if ($request->file('category_image')) {
             $imageFileType = $request->category_image->getClientOriginalExtension();
@@ -52,6 +50,9 @@ class CategoryController extends Controller
             }
             Storage::disk('public')->put($dir . $imageName, file_get_contents($request->category_image));
             $category->images = $imageName;
+        } else{
+
+            $category->images = "blank.jpg";
         }
 
         $category->save();
@@ -85,7 +86,6 @@ class CategoryController extends Controller
             'category_name' => 'required',
             'branch_id' => 'required',
             'counter_id' => 'required',
-            'category_type' => 'required',
         ]);
 
         $id = $request->category_id;
@@ -94,7 +94,6 @@ class CategoryController extends Controller
         $category->item_type = $request->item_type;
         $category->branch_id = $request->branch_id;
         $category->counter_id = $request->counter_id;
-        $category->category_type = $request->category_type;
 
         if ($request->file('category_image')) {
             $imageFileType = $request->category_image->getClientOriginalExtension();

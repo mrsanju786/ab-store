@@ -41,16 +41,18 @@ class DishController extends Controller
 
         $request->validate([
             'dish_name' => 'required',
-            'dish_hsn' => 'required',
+            'dish_hsn' => 'required|max:5',
             'counter_id' => 'required',
             'category_id' => 'required',
             'tax_inc' => 'required',
             'dish_has_variant' => 'required',
             'tax_id' => 'required',
+            'dish_type' => 'required',
 
         ],[
             'dish_name.required'=>'Dish Name is Required',
-            'dish_hsn.required'=>'CIN No. is required',
+            'dish_hsn.required'=>'HSN No is required',
+            'dish_hsn.max'=>'HSN No must not be greater than 5 number',
             'counter_id.required'=>'Registered Address is required',
             'tax_inc.required'=>'Tax option is required',
             'dish_has_variant.required'=>'state_id is required',
@@ -68,6 +70,7 @@ class DishController extends Controller
         $dish->discount_ids = $request->discount_id;
         $dish->stock_quantity = $request->stock_quantity;
         $dish->chef_preparation = !empty($request->chef_preparation)? $request->chef_preparation : 0;
+        $dish->dish_type = $request->dish_type;
         
         if ($request->file('dish_image')) {
             $imageFileType = $request->dish_image->getClientOriginalExtension();
@@ -117,16 +120,18 @@ class DishController extends Controller
         
         $request->validate([
             'dish_name' => 'required',
-            'dish_hsn' => 'required',
+            'dish_hsn' => 'required|max:5',
             'counter_id' => 'required',
             'category_id' => 'required',
             'tax_inc' => 'required',
             'dish_has_variant' => 'required',
             'tax_id' => 'required',
+            'dish_type' => 'required',
 
         ],[
             'dish_name.required'=>'Dish Name is Required',
             'dish_hsn.required'=>'HSN No is required',
+            'dish_hsn.max'=>'HSN No must not be greater than 5 number',
             'counter_id.required'=>'Registered Address is required',
             'tax_inc.required'=>'Tax option is required',
             'dish_has_variant.required'=>'state_id is required',
@@ -145,6 +150,7 @@ class DishController extends Controller
         $dish->discount_ids = $request->discount_id;
         $dish->stock_quantity = $request->stock_quantity;
         $dish->chef_preparation = !empty($request->chef_preparation)? $request->chef_preparation : 0;
+        $dish->dish_type = $request->dish_type;
         
         if ($request->file('dish_image')) {
             $imageFileType = $request->dish_image->getClientOriginalExtension();
