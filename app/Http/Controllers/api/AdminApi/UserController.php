@@ -31,8 +31,9 @@ class UserController extends Controller
     public function createUser(Request $request) {
         try{
             $validator = Validator::make($request->all(), [
-                'name'    => 'required|unique:users,name',
+                'name'    => 'required|max:100',
                 'role'    => 'required',
+                'email'    => 'required|email|max:250|unique:users,email',
                 'password'    => 'required|min:6',
             ]);
 
@@ -57,10 +58,16 @@ class UserController extends Controller
 
     public function updateUser(Request $request) {
         try{
-            $request->validate([
-                'name'    => 'required',
+            $validator = Validator::make($request->all(), [
+                'name'    => 'required|max:100',
                 'role'    => 'required',
+                
             ]);
+
+            if ($validator->fails()) {
+                return response()->json(['errors' => $validator->errors()->all() ]);
+            }
+            
             $edit_user = User::find($request->user_id);
             $edit_user->name = $request->name;
             $edit_user->save();
