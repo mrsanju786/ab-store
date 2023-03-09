@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class userHasCompany extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['company_id', 'user_id'];
 }
