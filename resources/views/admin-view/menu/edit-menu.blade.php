@@ -202,6 +202,21 @@
                                     <!--begin::Row-->
                                     <div class="row gx-9 h-100">
                                         <!--begin::Col-->
+                                        <!--begin::Label-->
+                                        <label class="fs-5 fw-bold form-label mb-2">
+                                            <input class="form-check-input selectall" name="selectall"
+                                                type="radio" value="selectall">
+                                                <span>All Week</span>
+                                            </label>
+                                            <!--end::Label-->
+
+                                            <!--begin::Label-->
+                                            <label class="fs-5 fw-bold form-label mb-2">
+                                            <input class="form-check-input selectall" name="selectall"
+                                                type="radio" value="weekday">
+                                                <span>Weekdays</span>
+                                            </label>
+                                            <!--end::Label-->
                                         <div class="col-sm-5">
                                             <!--begin::Scroll-->
                                             <div class="d-flex flex-column scroll-y me-n7 pe-7">
@@ -209,19 +224,19 @@
                                                 <div class="fv-row mb-10 fv-plugins-icon-container">
                                                     <ul class="list-style-none">
                                                         <li class="pt-4">
-                                                            <input class="form-check-input" name="repeat_days[]" type="checkbox" value="Monday" {{in_array("Monday", $repeatDays)? 'checked' : ''}}>
+                                                            <input class="form-check-input weekday" name="repeat_days[]" type="checkbox" value="Monday" {{in_array("Monday", $repeatDays)? 'checked' : ''}}>
                                                             <span class="fw-semibold ps-2 fs-6"> Monday  </span>
                                                         </li>
                                                         <li class="pt-4">
-                                                            <input class="form-check-input" name="repeat_days[]" type="checkbox" value="Tuesday" {{in_array("Tuesday", $repeatDays)? 'checked' : ''}}>
+                                                            <input class="form-check-input weekday" name="repeat_days[]" type="checkbox" value="Tuesday" {{in_array("Tuesday", $repeatDays)? 'checked' : ''}}>
                                                             <span class="fw-semibold ps-2 fs-6"> Tuesday </span>
                                                         </li>
                                                         <li class="pt-4">
-                                                            <input class="form-check-input" name="repeat_days[]" type="checkbox" value="Wednesday" {{in_array("Wednesday", $repeatDays)? 'checked' : ''}}>
+                                                            <input class="form-check-input weekday" name="repeat_days[]" type="checkbox" value="Wednesday" {{in_array("Wednesday", $repeatDays)? 'checked' : ''}}>
                                                             <span class="fw-semibold ps-2 fs-6"> Wednesday </span>
                                                         </li>
                                                         <li class="pt-4">
-                                                            <input class="form-check-input" name="repeat_days[]" type="checkbox" value="Thursday" {{in_array("Thursday", $repeatDays)? 'checked' : ''}}>
+                                                            <input class="form-check-input weekday" name="repeat_days[]" type="checkbox" value="Thursday" {{in_array("Thursday", $repeatDays)? 'checked' : ''}}>
                                                             <span class="fw-semibold ps-2 fs-6">Thursday</span> 
                                                         </li>
                                                     </ul>  
@@ -239,7 +254,7 @@
                                                 <div class="fv-row mb-10 fv-plugins-icon-container">
                                                     <ul class="list-style-none">
                                                         <li class="pt-4">
-                                                            <input class="form-check-input" name="repeat_days[]" type="checkbox" value="Friday" {{in_array("Friday", $repeatDays)? 'checked' : ''}}>
+                                                            <input class="form-check-input weekday" name="repeat_days[]" type="checkbox" value="Friday" {{in_array("Friday", $repeatDays)? 'checked' : ''}}>
                                                             <span class="fw-semibold ps-2 fs-6">Friday</span> 
                                                         </li>
                                                         <li class="pt-4">
@@ -434,6 +449,19 @@ $(document).ready(function() {
                 $("#counter_id").append('<option value=' + value.id + '>' + value.counter_name + '</option>');
             });
             $('#counter_id option[value='+cntr+']').attr('selected','selected');
+        }
+    });
+
+    $(".selectall").on('click', function(){
+        var radioValue = $(this).val();
+        // alert(radioValue);
+        if(radioValue == 'selectall'){
+            $('input:checkbox').attr('checked', true);
+                
+        }else if(radioValue == 'weekday'){
+
+            $('input:checkbox').attr('checked', false);
+            $('.weekday').attr('checked', true);
         }
     });
 
