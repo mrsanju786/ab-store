@@ -118,6 +118,29 @@
                                     <div class="fv-plugins-message-container invalid-feedback"></div>
                                 </div>
                                 <!--end::Input group-->
+                                
+                                @if(Auth::user()->hasRole('Super Admin'))
+                                <!--begin::Input group-->
+                                <div class="fv-row mb-10 fv-plugins-icon-container">
+                                    <!--begin::Label-->
+                                    <label class="fs-5 fw-bold form-label mb-2">
+                                        <span class="required">Select Company</span>
+                                    </label>
+                                    <!--begin::Input-->
+                                    <select class="form-select form-select-solid" aria-label="Select example" name="company_id" id="company_id" data-control="select2" >
+                                            <option value="">Select Company</option>
+                                            @foreach($company as $companies)
+                                            <option value="{{$companies->id}}">{{$companies->company_name}}</option>
+                                            @endforeach                                   
+                                        </select>
+                                    <!--end::Input-->
+                                    @if($errors->has('role'))
+                                    <span class="text-danger">{{ $errors->first('role') }}</span>
+                                    @endif
+                                    <div class="fv-plugins-message-container invalid-feedback"></div>
+                                </div>
+                                <!--end::Input group-->
+                                @endif
 
                             </div>
                             <!--end::Scroll-->
