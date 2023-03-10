@@ -72,6 +72,7 @@ Route::group(['middleware' => ['auth:api']], function(){
     Route::get('get-menu-list', [MobileAppController::class, 'getMenuList']);
     Route::get('get-category-list', [MobileAppController::class, 'getCategoryList']);
     Route::get('get-dish-list', [MobileAppController::class, 'getDishList']);
+    Route::get('mobile/counter-wise-dish', [MobileAppController::class, 'counterWiseDish']);
     
    
 });
@@ -95,6 +96,7 @@ Route::group(['middleware' => ['auth:api']], function(){
     Route::post('mobile/multiple-order-save', [MobileAppController::class, 'bulkOrderSave']);
     Route::get('mobile/order-list', [MobileAppController::class, 'orderList']);
     Route::get('mobile/order-details', [MobileAppController::class, 'orderDetailsList']);
+    Route::get('mobile/counter-wise-dish', [MobileAppController::class, 'counterWiseDish']);
 
 
     //admin side apis route

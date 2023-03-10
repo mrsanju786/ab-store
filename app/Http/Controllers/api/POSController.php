@@ -34,7 +34,7 @@ use Log;
 class POSController extends Controller
 {
      //get counter,menu, category and dish
-     public function counterWiseDish(Request $request){
+    public function counterWiseDish(Request $request){
         try {
 
             $validator = Validator::make($request->all(), [
