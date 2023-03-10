@@ -30,7 +30,6 @@ class MenuController extends Controller
             'menu_name' => 'required',
             'from_time' => 'required',
             'to_time' => 'required',
-            'off_time' => 'required',
             'repeat_days' => 'required',
 
         ]);
@@ -67,7 +66,6 @@ class MenuController extends Controller
             'menu_name' => 'required',
             'from_time' => 'required',
             'to_time' => 'required',
-            'off_time' => 'required',
             'repeat_days' => 'required',
 
         ]);

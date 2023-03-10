@@ -163,7 +163,7 @@ class POSController extends Controller
                         $dish_variant[] = array(
                             "id"           => $variant->id,
                             "variant_name" => $variant->variant_name,
-                            "variant_price"=> $variant_price  ?? 0,
+                            "variant_price"=> number_format($variant_price,2)  ?? 0,
                             "dish_id"      => $variant->dish_id,
                             "created_at"   => $variant->created_at,
                             "updated_at"   => $variant->updated_at
@@ -172,7 +172,7 @@ class POSController extends Controller
                     $array[] =array(
                         "id"       => $dish->id,
                         "dish_name"=>$dish->dish_name,
-                        "dish_price"=> $final_price,
+                        "dish_price"=> number_format($final_price,2),
                         "dish_code"=> $dish->dish_code,
                         "dish_images"=> $dish->dish_images,
                         "has_variant"=> $dish->has_variant,

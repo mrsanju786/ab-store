@@ -32,6 +32,8 @@ class DishExport implements FromCollection, WithHeadings
             'discount_ids',
             'chef_preparation',
             'dish_hsn',
+            'dish_type',
+            'stock_quantity',
             'edited_at',
             'edited_by',
             'is_active',

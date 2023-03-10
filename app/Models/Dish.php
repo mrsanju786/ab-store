@@ -22,6 +22,7 @@ class Dish extends Model
         'discount_ids',
         'chef_preparation',
         'dish_hsn',
+        'dish_type',
         'edited_at',
         'stock_quantity',
         'edited_by',

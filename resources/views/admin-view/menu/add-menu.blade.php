@@ -247,7 +247,7 @@ li.ui-timepicker-selected .ui-timepicker-duration,
                                     <div class="fv-row mb-10 fv-plugins-icon-container timedisplay">
                                         <!--begin::Label-->
                                         <label class="fs-5 fw-bold form-label mb-2">
-                                            <span class="required">Off Time</span>
+                                            <span>Off Time</span>
                                         </label>
                                         <!--end::Label-->
                                         <!--begin::Input-->
@@ -278,10 +278,26 @@ li.ui-timepicker-selected .ui-timepicker-duration,
                                             <span class="required">Repeat Days</span>
                                         </label>
                                         <!--end::Label-->
-
+                                        
                                         <!--begin::Row-->
                                         <div class="row gx-9 h-100">
                                             <!--begin::Col-->
+                                            <!--begin::Label-->
+                                            <label class="fs-5 fw-bold form-label mb-2">
+                                            <input class="form-check-input selectall" name="selectall"
+                                                type="radio" value="selectall">
+                                                <span>All Week</span>
+                                            </label>
+                                            <!--end::Label-->
+
+                                            <!--begin::Label-->
+                                            <label class="fs-5 fw-bold form-label mb-2">
+                                            <input class="form-check-input selectall" name="selectall"
+                                                type="radio" value="weekday">
+                                                <span>Weekdays</span>
+                                            </label>
+                                            <!--end::Label-->
+
                                             <div class="col-sm-5">
                                                 <!--begin::Scroll-->
                                                 <div class="d-flex flex-column scroll-y me-n7 pe-7">
@@ -289,22 +305,22 @@ li.ui-timepicker-selected .ui-timepicker-duration,
                                                     <div class="fv-row mb-10 fv-plugins-icon-container">
                                                         <ul class="list-style-none">
                                                             <li class="pt-4">
-                                                                <input class="form-check-input" name="repeat_days[]"
+                                                                <input class="form-check-input weekday" name="repeat_days[]"
                                                                     type="checkbox" value="Monday" checked>
                                                                 <span class="fw-semibold ps-2 fs-6">Monday </span>
                                                             </li>
                                                             <li class="pt-4">
-                                                                <input class="form-check-input" name="repeat_days[]"
+                                                                <input class="form-check-input weekday" name="repeat_days[]"
                                                                     type="checkbox" value="Tuesday">
                                                                 <span class="fw-semibold ps-2 fs-6">Tuesday </span>
                                                             </li>
                                                             <li class="pt-4">
-                                                                <input class="form-check-input" name="repeat_days[]"
+                                                                <input class="form-check-input weekday" name="repeat_days[]"
                                                                     type="checkbox" value="Wednesday">
                                                                 <span class="fw-semibold ps-2 fs-6">Wednesday </span>
                                                             </li>
                                                             <li class="pt-4">
-                                                                <input class="form-check-input" name="repeat_days[]"
+                                                                <input class="form-check-input weekday" name="repeat_days[]"
                                                                     type="checkbox" value="Thursday">
                                                                 <span class="fw-semibold ps-2 fs-6">Thursday</span>
                                                             </li>
@@ -325,7 +341,7 @@ li.ui-timepicker-selected .ui-timepicker-duration,
                                                     <div class="fv-row mb-10 fv-plugins-icon-container">
                                                         <ul class="list-style-none">
                                                             <li class="pt-4">
-                                                                <input class="form-check-input" name="repeat_days[]"
+                                                                <input class="form-check-input weekday" name="repeat_days[]"
                                                                     type="checkbox" value="Friday">
                                                                 <span class="fw-semibold ps-2 fs-6">Friday</span>
                                                             </li>
@@ -486,6 +502,21 @@ li.ui-timepicker-selected .ui-timepicker-duration,
             }
 
         });
+        
+
+        $(".selectall").on('click', function(){
+            var radioValue = $(this).val();
+            // alert(radioValue);
+            if(radioValue == 'selectall'){
+                $('input:checkbox').attr('checked', true);
+                    
+            }else if(radioValue == 'weekday'){
+
+                $('input:checkbox').attr('checked', false);
+                $('.weekday').attr('checked', true);
+            }
+        });
+
     });
 
     $('#company_id').on('change', function () {
@@ -538,6 +569,7 @@ li.ui-timepicker-selected .ui-timepicker-duration,
     });
     var basicExampleEl = document.getElementById('basicExample');
     var datepair = new Datepair(basicExampleEl);
+
 </script>
 <!-- dipak time end -->
 
