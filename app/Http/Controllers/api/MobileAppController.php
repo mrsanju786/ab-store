@@ -304,7 +304,7 @@ class MobileAppController extends Controller
                 return response()->json(['errors' => $validator->errors()->all() ]);
             }
                 
-            DB::beginTransaction();
+            DB::beginTransaction(); 
 
             $order = new order();
             $order->order_number  = $request['order_number'];

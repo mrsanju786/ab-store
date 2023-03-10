@@ -42,16 +42,18 @@ class CountryTaxController extends Controller
                 return response()->json(['errors' => $validator->errors()->all() ]);
             }
             
-
+            DB::beginTransaction();
             $countrytax = new Countrytax();
             $countrytax->name = $request->tax_name;
             $countrytax->tax_percent = $request->tax_percent;
             $countrytax->country_id = $request->country_id;
             $countrytax->save();
 
+            DB::commit();
             return response()->json(['message'=>'Country Tax added successfully!','status'=>true,'data'=> []]); 
         }catch (\Throwable $th) {
             Log::debug($th);
+            DB::rollback();
             return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
         } 
 
@@ -76,16 +78,18 @@ class CountryTaxController extends Controller
             if ($validator->fails()) {
                 return response()->json(['errors' => $validator->errors()->all() ]);
             }
-
+            DB::beginTransaction();
             $countrytax = CountryTax::find($request->countrytax_id);
             $countrytax->name = $request->tax_name;
             $countrytax->tax_percent = $request->tax_percent;
             $countrytax->country_id = $request->country_id;
             $countrytax->save();
 
+            DB::commit();
             return response()->json(['message'=>'Country Tax updated successfully!','status'=>true,'data'=> []]); 
         }catch (\Throwable $th) {
             Log::debug($th);
+            DB::rollback();
             return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
         } 
     }
@@ -93,12 +97,18 @@ class CountryTaxController extends Controller
     public function countrytaxStatus(Request $request)
     {  
         try{
+            DB::beginTransaction();
+
             $countrytax = CountryTax::find($request->countrytax_id);
             $countrytax->is_active = $request->status;
             $countrytax->save();
+            
+            DB::commit();
+
             return response()->json(['message'=>'Country Tax status updated successfully!','status'=>true,'data'=> []]); 
         }catch (\Throwable $th) {
             Log::debug($th);
+            DB::rollback();
             return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
         } 
     }

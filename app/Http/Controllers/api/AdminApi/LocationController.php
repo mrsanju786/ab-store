@@ -47,6 +47,8 @@ class LocationController extends Controller
                 return response()->json(['errors' => $validator->errors()->all() ]);
             }
 
+            DB::beginTransaction();
+
             $location = new Location();
             $location->address = $request->location_address;
             $location->state_id = $request->state_id;
@@ -65,9 +67,12 @@ class LocationController extends Controller
             $location->discount_ids = $request->discount_id;
             $location->save();
 
+            DB::commit();
+
             return response()->json(['message'=>'Location added successfully!','status'=>true,'data'=>[]]); 
         }catch (\Throwable $th) {
             Log::debug($th);
+            DB::rollback();
             return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
         } 
 
@@ -91,6 +96,8 @@ class LocationController extends Controller
                 return response()->json(['errors' => $validator->errors()->all() ]);
             }
            
+            DB::beginTransaction();
+
             $location_id = $request->location_id;
             $location = Location::find($location_id);
             $location->address = $request->location_address;
@@ -110,9 +117,13 @@ class LocationController extends Controller
             $location->discount_ids = $request->discount_id;
             $location->save();
 
+            DB::commit();
+
+
             return response()->json(['message'=>'Location updated successfully!','status'=>true,'data'=>[]]); 
         }catch (\Throwable $th) {
             Log::debug($th);
+            DB::rollback();
             return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
         } 
     }
@@ -120,12 +131,19 @@ class LocationController extends Controller
     public function locationStatus(Request $request)
     {
         try{
+
+            DB::beginTransaction();
+            
             $size = Location::find($request->location_id);
             $size->is_active = $request->status;
             $size->save();
+
+            DB::commit();
+
             return response()->json(['message'=>'Location status changed successfully!','status'=>true,'data'=>[]]); 
         }catch (\Throwable $th) {
             Log::debug($th);
+            DB::rollback();
             return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
         } 
     }

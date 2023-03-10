@@ -45,15 +45,20 @@ class DishVariantController extends Controller
                 return response()->json(['errors' => $validator->errors()->all() ]);
             }
             
+            DB::beginTransaction();
+
             $variant = new DishVariant();
             $variant->variant_price = $request->price;
             $variant->variant_name = implode(",", $request->options);
             $variant->dish_id = $request->dish_id;
             $variant->save();
 
+            DB::commit();
+
             return response()->json(['message'=>'Dish variant added successfully!','status'=>true,'data'=>[]]); 
         }catch (\Throwable $th) {
             Log::debug($th);
+            DB::rollback();
             return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
         } 
         
@@ -79,15 +84,20 @@ class DishVariantController extends Controller
                 return response()->json(['errors' => $validator->errors()->all() ]);
             }
             
+            DB::beginTransaction();
+
             $id = $request->variant_id;
             $variant = DishVariant::find($id);
             $variant->variant_price = $request->price;
             $variant->variant_name = implode(",", $request->options);
             $variant->save();
         
+            DB::commit();
+
             return response()->json(['message'=>'Dish variant updated successfully!','status'=>true,'data'=>[]]); 
         }catch (\Throwable $th) {
             Log::debug($th);
+            DB::rollback();
             return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
         } 
     }
@@ -95,12 +105,18 @@ class DishVariantController extends Controller
     public function dishvariantStatus(Request $request)
     {
         try{
+            DB::beginTransaction();
+
             $size = DishVariant::find($request->variant_id);
             $size->is_active = $request->status;
             $size->save();
+
+            DB::commit();
+
             return response()->json(['message'=>'Dish variant status added successfully!','status'=>true,'data'=>[]]); 
         }catch (\Throwable $th) {
             Log::debug($th);
+            DB::rollback();
             return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
         } 
     }

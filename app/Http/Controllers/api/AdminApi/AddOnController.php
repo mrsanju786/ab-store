@@ -46,6 +46,8 @@ class AddOnController extends Controller
                 return response()->json(['errors' => $validator->errors()->all() ]);
             }
             
+            DB::beginTransaction();
+
             $addon = new Addon();
             $addon->addon_name = $request->addon_name;
             $addon->addon_price = $request->addon_price;
@@ -65,9 +67,12 @@ class AddOnController extends Controller
             
             $addon->save();
 
+            DB::commit();
+
             return response()->json(['message'=>'AddOn saved successfully!','status'=>true,'data'=>[]]); 
         }catch (\Throwable $th) {
             Log::debug($th);
+            DB::rollback();
             return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
         } 
         
@@ -96,6 +101,8 @@ class AddOnController extends Controller
                 return response()->json(['errors' => $validator->errors()->all() ]);
             }
             
+            DB::beginTransaction();
+
             $id = $request->addon_id;
             $addon = Addon::find($id);
             $addon->addon_name = $request->addon_name;
@@ -114,10 +121,13 @@ class AddOnController extends Controller
             }
 
             $addon->save();
-            
+
+            DB::commit();
+
             return response()->json(['message'=>'AddOn updated successfully!','status'=>true,'data'=>[]]); 
         }catch (\Throwable $th) {
             Log::debug($th);
+            DB::rollback();
             return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
         } 
     }
@@ -125,12 +135,18 @@ class AddOnController extends Controller
     public function dishvariantStatus(Request $request)
     {
         try{
+            DB::beginTransaction();
+
             $size = Addon::find($request->addon_id);
             $size->is_active = $request->status;
             $size->save();
+
+            DB::commit();
+            
             return response()->json(['message'=>'AddOn status updated successfully!','status'=>true,'data'=>[]]); 
         }catch (\Throwable $th) {
             Log::debug($th);
+            DB::rollback();
             return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
         } 
     }

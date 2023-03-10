@@ -43,14 +43,18 @@ class CityController extends Controller
                 return response()->json(['errors' => $validator->errors()->all() ]);
             }
 
+            DB::beginTransaction();
+
             $city = new City();
             $city->city_name = $request->city_name;
             $city->state_id = $request->state_id;
             $city->save();
 
+            DB::commit();
             return response()->json(['message'=>'City added successfully!','status'=>true,'data'=>[]]); 
         }catch (\Throwable $th) {
             Log::debug($th);
+            DB::rollback();
             return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
         } 
 
@@ -78,15 +82,19 @@ class CityController extends Controller
                 return response()->json(['errors' => $validator->errors()->all() ]);
             }
             
+            DB::beginTransaction();
+
             $id = $request->city_id;
             $city = City::find($id);
             $city->city_name = $request->city_name;
             $city->state_id = $request->state_id;
             $city->save();
-
+            
+            DB::commit();
             return response()->json(['message'=>'City updated successfully!','status'=>true,'data'=>[]]); 
         }catch (\Throwable $th) {
             Log::debug($th);
+            DB::rollback();
             return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
         } 
     }

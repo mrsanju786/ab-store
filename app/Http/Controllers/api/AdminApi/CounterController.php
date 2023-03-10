@@ -35,7 +35,8 @@ class CounterController extends Controller
                 return response()->json(['errors' => $validator->errors()->all() ]);
             }
 
-           
+            DB::beginTransaction();
+
             $counter = new Counter();
             $counter->counter_name = $request->counter_name;
             $counter->license_no = $request->license_no;
@@ -44,9 +45,12 @@ class CounterController extends Controller
             $counter->discount_ids = $request->discount_id;
             $counter->save();
 
+            DB::commit();
+
             return response()->json(['message'=>'Counter added successfully!','status'=>true,'data'=>[]]); 
         }catch (\Throwable $th) {
             Log::debug($th);
+            DB::rollback();
             return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
         } 
 
@@ -59,6 +63,8 @@ class CounterController extends Controller
                 'area_id' => 'required',
             ]);
 
+            DB::rollback();
+            
             $id = $request->counter_id;
             $counter = Counter::find($id);
             $counter->counter_name = $request->counter_name;
@@ -67,9 +73,13 @@ class CounterController extends Controller
             $counter->area_id = $request->area_id;
             $counter->discount_ids = $request->discount_id;
             $counter->save();
+
+            DB::commit();
+
           return response()->json(['message'=>'Counter updated successfully!','status'=>true,'data'=>[]]); 
         }catch (\Throwable $th) {
             Log::debug($th);
+            DB::rollback();
             return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
         } 
     }

@@ -59,6 +59,8 @@ class TimezoneController extends Controller
                 return response()->json(['errors' => $validator->errors()->all() ]);
             }
 
+            DB::beginTransaction();
+
             $timezone = new Timezone();
             $timezone->zone_name = $request->zone_name;
             $timezone->start_time = "NA";
@@ -67,9 +69,12 @@ class TimezoneController extends Controller
             $timezone->country_id = $request->country_id;
             $timezone->save();
 
+            DB::commit();
+
             return response()->json(['message'=>'Timezone added successfully!','status'=>true,'data'=>[]]); 
         }catch (\Throwable $th) {
             Log::debug($th);
+            DB::rollback();
             return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
         } 
 
@@ -109,6 +114,8 @@ class TimezoneController extends Controller
             }
             
 
+            DB::beginTransaction();
+            
             $timezone = Timezone::find($request->timezone_id);
             $timezone->zone_name = $request->zone_name;
             $timezone->start_time = "NA";
@@ -117,9 +124,11 @@ class TimezoneController extends Controller
             $timezone->country_id = $request->country_id;
             $timezone->save();
 
+            DB::commit();
             return response()->json(['message'=>'Timezone edited successfully!','status'=>true,'data'=>[]]); 
         }catch (\Throwable $th) {
             Log::debug($th);
+            DB::rollback();
             return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
         } 
     }

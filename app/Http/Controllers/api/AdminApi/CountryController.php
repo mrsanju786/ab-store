@@ -34,15 +34,19 @@ class CountryController extends Controller
             if ($validator->fails()) {
                 return response()->json(['errors' => $validator->errors()->all() ]);
             }
-            
+
+            DB::beginTransaction();
+
             $country = new Country();
             $country->country_name = $request->country_name;
             $country->country_code = $request->country_code;
             $country->save();
 
+            DB::commit();
             return response()->json(['message'=>'Country added successfully!','status'=>true,'data'=>[]]); 
         }catch (\Throwable $th) {
             Log::debug($th);
+            DB::rollback();
             return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
         } 
 
@@ -69,15 +73,19 @@ class CountryController extends Controller
                 return response()->json(['errors' => $validator->errors()->all() ]);
             }
 
+            DB::beginTransaction();
+
             $id = $request->country_id;
             $country = Country::find($id);
             $country->country_name = $request->country_name;
             $country->country_code = $request->country_code;
             $country->save();
 
+            DB::commit();
             return response()->json(['message'=>'Country updated successfully!','status'=>true,'data'=>[]]); 
         }catch (\Throwable $th) {
             Log::debug($th);
+            DB::rollback();
             return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
         } 
     }

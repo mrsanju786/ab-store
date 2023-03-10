@@ -38,14 +38,18 @@ class DiscountController extends Controller
                 return response()->json(['errors' => $validator->errors()->all() ]);
             }
 
+            DB::beginTransaction();
+
             $discount = new Discount();
             $discount->discount_name = $request->discount_name;
             $discount->discount_percent = $request->discount_percent;
             $discount->save();
 
+            DB::commit();
             return response()->json(['message'=>'Discount added successfully!','status'=>true,'data'=>[]]); 
         }catch (\Throwable $th) {
             Log::debug($th);
+            DB::rollback();
             return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
         } 
     }
@@ -66,15 +70,19 @@ class DiscountController extends Controller
                 return response()->json(['errors' => $validator->errors()->all() ]);
             }
 
+            DB::beginTransaction();
+
             $id = $request->discount_id;
             $discount = Discount::find($id);
             $discount->discount_name = $request->discount_name;
             $discount->discount_percent = $request->discount_percent;
             $discount->save();
 
+            DB::commit();
             return response()->json(['message'=>'Discount updated successfully!','status'=>true,'data'=>[]]); 
         }catch (\Throwable $th) {
             Log::debug($th);
+            DB::rollback();
             return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
         } 
     }
@@ -82,12 +90,18 @@ class DiscountController extends Controller
     public function discountStatus(Request $request)
     {   
         try{
+            DB::beginTransaction();
+
             $size = Discount::find($request->discount_id);
             $size->is_active = $request->status;
             $size->save();
+
+            DB::commit();
+
             return response()->json(['message'=>'Discount status updated successfully!','status'=>true,'data'=>[]]); 
         }catch (\Throwable $th) {
             Log::debug($th);
+            DB::rollback();
             return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
         } 
     }

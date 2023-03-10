@@ -36,13 +36,17 @@ class AreaController extends Controller
                 return response()->json(['errors' => $validator->errors()->all() ]);
             }
 
+            DB::beginTransaction();
+
             $area = new Area();
             $area->area_name = $request->area_name;
             $area->location_id = $request->location_id;
             $area->save();
 
+            DB::commit();
            return response()->json(['message'=>'Area added successfully!','status'=>true,'data'=>[]]); 
         }catch (\Throwable $th) {
+            DB::rollback();
             Log::debug($th);
             return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
         } 
@@ -63,14 +67,16 @@ class AreaController extends Controller
                 return response()->json(['errors' => $validator->errors()->all() ]);
             }
 
+            DB::beginTransaction();
             $area = Area::find($request->area_id);
             $area->area_name = $request->area_name;
             $area->location_id = $request->location_id;
             $area->save();
-
+            DB::commit();
             return response()->json(['message'=>'Area updated successfully!','status'=>true,'data'=>[]]); 
         }catch (\Throwable $th) {
             Log::debug($th);
+            DB::rollback();
             return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
         } 
     }
@@ -78,12 +84,15 @@ class AreaController extends Controller
     public function areaStatus(Request $request)
     {
         try{
+            DB::beginTransaction();
             $area = Area::find($request->area_id);
             $area->is_active = $request->status;
             $area->save();
+            DB::commit();
             return response()->json(['message'=>'Area status changed successfully!','status'=>true,'data'=>[]]); 
         }catch (\Throwable $th) {
             Log::debug($th);
+            DB::rollback();
             return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
         } 
     }

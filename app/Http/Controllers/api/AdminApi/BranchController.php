@@ -28,6 +28,8 @@ class BranchController extends Controller
     public function regionList()
     {
         try{
+            
+
             $discount    = Discount::get();
             $region_list = Region::where('is_active', 1)->get();
             $company     = Company::where('is_active', 1)->get();
@@ -53,6 +55,8 @@ class BranchController extends Controller
                 return response()->json(['errors' => $validator->errors()->all() ]);
             }
             
+            DB::beginTransaction();
+
             $branch = new Branch();
             $branch->name = $request->branch_name;
             $branch->branch_code = $request->branch_code;
@@ -71,9 +75,11 @@ class BranchController extends Controller
             $branch->discount_ids = $request->discount_id;
             $branch->save();
 
+            DB::commit();
             return response()->json(['message'=>'Branch added successfully!','status'=>true,'data'=>[]]); 
         }catch (\Throwable $th) {
             Log::debug($th);
+            DB::rollback();
             return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
         } 
 
@@ -94,6 +100,8 @@ class BranchController extends Controller
                 return response()->json(['errors' => $validator->errors()->all() ]);
             }
             
+            DB::beginTransaction();
+
             $id = $request->branch_id;
             $branch = Branch::find($id);
             $branch->name = $request->branch_name;
@@ -113,9 +121,11 @@ class BranchController extends Controller
             $branch->discount_ids = $request->discount_id;
             $branch->save();
 
+            DB::commit();
             return response()->json(['message'=>'Branch updated successfully!','status'=>true,'data'=>[]]); 
         }catch (\Throwable $th) {
             Log::debug($th);
+            DB::rollback();
             return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
         } 
     }
@@ -123,13 +133,17 @@ class BranchController extends Controller
     public function branchStatus(Request $request)
     {
         try{
+            DB::beginTransaction();
+
             $size = Branch::find($request->branch_id);
             $size->is_active = $request->status;
             $size->save();
-        
+            
+            DB::commit();
             return response()->json(['message'=>'Branch status changed successfully!','status'=>true,'data'=>[]]); 
         }catch (\Throwable $th) {
             Log::debug($th);
+            DB::rollback();
             return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
         } 
     }

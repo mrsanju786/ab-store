@@ -42,7 +42,9 @@ class LicenseController extends Controller
             if ($validator->fails()) {
                 return response()->json(['errors' => $validator->errors()->all() ]);
             }
-            
+
+            DB::beginTransaction();
+
             $license = new License();
             $license->license_name = $request->license_name;
             $license->format = $request->format;
@@ -51,9 +53,12 @@ class LicenseController extends Controller
             $license->country_id = $request->country_id;
             $license->save();
 
+            DB::commit();
+
             return response()->json(['message'=>'License added successfully!','status'=>true,'data'=>[]]); 
         }catch (\Throwable $th) {
             Log::debug($th);
+            DB::rollback();
             return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
         } 
 
@@ -81,6 +86,8 @@ class LicenseController extends Controller
                 return response()->json(['errors' => $validator->errors()->all() ]);
             }
 
+            DB::beginTransaction();
+
             $license = License::find($request->license_id);
             $license->license_name = $request->license_name;
             $license->format = $request->format;
@@ -89,9 +96,11 @@ class LicenseController extends Controller
             $license->country_id = $request->country_id;
             $license->save();
 
+            DB::commit();
             return response()->json(['message'=>'License updated successfully!','status'=>true,'data'=>[]]); 
         }catch (\Throwable $th) {
             Log::debug($th);
+            DB::rollback();
             return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
         } 
     }

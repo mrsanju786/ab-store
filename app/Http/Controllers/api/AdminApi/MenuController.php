@@ -38,6 +38,7 @@ class MenuController extends Controller
                 return response()->json(['errors' => $validator->errors()->all() ]);
             }
             
+            DB::beginTransaction();
 
             $menu = new Menu();
             $menu->company_id = $request->company_id;
@@ -50,9 +51,13 @@ class MenuController extends Controller
             $menu->repeat_days = implode(",", $request->repeat_days);
             
             $menu->save();
+
+            DB::commit();
+
             return response()->json(['message'=>'Menu added successfully!','status'=>true,'data'=>[]]); 
         }catch (\Throwable $th) {
             Log::debug($th);
+            DB::rollback();
             return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
         } 
         
@@ -76,6 +81,8 @@ class MenuController extends Controller
                 return response()->json(['errors' => $validator->errors()->all() ]);
             }
 
+            DB::beginTransaction();
+
             $id = $request->menu_id;
             $menu = Menu::find($id);
             $menu->company_id = $request->company_id;
@@ -88,9 +95,12 @@ class MenuController extends Controller
             $menu->repeat_days = implode(",", $request->repeat_days);
             $menu->save();
         
+            DB::commit();
+
            return response()->json(['message'=>'Menu updated successfully!','status'=>true,'data'=>[]]); 
         }catch (\Throwable $th) {
             Log::debug($th);
+            DB::rollback();
             return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
         } 
     }
@@ -98,12 +108,18 @@ class MenuController extends Controller
     public function menuStatus(Request $request)
     {
         try{
+            DB::beginTransaction();
+
             $menu = Menu::find($request->menu_id);
             $menu->is_active = $request->status;
             $menu->save();
+
+            DB::commit();
+
             return response()->json(['message'=>'Menu status changed successfully!','status'=>true,'data'=>[]]); 
         }catch (\Throwable $th) {
             Log::debug($th);
+            DB::rollback();
             return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
         } 
     }

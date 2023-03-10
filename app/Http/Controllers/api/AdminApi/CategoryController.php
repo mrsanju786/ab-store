@@ -38,6 +38,8 @@ class CategoryController extends Controller
                 return response()->json(['errors' => $validator->errors()->all() ]);
             }
             
+            DB::beginTransaction();
+
             $category = new Category();
             $category->category_name = $request->category_name;
             $category->item_type = $request->item_type;
@@ -66,10 +68,12 @@ class CategoryController extends Controller
                     $category_has_menu->save();
                 }
             }
-            
+
+            DB::commit();
             return response()->json(['message'=>'Category added successfully!','status'=>true,'data'=>[]]); 
         }catch (\Throwable $th) {
             Log::debug($th);
+            DB::rollback();
             return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
         } 
 
@@ -87,6 +91,8 @@ class CategoryController extends Controller
             if ($validator->fails()) {
                 return response()->json(['errors' => $validator->errors()->all() ]);
             }
+
+            DB::beginTransaction();
 
             $id = $request->category_id;
             $category = Category::find($id);
@@ -118,9 +124,12 @@ class CategoryController extends Controller
                     $category_has_menu->save();
                 }
             }
+            DB::commit();
+            
             return response()->json(['message'=>'Category updated successfully!','status'=>true,'data'=>[]]); 
         }catch (\Throwable $th) {
             Log::debug($th);
+            DB::rollback();
             return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
         } 
     }

@@ -46,6 +46,8 @@ class ExtraController extends Controller
                 return response()->json(['errors' => $validator->errors()->all() ]);
             }
             
+            DB::beginTransaction();
+
             $extra = new Extra();
             $extra->extras_name = $request->extra_name;
             $extra->extras_price = $request->extra_price;
@@ -65,9 +67,12 @@ class ExtraController extends Controller
 
             $extra->save();
 
+            DB::commit();
+
             return response()->json(['message'=>'Extra added successfully!','status'=>true,'data'=>[]]); 
         }catch (\Throwable $th) {
             Log::debug($th);
+            DB::rollback();
             return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
         } 
         
@@ -96,7 +101,8 @@ class ExtraController extends Controller
                 return response()->json(['errors' => $validator->errors()->all() ]);
             }
             
-            
+            DB::beginTransaction();
+
             $id = $request->extra_id;
             $extra = Extra::find($id);
             $extra->extras_name = $request->extra_name;
@@ -116,9 +122,12 @@ class ExtraController extends Controller
             
             $extra->save();
             
+            DB::commit();
+
             return response()->json(['message'=>'Extra updated successfully!','status'=>true,'data'=>[]]); 
         }catch (\Throwable $th) {
             Log::debug($th);
+            DB::rollback();
             return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
         } 
     }

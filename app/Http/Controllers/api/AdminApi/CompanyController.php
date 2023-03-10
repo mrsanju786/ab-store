@@ -63,6 +63,8 @@ class CompanyController extends Controller
                 return response()->json(['errors' => $validator->errors()->all() ]);
             }
             
+            DB::beginTransaction();
+
             $company = new Company();
             $company->company_name = $request->company_name;
             $company->food_license_id = $request->license_no;
@@ -94,9 +96,13 @@ class CompanyController extends Controller
             $company_has_region->company_id = $company->id;
             $company_has_region->region_id = $region_id;
             $company_has_region->save();
+
+            DB::commit();
+
             return response()->json(['message'=>'Company Added successfully!','status'=>true,'data'=>[]]);                
         }catch (\Throwable $th) {
             Log::debug($th);
+            DB::rollback();
             return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
         }
 
@@ -124,6 +130,8 @@ class CompanyController extends Controller
                 return response()->json(['errors' => $validator->errors()->all() ]);
             }
            
+            DB::beginTransaction();
+
             $id = $request->company_id;
             $company = Company::find($id);
             $company->company_name = $request->company_name;
@@ -153,10 +161,11 @@ class CompanyController extends Controller
             $region_id = $state->region_id;
             
             $company_has_region = CompanyHasRegion::where('company_id',$id)->update(['region_id'=>$region_id]);
-
+            DB::commit();
             return response()->json(['message'=>'Company updated successfully!','status'=>true,'data'=>[]]); 
         }catch (\Throwable $th) {
             Log::debug($th);
+            DB::rollback();
             return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
         }               
     }
@@ -164,12 +173,18 @@ class CompanyController extends Controller
     public function companyStatus(Request $request)
     {
         try{
+            DB::beginTransaction();
+
             $size = Company::find($request->company_id);
             $size->is_active = $request->status;
             $size->save();
+            
+            DB::commit();
+
             return response()->json(['message'=>'Company status changed successfully!','status'=>true,'data'=>[]]); 
         }catch (\Throwable $th) {
             Log::debug($th);
+            DB::rollback();
             return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
         }                
     }

@@ -48,11 +48,17 @@ class RoleController extends Controller
                 return response()->json(['errors' => $validator->errors()->all() ]);
             }
             
+            DB::beginTransaction();
+
             $newRole = Role::create(['name' => $request->role_name]);
             $newRole->givePermissionTo($request->permission);
+
+            DB::commit();
+
             return response()->json(['message'=>'Role added successfully!','status'=>true,'data'=>[]]);                
         }catch (\Throwable $th) {
             Log::debug($th);
+            DB::rollback();
             return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
         }
     }
@@ -68,15 +74,22 @@ class RoleController extends Controller
                 return response()->json(['errors' => $validator->errors()->all() ]);
             }
 
+
+            DB::beginTransaction();
+            
             $id = $request->role_id;
             $edit_role = Role::find($id);
             $edit_role->name = $request->role_name;
             $edit_role->save();
 
             $edit_role->syncPermissions($request->permission);
+
+            DB::commit();
+
             return response()->json(['message'=>'Role updated successfully!','status'=>true,'data'=>[]]);                
         }catch (\Throwable $th) {
             Log::debug($th);
+            DB::rollback();
             return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
         }
     }

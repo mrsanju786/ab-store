@@ -36,14 +36,19 @@ class TaxController extends Controller
                 return response()->json(['errors' => $validator->errors()->all() ]);
             }
 
+            DB::beginTransaction();
+
             $tax = new Tax();
             $tax->tax_name = $request->tax_name;
             $tax->tax_percent = $request->tax_percent;
             $tax->save();
 
+            DB::commit();
+
             return response()->json(['message'=>'Tax added successfully!','status'=>true,'data'=> []]); 
         }catch (\Throwable $th) {
             Log::debug($th);
+            DB::rollback();
             return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
         } 
 
@@ -65,14 +70,19 @@ class TaxController extends Controller
                 return response()->json(['errors' => $validator->errors()->all() ]);
             }
             
+            DB::beginTransaction();
+            
             $tax = Tax::find($request->tax_id);
             $tax->tax_name = $request->tax_name;
             $tax->tax_percent = $request->tax_percent;
             $tax->save();
 
+            DB::commit();
+
             return response()->json(['message'=>'Tax updated successfully!','status'=>true,'data'=> []]); 
         }catch (\Throwable $th) {
             Log::debug($th);
+            DB::rollback();
             return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
         } 
     }

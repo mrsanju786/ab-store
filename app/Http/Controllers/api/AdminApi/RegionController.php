@@ -43,15 +43,19 @@ class RegionController extends Controller
                 return response()->json(['errors' => $validator->errors()->all() ]);
             }
             
+            DB::beginTransaction();
 
             $license = new Region();
             $license->region_name = $request->region_name;
             $license->country_id = $request->country_id;
             $license->save();
 
+            DB::commit();
+
             return response()->json(['message'=>'Region added successfully!','status'=>true,'data'=>[]]); 
         }catch (\Throwable $th) {
             Log::debug($th);
+            DB::rollback();
             return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
         } 
 
@@ -78,14 +82,19 @@ class RegionController extends Controller
                 return response()->json(['errors' => $validator->errors()->all() ]);
             }
         
+            DB::beginTransaction();
+
             $license = Region::find($request->region_id);
             $license->region_name = $request->region_name;
             $license->country_id = $request->country_id;
             $license->save();
 
+            DB::commit();
+
             return response()->json(['message'=>'Region updated successfully!','status'=>true,'data'=>[]]); 
         }catch (\Throwable $th) {
             Log::debug($th);
+            DB::rollback();
             return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
         } 
     }
@@ -93,12 +102,19 @@ class RegionController extends Controller
     public function regionStatus(Request $request)
     {
         try{ 
+
+            DB::beginTransaction();
+            
             $size = Region::find($request->region_id);
             $size->is_active = $request->status;
             $size->save();
+
+            DB::commit();
+
             return response()->json(['message'=>'Region status updated successfully!','status'=>true,'data'=>[]]); 
         }catch (\Throwable $th) {
             Log::debug($th);
+            DB::rollback();
             return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
         } 
     }

@@ -60,6 +60,8 @@ class DishController extends Controller
                 return response()->json(['errors' => $validator->errors()->all() ]);
             }
            
+            DB::beginTransaction();
+
             $dish = new Dish();
             $dish->dish_name = $request->dish_name;
             $dish->dish_price = $request->dish_price;
@@ -94,6 +96,8 @@ class DishController extends Controller
             $dishTax->dish_id = $dish->id;
             $dishTax->save();
 
+            DB::commit();
+
             if($request->dish_has_variant == 1){
                 return response()->json(['message'=>'Dish added successfully!','status'=>true,'data'=>[]]); 
                
@@ -104,6 +108,7 @@ class DishController extends Controller
             
         }catch (\Throwable $th) {
             Log::debug($th);
+            DB::rollback();
             return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
         } 
 
@@ -131,6 +136,8 @@ class DishController extends Controller
             if ($validator->fails()) {
                 return response()->json(['errors' => $validator->errors()->all() ]);
             }
+
+            DB::beginTransaction();
 
             $id = $request->dish_id;
             $dish = Dish::find($id);
@@ -162,9 +169,13 @@ class DishController extends Controller
             $dishTax = DishHasTax::where('dish_id', $id)->first();
             $dishTax->tax_id = $request->tax_id;
             $dishTax->save();
+
+            DB::commit();
+
             return response()->json(['message'=>'Dish updated successfully!','status'=>true,'data'=>[]]);     
         }catch (\Throwable $th) {
             Log::debug($th);
+            DB::rollback();
             return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
         } 
     }
@@ -172,12 +183,18 @@ class DishController extends Controller
     public function dishStatus(Request $request)
     {
         try{
+            DB::beginTransaction();
+
             $size = Dish::find($request->dish_id);
             $size->is_active = $request->status;
             $size->save();
+
+            DB::commit();
+
             return response()->json(['message'=>'Dish status changed successfully!','status'=>true,'data'=>[]]);     
         }catch (\Throwable $th) {
             Log::debug($th);
+            DB::rollback();
             return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
         } 
     }
@@ -204,10 +221,16 @@ class DishController extends Controller
     public function importDish() 
     {
         try{
+            DB::beginTransaction();
+
             Excel::import(new DishImport,request()->file('file'));
+
+            DB::commit();
+
             return response()->json(['message'=>'Imported Successfully!','status'=>true,'data'=>[]]);     
         }catch (\Throwable $th) {
             Log::debug($th);
+            DB::rollback();
             return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
         } 
 
@@ -216,6 +239,7 @@ class DishController extends Controller
    
     public function updateDishexcel(){
         try{
+            DB::beginTransaction();
         $data = Excel::toArray(new DishImport, request()->file('file')); 
 
         collect(head($data))
@@ -224,9 +248,11 @@ class DishController extends Controller
                     ->where('id', $row['id'])
                     ->update(Arr::except($row, ['id']));
             });
+            DB::commit();
             return response()->json(['message'=>'Updated Successfully!','status'=>true,'data'=>[]]);     
         }catch (\Throwable $th) {
             Log::debug($th);
+            DB::rollback();
             return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
         } 
        

@@ -43,6 +43,7 @@ class CurrencyController extends Controller
                 return response()->json(['errors' => $validator->errors()->all() ]);
             }
             
+            DB::beginTransaction();
 
             $currency = new Currency();
             $currency->currency_name = $request->currency_name;
@@ -51,9 +52,11 @@ class CurrencyController extends Controller
             $currency->country_id = $request->country_id;
             $currency->save();
 
+            DB::commit();
             return response()->json(['message'=>'Currency added successfully!','status'=>true,'data'=>[]]); 
         }catch (\Throwable $th) {
             Log::debug($th);
+            DB::rollback();
             return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
         } 
 
@@ -81,6 +84,8 @@ class CurrencyController extends Controller
                 return response()->json(['errors' => $validator->errors()->all() ]);
             }
 
+            DB::beginTransaction();
+
             $currency = Currency::find($request->currency_id);
             $currency->currency_name = $request->currency_name;
             $currency->currency_code = $request->currency_code;
@@ -88,9 +93,11 @@ class CurrencyController extends Controller
             $currency->country_id = $request->country_id;
             $currency->save();
 
+            DB::commit();
             return response()->json(['message'=>'Currency updated successfully!','status'=>true,'data'=>[]]); 
     }catch (\Throwable $th) {
         Log::debug($th);
+        DB::rollback();
         return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
     } 
     }

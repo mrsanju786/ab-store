@@ -47,6 +47,8 @@ class StateController extends Controller
             if ($validator->fails()) {
                 return response()->json(['errors' => $validator->errors()->all() ]);
             }
+
+            DB::beginTransaction();
             
             $state = new State();
             $state->state_name = $request->state_name;
@@ -55,9 +57,12 @@ class StateController extends Controller
             $state->region_id = $request->region_id;
             $state->save();
 
+            DB::commit();
+
             return response()->json(['message'=>'State added successfully!','status'=>true,'data'=>[]]); 
         }catch (\Throwable $th) {
             Log::debug($th);
+            DB::rollback();
             return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
         } 
 
@@ -89,6 +94,8 @@ class StateController extends Controller
                 return response()->json(['errors' => $validator->errors()->all() ]);
             }
 
+            DB::beginTransaction();
+            
             $id = $request->state_id;
             $state = State::find($id);
             $state->state_name = $request->state_name;
@@ -97,9 +104,13 @@ class StateController extends Controller
             $state->region_id = $request->region_id;
             $state->save();
 
+
+            DB::commit();
+
             return response()->json(['message'=>'State Updated successfully!','status'=>true,'data'=>[]]); 
         }catch (\Throwable $th) {
             Log::debug($th);
+            DB::rollback();
             return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
         } 
     }

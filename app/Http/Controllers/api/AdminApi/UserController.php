@@ -44,12 +44,18 @@ class UserController extends Controller
                 return response()->json(['errors' => $validator->errors()->all() ]);
             }
             
+            DB::beginTransaction();
+
             $newUser = User::create(['name' => $request->name, 'email' => $request->email, 'password' => bcrypt($request->password)]);
             $userHasCompany = userHasCompany::create(['company_id' => $request->company_id, 'user_id'=>$newUser->id]);
             $newUser->assignRole($request->role);
+
+            DB::commit();
+
             return response()->json(['message'=>'User added successfully!','status'=>true,'data'=>[]]); 
         }catch (\Throwable $th) {
             Log::debug($th);
+            DB::rollback();
             return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
         } 
     }
@@ -73,6 +79,8 @@ class UserController extends Controller
                 return response()->json(['errors' => $validator->errors()->all() ]);
             }
             
+            DB::beginTransaction();
+            
             $edit_user = User::find($request->user_id);
             $edit_user->name = $request->name;
             $edit_user->save();
@@ -81,9 +89,14 @@ class UserController extends Controller
             $userCompany->company_id = $request->company_id;
             $userCompany->save();
             $edit_user->syncRoles($request->role);
+
+            DB::commit();
+
+
             return response()->json(['message'=>'User updated successfully!','status'=>true,'data'=>[]]); 
         }catch (\Throwable $th) {
             Log::debug($th);
+            DB::rollback();
             return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
         } 
     }

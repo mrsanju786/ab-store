@@ -42,15 +42,20 @@ class OptionController extends Controller
             }
            
 
+            DB::beginTransaction();
+
             $option = new DishOption();
             $option->option_name = $request->option_name;
             $option->option_value = $request->option_value;
             $option->dish_id = $request->dish_id;
             $option->save();
 
+            DB::commit();
+
             return response()->json(['message'=>'Option added successfully!','status'=>true,'data'=>[]]); 
         }catch (\Throwable $th) {
             Log::debug($th);
+            DB::rollback();
             return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
         } 
 
@@ -72,14 +77,20 @@ class OptionController extends Controller
             if ($validator->fails()) {
                 return response()->json(['errors' => $validator->errors()->all() ]);
             }
+
+            DB::beginTransaction();
+
             $option = DishOption::find($request->option_id);
             $option->option_name = $request->option_name;
             $option->option_value = $request->option_value;
             $option->save();
 
+            DB::commit();
+
             return response()->json(['message'=>'Option updated successfully!','status'=>true,'data'=>[]]); 
         }catch (\Throwable $th) {
             Log::debug($th);
+            DB::rollback();
             return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
         } 
     }
