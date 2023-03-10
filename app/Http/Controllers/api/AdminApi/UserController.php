@@ -10,6 +10,8 @@ use Spatie\Permission\Models\RoleHasPermission;
 use app\Models\User;
 use Log;
 use Validator;
+use App\Models\Company;
+use App\Models\userHasCompany;
 
 class UserController extends Controller
 {
@@ -35,6 +37,7 @@ class UserController extends Controller
                 'role'    => 'required',
                 'email'    => 'required|email|max:250|unique:users,email',
                 'password'    => 'required|min:6',
+                'company_id' => 'required',
             ]);
 
             if ($validator->fails()) {
@@ -42,6 +45,7 @@ class UserController extends Controller
             }
             
             $newUser = User::create(['name' => $request->name, 'email' => $request->email, 'password' => bcrypt($request->password)]);
+            $userHasCompany = userHasCompany::create(['company_id' => $request->company_id, 'user_id'=>$newUser->id]);
             $newUser->assignRole($request->role);
             return response()->json(['message'=>'User added successfully!','status'=>true,'data'=>[]]); 
         }catch (\Throwable $th) {
@@ -61,6 +65,7 @@ class UserController extends Controller
             $validator = Validator::make($request->all(), [
                 'name'    => 'required|max:100',
                 'role'    => 'required',
+                'company_id' => 'required',
                 
             ]);
 
@@ -72,6 +77,9 @@ class UserController extends Controller
             $edit_user->name = $request->name;
             $edit_user->save();
 
+            $userCompany = userHasCompany::where('user_id', $request->user_id)->first();
+            $userCompany->company_id = $request->company_id;
+            $userCompany->save();
             $edit_user->syncRoles($request->role);
             return response()->json(['message'=>'User updated successfully!','status'=>true,'data'=>[]]); 
         }catch (\Throwable $th) {

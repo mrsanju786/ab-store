@@ -27,8 +27,8 @@ class CountryController extends Controller
                 'country_code' => 'required',
 
             ],[
-                'country_name.required'=>'Country Name is Required',
-                'country_code.required'=>'Company Logo is Required',
+                'country_name.required'=>'Country name is Required',
+                'country_code.required'=>'Country code is Required',
             ]);
 
             if ($validator->fails()) {
@@ -40,7 +40,7 @@ class CountryController extends Controller
             $country->country_code = $request->country_code;
             $country->save();
 
-            return response()->json(['message'=>'Company added successfully!','status'=>true,'data'=>[]]); 
+            return response()->json(['message'=>'Country added successfully!','status'=>true,'data'=>[]]); 
         }catch (\Throwable $th) {
             Log::debug($th);
             return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
@@ -61,8 +61,8 @@ class CountryController extends Controller
                 'country_code' => 'required',
 
             ],[
-                'country_name.required'=>'Country Name is Required',
-                'country_code.required'=>'Company Logo is Required',
+                'country_name.required'=>'Country name is Required',
+                'country_code.required'=>'Country code is Required',
             ]);
 
             if ($validator->fails()) {
@@ -75,7 +75,7 @@ class CountryController extends Controller
             $country->country_code = $request->country_code;
             $country->save();
 
-            return response()->json(['message'=>'Company updated successfully!','status'=>true,'data'=>[]]); 
+            return response()->json(['message'=>'Country updated successfully!','status'=>true,'data'=>[]]); 
         }catch (\Throwable $th) {
             Log::debug($th);
             return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);

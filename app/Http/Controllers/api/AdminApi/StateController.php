@@ -16,7 +16,7 @@ class StateController extends Controller
         try{
             $state = State::get();
             $region = Region::get();
-            return response()->json(['message'=>'State List!','status'=>true,'data'=>$state,'region'=>$region]); 
+            return response()->json(['message'=>'State List!','status'=>true,'data'=>['state'=>$state,'region'=>$region]]); 
         }catch (\Throwable $th) {
             Log::debug($th);
             return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);

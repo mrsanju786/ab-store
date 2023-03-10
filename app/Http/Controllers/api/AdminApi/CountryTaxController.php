@@ -91,11 +91,16 @@ class CountryTaxController extends Controller
     }
 
     public function countrytaxStatus(Request $request)
-    {
-        $countrytax = CountryTax::find($request->id);
-        $countrytax->is_active = $request->status;
-        $countrytax->save();
-        return redirect()->back()->with('success','Countrytax status updated!');
+    {  
+        try{
+            $countrytax = CountryTax::find($request->countrytax_id);
+            $countrytax->is_active = $request->status;
+            $countrytax->save();
+            return response()->json(['message'=>'Country Tax status updated successfully!','status'=>true,'data'=> []]); 
+        }catch (\Throwable $th) {
+            Log::debug($th);
+            return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
+        } 
     }
 
     public function getCountryTax($id){

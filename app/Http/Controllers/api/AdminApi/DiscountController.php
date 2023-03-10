@@ -80,10 +80,15 @@ class DiscountController extends Controller
     }
 
     public function discountStatus(Request $request)
-    {
-        $size = Discount::find($request->id);
-        $size->is_active = $request->status;
-        $size->save();
-        return redirect()->back()->with('success', 'Discount status updated!');
+    {   
+        try{
+            $size = Discount::find($request->discount_id);
+            $size->is_active = $request->status;
+            $size->save();
+            return response()->json(['message'=>'Discount status updated successfully!','status'=>true,'data'=>[]]); 
+        }catch (\Throwable $th) {
+            Log::debug($th);
+            return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
+        } 
     }
 }

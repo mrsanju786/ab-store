@@ -51,7 +51,7 @@ class DishVariantController extends Controller
             $variant->dish_id = $request->dish_id;
             $variant->save();
 
-            return response()->json(['message'=>'Dish added successfully!','status'=>true,'data'=>[]]); 
+            return response()->json(['message'=>'Dish variant added successfully!','status'=>true,'data'=>[]]); 
         }catch (\Throwable $th) {
             Log::debug($th);
             return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
@@ -66,7 +66,7 @@ class DishVariantController extends Controller
         return view('admin-view.dish_variant.edit-variant', compact('variant','dish_option'));
     }
 
-    public function updateDishVariant(Request $request, $id){
+    public function updateDishVariant(Request $request){
         try{
             $validator = Validator::make($request->all(), [
                 'price' => 'required',
@@ -85,7 +85,7 @@ class DishVariantController extends Controller
             $variant->variant_name = implode(",", $request->options);
             $variant->save();
         
-            return response()->json(['message'=>'Dish updated successfully!','status'=>true,'data'=>[]]); 
+            return response()->json(['message'=>'Dish variant updated successfully!','status'=>true,'data'=>[]]); 
         }catch (\Throwable $th) {
             Log::debug($th);
             return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);
@@ -95,10 +95,10 @@ class DishVariantController extends Controller
     public function dishvariantStatus(Request $request)
     {
         try{
-            $size = Dish::find($request->variant_id);
+            $size = DishVariant::find($request->variant_id);
             $size->is_active = $request->status;
             $size->save();
-            return response()->json(['message'=>'Dish status added successfully!','status'=>true,'data'=>[]]); 
+            return response()->json(['message'=>'Dish variant status added successfully!','status'=>true,'data'=>[]]); 
         }catch (\Throwable $th) {
             Log::debug($th);
             return response()->json(['status' => false, 'message' => 'Something went wrong.'], 400);

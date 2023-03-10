@@ -226,7 +226,7 @@ Route::group(['middleware' => ['auth:api']], function(){
         Route::post('/create-dishvariant', [DishVariantController::class, 'createDishVariant']);
         Route::get('/edit-dishvariant/{id?}', [DishVariantController::class, 'editDishVariant']);
         Route::post('/update-dishvariant', [DishVariantController::class, 'updateDishVariant']);
-        Route::get('/dishvariant-status', [DishVariantController::class, 'dishvariantStatus']);
+        Route::post('/dishvariant-status', [DishVariantController::class, 'dishvariantStatus']);
 
         /**
          * Tax Routes
@@ -259,7 +259,7 @@ Route::group(['middleware' => ['auth:api']], function(){
              * Timezone Routes
              */
             Route::get('/timezone-list', [TimezoneController::class, 'index'])->name('timezone-list');
-            Route::get('/add-timezone', [TimezoneController::class, 'addTimezone'])->name('add-timezone');
+            Route::get('/timezone', [TimezoneController::class, 'addTimezone'])->name('add-timezone');
             Route::post('/create-timezone', [TimezoneController::class, 'createTimezone'])->name('create-timezone');
             Route::get('/edit-timezone/{id}', [TimezoneController::class, 'editTimezone'])->name('edit-timezone');
             Route::post('/update-timezone', [TimezoneController::class, 'updateTimezone'])->name('update-timezone');
@@ -323,7 +323,7 @@ Route::group(['middleware' => ['auth:api']], function(){
             Route::post('/create-countrytax', [CountrytaxController::class, 'createCountrytax'])->name('create-countrytax');
             Route::get('/edit-countrytax/{id}', [CountrytaxController::class, 'editCountrytax'])->name('edit-countrytax');
             Route::post('/update-countrytax', [CountrytaxController::class, 'updateCountrytax'])->name('update-countrytax');
-            Route::get('/countrytax-status', [CountrytaxController::class, 'countrytaxStatus'])->name('countrytax-status');
+            Route::post('/countrytax-status', [CountrytaxController::class, 'countrytaxStatus'])->name('countrytax-status');
 
             Route::get('/get-company-city/{id}', [CityController::class, 'getCompanyCity'])->name('get-company-city');
 
@@ -337,7 +337,7 @@ Route::group(['middleware' => ['auth:api']], function(){
             Route::post('/create-discount', [DiscountController::class, 'createDiscount'])->name('create-discount');
             Route::get('/edit-discount/{id}', [DiscountController::class, 'editDiscount'])->name('edit-discount');
             Route::post('/update-discount', [DiscountController::class, 'updateDiscount'])->name('update-discount');
-            Route::get('/discount-status', [DiscountController::class, 'discountStatus'])->name('discount-status');
+            Route::post('/discount-status', [DiscountController::class, 'discountStatus'])->name('discount-status');
 
             /**
              * Users Routes
