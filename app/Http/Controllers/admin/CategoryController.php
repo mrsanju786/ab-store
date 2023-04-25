@@ -5,123 +5,105 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Category;
-use App\Models\CategoryHasMenu;
-use App\Models\Branch;
-use App\Models\Counter;
-use App\Models\Menu;
 use Storage;
 
 class CategoryController extends Controller
 {
     public function index(){
 
-        $category = Category::with(['Branch', 'Counter'])->get();
-        return view('admin-view.category.index', compact('category'));
+        $category = Category::orderBy('id','desc')->get();
+        return view('admin-view.product_category.index', compact('category'));
     }
 
-    public function addCategory()
+    public function create()
     {
-        $branch = Branch::where('is_active', 1)->get();
-        $counter = Counter::get();
-        $menu = Menu::get();
-        return view('admin-view.category.add_category', compact('branch', 'counter', 'menu'));
+        return view('admin-view.product_category.create');
     }
 
-    public function createCategory(Request $request){
+    public function store(Request $request){
 
+        // return $request->all();
         $request->validate([
-            'category_name' => 'required',
-            'branch_id' => 'required',
-            'counter_id' => 'required',
+            'title'  => 'required|unique:categories,title',
+            'file'   =>'required|image',
+            // 'status' => 'required',
         ]);
 
         $category = new Category();
-        $category->category_name = $request->category_name;
-        $category->item_type = $request->item_type;
-        $category->branch_id = $request->branch_id;
-        $category->counter_id = $request->counter_id;
-
-        if ($request->file('category_image')) {
-            $imageFileType = $request->category_image->getClientOriginalExtension();
+        $category->title = $request->title;
+        $category->slug = \Str::slug($request->title);
+       
+        //add image 
+        if ($request->file('file')) {
+            $file = $request->file('file');
+            $imageFileType = $file->getClientOriginalExtension();
             $imageName = \Carbon\Carbon::now()->toDateString() . "-" . uniqid() . "." . $imageFileType;
             $dir = "/upload/category/";
             if (!Storage::disk('public')->exists($dir)) {
                 Storage::disk('public')->makeDirectory($dir);
             }
-            Storage::disk('public')->put($dir . $imageName, file_get_contents($request->category_image));
-            $category->images = $imageName;
+            Storage::disk('public')->put($dir . $imageName, file_get_contents($request->file));
+            $category->image = $imageName;
         } else{
 
-            $category->images = "blank.jpg";
+            $category->image = "blank.jpg";
         }
-
         $category->save();
 
-        if ($request->has('menu_id')) {
-            foreach($request->menu_id as $menu_id){
-                $category_has_menu = new CategoryHasMenu();
-                $category_has_menu->category_id = $category->id;
-                $category_has_menu->menu_id = $menu_id;
-                $category_has_menu->save();
-            }
-        }
-        
-        return redirect()->route('category-list')->with('success', 'Category Added Successfully!');
+        return redirect()->route('category/index')->with('success', 'Category Added Successfully!');
 
     }
 
-    public function editCategory($id){
+    public function edit($id){
 
         $category = Category::find(base64_decode($id));
-        $branch = Branch::where('is_active', 1)->get();
-        $counter = Counter::get();
-        $menu = Menu::get();
-        $category_has_menu = CategoryHasMenu::where('category_id', base64_decode($id))->pluck('menu_id')->toArray();
-        return view('admin-view.category.edit_category', compact('category', 'branch', 'counter', 'menu', 'category_has_menu'));
+       
+        return view('admin-view.product_category.edit', compact('category'));
     }
 
-    public function updateCategory(Request $request){
+    public function update(Request $request, $id){
 
         $request->validate([
-            'category_name' => 'required',
-            'branch_id' => 'required',
-            'counter_id' => 'required',
+            'title' => 'required',
+            'image' => 'nullable|image'
+            //'status' => 'required',
         ]);
 
-        $id = $request->category_id;
-        $category = Category::find($id);
-        $category->category_name = $request->category_name;
-        $category->item_type = $request->item_type;
-        $category->branch_id = $request->branch_id;
-        $category->counter_id = $request->counter_id;
 
-        if ($request->file('category_image')) {
-            $imageFileType = $request->category_image->getClientOriginalExtension();
+        $category = Category::find(base64_decode($id));
+       
+        $category->title = $request->title;
+        //add image 
+        if ($request->file('file')) {
+            $file = $request->file('file');
+            $imageFileType = $file->getClientOriginalExtension();
             $imageName = \Carbon\Carbon::now()->toDateString() . "-" . uniqid() . "." . $imageFileType;
             $dir = "/upload/category/";
             if (!Storage::disk('public')->exists($dir)) {
                 Storage::disk('public')->makeDirectory($dir);
             }
-            Storage::disk('public')->put($dir . $imageName, file_get_contents($request->category_image));
-            $category->images = $imageName;
+            Storage::disk('public')->put($dir . $imageName, file_get_contents($request->file));
+            $category->image = $imageName;
+        } else{
+
+            $category->image = $request->old_image;
         }
 
         $category->save();
-
-        if ($request->has('menu_id')) {
-            CategoryHasMenu::where('category_id', $request->category_id)->delete();
-            foreach($request->menu_id as $menu_id){
-                $category_has_menu = new CategoryHasMenu();
-                $category_has_menu->category_id = $request->category_id;
-                $category_has_menu->menu_id = $menu_id;
-                $category_has_menu->save();
-            }
-        }
-        return redirect()->route('category-list')->with('success', 'Changes saved Successfully!');
+        
+        return redirect()->route('category/index')->with('success', 'Category updated Successfully!');
     }
 
-    public function getCategory($id){
-        $category = Category::where('counter_id', $id)->get();
-        return $category;
+    public function delete($id){
+        $record = Category::where('id',base64_decode($id))->first();
+        $record->delete();
+        return redirect()->route('category/index')->with('success', 'Category deleted successfully!');
+    
+    }
+
+    public function view($id){
+        $record = Category::where('id',base64_decode($id))->first();
+
+        return view('admin-view.product_category.view',compact('record'));
     }
 }

@@ -8,12 +8,4 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
     use HasFactory;
-
-    public function Branch(){
-        return $this->belongsTo(Branch::class);
-    }
-
-    public function Counter(){
-        return $this->belongsTo(Counter::class);
-    }
 }
