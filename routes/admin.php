@@ -8,6 +8,10 @@ use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\admin\UsersController;
 use App\Http\Controllers\admin\BannerController;
 use App\Http\Controllers\admin\StaffController;
+use App\Http\Controllers\admin\ProductOptionController;
+use App\Http\Controllers\admin\ProductColorController;
+use App\Http\Controllers\admin\ProductColorVariantController;
+use App\Http\Controllers\admin\ProductSizeVariantController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -105,5 +109,50 @@ use App\Http\Controllers\admin\StaffController;
             Route::post('banner/update/{id}', [BannerController::class, 'update'])->name('banner/update');
             Route::get('banner/delete/{id}', [BannerController::class, 'delete'])->name('banner/delete');
             Route::get('banner/view/{id}', [BannerController::class, 'view'])->name('banner/view');
+
+             /**
+             * product option  Routes
+             */
+            Route::get('option/index', [ProductOptionController::class, 'index'])->name('option/index');
+            Route::get('option/create', [ProductOptionController::class, 'create'])->name('option/create');
+            Route::post('option/store', [ProductOptionController::class, 'store'])->name('option/store');
+            Route::get('option/edit/{id}', [ProductOptionController::class, 'edit'])->name('option/edit');
+            Route::post('option/update/{id}', [ProductOptionController::class, 'update'])->name('option/update');
+            Route::get('option/delete/{id}', [ProductOptionController::class, 'delete'])->name('option/delete');
+            Route::get('option/view/{id}', [ProductOptionController::class, 'view'])->name('option/view');
+             
+            /**
+             * product color  Routes
+             */
+            Route::get('color/index', [ProductColorController::class, 'index'])->name('color/index');
+            Route::get('color/create', [ProductColorController::class, 'create'])->name('color/create');
+            Route::post('color/store', [ProductColorController::class, 'store'])->name('color/store');
+            Route::get('color/edit/{id}', [ProductColorController::class, 'edit'])->name('color/edit');
+            Route::post('color/update/{id}', [ProductColorController::class, 'update'])->name('color/update');
+            Route::get('color/delete/{id}', [ProductColorController::class, 'delete'])->name('color/delete');
+            Route::get('color/view/{id}', [ProductColorController::class, 'view'])->name('color/view');
+
+             /**
+             * product color variant  Routes
+             */
+            Route::get('variantcolor/index', [ProductColorVariantController::class, 'index'])->name('variantcolor/index');
+            Route::get('variantcolor/create', [ProductColorVariantController::class, 'create'])->name('variantcolor/create');
+            Route::post('variantcolor/store', [ProductColorVariantController::class, 'store'])->name('variantcolor/store');
+            Route::get('variantcolor/edit/{id}', [ProductColorVariantController::class, 'edit'])->name('variantcolor/edit');
+            Route::post('variantcolor/update/{id}', [ProductColorVariantController::class, 'update'])->name('variantcolor/update');
+            Route::get('variantcolor/delete/{id}', [ProductColorVariantController::class, 'delete'])->name('variantcolor/delete');
+            Route::get('variantcolor/view/{id}', [ProductColorVariantController::class, 'view'])->name('variantcolor/view');
+
+             /**
+             * product size variant  Routes
+             */
+            Route::get('variantsize/index', [ProductSizeVariantController::class, 'index'])->name('variantsize/index');
+            Route::get('variantsize/create', [ProductSizeVariantController::class, 'create'])->name('variantsize/create');
+            Route::post('variantsize/store', [ProductSizeVariantController::class, 'store'])->name('variantsize/store');
+            Route::get('variantsize/edit/{id}', [ProductSizeVariantController::class, 'edit'])->name('variantsize/edit');
+            Route::post('variantsize/update/{id}', [ProductSizeVariantController::class, 'update'])->name('variantsize/update');
+            Route::get('variantsize/delete/{id}', [ProductSizeVariantController::class, 'delete'])->name('variantsize/delete');
+            Route::get('variantsize/view/{id}', [ProductSizeVariantController::class, 'view'])->name('variantsize/view');
+
     });
 

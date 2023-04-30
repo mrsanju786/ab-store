@@ -13,7 +13,7 @@
     <meta name="author" content="pixelstrap">
     <link rel="icon" href="{{asset('admin_site/assets/images/favicon.png')}}" type="image/x-icon">
     <link rel="shortcut icon" href="{{asset('admin_site/assets/images/favicon.png')}}" type="image/x-icon">
-    <title>Voxo - Dashboard</title>
+    <title>BB - Dashboard</title>
 
     <!-- Google font-->assets/images/favicon.png
     <link

@@ -18,7 +18,7 @@
                 <div class="Typeahead Typeahead--twitterUsers">
                     <div class="u-posRelative">
                         <input class="demo-input Typeahead-input form-control-plaintext w-100" type="text"
-                            placeholder="Search Voxo .." name="q" title="" autofocus>
+                            placeholder="Search BB .." name="q" title="" autofocus>
                         <i class="close-search" data-feather="x"></i>
                         <div class="spinner-border Typeahead-spinner" role="status">
                             <span class="sr-only">Loading...</span>
@@ -35,7 +35,7 @@
                         <span class="lnr lnr-magnifier"></span>
                     </span>
                 </li>
-                <li class="onhover-dropdown">
+                <!-- <li class="onhover-dropdown">
                     <div class="notification-box">
                         <span class="lnr lnr-alarm"></span>
                         <span class="badge rounded-pill badge-theme">0</span>
@@ -89,7 +89,7 @@
                             <a class="btn btn-primary" href="javascript:void(0)">View All</a>
                         </li>
                     </ul>
-                </li>
+                </li> -->
 
                 <li class="maximize">
                     <a class="text-dark" href="javascript:void(0)!" onclick="javascript:toggleFullScreen()">

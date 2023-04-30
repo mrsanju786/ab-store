@@ -57,7 +57,7 @@
                                         <div class="col-sm-10">
                                             <input class="form-control form-choose" type="file"
                                                  name ="file">
-                                                 <img width="155" src="{{asset('storage/app/public/upload/category')}}/{{$category->image}}">
+                                                 <img width="155" src="{{env('APP_URL')."category"}}/{{$category->image}}">
                                                  @if ($errors->has('file'))
                                                     <span class="error">{{ $errors->first('file') }}</span>
                                                 @endif 

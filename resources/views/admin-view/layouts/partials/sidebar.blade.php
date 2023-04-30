@@ -69,6 +69,34 @@
                         </ul>
                     </li>
 
+                    <!-- <li class="sidebar-list">
+                        <a class="sidebar-link sidebar-title" href="javascript:void(0)">
+                            <i data-feather="users"></i>
+                            <span>Product Option</span>
+                        </a>
+                        <ul class="sidebar-submenu">
+                            <li>
+                                <a href="{{url('admin/option/index')}}">All Product Option</a>
+                            </li>
+                            <li>
+                                <a href="{{url('admin/option/create')}}">Add New Option</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="sidebar-list">
+                        <a class="sidebar-link sidebar-title" href="javascript:void(0)">
+                            <i data-feather="users"></i>
+                            <span>Product Color</span>
+                        </a>
+                        <ul class="sidebar-submenu">
+                            <li>
+                                <a href="{{url('admin/color/index')}}">All Product Color</a>
+                            </li>
+                            <li>
+                                <a href="{{url('admin/color/create')}}">Add New Color</a>
+                            </li>
+                        </ul>
+                    </li> -->
                     <li class="sidebar-list">
                         <a class="sidebar-link sidebar-title" href="javascript:void(0)">
                             <i data-feather="users"></i>
@@ -80,6 +108,34 @@
                             </li>
                             <li>
                                 <a href="{{url('admin/product/create')}}">Add new product</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="sidebar-list">
+                        <a class="sidebar-link sidebar-title" href="javascript:void(0)">
+                            <i data-feather="users"></i>
+                            <span>Product Size Variant</span>
+                        </a>
+                        <ul class="sidebar-submenu">
+                            <li>
+                                <a href="{{url('admin/variantsize/index')}}">All Product Size</a>
+                            </li>
+                            <li>
+                                <a href="{{url('admin/variantsize/create')}}">Add New Size</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="sidebar-list">
+                        <a class="sidebar-link sidebar-title" href="javascript:void(0)">
+                            <i data-feather="users"></i>
+                            <span>Product Color Variant</span>
+                        </a>
+                        <ul class="sidebar-submenu">
+                            <li>
+                                <a href="{{url('admin/variantcolor/index')}}">All Product Color</a>
+                            </li>
+                            <li>
+                                <a href="{{url('admin/variantcolor/create')}}">Add New Color</a>
                             </li>
                         </ul>
                     </li>

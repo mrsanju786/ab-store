@@ -50,22 +50,26 @@
                             
                                 <div class="input">
                                     <label for="name">Username</label>
-                                    <input type="text" name="email" autocomplete="off" placeholder="Email"  id="name">
+                                    <input type="text" name="email" autocomplete="off" placeholder=""  id="name">
                                     <span class="spin"></span>
-                                    @if ($errors->has('email'))
-                                    <span class="error">{{ $errors->first('email') }}</span>
-                                    @endif
+                                    
                                 </div>
+                               
+                                    @if ($errors->has('email'))
+                                    <span class="text-danger">{{ $errors->first('email') }}</span>
+                                    @endif
 
                                 <div class="input">
                                     <label for="pass">Password</label>
-                                    <input type="password" placeholder="Password" name="password" autocomplete="off" id="pass">
+                                    <input type="password" placeholder="" name="password" autocomplete="off" id="pass">
                                     <span class="spin"></span>
-                                    @if ($errors->has('password'))
-                                        <span class="error">{{ $errors->first('password') }}</span>
-                                    @endif
+                                    
+                                    
                                 </div>
-
+                                <br>
+                                @if ($errors->has('password'))
+                                        <span class="text-danger">{{ $errors->first('password') }}</span>
+                                    @endif
                                 <!-- <a href="forgot-password.html" class="pass-forgot">Forgot your password?</a> -->
 
                                 <div class="button login">

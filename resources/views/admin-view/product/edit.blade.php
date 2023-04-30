@@ -27,7 +27,7 @@
                                 <div class="row">
                                     <div class="mb-4 row align-items-center">
                                         <label class="form-label-title col-sm-2 mb-0">
-                                            Title</label>
+                                            Name</label>
                                         <div class="col-sm-10">
                                             <input class="form-control" type="text"
                                                 placeholder="Product Name" name = "name" value="{{$product->name}}">
@@ -77,7 +77,7 @@
                                                 @endif    
                                         </div>
                                     </div>
-                                    <div class="mb-4 row align-items-center">
+                                    <!-- <div class="mb-4 row align-items-center">
                                         <label class="form-label-title col-sm-2 mb-0">
                                             Quantity</label>
                                         <div class="col-sm-10">
@@ -88,7 +88,7 @@
                                                     <span class="error">{{ $errors->first('quantity') }}</span>
                                                 @endif    
                                         </div>
-                                    </div>
+                                    </div> -->
                                     <div class="mb-4 row align-items-center">
                                         <label class="form-label-title col-sm-2 mb-0">
                                             Product Type</label>
@@ -121,7 +121,7 @@
                                             <label class="form-label-title col-sm-2 mb-0">Product
                                                 Description</label>
                                             <div class="col-sm-10">
-                                                <textarea name ="description" id="editor" placeholder ="Description">{{$product->quantity}}</textarea>
+                                                <textarea name ="description" id="editor" placeholder ="Description">{{$product->description}}</textarea>
                                                 @if ($errors->has('description'))
                                                     <span class="error">{{ $errors->first('description') }}</span>
                                                 @endif
@@ -146,8 +146,8 @@
                                             class="col-sm-2 col-form-label form-label-title">Images</label>
                                         <div class="col-sm-10">
                                             <input class="form-control form-choose" type="file"
-                                                 name ="file" multiple>
-                                                 <img width="155" src="{{asset('storage/app/public/upload/product')}}/{{$product->image}}">
+                                                 name ="image" >
+                                                 <img width="155" src="{{env('APP_URL')."product"}}/{{$product->image}}">
                                                  @if ($errors->has('file'))
                                                     <span class="error">{{ $errors->first('file') }}</span>
                                                 @endif 

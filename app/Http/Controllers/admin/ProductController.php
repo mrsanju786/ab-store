@@ -6,7 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Product;
-use App\Models\ProductGallery;
+use App\Models\ProductOption;
+use App\Models\ProductColor;
+use App\Models\ProductVariant;
+use App\Models\ProductStock;
 use Storage;
 use Str;
 
@@ -22,7 +25,9 @@ class ProductController extends Controller
     public function create()
     {
         $category = Category::orderBy('id','desc')->get();
-        return view('admin-view.product.create', compact('category'));
+        $productOption = ProductOption::orderBy('id','desc')->get();
+        $productColor = ProductColor::orderBy('id','desc')->get();
+        return view('admin-view.product.create', compact('category','productOption','productColor'));
     }
 
     public function store(Request $request){
@@ -30,10 +35,10 @@ class ProductController extends Controller
         $request->validate([
             'name'           => 'required',
             'category_id'    => 'required',
-            'price'          => 'required',
-            'discount'       => 'nullable',
+            // 'price'          => 'required',
+            // 'discount'       => 'nullable',
             'product_type'   => 'required',
-            'quantity'       => 'required',
+            // 'quantity'       => 'required',
             'image'          => 'nullable',
             'description'    => 'required',
           
@@ -42,27 +47,25 @@ class ProductController extends Controller
         $product = new Product();
         $product->name        = $request->name;
         $product->slug         = \Str::slug($request->name);
-        $product->price        = $request->price;
-        $product->discount     = $request->discount;
+        // $product->price        = $request->price;
+        // $product->discount     = $request->discount;
         $product->product_type = $request->product_type;
-        $product->quantity     = $request->quantity;
+       // $product->quantity     = $request->quantity;
         $product->description  = $request->description;
         $product->category_id  = $request->category_id;
       
         //add image 
+        //add image 
         if ($request->file('image')) {
-            foreach($request->file('image') as $image){
-                $file = $image;
-                $imageFileType = $file->getClientOriginalExtension();
-                $imageName = \Carbon\Carbon::now()->toDateString() . "-" . uniqid() . "." . $imageFileType;
-                $dir = "/upload/product/";
-                if (!Storage::disk('public')->exists($dir)) {
-                    Storage::disk('public')->makeDirectory($dir);
-                }
-                Storage::disk('public')->put($dir . $imageName, file_get_contents($request->image));
-                $product->image[] = json_encode($imageName,true);
+            $file = $request->file('image');
+            $imageFileType = $file->getClientOriginalExtension();
+            $imageName = \Carbon\Carbon::now()->toDateString() . "-" . uniqid() . "." . $imageFileType;
+            $dir = "/upload/product/";
+            if (!Storage::disk('public')->exists($dir)) {
+                Storage::disk('public')->makeDirectory($dir);
             }
-            
+            Storage::disk('public')->put($dir . $imageName, file_get_contents($request->image));
+            $product->image = $imageName;
         } else{
 
             $product->image = "blank.jpg";
@@ -78,8 +81,9 @@ class ProductController extends Controller
 
         $product = Product::find(base64_decode($id));
         $category   = Category::orderBy('id','desc')->get();
-      
-        return view('admin-view.product.edit', compact('category', 'product'));
+        $productOption = ProductOption::orderBy('id','desc')->get();
+        $productColor = ProductColor::orderBy('id','desc')->get();
+        return view('admin-view.product.edit', compact('category', 'product','productOption','productColor'));
     }
 
     public function update(Request $request,$id){
@@ -87,10 +91,10 @@ class ProductController extends Controller
         $request->validate([
             'name'           => 'required',
             'category_id'    => 'required',
-            'price'          => 'required',
-            'discount'       => 'nullable',
+            // 'price'          => 'required',
+            // 'discount'       => 'nullable',
             'product_type'   => 'required',
-            'quantity'       => 'required',
+            // 'quantity'       => 'required',
             'image'          => 'nullable',
             'description'    => 'required',
         ]);
@@ -98,31 +102,27 @@ class ProductController extends Controller
         $product = Product::find(base64_decode($id));
         $product->name = $request->name;
         $product->description = $request->description;
-        $product->price        = $request->price;
-        $product->discount     = $request->discount;
+        // $product->price        = $request->price;
+        // $product->discount     = $request->discount;
         $product->product_type = $request->product_type;
-        $product->quantity     = $request->quantity;
+      //  $product->quantity     = $request->quantity;
         $product->category_id = $request->category_id;
 
          //add image 
          if ($request->file('image')) {
-            foreach($request->file('image') as $image){
-                $file = $image;
-                $imageFileType = $file->getClientOriginalExtension();
-                $imageName = \Carbon\Carbon::now()->toDateString() . "-" . uniqid() . "." . $imageFileType;
-                $dir = "/upload/product/";
-                if (!Storage::disk('public')->exists($dir)) {
-                    Storage::disk('public')->makeDirectory($dir);
-                }
-                Storage::disk('public')->put($dir . $imageName, file_get_contents($request->image));
-                $product->image[] = json_encode($imageName,true);
-            }   
+            $file = $request->file('image');
+            $imageFileType = $file->getClientOriginalExtension();
+            $imageName = \Carbon\Carbon::now()->toDateString() . "-" . uniqid() . "." . $imageFileType;
+            $dir = "/upload/product/";
+            if (!Storage::disk('public')->exists($dir)) {
+                Storage::disk('public')->makeDirectory($dir);
+            }
+            Storage::disk('public')->put($dir . $imageName, file_get_contents($request->image));
+            $product->image = $imageName;
         } else{
 
             $product->image = $request->old_image;
         }
-
-        
         $product->save();
 
 

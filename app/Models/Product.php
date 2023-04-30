@@ -14,8 +14,5 @@ class Product extends Model
         return $this->belongsTo(Category::class);
     }
 
-    public function gallery_image()
-    {
-        return $this->belongsTo(ProductGallery::class,'id','product_id');
-    }
+
 }

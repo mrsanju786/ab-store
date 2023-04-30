@@ -21,8 +21,8 @@
                             
                                         <td>Image :
                                             @if(!empty($record->image))
-                                            <img src="{{asset('storage/upload/banner')}}/{{$record->image}}" class="img-fluid"
-                                                alt="">
+                                            <img src="{{env('APP_URL')."banner"}}/{{$record->image}}" class="img-fluid"
+                                                alt="" width="50px" height="50px">
                                             @else
                                             <img src="{{asset('admin_site/assets/images/profile/4.jpg')}}" class="img-fluid"
                                                 alt="">

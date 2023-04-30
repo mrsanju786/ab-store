@@ -32,7 +32,7 @@
                                     <tr>
                                         <td>
                                             @if(!empty($value->image))
-                                            <img src="{{asset('storage/upload/banner')}}/{{$value->image}}" class="img-fluid"
+                                            <img src="{{env('APP_URL')."banner"}}/{{$value->image}}" class="img-fluid"
                                                 alt="">
                                             @else
                                             <img src="{{asset('admin_site/assets/images/profile/4.jpg')}}" class="img-fluid"

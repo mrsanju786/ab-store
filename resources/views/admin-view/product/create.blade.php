@@ -27,7 +27,7 @@
                                 <div class="row">
                                     <div class="mb-4 row align-items-center">
                                         <label class="form-label-title col-sm-2 mb-0">
-                                            Title</label>
+                                            Name</label>
                                         <div class="col-sm-10">
                                             <input class="form-control" type="text"
                                                 placeholder="Product Name" name = "name" value="{{old('name')}}">
@@ -55,42 +55,6 @@
 
                                     <div class="mb-4 row align-items-center">
                                         <label class="form-label-title col-sm-2 mb-0">
-                                            Price</label>
-                                        <div class="col-sm-10">
-                                            <input class="form-control" type="text"
-                                                placeholder="Product Name" name = "price" value="{{old('price')}}">
-                                             
-                                                @if($errors->has('price'))
-                                                    <span class="error">{{ $errors->first('price') }}</span>
-                                                @endif    
-                                        </div>
-                                    </div>
-                                    <div class="mb-4 row align-items-center">
-                                        <label class="form-label-title col-sm-2 mb-0">
-                                            Discount</label>
-                                        <div class="col-sm-10">
-                                            <input class="form-control" type="text"
-                                                placeholder="Product Discount" name = "discount" value="{{old('discount')}}">
-                                             
-                                                @if ($errors->has('discount'))
-                                                    <span class="error">{{ $errors->first('discount') }}</span>
-                                                @endif    
-                                        </div>
-                                    </div>
-                                    <div class="mb-4 row align-items-center">
-                                        <label class="form-label-title col-sm-2 mb-0">
-                                            Quantity</label>
-                                        <div class="col-sm-10">
-                                            <input class="form-control" type="text"
-                                                placeholder="Product Quantity" name = "quantity" value="{{old('quantity')}}">
-                                             
-                                                @if ($errors->has('quantity'))
-                                                    <span class="error">{{ $errors->first('quantity') }}</span>
-                                                @endif    
-                                        </div>
-                                    </div>
-                                    <div class="mb-4 row align-items-center">
-                                        <label class="form-label-title col-sm-2 mb-0">
                                             Product Type</label>
                                         <div class="col-sm-10">
                                             <select class="js-example-basic-single w-100" name="product_type">
@@ -101,20 +65,6 @@
                                             </select>
                                         </div>
                                     </div>
-
-                                </div>
-                            <!-- </form> -->
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="card-header-2">
-                                <h5>Description</h5>
-                            </div>
-
-                            <!-- <form class="theme-form theme-form-2 mega-form"> -->
-                                <div class="row">
                                     <div class="col-12">
                                         <div class="row">
                                             <label class="form-label-title col-sm-2 mb-0">Product
@@ -145,7 +95,7 @@
                                             class="col-sm-2 col-form-label form-label-title">Images</label>
                                         <div class="col-sm-10">
                                             <input class="form-control form-choose" type="file"
-                                                 name ="file" multiple>
+                                                 name ="image" >
                                                  @if ($errors->has('file'))
                                                     <span class="error">{{ $errors->first('file') }}</span>
                                                 @endif 
