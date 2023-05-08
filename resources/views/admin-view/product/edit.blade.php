@@ -96,9 +96,10 @@
                                         <div class="col-sm-10">
                                             <select class="js-example-basic-single w-100" name="product_type">
                                                 <option >Select Type</option>
-                                                <option value="1" {{($product->product_type==1)? 'selected':''}}>Default Category</option>
-                                                <option value="2" {{($product->product_type==2)? 'selected':''}}>Featured Category</option>
-                                                <option value="3" {{($product->product_type==3)? 'selected':''}}>Hot Category</option>
+                                                <option value="1" {{($product->product_type==1)? 'selected':''}}>Default</option>
+                                                <option value="2" {{($product->product_type==2)? 'selected':''}}>Featured</option>
+                                                <option value="3" {{($product->product_type==3)? 'selected':''}}>Hot</option>
+                                                <option value="4" {{($product->product_type==4)? 'selected':''}}>New </option>
                                             </select>
                                         </div>
                                     </div>

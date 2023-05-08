@@ -270,8 +270,8 @@
          </div>
      </div>
      <!-- cart mini area end -->
-   
-       @include('frontend.layouts.header')
+     
+       @include('frontend.layouts.inner_header')
     
    
      <main>

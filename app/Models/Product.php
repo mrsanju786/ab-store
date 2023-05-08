@@ -14,5 +14,13 @@ class Product extends Model
         return $this->belongsTo(Category::class);
     }
 
+    public function ProductSize()
+    {
+        return $this->hasOne(ProductSizeVariant::class);
+    }
 
+    public function ProductColor()
+    {
+        return $this->hasOne(ProductColorVariant::class);
+    }
 }

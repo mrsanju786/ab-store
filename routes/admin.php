@@ -88,6 +88,8 @@ use App\Http\Controllers\admin\ProductSizeVariantController;
             Route::post('product/update/{id}', [ProductController::class, 'update'])->name('product/update');
             Route::get('product/delete/{id}', [ProductController::class, 'delete'])->name('product/delete');
             Route::get('product/view/{id}', [ProductController::class, 'view'])->name('product/view');
+            Route::get('product/active/{id}', [ProductController::class, 'active'])->name('product/active');
+            Route::get('product/inactive/{id}', [ProductController::class, 'inActive'])->name('product/inActive');
             /**
              * Category Routes
              */
@@ -98,6 +100,8 @@ use App\Http\Controllers\admin\ProductSizeVariantController;
             Route::post('category/update/{id}', [CategoryController::class, 'update'])->name('category/update');
             Route::get('category/delete/{id}', [CategoryController::class, 'delete'])->name('category/delete');
             Route::get('category/view/{id}', [CategoryController::class, 'view'])->name('category/view');
+            Route::get('category/active/{id}', [CategoryController::class, 'active'])->name('category/active');
+            Route::get('category/inactive/{id}', [CategoryController::class, 'inActive'])->name('category/inActive');
 
             /**
              * Banner Routes
@@ -109,6 +113,8 @@ use App\Http\Controllers\admin\ProductSizeVariantController;
             Route::post('banner/update/{id}', [BannerController::class, 'update'])->name('banner/update');
             Route::get('banner/delete/{id}', [BannerController::class, 'delete'])->name('banner/delete');
             Route::get('banner/view/{id}', [BannerController::class, 'view'])->name('banner/view');
+            Route::get('banner/active/{id}', [BannerController::class, 'active'])->name('banner/active');
+            Route::get('banner/inactive/{id}', [BannerController::class, 'inActive'])->name('banner/inActive');
 
              /**
              * product option  Routes
@@ -120,6 +126,8 @@ use App\Http\Controllers\admin\ProductSizeVariantController;
             Route::post('option/update/{id}', [ProductOptionController::class, 'update'])->name('option/update');
             Route::get('option/delete/{id}', [ProductOptionController::class, 'delete'])->name('option/delete');
             Route::get('option/view/{id}', [ProductOptionController::class, 'view'])->name('option/view');
+            Route::get('option/active/{id}', [ProductOptionController::class, 'active'])->name('option/active');
+            Route::get('option/inactive/{id}', [ProductOptionController::class, 'inActive'])->name('option/inActive');
              
             /**
              * product color  Routes
@@ -131,7 +139,8 @@ use App\Http\Controllers\admin\ProductSizeVariantController;
             Route::post('color/update/{id}', [ProductColorController::class, 'update'])->name('color/update');
             Route::get('color/delete/{id}', [ProductColorController::class, 'delete'])->name('color/delete');
             Route::get('color/view/{id}', [ProductColorController::class, 'view'])->name('color/view');
-
+            Route::get('color/active/{id}', [ProductColorController::class, 'active'])->name('color/active');
+            Route::get('color/inactive/{id}', [ProductColorController::class, 'inActive'])->name('color/inActive');
              /**
              * product color variant  Routes
              */
@@ -142,7 +151,8 @@ use App\Http\Controllers\admin\ProductSizeVariantController;
             Route::post('variantcolor/update/{id}', [ProductColorVariantController::class, 'update'])->name('variantcolor/update');
             Route::get('variantcolor/delete/{id}', [ProductColorVariantController::class, 'delete'])->name('variantcolor/delete');
             Route::get('variantcolor/view/{id}', [ProductColorVariantController::class, 'view'])->name('variantcolor/view');
-
+            Route::get('variantcolor/active/{id}', [ProductColorVariantController::class, 'active'])->name('variantcolor/active');
+            Route::get('variantcolor/inactive/{id}', [ProductColorVariantController::class, 'inActive'])->name('variantcolor/inActive');
              /**
              * product size variant  Routes
              */
@@ -153,6 +163,8 @@ use App\Http\Controllers\admin\ProductSizeVariantController;
             Route::post('variantsize/update/{id}', [ProductSizeVariantController::class, 'update'])->name('variantsize/update');
             Route::get('variantsize/delete/{id}', [ProductSizeVariantController::class, 'delete'])->name('variantsize/delete');
             Route::get('variantsize/view/{id}', [ProductSizeVariantController::class, 'view'])->name('variantsize/view');
+            Route::get('variantsize/active/{id}', [ProductSizeVariantController::class, 'active'])->name('variantsize/active');
+            Route::get('variantsize/inactive/{id}', [ProductSizeVariantController::class, 'inActive'])->name('variantsize/inActive');
 
     });
 

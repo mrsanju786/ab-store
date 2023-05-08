@@ -31,10 +31,10 @@ class ProductColorVariantController extends Controller
 
         $request->validate([
             'product_id'            => 'required',
-            'color_name'            => 'required|unique:product_color_variants,color_name',
-            'color_code'            => 'required|unique:product_color_variants,color_code',
+            'color_name'            => 'required',
+            'color_code'            => 'nullable',
             'file'                  => 'required|image|mimes:jpeg,png,jpg',
-            'extra_amount'          => 'required|numeric',
+            'extra_amount'          => 'nullable|numeric',
           
         ]);
 
@@ -77,9 +77,9 @@ class ProductColorVariantController extends Controller
         $request->validate([
             'product_id'            => 'required',
             'color_name'            => 'required',
-            'color_code'            => 'required',
-            'file'                  => 'nullableimage|mimes:jpeg,png,jpg',
-            'extra_amount'          => 'required|numeric',
+            'color_code'            => 'nullable',
+            'file'                  => 'nullable|image|mimes:jpeg,png,jpg',
+            'extra_amount'          => 'nullable|numeric',
         ]);
 
         $product = ProductColorVariant::find(base64_decode($id));
@@ -120,5 +120,15 @@ class ProductColorVariantController extends Controller
         $record = ProductColorVariant::with('category')->where('id',base64_decode($id))->first();
 
         return view('admin-view.product_color.view',compact('record'));
+    }
+
+    public function active($id){
+        $record = ProductColorVariant::where('id',base64_decode($id))->where('status',0)->update(['status'=>1]);
+        return redirect()->route('variantcolor/index')->with('success', 'Product Color activated successfully!');
+    }
+
+    public function inActive($id){
+        $record = ProductColorVariant::where('id',base64_decode($id))->where('status',1)->update(['status'=>0]);
+        return redirect()->route('variantcolor/index')->with('success', 'Product Color deactivated successfully!');
     }
 }

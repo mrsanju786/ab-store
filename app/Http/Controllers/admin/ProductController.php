@@ -142,4 +142,14 @@ class ProductController extends Controller
         return view('admin-view.product.view',compact('record'));
     }
 
+    public function active($id){
+        $record = Product::where('id',base64_decode($id))->where('status',0)->update(['status'=>1]);
+        return redirect()->route('product/index')->with('success', 'Product activated successfully!');
+    }
+
+    public function inActive($id){
+        $record = Product::where('id',base64_decode($id))->where('status',1)->update(['status'=>0]);
+        return redirect()->route('product/index')->with('success', 'Product deactivated successfully!');
+    }
+
 }

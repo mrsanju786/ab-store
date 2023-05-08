@@ -28,7 +28,7 @@ class ProductSizeVariantController extends Controller
 
         $request->validate([
             'product_id'    => 'required',
-            'size'          => 'required|unique:product_size_variants,size',
+            'size'          => 'required',
             'actual_price'  => 'required|numeric',
             'offer_price'   => 'required|numeric',
           
@@ -84,5 +84,15 @@ class ProductSizeVariantController extends Controller
         $record = ProductSizeVariant::where('id',base64_decode($id))->first();
 
         return view('admin-view.product_size.view',compact('record'));
+    }
+
+    public function active($id){
+        $record = ProductSizeVariant::where('id',base64_decode($id))->where('status',0)->update(['status'=>1]);
+        return redirect()->route('variantsize/index')->with('success', 'Product Size activated successfully!');
+    }
+
+    public function inActive($id){
+        $record = ProductSizeVariant::where('id',base64_decode($id))->where('status',1)->update(['status'=>0]);
+        return redirect()->route('variantsize/index')->with('success', 'Product Size deactivated successfully!');
     }
 }

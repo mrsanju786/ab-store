@@ -7,7 +7,7 @@
                <div class="container">
                   <div class="row align-items-center">
                      <div class="col-md-6">
-                        <div class="tp-header-welcome d-flex align-items-center">
+                        <!-- <div class="tp-header-welcome d-flex align-items-center">
                            <span>
                               <svg width="22" height="19" viewBox="0 0 22 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                                  <path d="M14.6364 1H1V12.8182H14.6364V1Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -17,14 +17,14 @@
                               </svg>                                 
                            </span>
                            <p>FREE Express Shipping On Orders $570+</p>
-                        </div>
+                        </div> -->
                      </div>
                      <div class="col-md-6">
                         <div class="tp-header-top-right d-flex align-items-center justify-content-end">
                            <div class="tp-header-top-menu d-flex align-items-center justify-content-end">
                               <div class="tp-header-top-menu-item tp-header-lang">
                                  <span class="tp-header-lang-toggle" id="tp-header-lang-toggle">English</span>
-                                 <ul>
+                                 <!-- <ul>
                                     <li>
                                        <a href="#">Spanish</a>
                                     </li>
@@ -34,9 +34,9 @@
                                     <li>
                                        <a href="#">Portuguese</a>
                                     </li>
-                                 </ul>
+                                 </ul> -->
                               </div>
-                              <div class="tp-header-top-menu-item tp-header-currency">
+                              <!-- <div class="tp-header-top-menu-item tp-header-currency">
                                  <span class="tp-header-currency-toggle" id="tp-header-currency-toggle">USD</span>
                                  <ul>
                                     <li>
@@ -52,24 +52,31 @@
                                        <a href="#">KWD</a>
                                     </li>
                                  </ul>
-                              </div>
+                              </div> -->
+                              @if(Auth::check())
                               <div class="tp-header-top-menu-item tp-header-setting">
                                  <span class="tp-header-setting-toggle" id="tp-header-setting-toggle">Setting</span>
                                  <ul>
                                     <li>
-                                       <a href="profile.html">My Profile</a>
+                                       <a href="{{url('/profile')}}">My Profile</a>
                                     </li>
                                     <li>
-                                       <a href="wishlist.html">Wishlist</a>
+                                       <a href="{{url('/home')}}">Wishlist</a>
                                     </li>
                                     <li>
-                                       <a href="cart.html">Cart</a>
+                                       <a href="{{url('/home')}}">Cart</a>
                                     </li>
                                     <li>
-                                       <a href="login.html">Logout</a>
+                                       <a href="{{url('/logout')}}">Logout</a>
                                     </li>
                                  </ul>
                               </div>
+                              @else
+                              <div class="tp-header-top-menu-item tp-header-setting">
+                                 <span class="tp-header-setting-toggle" id="tp-header-setting-toggle">Setting</span>
+                                 
+                              </div>
+                              @endif
                            </div>
                         </div>
                      </div>
@@ -119,7 +126,23 @@
                      <div class="col-xl-4 col-lg-3 col-md-8 col-6">
                         <div class="tp-header-main-right d-flex align-items-center justify-content-end">
                            <div class="tp-header-login d-none d-lg-block">
-                              <a href="profile.html" class="d-flex align-items-center">
+                              @if(Auth::check())
+                              <a href="{{url('/profile')}}" class="d-flex align-items-center"> 
+                                 <div class="tp-header-login-icon">
+                                    <span>
+                                       <svg width="17" height="21" viewBox="0 0 17 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                          <circle cx="8.57894" cy="5.77803" r="4.77803" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                          <path fill-rule="evenodd" clip-rule="evenodd" d="M1.00002 17.2014C0.998732 16.8655 1.07385 16.5337 1.2197 16.2311C1.67736 15.3158 2.96798 14.8307 4.03892 14.611C4.81128 14.4462 5.59431 14.336 6.38217 14.2815C7.84084 14.1533 9.30793 14.1533 10.7666 14.2815C11.5544 14.3367 12.3374 14.4468 13.1099 14.611C14.1808 14.8307 15.4714 15.27 15.9291 16.2311C16.2224 16.8479 16.2224 17.564 15.9291 18.1808C15.4714 19.1419 14.1808 19.5812 13.1099 19.7918C12.3384 19.9634 11.5551 20.0766 10.7666 20.1304C9.57937 20.2311 8.38659 20.2494 7.19681 20.1854C6.92221 20.1854 6.65677 20.1854 6.38217 20.1304C5.59663 20.0773 4.81632 19.9641 4.04807 19.7918C2.96798 19.5812 1.68652 19.1419 1.2197 18.1808C1.0746 17.8747 0.999552 17.5401 1.00002 17.2014Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                       </svg>                                       
+                                    </span>
+                                 </div>
+                                 <div class="tp-header-login-content d-none d-xl-block">
+                                    <span>Hello, {{Auth::user()->first_name.' '.Auth::user()->last_name}}</span>
+                                    <!-- <h5 class="tp-header-login-title">Your Account</h5> -->
+                                 </div>
+                              </a>
+                              @else
+                              <a href="{{url('/login')}}" class="d-flex align-items-center"> 
                                  <div class="tp-header-login-icon">
                                     <span>
                                        <svg width="17" height="21" viewBox="0 0 17 21" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -133,6 +156,7 @@
                                     <h5 class="tp-header-login-title">Your Account</h5>
                                  </div>
                               </a>
+                              @endif
                            </div>
                            <div class="tp-header-action d-flex align-items-center ml-50">
                               <div class="tp-header-action-item d-none d-lg-block">
@@ -579,7 +603,7 @@
 
                                        </ul>
                                     </li>
-                                    <li><a href="shop-category.html">Categories</a></li>
+                                    <li><a href="{{url('/shop-category')}}">Categories</a></li>
                                     <li class="has-dropdown">
                                        <a href="blog.html">Blog</a>
                                        <ul class="tp-submenu">
@@ -828,7 +852,7 @@
 
                                  </ul>
                               </li>
-                              <li><a href="shop-category.html">Categories</a></li>
+                              <li><a href="{{url('/shop-category')}}">Categories</a></li>
                               <li class="has-dropdown">
                                  <a href="blog.html">Blog</a>
                                  <ul class="tp-submenu">
