@@ -84,7 +84,9 @@
                      <div class="col-xl-2 col-lg-2 col-md-4 col-6">
                         <div class="logo">
                            <a href="index.html">
-                              <img src="{{asset('frontend/assets/img/logo/logo.svg')}}" alt="logo">
+                              {{-- <img src="{{asset('frontend/assets/img/logo/logo.svg')}}" alt="logo"> --}}
+
+                              <b>AB-MOBILE</b>
                            </a>
                         </div>
                      </div>
@@ -627,7 +629,8 @@
                   <div class="col-xl-3 col-lg-3 col-md-3 col-6">
                      <div class="logo">
                         <a href="index.html">
-                           <img src="{{asset('frontend/assets/img/logo/logo.svg')}}" alt="logo">
+                           {{-- <img src="{{asset('frontend/assets/img/logo/logo.svg')}}" alt="logo"> --}}
+                           <b>AB-MOBILE</b>
                         </a>
                      </div>
                   </div>

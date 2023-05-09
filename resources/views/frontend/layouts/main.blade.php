@@ -3,7 +3,7 @@
    <head>
       <meta charset="utf-8">
       <meta http-equiv="x-ua-compatible" content="ie=edge">
-      <title>Shofy - Multipurpose eCommerce HTML Template</title>
+      <title>AB-MOBILE - ITNA SASTA KI DIL LAL CHAYE</title>
       <meta name="description" content="">
       <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -37,7 +37,7 @@
                             </div>
                             <img src="{{asset('frontend/assets/img/logo/preloader/preloader-icon.svg')}}" alt="">
                         </div>
-                        <h3 class="tp-preloader-title">Shofy</h3>
+                        <h6 style="size: 16px" class="tp-preloader-title">AB-MOBILE</h6>
                         <p class="tp-preloader-subtitle">Loading</p>
                     </div>
                     </div>
