@@ -71,4 +71,14 @@ class ProductColorController extends Controller
 
         return view('admin-view.product_color.view',compact('record'));
     }
+
+    public function active($id){
+        $record = ProductColor::where('id',base64_decode($id))->where('status',0)->update(['status'=>1]);
+        return redirect()->route('color/index')->with('success', 'Color activated successfully!');
+    }
+
+    public function inActive($id){
+        $record = ProductColor::where('id',base64_decode($id))->where('status',1)->update(['status'=>0]);
+        return redirect()->route('color/index')->with('success', 'Color deactivated successfully!');
+    }
 }

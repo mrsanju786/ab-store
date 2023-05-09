@@ -59,9 +59,10 @@
                                         <div class="col-sm-10">
                                             <select class="js-example-basic-single w-100" name="product_type">
                                                 <option >Select Type</option>
-                                                <option value="1" >Default Category</option>
-                                                <option value="2" >Featured Category</option>
-                                                <option value="3" >Hot Category</option>
+                                                <option value="1" >Default</option>
+                                                <option value="2" >Featured</option>
+                                                <option value="3" >Hot</option>
+                                                <option value="4" >New </option>
                                             </select>
                                         </div>
                                     </div>

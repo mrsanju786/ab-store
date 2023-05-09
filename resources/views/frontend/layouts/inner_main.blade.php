@@ -3,7 +3,7 @@
    <head>
       <meta charset="utf-8">
       <meta http-equiv="x-ua-compatible" content="ie=edge">
-      <title>AB-MOBILE - ITNA SASTA KI DIL LAL CHAYE</title>
+      <title>BB</title>
       <meta name="description" content="">
       <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -37,7 +37,7 @@
                             </div>
                             <img src="{{asset('frontend/assets/img/logo/preloader/preloader-icon.svg')}}" alt="">
                         </div>
-                        <h6 style="size: 16px" class="tp-preloader-title">AB-MOBILE</h6>
+                        <h3 class="tp-preloader-title">Shofy</h3>
                         <p class="tp-preloader-subtitle">Loading</p>
                     </div>
                     </div>
@@ -270,8 +270,8 @@
          </div>
      </div>
      <!-- cart mini area end -->
-   
-       @include('frontend.layouts.header')
+     
+       @include('frontend.layouts.inner_header')
     
    
      <main>

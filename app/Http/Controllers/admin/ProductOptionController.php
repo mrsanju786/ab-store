@@ -71,4 +71,14 @@ class ProductOptionController extends Controller
 
         return view('admin-view.product_option.view',compact('record'));
     }
+
+    public function active($id){
+        $record = ProductOption::where('id',base64_decode($id))->where('status',0)->update(['status'=>1]);
+        return redirect()->route('option/index')->with('success', 'Product Option activated successfully!');
+    }
+
+    public function inActive($id){
+        $record = ProductOption::where('id',base64_decode($id))->where('status',1)->update(['status'=>0]);
+        return redirect()->route('option/index')->with('success', 'Product Option deactivated successfully!');
+    }
 }

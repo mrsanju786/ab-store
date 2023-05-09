@@ -45,14 +45,24 @@
                                             @if($value->producy_type==1)
                                               {{'Default'}}
                                             @elseif($value->producy_type==2)
-                                              {{'Featured Category'}}
+                                              {{'Featured'}}
+                                            @elseif($value->producy_type==3)
+                                              {{'Hot'}}
                                             @else
-                                            {{'Hot Category'}}
+                                              {{'New '}}
                                             @endif
                                            
                                         </td>
                                         <td>
-                                            <a href="javascript:void(0)">{{$value->status==1 ? "Active" : "InActive"}}</a>
+                                        @if($value->status==1)
+                                            <div >
+                                              <a href="{{url('admin/product/inactive')}}/{{base64_encode($value->id)}}" class="btn btn-success">Active</a>
+                                            </div>
+                                            @else
+                                            <div >
+                                              <a href="{{url('admin/product/active')}}/{{base64_encode($value->id)}}"  class="btn btn-danger">InActive</a>
+                                            </div>
+                                            @endif
                                         </td>
 
                                         <td>

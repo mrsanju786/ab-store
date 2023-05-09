@@ -45,7 +45,16 @@
                                         </td>
 
                                         <td>
-                                            <a href="javascript:void(0)">{{$value->status==1 ? "Active" : "InActive"}}</a>
+                                            @if($value->status==1)
+                                            <div >
+                                              <a href="{{url('admin/category/inactive')}}/{{base64_encode($value->id)}}" class="btn btn-success">Active</a>
+                                            </div>
+                                            @else
+                                            <div >
+                                              <a href="{{url('admin/category/active')}}/{{base64_encode($value->id)}}"  class="btn btn-danger">InActive</a>
+                                            </div>
+                                            @endif
+                                            
                                         </td>
 
                                         <td>

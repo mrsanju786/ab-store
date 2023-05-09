@@ -27,11 +27,8 @@ class BannerController extends Controller
 
         $request->validate([
             'title'       => 'required',
-            'file'       => 'required',
+            'file'       => 'required|image|mimes:jpeg,jpg,png',
             'description' => 'required',
-           // 'status'      => 'required',
-            // 'category_id'    => 'required',
-            // 'category_id'    => 'required',
           
         ]);
 
@@ -73,11 +70,9 @@ class BannerController extends Controller
 
         $request->validate([
             'title'       => 'required',
-            'file'       => 'nullable',
+            'file'       => 'required|image|mimes:jpeg,jpg,png',
             'description' => 'required',
-            //'status'      => 'required',
-            // 'category_id'    => 'required',
-            // 'product_id'     => 'nullable'
+           
         ]);
 
         $banner = Banner::find(base64_decode($id));
@@ -118,5 +113,15 @@ class BannerController extends Controller
         $record = Banner::where('id',base64_decode($id))->first();
 
         return view('admin-view.banner.view',compact('record'));
+    }
+
+    public function active($id){
+        $record = Banner::where('id',base64_decode($id))->where('status',0)->update(['status'=>1]);
+        return redirect()->route('banner/index')->with('success', 'Banner activated successfully!');
+    }
+
+    public function inActive($id){
+        $record = Banner::where('id',base64_decode($id))->where('status',1)->update(['status'=>0]);
+        return redirect()->route('banner/index')->with('success', 'Banner deactivated successfully!');
     }
 }

@@ -106,4 +106,14 @@ class CategoryController extends Controller
 
         return view('admin-view.product_category.view',compact('record'));
     }
+
+    public function active($id){
+        $record = Category::where('id',base64_decode($id))->where('status',0)->update(['status'=>1]);
+        return redirect()->route('category/index')->with('success', 'Category activated successfully!');
+    }
+
+    public function inActive($id){
+        $record = Category::where('id',base64_decode($id))->where('status',1)->update(['status'=>0]);
+        return redirect()->route('category/index')->with('success', 'Category deactivated successfully!');
+    }
 }
