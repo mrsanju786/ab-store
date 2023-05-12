@@ -64,7 +64,7 @@ class LoginController extends Controller
 
     public function profile(){
         $user = User::where('id',Auth::user()->id)->first();
-        return view('frontend.profile',compact($user));
+        return view('frontend.profile',compact('user'));
     }
     
     public function logout() {
