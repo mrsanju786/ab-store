@@ -19,40 +19,14 @@
                            <p>FREE Express Shipping On Orders $570+</p>
                         </div> -->
                      </div>
-                     <div class="col-md-6">
+                     <!-- <div class="col-md-6">
                         <div class="tp-header-top-right d-flex align-items-center justify-content-end">
                            <div class="tp-header-top-menu d-flex align-items-center justify-content-end">
                               <div class="tp-header-top-menu-item tp-header-lang">
                                  <span class="tp-header-lang-toggle" id="tp-header-lang-toggle">English</span>
-                                 <!-- <ul>
-                                    <li>
-                                       <a href="#">Spanish</a>
-                                    </li>
-                                    <li>
-                                       <a href="#">Russian</a>
-                                    </li>
-                                    <li>
-                                       <a href="#">Portuguese</a>
-                                    </li>
-                                 </ul> -->
+                                
                               </div>
-                              <!-- <div class="tp-header-top-menu-item tp-header-currency">
-                                 <span class="tp-header-currency-toggle" id="tp-header-currency-toggle">USD</span>
-                                 <ul>
-                                    <li>
-                                       <a href="#">EUR</a>
-                                    </li>
-                                    <li>
-                                       <a href="#">CHF</a>
-                                    </li>
-                                    <li>
-                                       <a href="#">GBP</a>
-                                    </li>
-                                    <li>
-                                       <a href="#">KWD</a>
-                                    </li>
-                                 </ul>
-                              </div> -->
+                              
                               @if(Auth::check())
                               <div class="tp-header-top-menu-item tp-header-setting">
                                  <span class="tp-header-setting-toggle" id="tp-header-setting-toggle">Setting</span>
@@ -79,7 +53,7 @@
                               @endif
                            </div>
                         </div>
-                     </div>
+                     </div> -->
                   </div>
                </div>
             </div>
@@ -90,7 +64,7 @@
                   <div class="row align-items-center">
                      <div class="col-xl-2 col-lg-2 col-md-4 col-6">
                         <div class="logo">
-                           <a href="index.html">
+                           <a href="{{url('/home')}}">
                               {{-- <img src="{{asset('frontend/assets/img/logo/logo.svg')}}" alt="logo"> --}}
 
                               <b>AB-MOBILE</b>
@@ -104,13 +78,18 @@
                                  <div class="tp-header-search-box">
                                     <input type="text" placeholder="Search for Products...">
                                  </div>
+                                 <?php $categoryList = DB::table('categories')->where('status',1)->orderBy('id','desc')->get(); ?>
                                  <div class="tp-header-search-category">
                                     <select>
                                        <option>Select Category</option>
-                                       <option>Mobile</option>
-                                       <option>Digital Watch</option>
+                                       @if(!empty($categoryList))
+                                       @foreach($categoryList as $value)
+                                       <option value="{{$value->id}}">{{$value->title ?? "-"}}</option>
+                                       @endforeach
+                                       @endif
+                                       <!-- <option>Digital Watch</option>
                                        <option>Computer</option>
-                                       <option>Watch</option>
+                                       <option>Watch</option> -->
                                     </select>
                                  </div>
                                  <div class="tp-header-search-btn">
@@ -161,7 +140,7 @@
                               @endif
                            </div>
                            <div class="tp-header-action d-flex align-items-center ml-50">
-                              <div class="tp-header-action-item d-none d-lg-block">
+                              <!-- <div class="tp-header-action-item d-none d-lg-block">
                                  <a href="compare.html"  class="tp-header-action-btn">
                                     <svg width="20" height="19" viewBox="0 0 20 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                                        <path d="M14.8396 17.3319V3.71411" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -170,7 +149,7 @@
                                        <path d="M0.833496 5.09667L4.91127 1L8.98905 5.09667" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                     </svg>                                       
                                  </a>
-                              </div>
+                              </div> -->
                               <div class="tp-header-action-item d-none d-lg-block">
                                  <a href="wishlist.html" class="tp-header-action-btn">
                                     <svg width="22" height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -223,7 +202,7 @@
                                  </span>     
                                  All Departments                            
                               </button>
-                              <nav class="tp-category-menu-content">
+                              <!-- <nav class="tp-category-menu-content">
                                <ul>
                                    <li>
                                       <a href="shop.html">
@@ -405,7 +384,7 @@
                                          Sports</a>
                                    </li>
                                 </ul>
-                              </nav>
+                              </nav> -->
                            </div>
                         </div>
                         <div class="col-xl-6 col-lg-6">
@@ -413,8 +392,8 @@
                               <nav class="tp-main-menu-content">
                                  <ul>
                                     <li class="has-dropdown has-mega-menu">
-                                       <a href="index.html">Home</a>
-                                       <div class="home-menu tp-submenu tp-mega-menu">
+                                       <a href="{{url('/home')}}">Home</a>
+                                       <!-- <div class="home-menu tp-submenu tp-mega-menu">
                                           <div class="row row-cols-1 row-cols-lg-4 row-cols-xl-5">
                                              <div class="col">
                                                 <div class="home-menu-item ">
@@ -477,11 +456,11 @@
                                                 </div>
                                              </div>
                                           </div>
-                                       </div>
+                                       </div> -->
                                     </li>
                                     <li  class="has-dropdown has-mega-menu">
-                                       <a href="shop.html">Shop</a>
-                                       <div class="shop-mega-menu tp-submenu tp-mega-menu">
+                                       <a href="{{url('/products')}}">Shop</a>
+                                       <!-- <div class="shop-mega-menu tp-submenu tp-mega-menu">
                                           <div class="row">
                                              <div class="col-lg-2">
                                                 <div class="shop-mega-menu-list">
@@ -542,13 +521,13 @@
                                                 </div>
                                              </div>
                                           </div>
-                                       </div>
+                                       </div> -->
                                    </li>
-                                    <li class="has-dropdown has-mega-menu ">
+                                    <!-- <li class="has-dropdown has-mega-menu ">
                                        
                                        <a href="shop.html">Products</a>
                                        <ul class="tp-submenu tp-mega-menu mega-menu-style-2">
-                                          <!-- first col -->
+                                        
                                           <li class="has-dropdown">
                                              <a href="shop.html" class="mega-menu-title">Shop Page</a>
                                              <ul class="tp-submenu">
@@ -561,7 +540,7 @@
                                                 <li><a href="product-details-progress.html">Product Details Progress</a></li>
                                              </ul>
                                           </li>
-                                          <!-- third col -->
+                                         
                                           <li  class="has-dropdown">
                                              <a href="product-details.html" class="mega-menu-title">Products</a>
                                              <ul class="tp-submenu">
@@ -576,7 +555,7 @@
                                                 <li><a href="product-details-slider.html">With Slider</a></li>
                                              </ul>
                                           </li>
-                                          <!-- third col -->
+                                         
                                           <li  class="has-dropdown">
                                              <a href="shop.html" class="mega-menu-title">eCommerce</a>
                                              <ul class="tp-submenu">
@@ -589,7 +568,7 @@
                                              </ul>
                                           </li>
 
-                                          <!-- second col -->
+                                         
                                           <li  class="has-dropdown">
                                              <a href="shop.html" class="mega-menu-title">More Pages</a>
                                              <ul class="tp-submenu">
@@ -604,9 +583,20 @@
                                           </li>
 
                                        </ul>
-                                    </li>
-                                    <li><a href="{{url('/shop-category')}}">Categories</a></li>
+                                    </li> -->
+                                    <!-- <li><a href="{{url('/shop-category')}}">Categories</a></li> -->
                                     <li class="has-dropdown">
+                                       <a href="javascript:;">Categories</a>
+                                       <ul class="tp-submenu">
+                                          @if(!empty($categoryList))
+                                          @foreach($categoryList as $value)
+                                          <li><a href="{{url('/shop-category')}}/{{base64_encode($value->id)}}">{{$value->title ?? "-"}}</a></li>
+                                          @endforeach
+                                          @endif
+                                         
+                                       </ul>
+                                    </li>
+                                    <!-- <li class="has-dropdown">
                                        <a href="blog.html">Blog</a>
                                        <ul class="tp-submenu">
                                           <li><a href="blog.html">Blog Standard</a></li>
@@ -615,8 +605,8 @@
                                           <li><a href="blog-details-2.html">Blog Details Full Width</a></li>
                                           <li><a href="blog-details.html">Blog Details</a></li>
                                        </ul>
-                                    </li>
-                                    <li><a href="contact.html">Contact</a></li>
+                                    </li> -->
+                                    <li><a href="{{url('/contact-us')}}">Contact</a></li>
                                  </ul>
                               </nav>
                            </div>
@@ -634,7 +624,7 @@
                               </div>
                               <div class="tp-header-contact-content">
                                  <h5>Hotline:</h5>
-                                 <p><a href="tel:402-763-282-46">+(402) 763 282 46</a></p>
+                                 <p><a href="tel:+(91) 8238899162">+(91) 8238899162</a></p>
                               </div>
                            </div>
                         </div>
@@ -652,7 +642,7 @@
                <div class="row align-items-center">
                   <div class="col-xl-3 col-lg-3 col-md-3 col-6">
                      <div class="logo">
-                        <a href="index.html">
+                        <a href="{{url('/home')}}">
                            {{-- <img src="{{asset('frontend/assets/img/logo/logo.svg')}}" alt="logo"> --}}
                            <b>AB-MOBILE</b>
                         </a>
@@ -663,8 +653,8 @@
                         <nav id="mobile-menu"> 
                            <ul>
                               <li class="has-dropdown has-mega-menu">
-                                 <a href="index.html">Home</a>
-                                 <div class="home-menu tp-submenu tp-mega-menu">
+                                 <a href="{{url('/home')}}">Home</a>
+                                 <!-- <div class="home-menu tp-submenu tp-mega-menu">
                                     <div class="row row-cols-1 row-cols-lg-4 row-cols-xl-5">
                                        <div class="col">
                                           <div class="home-menu-item ">
@@ -727,11 +717,11 @@
                                           </div>
                                        </div>
                                     </div>
-                                 </div>
+                                 </div> -->
                               </li>
                               <li  class="has-dropdown has-mega-menu">
-                                 <a href="shop.html">Shop</a>
-                                 <div class="shop-mega-menu tp-submenu tp-mega-menu">
+                                 <a href="{{url('/products')}}">Shop</a>
+                                 <!-- <div class="shop-mega-menu tp-submenu tp-mega-menu">
                                     <div class="row">
                                        <div class="col-lg-2">
                                           <div class="shop-mega-menu-list">
@@ -792,71 +782,22 @@
                                           </div>
                                        </div>
                                     </div>
-                                 </div>
+                                 </div> -->
                              </li>
-                              <li class="has-dropdown has-mega-menu ">
-                                 
-                                 <a href="shop.html">Products</a>
-                                 <ul class="tp-submenu tp-mega-menu mega-menu-style-2">
-                                    <!-- first col -->
-                                    <li class="has-dropdown">
-                                       <a href="shop.html" class="mega-menu-title">Shop Page</a>
-                                       <ul class="tp-submenu">
-                                          <li><a href="shop-category.html">Only Categories</a></li>
-                                          <li><a href="shop-filter-offcanvas.html">Shop Grid</a></li>
-                                          <li><a href="shop.html">Shop Grid with Sideber</a></li>
-                                          <li><a href="shop-list.html">Shop List</a></li>
-                                          <li><a href="shop-category.html">Categories</a></li>
-                                          <li><a href="product-details.html">Product Details</a></li>
-                                          <li><a href="product-details-progress.html">Product Details Progress</a></li>
-                                       </ul>
-                                    </li>
-                                    <!-- third col -->
-                                    <li  class="has-dropdown">
-                                       <a href="product-details.html" class="mega-menu-title">Products</a>
-                                       <ul class="tp-submenu">
-                                          
-                                          <li><a href="product-details.html">Product Simple</a></li>
-                                          <li><a href="product-details-video.html">With Video</a></li>
-                                          <li><a href="product-details-countdown.html">With Countdown Timer</a></li>
-                                          <li><a href="product-details-presentation.html">Product Presentation</a></li>
-                                          <li><a href="product-details-swatches.html">Variations Swatches</a></li>
-                                          <li><a href="product-details-list.html">List View</a></li>
-                                          <li><a href="product-details-gallery.html">Details Gallery</a></li>
-                                          <li><a href="product-details-slider.html">With Slider</a></li>
-                                       </ul>
-                                    </li>
-                                    <!-- third col -->
-                                    <li  class="has-dropdown">
-                                       <a href="shop.html" class="mega-menu-title">eCommerce</a>
-                                       <ul class="tp-submenu">
-                                          <li><a href="cart.html">Shopping Cart</a></li>
-                                          <li><a href="order.html">Track Your Order</a></li>
-                                          <li><a href="compare.html">Compare</a></li>
-                                          <li><a href="wishlist.html">Wishlist</a></li>
-                                          <li><a href="checkout.html">Checkout</a></li>
-                                          <li><a href="profile.html">My account</a></li>
-                                       </ul>
-                                    </li>
-
-                                    <!-- second col -->
-                                    <li  class="has-dropdown">
-                                       <a href="shop.html" class="mega-menu-title">More Pages</a>
-                                       <ul class="tp-submenu">
-                                          
-                                         
-                                          <li><a href="about.html">About</a></li>
-                                          <li><a href="login.html">Login</a></li>
-                                          <li><a href="register.html">Register</a></li>
-                                          <li><a href="forgot.html">Forgot Password</a></li>
-                                          <li><a href="404.html">404 Error</a></li>
-                                       </ul>
-                                    </li>
-
+                             
+                             <li class="has-dropdown">
+                                 <a href="javascript:;">Categories</a>
+                                 <?php $categoryList = DB::table('categories')->where('status',1)->orderBy('id','desc')->get(); ?>
+                                 <ul class="tp-submenu">
+                                    @if(!empty($categoryList))
+                                    @foreach($categoryList as $value)
+                                    <li><a href="{{url('/shop-category')}}/{{base64_encode($value->id)}}">{{$value->title ?? "-"}}</a></li>
+                                    @endforeach
+                                    @endif
+                                    
                                  </ul>
                               </li>
-                              <li><a href="{{url('/shop-category')}}">Categories</a></li>
-                              <li class="has-dropdown">
+                              <!-- <li class="has-dropdown">
                                  <a href="blog.html">Blog</a>
                                  <ul class="tp-submenu">
                                     <li><a href="blog.html">Blog Standard</a></li>
@@ -865,8 +806,8 @@
                                     <li><a href="blog-details-2.html">Blog Details Full Width</a></li>
                                     <li><a href="blog-details.html">Blog Details</a></li>
                                  </ul>
-                              </li>
-                              <li><a href="contact.html">Contact</a></li>
+                              </li> -->
+                              <li><a href="{{url('/contact-us')}}">Contact</a></li>
                            </ul>
                         </nav>
                      </div>

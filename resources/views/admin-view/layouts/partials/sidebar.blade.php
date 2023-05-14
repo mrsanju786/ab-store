@@ -177,6 +177,34 @@
                         </ul>
                     </li>
 
+                    <li class="sidebar-list">
+                        <a class="sidebar-link sidebar-title" href="javascript:void(0)">
+                            <i data-feather="archive"></i>
+                            <span>Contact Detail</span>
+                        </a>
+                        <ul class="sidebar-submenu">
+                            <li>
+                                <a href="{{url('admin/contact/index')}}">Contact List</a>
+                            </li>
+
+                            
+                        </ul>
+                    </li>
+
+                    <li class="sidebar-list">
+                        <a class="sidebar-link sidebar-title" href="javascript:void(0)">
+                            <i data-feather="archive"></i>
+                            <span>Subscribed Newsletter</span>
+                        </a>
+                        <ul class="sidebar-submenu">
+                            <li>
+                                <a href="{{url('admin/subscribe/index')}}">Subscribed User List</a>
+                            </li>
+
+                            
+                        </ul>
+                    </li>
+
                     <!-- <li class="sidebar-list">
                         <a class="linear-icon-link sidebar-link sidebar-title" href="javascript:void(0)">
                             <i data-feather="users"></i>

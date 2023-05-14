@@ -14,7 +14,7 @@
         </div>
 
         <form class="form-inline search-full col" action="javascript:void(0)" method="get">
-            <div class="form-group w-100">
+            <!-- <div class="form-group w-100">
                 <div class="Typeahead Typeahead--twitterUsers">
                     <div class="u-posRelative">
                         <input class="demo-input Typeahead-input form-control-plaintext w-100" type="text"
@@ -26,7 +26,7 @@
                     </div>
                     <div class="Typeahead-menu"></div>
                 </div>
-            </div>
+            </div> -->
         </form>
         <div class="nav-right col-4 pull-right right-header p-0">
             <ul class="nav-menus">

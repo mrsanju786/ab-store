@@ -27,7 +27,7 @@ class LoginController extends Controller
         if (Auth::attempt($credentials)) {
             $user = Auth::user(); 
             if($user->is_admin==3){
-                return redirect()->intended('/profile');
+                return redirect()->intended('/home')->with('message', 'Login successfully!');
             }
         }
         return Redirect::to("/login")->with('message', 'Email or Password is wrong!');
@@ -58,7 +58,7 @@ class LoginController extends Controller
         $user->password = Hash::make($request->password);
         $user->save();
 
-        return redirect('/login')->with("success", "Profile updated successfully!");
+        return redirect('/login')->with("success", "User registered successfully!");
     }
 
 

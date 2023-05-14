@@ -26,9 +26,10 @@
                   </div>
                   <div class="col-xl-5 col-lg-5">
                      <div class="tp-subscribe-form">
-                        <form action="#">
+                        <form action="{{url('/subscribe')}}" method ="POST">
+                           @csrf
                            <div class="tp-subscribe-input">
-                              <input type="email" placeholder="Enter Your Email">
+                              <input type="email" placeholder="Enter Your Email" name="email" required value="{{old('email')}}">
                               <button type="submit">Subscribe</button>
                            </div>
                         </form>
@@ -48,8 +49,9 @@
                         <div class="tp-footer-widget footer-col-1 mb-50">
                            <div class="tp-footer-widget-content">
                               <div class="tp-footer-logo">
-                                 <a href="index.html">
-                                    <img src="{{asset('frontend/assets/img/logo/logo.svg')}}" alt="logo">
+                                 <a href="{{url('/home')}}">
+                                    <!-- <img src="{{asset('frontend/assets/img/logo/logo.svg')}}" alt="logo"> -->
+                                    <p>AB-MOBILE</p>
                                  </a>
                               </div>
                               <p class="tp-footer-desc">We are a team of designers and developers that create high quality WordPress</p>
@@ -86,8 +88,7 @@
                                  <li><a href="#">Careers</a></li>
                                  <li><a href="#">Privacy Policy</a></li>
                                  <li><a href="#">Terms & Conditions</a></li>
-                                 <li><a href="#">Latest News</a></li>
-                                 <li><a href="#">Contact Us</a></li>
+                                 <li><a href="{{url('/contact-us')}}">Contact Us</a></li>
                               </ul>
                            </div>
                         </div>
@@ -98,7 +99,7 @@
                            <div class="tp-footer-widget-content">
                               <div class="tp-footer-talk mb-20">
                                  <span>Got Questions? Call us</span>
-                                 <h4><a href="tel:670-413-90-762">+670 413 90 762</a></h4>
+                                 <h4><a href="tel:+(91) 8238899162">+(91) 8238899162</a></h4>
                               </div>
                               <div class="tp-footer-contact">
                                  <div class="tp-footer-contact-item d-flex align-items-start">
@@ -113,7 +114,7 @@
                                        </span>
                                     </div>
                                     <div class="tp-footer-contact-content">
-                                       <p><a href="mailto:shofy@support.com">shofy@support.com</a></p>
+                                       <p><a href="mailto:shofy@support.com">ab@support.com</a></p>
                                     </div>
                                  </div>
                                  <div class="tp-footer-contact-item d-flex align-items-start">
@@ -126,7 +127,7 @@
                                        </span>
                                     </div>
                                     <div class="tp-footer-contact-content">
-                                       <p><a href="https://www.google.com/maps/place/Sleepy+Hollow+Rd,+Gouverneur,+NY+13642,+USA/@44.3304966,-75.4552367,17z/data=!3m1!4b1!4m6!3m5!1s0x4cccddac8972c5eb:0x56286024afff537a!8m2!3d44.3304928!4d-75.453048!16s%2Fg%2F1tdsjdj4" target="_blank">79 Sleepy Hollow St. <br> Jamaica, New York 1432</a></p>
+                                       <p><a href="https://www.google.com/maps/place/Sleepy+Hollow+Rd,+Gouverneur,+NY+13642,+USA/@44.3304966,-75.4552367,17z/data=!3m1!4b1!4m6!3m5!1s0x4cccddac8972c5eb:0x56286024afff537a!8m2!3d44.3304928!4d-75.453048!16s%2Fg%2F1tdsjdj4" target="_blank">Surat. <br> Gujrat</a></p>
                                     </div>
                                  </div>
                               </div>
@@ -142,16 +143,17 @@
                      <div class="row align-items-center">
                         <div class="col-md-6">
                            <div class="tp-footer-copyright">
-                              <p>© 2023 All Rights Reserved  |  HTML Template by <a href="index.html">Themepure</a>.</p>
+                           <!-- |  HTML Template by <a href="{{url('/home')}}">Themepure</a>. -->
+                              <p>© 2023 All Rights Reserved  </p>
                            </div>
                         </div>
-                        <div class="col-md-6">
+                        <!-- <div class="col-md-6">
                            <div class="tp-footer-payment text-md-end">
                               <p>
                                  <img src="{{asset('frontend/assets/img/footer/footer-pay.png')}}" alt="">
                               </p>
                            </div>
-                        </div>
+                        </div> -->
                      </div>
                   </div>
                </div>

@@ -1,10 +1,5 @@
 @extends('frontend.layouts.inner_main')
 @section('title')
-<title>Demo | Category</title>
-@endsection
-@section('content')
-@extends('frontend.layouts.inner_main')
-@section('title')
 <title>Demo | Product</title>
 @endsection
 @section('content')
@@ -498,7 +493,7 @@
                                           </div>
                                           <div class="tp-product-content-2 pt-15">
                                              <div class="tp-product-tag-2">
-                                                <a href="{{url('/product-detail')}}/{{base64_encode($product->id)}}">{{$product->title ?? "-"}}</a>
+                                                <a href="{{url('/product-detail')}}/{{base64_encode($product->id)}}">{{$product->category->title ?? "-"}}</a>
                                              </div>
                                              <h3 class="tp-product-title-2">
                                                 <a href="{{url('/product-detail')}}/{{base64_encode($product->id)}}">{{$product->name ?? "-"}}</a>
@@ -695,5 +690,4 @@
                </div>
             </div>
          </div> -->
-@endsection
 @endsection

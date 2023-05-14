@@ -3,7 +3,7 @@
    <head>
       <meta charset="utf-8">
       <meta http-equiv="x-ua-compatible" content="ie=edge">
-      <title>BB</title>
+      <title> AB-MOBILE</title>
       <meta name="description" content="">
       <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -23,10 +23,10 @@
    </head>
    <body>
         <!-- pre loader area start -->
-        <div id="loading">
+            <!-- <div id="loading">
                 <div id="loading-center">
                     <div id="loading-center-absolute">
-                    <!-- loading content here -->
+                   
                     <div class="tp-preloader-content">
                         <div class="tp-preloader-logo">
                             <div class="tp-preloader-circle">
@@ -37,12 +37,12 @@
                             </div>
                             <img src="{{asset('frontend/assets/img/logo/preloader/preloader-icon.svg')}}" alt="">
                         </div>
-                        <h3 class="tp-preloader-title">Shofy</h3>
+                        <h3 class="tp-preloader-title">AB-MOBILE</h3>
                         <p class="tp-preloader-subtitle">Loading</p>
                     </div>
                     </div>
                 </div>  
-            </div>
+            </div> -->
             <!-- pre loader area end -->
 
             <!-- back to top start -->
@@ -296,6 +296,8 @@
       <script src="{{asset('frontend/assets/js/ajax-form.js')}}"></script>
       <script src="{{asset('frontend/assets/js/main.js')}}"></script>
 
+      <!-- CSS -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.0/css/toastr.css" rel="stylesheet" />
       <!-- JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.0/js/toastr.js"></script>

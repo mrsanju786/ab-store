@@ -32,7 +32,7 @@
                         off this week</p> -->
 
                         <div class="tp-slider-btn">
-                           <a href="{{url('/home')}}" class="tp-btn tp-btn-2 tp-btn-white">Shop Now
+                           <a href="{{url('/products')}}" class="tp-btn tp-btn-2 tp-btn-white">Shop Now
                               <svg width="17" height="14" viewBox="0 0 17 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                  <path d="M16 6.99976L1 6.99976" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                  <path d="M9.9502 0.975414L16.0002 6.99941L9.9502 13.0244" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -79,7 +79,7 @@
            
             <div class="tp-product-category-item text-center mb-40">
                <div class="tp-product-category-thumb fix">
-                  <a href="shop-category.html">
+                  <a href="{{url('/shop-category')}}/{{base64_encode($value->id)}}">
                      <img src="{{env('APP_URL')."category"}}/{{$value->image}}" alt="product-category">
                   </a>
                </div>
@@ -236,19 +236,19 @@
                <div class="tab-content" id="myTabContent">
                   <div class="tab-pane fade show active" id="new-tab-pane" role="tabpanel" aria-labelledby="new-tab" tabindex="0">
                      <div class="row">
-                        @if(!empty($product))
-                        @foreach($product as $value)
+                        @if(!empty($newProduct))
+                        @foreach($newProduct as $value)
                         <div class="col-xl-3 col-lg-3 col-sm-6">
                            <div class="tp-product-item p-relative transition-3 mb-25">
                               <div class="tp-product-thumb p-relative fix m-img">
-                                 <a href="product-details.html">
+                                 <a href="{{url('/product-detail')}}/{{base64_encode($value->id)}}">
                                     <img src="{{env('APP_URL')."product"}}/{{$value->image}}" alt="product-electronic">
                                  </a>
       
                                  <!-- product badge -->
-                                 <div class="tp-product-badge">
+                                 <!-- <div class="tp-product-badge">
                                     <span class="product-hot">Hot</span>
-                                 </div>
+                                 </div> -->
       
                                  <!-- product action -->
                                  <div class="tp-product-action">
@@ -267,7 +267,7 @@
                                              
                                           <span class="tp-product-tooltip">Add to Cart</span>
                                        </button>
-                                       <button type="button" class="tp-product-action-btn tp-product-quick-view-btn" data-bs-toggle="modal" data-bs-target="#producQuickViewModal">
+                                       <!-- <button type="button" class="tp-product-action-btn tp-product-quick-view-btn" data-bs-toggle="modal" data-bs-target="#producQuickViewModal">
                                           <svg width="20" height="17" viewBox="0 0 20 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                                              <path fill-rule="evenodd" clip-rule="evenodd" d="M9.99938 5.64111C8.66938 5.64111 7.58838 6.72311 7.58838 8.05311C7.58838 9.38211 8.66938 10.4631 9.99938 10.4631C11.3294 10.4631 12.4114 9.38211 12.4114 8.05311C12.4114 6.72311 11.3294 5.64111 9.99938 5.64111ZM9.99938 11.9631C7.84238 11.9631 6.08838 10.2091 6.08838 8.05311C6.08838 5.89611 7.84238 4.14111 9.99938 4.14111C12.1564 4.14111 13.9114 5.89611 13.9114 8.05311C13.9114 10.2091 12.1564 11.9631 9.99938 11.9631Z" fill="currentColor"/>
                                              <g mask="url(#mask0_1211_721)">
@@ -276,7 +276,7 @@
                                           </svg>                                          
                                              
                                              <span class="tp-product-tooltip">Quick View</span>
-                                       </button>
+                                       </button> -->
                                        <button type="button" class="tp-product-action-btn tp-product-add-to-wishlist-btn">
                                           <svg width="20" height="19" viewBox="0 0 20 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                                              <path fill-rule="evenodd" clip-rule="evenodd" d="M1.78158 8.88867C3.15121 13.1386 8.5623 16.5749 10.0003 17.4255C11.4432 16.5662 16.8934 13.0918 18.219 8.89257C19.0894 6.17816 18.2815 2.73984 15.0714 1.70806C13.5162 1.21019 11.7021 1.5132 10.4497 2.4797C10.1879 2.68041 9.82446 2.68431 9.56069 2.48555C8.23405 1.49079 6.50102 1.19947 4.92136 1.70806C1.71613 2.73887 0.911158 6.17718 1.78158 8.88867ZM10.0013 19C9.88015 19 9.75999 18.9708 9.65058 18.9113C9.34481 18.7447 2.14207 14.7852 0.386569 9.33491C0.385592 9.33491 0.385592 9.33394 0.385592 9.33394C-0.71636 5.90244 0.510636 1.59018 4.47199 0.316764C6.33203 -0.283407 8.35911 -0.019371 9.99836 1.01242C11.5868 0.0108324 13.6969 -0.26587 15.5198 0.316764C19.4851 1.59213 20.716 5.90342 19.615 9.33394C17.9162 14.7218 10.6607 18.7408 10.353 18.9094C10.2436 18.9698 10.1224 19 10.0013 19Z" fill="currentColor"/>
@@ -291,10 +291,10 @@
                               <!-- product content -->
                               <div class="tp-product-content">
                                  <div class="tp-product-category">
-                                    <a href="shop.html">{{$value->title ?? "-"}}</a>
+                                    <a href="{{url('/product-detail')}}/{{base64_encode($value->id)}}">{{$value->title ?? "-"}}</a>
                                  </div>
                                  <h3 class="tp-product-title">
-                                    <a href="product-details.html">
+                                    <a href="{{url('/product-detail')}}/{{base64_encode($value->id)}}">
                                     {{$value->name ?? "-"}}
                                     </a>
                                  </h3>
@@ -326,8 +326,8 @@
                   </div>
                   <div class="tab-pane fade" id="featured-tab-pane" role="tabpanel" aria-labelledby="featured-tab" tabindex="0">
                   <div class="row">
-                        @if(!empty($product))
-                        @foreach($product as $value)
+                        @if(!empty($featuredProduct))
+                        @foreach($featuredProduct as $value)
                         <div class="col-xl-3 col-lg-3 col-sm-6">
                            <div class="tp-product-item p-relative transition-3 mb-25">
                               <div class="tp-product-thumb p-relative fix m-img">
@@ -336,10 +336,10 @@
                                  </a>
       
                                  <!-- product badge -->
-                                 <div class="tp-product-badge">
+                                 <!-- <div class="tp-product-badge">
                                     <span class="product-hot">Hot</span>
                                  </div>
-      
+       -->
                                  <!-- product action -->
                                  <div class="tp-product-action">
                                     <div class="tp-product-action-item d-flex flex-column">
@@ -357,7 +357,7 @@
                                              
                                           <span class="tp-product-tooltip">Add to Cart</span>
                                        </button>
-                                       <button type="button" class="tp-product-action-btn tp-product-quick-view-btn" data-bs-toggle="modal" data-bs-target="#producQuickViewModal">
+                                       <!-- <button type="button" class="tp-product-action-btn tp-product-quick-view-btn" data-bs-toggle="modal" data-bs-target="#producQuickViewModal">
                                           <svg width="20" height="17" viewBox="0 0 20 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                                              <path fill-rule="evenodd" clip-rule="evenodd" d="M9.99938 5.64111C8.66938 5.64111 7.58838 6.72311 7.58838 8.05311C7.58838 9.38211 8.66938 10.4631 9.99938 10.4631C11.3294 10.4631 12.4114 9.38211 12.4114 8.05311C12.4114 6.72311 11.3294 5.64111 9.99938 5.64111ZM9.99938 11.9631C7.84238 11.9631 6.08838 10.2091 6.08838 8.05311C6.08838 5.89611 7.84238 4.14111 9.99938 4.14111C12.1564 4.14111 13.9114 5.89611 13.9114 8.05311C13.9114 10.2091 12.1564 11.9631 9.99938 11.9631Z" fill="currentColor"/>
                                              <g mask="url(#mask0_1211_721)">
@@ -366,7 +366,7 @@
                                           </svg>                                          
                                              
                                              <span class="tp-product-tooltip">Quick View</span>
-                                       </button>
+                                       </button> -->
                                        <button type="button" class="tp-product-action-btn tp-product-add-to-wishlist-btn">
                                           <svg width="20" height="19" viewBox="0 0 20 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                                              <path fill-rule="evenodd" clip-rule="evenodd" d="M1.78158 8.88867C3.15121 13.1386 8.5623 16.5749 10.0003 17.4255C11.4432 16.5662 16.8934 13.0918 18.219 8.89257C19.0894 6.17816 18.2815 2.73984 15.0714 1.70806C13.5162 1.21019 11.7021 1.5132 10.4497 2.4797C10.1879 2.68041 9.82446 2.68431 9.56069 2.48555C8.23405 1.49079 6.50102 1.19947 4.92136 1.70806C1.71613 2.73887 0.911158 6.17718 1.78158 8.88867ZM10.0013 19C9.88015 19 9.75999 18.9708 9.65058 18.9113C9.34481 18.7447 2.14207 14.7852 0.386569 9.33491C0.385592 9.33491 0.385592 9.33394 0.385592 9.33394C-0.71636 5.90244 0.510636 1.59018 4.47199 0.316764C6.33203 -0.283407 8.35911 -0.019371 9.99836 1.01242C11.5868 0.0108324 13.6969 -0.26587 15.5198 0.316764C19.4851 1.59213 20.716 5.90342 19.615 9.33394C17.9162 14.7218 10.6607 18.7408 10.353 18.9094C10.2436 18.9698 10.1224 19 10.0013 19Z" fill="currentColor"/>
@@ -2278,7 +2278,7 @@
 <!-- product sm area end -->
 
 <!-- blog area start -->
-<section class="tp-blog-area pt-50 pb-75">
+<!-- <section class="tp-blog-area pt-50 pb-75">
    <div class="container">
       <div class="row align-items-end">
          <div class="col-xl-4 col-md-6">
@@ -2421,7 +2421,7 @@
          </div>
       </div>
    </div>
-</section>
+</section> -->
 <!-- blog area end -->
 
 <!-- instagram area start -->
