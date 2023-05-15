@@ -34,6 +34,12 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
         
 
 //all page route
-Route::get('/shop-category', [HomeController::class, 'Category'])->name('shop-category');
+Route::get('/shop-category/{id}', [HomeController::class, 'category'])->name('shop-category');
+Route::get('/products', [HomeController::class, 'Products'])->name('products');
+Route::get('/product-detail/{id}', [HomeController::class, 'ProductDetails'])->name('product-detail');
+//subscribed email route
+Route::post('/subscribe', [HomeController::class, 'subscribe'])->name('subscribe');
 
-
+//contact us route
+Route::get('/contact-us', [HomeController::class, 'contactUs'])->name('contactUs');
+Route::post('/contact', [HomeController::class, 'addContactUs'])->name('addContactUs');

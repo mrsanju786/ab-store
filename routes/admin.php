@@ -165,6 +165,21 @@ use App\Http\Controllers\admin\ProductSizeVariantController;
             Route::get('variantsize/view/{id}', [ProductSizeVariantController::class, 'view'])->name('variantsize/view');
             Route::get('variantsize/active/{id}', [ProductSizeVariantController::class, 'active'])->name('variantsize/active');
             Route::get('variantsize/inactive/{id}', [ProductSizeVariantController::class, 'inActive'])->name('variantsize/inActive');
+            /**
+            * admin contact Routes
+            */
+           Route::get('contact/index', [AdminController::class, 'conatctList'])->name('contact/index');
+           Route::get('contact/view/{id}', [AdminController::class, 'conatctView'])->name('contact/view');
+           Route::get('contact/active/{id}', [AdminController::class, 'conatctActive'])->name('contact/active');
+           Route::get('contact/inactive/{id}', [AdminController::class, 'conatctInActive'])->name('contact/inActive');
 
+           /**
+            * admin subscribed Routes
+            */
+            Route::get('subscribe/index', [AdminController::class, 'subscribeList'])->name('subscribe/index');
+            Route::get('subscribe/view/{id}', [AdminController::class, 'subscribeView'])->name('subscribe/view');
+            Route::get('subscribe/active/{id}', [AdminController::class, 'subscribeActive'])->name('subscribe/active');
+            Route::get('subscribe/inactive/{id}', [AdminController::class, 'subscribeInActive'])->name('subscribe/inActive');
+           
     });
 

@@ -8,6 +8,8 @@ use Auth;
 use Validator,Redirect,Response;
 use Session, Artisan;
 use App\Models\User;
+use App\Models\Subscribe;
+use App\Models\ContactUs;
 
 class AdminController extends Controller
 {
@@ -84,5 +86,51 @@ class AdminController extends Controller
         $admin->save();
         return redirect()->back()->with("success", "Password updated successfully!");
        
+    }
+
+    public function conatctList(){
+
+        $contact = ContactUs::orderBy('id','desc')->get();
+
+        return view('admin-view.contact.index', compact('contact'));
+    }
+
+    public function conatctView($id){
+        $record = ContactUs::where('id',base64_decode($id))->first();
+
+        return view('admin-view.contact.view',compact('record'));
+    }
+
+    public function conatctActive($id){
+        $record = ContactUs::where('id',base64_decode($id))->where('status',0)->update(['status'=>1]);
+        return redirect()->route('contact/index')->with('success', 'User activated successfully!');
+    }
+
+    public function conatctInActive($id){
+        $record = ContactUs::where('id',base64_decode($id))->where('status',1)->update(['status'=>0]);
+        return redirect()->route('contact/index')->with('success', 'User deactivated successfully!');
+    }
+
+    public function subscribeList(){
+
+        $subscribe = Subscribe::orderBy('id','desc')->get();
+
+        return view('admin-view.subscribe.index', compact('subscribe'));
+    }
+
+    public function subscribeView($id){
+        $record = Subscribe::where('id',base64_decode($id))->first();
+
+        return view('admin-view.subscribe.view',compact('record'));
+    }
+
+    public function subscribeActive($id){
+        $record = Subscribe::where('id',base64_decode($id))->where('status',0)->update(['status'=>1]);
+        return redirect()->route('subscribe/index')->with('success', 'User activated successfully!');
+    }
+
+    public function subscribeInActive($id){
+        $record = Subscribe::where('id',base64_decode($id))->where('status',1)->update(['status'=>0]);
+        return redirect()->route('subscribe/index')->with('success', 'User deactivated successfully!');
     }
 }
