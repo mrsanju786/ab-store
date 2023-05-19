@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\frontend\HomeController;
 use App\Http\Controllers\frontend\LoginController;
+use App\Http\Controllers\frontend\CartController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -39,7 +40,12 @@ Route::get('/products', [HomeController::class, 'Products'])->name('products');
 Route::get('/product-detail/{id}', [HomeController::class, 'ProductDetails'])->name('product-detail');
 //subscribed email route
 Route::post('/subscribe', [HomeController::class, 'subscribe'])->name('subscribe');
+Route::post('store-review/{id}', [HomeController::class, 'addReview']);
 
 //contact us route
 Route::get('/contact-us', [HomeController::class, 'contactUs'])->name('contactUs');
 Route::post('/contact', [HomeController::class, 'addContactUs'])->name('addContactUs');
+
+//add to cart
+Route::post('/add-to-cart',[CartController::class, 'addToCart'])->name('addToCart');
+Route::get('/cart',[CartController::class, 'view'])->name('cart');

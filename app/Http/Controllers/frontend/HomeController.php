@@ -13,6 +13,7 @@ use App\Models\Subscribe;
 use App\Models\ContactUs;
 use Auth;
 use Validator,Redirect,Response;
+use App\Models\Review;
 
 class HomeController extends Controller
 {
@@ -101,6 +102,38 @@ class HomeController extends Controller
         return redirect()->back()->with('success', 'Conatct form submitted successfully!');
      
 
+    }
+
+    public function addReview(Request $request, $id)
+    {
+
+        $alreadyRating = Review::where('user_id', Auth::id())->where('product_id', $id)->first();
+        if ($alreadyRating) {
+            return redirect()->back()->with('success', 'You have already review for this product!');
+            
+        }
+        $validator = Validator::make($request->all(), [
+            'name'      => 'required|max:100',
+            'comment'   => 'required',
+            'rating'    => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->with('error', 'Rating field is required ?');
+           
+        }else{
+            $product = Product::where('id', $id)->first();
+            $reviews = new Review;
+            $reviews->name       = $request->name;
+            $reviews->rating     = $request->rating;
+            $reviews->comment    = $request->comment;
+            $reviews->product_id = $product->id;
+            $reviews->user_id    = Auth::id();
+            $reviews->save();
+            return redirect()->back()->with('success', 'Review added successfully!');
+           
+        }
+        
     }
 
 
