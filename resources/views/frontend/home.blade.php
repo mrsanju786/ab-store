@@ -264,14 +264,32 @@
                                           <span class="tp-product-tooltip">Add to Cart</span>
                                        </button>
                                        -->
-                                       <button type="button" class="tp-product-action-btn tp-product-add-to-wishlist-btn">
-                                          <svg width="20" height="19" viewBox="0 0 20 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                             <path fill-rule="evenodd" clip-rule="evenodd" d="M1.78158 8.88867C3.15121 13.1386 8.5623 16.5749 10.0003 17.4255C11.4432 16.5662 16.8934 13.0918 18.219 8.89257C19.0894 6.17816 18.2815 2.73984 15.0714 1.70806C13.5162 1.21019 11.7021 1.5132 10.4497 2.4797C10.1879 2.68041 9.82446 2.68431 9.56069 2.48555C8.23405 1.49079 6.50102 1.19947 4.92136 1.70806C1.71613 2.73887 0.911158 6.17718 1.78158 8.88867ZM10.0013 19C9.88015 19 9.75999 18.9708 9.65058 18.9113C9.34481 18.7447 2.14207 14.7852 0.386569 9.33491C0.385592 9.33491 0.385592 9.33394 0.385592 9.33394C-0.71636 5.90244 0.510636 1.59018 4.47199 0.316764C6.33203 -0.283407 8.35911 -0.019371 9.99836 1.01242C11.5868 0.0108324 13.6969 -0.26587 15.5198 0.316764C19.4851 1.59213 20.716 5.90342 19.615 9.33394C17.9162 14.7218 10.6607 18.7408 10.353 18.9094C10.2436 18.9698 10.1224 19 10.0013 19Z" fill="currentColor"/>
-                                             <path fill-rule="evenodd" clip-rule="evenodd" d="M15.7806 7.42904C15.4025 7.42904 15.0821 7.13968 15.0508 6.75775C14.9864 5.95687 14.4491 5.2807 13.6841 5.03421C13.2983 4.9095 13.0873 4.49737 13.2113 4.11446C13.3373 3.73059 13.7467 3.52209 14.1335 3.6429C15.4651 4.07257 16.398 5.24855 16.5123 6.63888C16.5445 7.04127 16.2446 7.39397 15.8412 7.42612C15.8206 7.42807 15.8011 7.42904 15.7806 7.42904Z" fill="currentColor"/>
-                                          </svg>                                                                                
-                                             
+                                       <!-- @php $countWishlist = 0; @endphp
+                                       @if(Auth::check())
+                                       @php
+                                          $countWishlist = App\Models\Wishlist::countWishlist($value['id'])
+                                       @endphp   
+                                       @endif
+                                       @if(Auth::check())
+                                       <a href="javascript:;" class="tp-product-action-btn tp-product-add-to-wishlist-btn update-wishlist" data-productid ="{{$value->id}}">
+                                          @if($countWishlist > 0)
+                                          <i class="fas fa-heart"></i> 
+                                          @else  
+                                          <i class="far fa-regular fa-heart"></i>  
+                                          
+                                          @endif
+                                         <span class="tp-product-tooltip">Add To Wishlist</span>
+                                       </a>
+                                       @else
+                                       <a href="url('/login')" class="tp-product-action-btn tp-product-add-to-wishlist-btn update-wishlist" data-productid ="{{$value->id}}">
+                                      
+                                          <i class="fas fa-heart"></i> 
+                                       
+                                                
                                           <span class="tp-product-tooltip">Add To Wishlist</span>
-                                       </button>
+                                       </a>
+                                       @endif -->
+                                       
                                     </div>
                                  </div>
                               </div>
@@ -325,7 +343,7 @@
                                  <!-- product action -->
                                  <div class="tp-product-action">
                                     <div class="tp-product-action-item d-flex flex-column">
-                                       <button type="button" class="tp-product-action-btn tp-product-add-cart-btn">
+                                       <!-- <button type="button" class="tp-product-action-btn tp-product-add-cart-btn">
                                           <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                              <path fill-rule="evenodd" clip-rule="evenodd" d="M3.93795 5.34749L4.54095 12.5195C4.58495 13.0715 5.03594 13.4855 5.58695 13.4855H5.59095H16.5019H16.5039C17.0249 13.4855 17.4699 13.0975 17.5439 12.5825L18.4939 6.02349C18.5159 5.86749 18.4769 5.71149 18.3819 5.58549C18.2879 5.45849 18.1499 5.37649 17.9939 5.35449C17.7849 5.36249 9.11195 5.35049 3.93795 5.34749ZM5.58495 14.9855C4.26795 14.9855 3.15295 13.9575 3.04595 12.6425L2.12995 1.74849L0.622945 1.48849C0.213945 1.41649 -0.0590549 1.02949 0.0109451 0.620487C0.082945 0.211487 0.477945 -0.054513 0.877945 0.00948704L2.95795 0.369487C3.29295 0.428487 3.54795 0.706487 3.57695 1.04649L3.81194 3.84749C18.0879 3.85349 18.1339 3.86049 18.2029 3.86849C18.7599 3.94949 19.2499 4.24049 19.5839 4.68849C19.9179 5.13549 20.0579 5.68649 19.9779 6.23849L19.0289 12.7965C18.8499 14.0445 17.7659 14.9855 16.5059 14.9855H16.5009H5.59295H5.58495Z" fill="currentColor"/>
                                              <path fill-rule="evenodd" clip-rule="evenodd" d="M14.8979 9.04382H12.1259C11.7109 9.04382 11.3759 8.70782 11.3759 8.29382C11.3759 7.87982 11.7109 7.54382 12.1259 7.54382H14.8979C15.3119 7.54382 15.6479 7.87982 15.6479 8.29382C15.6479 8.70782 15.3119 9.04382 14.8979 9.04382Z" fill="currentColor"/>
@@ -338,16 +356,33 @@
                                           </svg>   
                                              
                                           <span class="tp-product-tooltip">Add to Cart</span>
-                                       </button>
+                                       </button> -->
+                                       
+                                       <!-- @php $countWishlist = 0; @endphp
+                                       @if(Auth::check())
+                                       @php
+                                          $countWishlist = App\Models\Wishlist::countWishlist($value['id'])
+                                       @endphp   
+                                       @endif
+                                       @if(Auth::check())
+                                       <a href="javascript:;" class="tp-product-action-btn tp-product-add-to-wishlist-btn update-wishlist" data-productid ="{{$value->id}}">
+                                          @if($countWishlist > 0)
+                                          <i class="fas fa-heart"></i> 
+                                          @else  
+                                          <i class="far fa-regular fa-heart"></i>  
+                                          
+                                          @endif
+                                         <span class="tp-product-tooltip">Add To Wishlist</span>
+                                       </a>
+                                       @else
+                                       <a href="url('/login')" class="tp-product-action-btn tp-product-add-to-wishlist-btn update-wishlist" data-productid ="{{$value->id}}">
                                       
-                                       <button type="button" class="tp-product-action-btn tp-product-add-to-wishlist-btn">
-                                          <svg width="20" height="19" viewBox="0 0 20 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                             <path fill-rule="evenodd" clip-rule="evenodd" d="M1.78158 8.88867C3.15121 13.1386 8.5623 16.5749 10.0003 17.4255C11.4432 16.5662 16.8934 13.0918 18.219 8.89257C19.0894 6.17816 18.2815 2.73984 15.0714 1.70806C13.5162 1.21019 11.7021 1.5132 10.4497 2.4797C10.1879 2.68041 9.82446 2.68431 9.56069 2.48555C8.23405 1.49079 6.50102 1.19947 4.92136 1.70806C1.71613 2.73887 0.911158 6.17718 1.78158 8.88867ZM10.0013 19C9.88015 19 9.75999 18.9708 9.65058 18.9113C9.34481 18.7447 2.14207 14.7852 0.386569 9.33491C0.385592 9.33491 0.385592 9.33394 0.385592 9.33394C-0.71636 5.90244 0.510636 1.59018 4.47199 0.316764C6.33203 -0.283407 8.35911 -0.019371 9.99836 1.01242C11.5868 0.0108324 13.6969 -0.26587 15.5198 0.316764C19.4851 1.59213 20.716 5.90342 19.615 9.33394C17.9162 14.7218 10.6607 18.7408 10.353 18.9094C10.2436 18.9698 10.1224 19 10.0013 19Z" fill="currentColor"/>
-                                             <path fill-rule="evenodd" clip-rule="evenodd" d="M15.7806 7.42904C15.4025 7.42904 15.0821 7.13968 15.0508 6.75775C14.9864 5.95687 14.4491 5.2807 13.6841 5.03421C13.2983 4.9095 13.0873 4.49737 13.2113 4.11446C13.3373 3.73059 13.7467 3.52209 14.1335 3.6429C15.4651 4.07257 16.398 5.24855 16.5123 6.63888C16.5445 7.04127 16.2446 7.39397 15.8412 7.42612C15.8206 7.42807 15.8011 7.42904 15.7806 7.42904Z" fill="currentColor"/>
-                                          </svg>                                                                                
-                                             
+                                          <i class="fas fa-heart"></i> 
+                                       
+                                                
                                           <span class="tp-product-tooltip">Add To Wishlist</span>
-                                       </button>
+                                       </a>
+                                       @endif -->
                                     </div>
                                  </div>
                               </div>
@@ -609,5 +644,70 @@
    </div>
 </div>
 
+<link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+<script>
+   var user_id = "{{Auth::id()}}" ? "{{Auth::id()}}" : '';
 
+
+   $(document).ready(function() {
+      $('.update-wishlist').click(function()
+         {
+            $.ajaxSetup({
+               headers: {
+                  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+               }
+           }); 
+
+            var product_id = $(this).data('productid');
+           // alert(product_id);
+            $.ajax({
+               url: "{{url('/update-wishlist')}}",
+               type:"POST",
+               data:{
+                     product_id:product_id,
+                     user_id   :user_id,
+                    
+               }, 
+               
+               success:function(response) {
+                 
+                  if(response.action=="add") {
+                     $('a[data-productid='+product_id+']').html('<i class="fas fa-heart"></i>')
+                     $('#notifyDiv').fadeIn();
+                     $('#notifyDiv').css('color','green');
+                     $('#notifyDiv').text(response.message);
+                     $('#wish_cnt').html(response.wish_cnt);
+                     
+                     setTimeout(() => {
+                     toastr.success(response.message);
+                     },1000)
+                    //  location.reload()
+                    
+                  }else if(response.action=="remove"){
+                     $('a[data-productid='+product_id+']').html('<i class="far fa-heart"></i>')
+                     $('#notifyDiv').fadeOut();
+                     $('#notifyDiv').css('color','red');
+                     $('#notifyDiv').text(response.message);
+                     $('#wish_cnt').html(response.wish_cnt);
+                     setTimeout(() => {
+                     toastr.success(response.message);
+                     },1000)
+                    // location.reload()
+                  }else if(response.action=="error"){
+                     $('a[data-productid='+product_id+']').html('<i class="fas fa-heart"></i>')
+                     $('#notifyDiv').fadeOut();
+                     $('#notifyDiv').css('color','red');
+                     $('#notifyDiv').text(response.message);
+                     setTimeout(() => {
+                     toastr.error(response.message);
+                     },1000)
+                  }
+               },
+            });
+
+         }) ;
+   });
+</script> 
 @endsection

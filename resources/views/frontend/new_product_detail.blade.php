@@ -165,8 +165,8 @@
                                    <?php $colors = DB::table('product_color_variants')->where('product_id',$productDetail->id)->where('status',1)->get(); ?>
                                     @foreach($colors as $key=>$color)
                                     
-                                    <a href="{{url('/product-color')}}/{{base64_encode($productDetail->id)}}/{{$color->id}}" class="color tp-color-variation-btn" onclick="changeStyle('{{$color->color_code}}',{{$color->id}});"style="border-color:{{$color->color_code}}; border-radius: 50%; background-color: {{$color->color_code}}; display: inline-block;width: 26px;height: 26px;border-radius: 50%;position: relative;-webkit-transition: box-shadow 0.2s 0s linear;-moz-transition: box-shadow 0.2s 0s linear;-ms-transition: box-shadow 0.2s 0s linear;-o-transition: box-shadow 0.2s 0s linear;transition: box-shadow 0.2s 0s linear;" id="variant-color" >
-                                        <span style="border-color:{{$color->color_code}}; border-radius: 50%; background-color: {{$color->color_code}}; "  data-id="{{$color->id}}"></span>
+                                    <a href="{{url('/product-color')}}/{{base64_encode($productDetail->id)}}/{{$color->id}}" class="color tp-color-variation-btn" onclick="changeStyle('{{$color->color_code}}',{{$color->id}});"style="border-color:{{$color->color_code}}; border-radius: 50%; background-color: {{$color->color_code}}; display: inline-block;width: 26px;height: 26px;border-radius: 50%;position: relative;-webkit-transition: box-shadow 0.2s 0s linear;-moz-transition: box-shadow 0.2s 0s linear;-ms-transition: box-shadow 0.2s 0s linear;-o-transition: box-shadow 0.2s 0s linear;transition: box-shadow 0.2s 0s linear;" id="variant-color" style="">
+                                        <span style="border-color:{{$color->color_code}}; border-radius: 50%; background-color: {{$color->color_code}}; " ></span>
                                         <span class="tp-color-variation-tootltip">{{$color->color_name}}</span>
                                     </a>
                                     @endforeach
@@ -175,7 +175,14 @@
                                     <h4 class="tp-product-details-variation-title">Size ( GB):</h4>
                                     <div class="tp-product-details-variation-list">
                                     <?php $sizes = DB::table('product_size_variants')->where('product_id',$productDetail->id)->where('status',1)->get(); ?>
-                                   
+                                    <!-- @foreach($sizes as $key=>$size) 
+                                    <button  type="button" class="color tp-color-variation-btn" style="background-color:  #e1d9e9;" id="product_size" onClick="getVariantSize()">
+                                        <span style="">{{$size->size}}</span>
+                                       <input type ="hidden" name="size" id= "variant_size" value="{{$size->id}}">
+                                        <span class="tp-color-variation-tootltip">{{$size->size}} GB</span>
+                                       
+                                    </button>
+                                    @endforeach -->
                                        <select  class="color tp-color-variation-btn" style="background-color:  #e1d9e9;" id="product_size" onchange="getVariantSize()">
                                        @foreach($sizes as $key=>$size)
                                           <option value="{{$size->id}}">{{$size->size}} GB</option>

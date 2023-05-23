@@ -35,17 +35,18 @@ class CartController extends Controller
         $quantity   = $request->quantity;
         $color      = $request->variant_color;
         $size       = $request->variant_size;
-      
+        $variant_id = $request->variant_id;
         $user_id = Auth::user()->id;
         $product_detail = Product::with(['productSize','productColor','category'])->where('id',$product_id)->first();
        
         $result = Cart::where('user_id',$user_id)
-                    ->where('product_id', $product_id)
+                    ->where('variant_color_id', $variant_id)
                     ->first();
         if($result == null){
             $cart = new Cart;
             $cart->user_id         = $user_id;
             $cart->product_id      = $product_id;
+            $cart->variant_color_id  = $variant_id;
             $cart->quantity        = $quantity;
             $cart->variant_color   = $color;
             $cart->variant_size    = $size;

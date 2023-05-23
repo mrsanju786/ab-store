@@ -49,3 +49,9 @@ Route::post('/contact', [HomeController::class, 'addContactUs'])->name('addConta
 //add to cart
 Route::post('/add-to-cart',[CartController::class, 'addToCart'])->name('addToCart');
 Route::get('/cart',[CartController::class, 'view'])->name('cart');
+Route::get('/wishlist',[HomeController::class, 'myWishlist']);
+Route::post('/update-wishlist', [HomeController::class, 'addFavouriteProduct'])->name('addFavouriteProduct');
+
+Route::post('/check-product-size',[HomeController::class, 'checkProductSize'])->name('check-product-size');
+Route::post('/check-product-color',[HomeController::class, 'checkProductColor'])->name('check-product-color');
+Route::get('/product-color/{id}/{color}',[HomeController::class, 'ProductColor'])->name('product-color');
