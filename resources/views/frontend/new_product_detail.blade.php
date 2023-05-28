@@ -150,8 +150,8 @@
                            <!-- price -->
                            
                            <div class="tp-product-details-price-wrapper mb-20">
-                           $<span class="tp-product-details-price old-price" id ="actualPrice">{{number_format(($productDetail['productSize']['actual_price']),2) ?? "-"}}</span>
-                           $<span class="tp-product-details-price new-price" id ="new_price">{{number_format(($productDetail['productSize']['actual_price']-$productDetail['productSize']['offer_price']),2) ?? "-"}}</span>
+                           &#x20B9;<span class="tp-product-details-price old-price" id ="actualPrice">{{number_format(($productDetail['productSize']['actual_price']),2) ?? "-"}}</span>
+                           &#x20B9;<span class="tp-product-details-price new-price" id ="new_price">{{number_format(($productDetail['productSize']['actual_price']-$productDetail['productSize']['offer_price']),2) ?? "-"}}</span>
                            </div>
                           
    
@@ -665,8 +665,8 @@
                                     </h3>
                                     @if(!empty($value['productSize']))
                                     <div class="tp-product-price-wrapper-3">
-                                       <span class="tp-product-price-3 new-price">${{number_format(($value['productSize']['actual_price']),2) ?? "-"}}</span>
-                                       <span class="tp-product-price-3 old-price">${{number_format(($value['productSize']['actual_price']-$value['productSize']['offer_price']),2) ?? "-"}}</span>
+                                       <span class="tp-product-price-3 new-price">&#x20B9;{{number_format(($value['productSize']['actual_price']),2) ?? "-"}}</span>
+                                       <span class="tp-product-price-3 old-price">&#x20B9;{{number_format(($value['productSize']['actual_price']-$value['productSize']['offer_price']),2) ?? "-"}}</span>
                                     </div>
                                     @endif
                                  </div>

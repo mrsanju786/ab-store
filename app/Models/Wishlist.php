@@ -5,15 +5,21 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Wishlist;
-use App\Models\Product;
+use App\Models\ProductSizeVariant;
+use App\Models\ProductColorVariant;
 use Auth;
 
 class Wishlist extends Model
 {
     use HasFactory;
-    public function products()
+    public function productSize()
     {
-        return $this->hasOne(Product::class, 'id', 'product_id');
+        return $this->hasOne(ProductSizeVariant::class, 'id', 'product_id');
+    }
+
+    public function productColor()
+    {
+        return $this->hasOne(ProductColorVariant::class, 'id', 'product_id');
     }
 
     public static function countWishlist($product_id){

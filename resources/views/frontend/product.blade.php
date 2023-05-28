@@ -508,8 +508,8 @@
                                             
                                              @if(!empty($product['productSize']))
                                              <div class="tp-product-price-wrapper-2">
-                                                <span class="tp-product-price-2 new-price">${{number_format(($product['productSize']['actual_price']),2) ?? "-"}}</span>
-                                                <span class="tp-product-price-2 old-price">${{number_format(($product['productSize']['actual_price']-$product['productSize']['offer_price']),2) ?? "-"}}</span>
+                                                <span class="tp-product-price-2 new-price">&#x20B9;{{number_format(($product['productSize']['actual_price']),2) ?? "-"}}</span>
+                                                <span class="tp-product-price-2 old-price">&#x20B9;{{number_format(($product['productSize']['actual_price']-$product['productSize']['offer_price']),2) ?? "-"}}</span>
                                              </div>
                                              @endif
                                           </div>

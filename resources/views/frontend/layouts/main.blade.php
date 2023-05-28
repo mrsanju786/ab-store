@@ -214,8 +214,8 @@
       </section>
       <!-- search area end -->
 
-      <!-- cart mini area start -->
-      <div class="cartmini__area tp-all-font-roboto">
+       <!-- cart mini area start -->
+       <div class="cartmini__area tp-all-font-roboto">
          <div class="cartmini__wrapper d-flex justify-content-between flex-column">
              <div class="cartmini__top-wrapper">
                  <div class="cartmini__top p-relative">
@@ -235,27 +235,39 @@
                  <?php 
                   $user_id = Auth::user()->id ?? Null; 
                   $products = DB::table('carts')
-                              ->join('products', 'carts.product_id','=','products.id')
-                              ->select('carts.*', 'products.*')
-                              ->where('user_id',$user_id)
-                              ->get();
+                                 ->join('product_color_variants', 'carts.variant_color_id','=','product_color_variants.id')
+                                 ->select('carts.*', 'product_color_variants.id as variant_id','product_color_variants.product_id','product_color_variants.color_product_image','product_color_variants.color_name',)
+                                 ->where('user_id',$user_id)
+                                 ->get();
                  ?>
-                 @php $subtotal =0; @endphp
+                <?php
+                     $sub_total =0;
+                     $total     =0;
+                     $price =0;
+                     ?>
                  @if(!empty($products) && count($products) > 0)
                  
                  @foreach($products as $product)
+                 <?php  
+                        $product_name =App\Models\Product::where('id',$product->product_id)->where('status',1)->first();
+                        $productSizePrice =App\Models\ProductSizeVariant::where('id',$product->variant_size)->where('status',1)->first();
+                       
+                        $price      =$productSizePrice['actual_price']-$productSizePrice['offer_price'];
+                        $sub_total +=$productSizePrice['actual_price']-$productSizePrice['offer_price'];
+                        $total     +=$productSizePrice['actual_price']-$productSizePrice['offer_price'];
+                  ?>
                  <div class="cartmini__widget">
                      <div class="cartmini__widget-item">
                          <div class="cartmini__thumb">
                            <a href="{{url('/product-detail')}}/{{base64_encode($product->id)}}">
-                              <img src="{{env('APP_URL')."product"}}/{{$product->image}}" alt="">
+                              <img src="{{env('APP_URL')."product"}}/{{$product->color_product_image}}" alt="">
                            </a>
                          </div>
                          <div class="cartmini__content">
-                           <h5 class="cartmini__title"><a href="{{url('/product-detail')}}/{{base64_encode($product->id)}}">{{$product->name ?? "-"}}</a></h5>
+                           <h5 class="cartmini__title"><a href="{{url('/product-detail')}}/{{base64_encode($product->variant_id)}}">{{$product_name->name ?? "-"}}</a></h5>
                            <div class="cartmini__price-wrapper">
                             
-                              <span class="cartmini__price">${{$product->price ?? "-"}}</span>
+                              <span class="cartmini__price">&#x20B9;{{$price ?? "-"}}</span>
                            
                               <span class="cartmini__quantity">{{$product->quantity ?? "-"}}</span>
                            </div>
@@ -264,7 +276,7 @@
                      </div>
                  </div>
 
-                 @php $subtotal += round($product->price*$product->quantity); @endphp
+                
                  @endforeach
                  @else
                  <!-- for wp -->
@@ -280,11 +292,11 @@
              <div class="cartmini__checkout">
                  <div class="cartmini__checkout-title mb-30">
                      <h4>Subtotal:</h4>
-                     <span>$ {{number_format($subtotal,2)}}</span>
+                     <span>&#x20B9; {{number_format($sub_total,2)}}</span>
                  </div>
                  <div class="cartmini__checkout-btn">
                      <a href="{{url('/cart')}}" class="tp-btn mb-10 w-100"> view cart</a>
-                     <a href="checkout.html" class="tp-btn tp-btn-border w-100"> checkout</a>
+                     <a href="{{url('/checkout')}}" class="tp-btn tp-btn-border w-100"> checkout</a>
                  </div>
              </div>
          </div>

@@ -15,6 +15,7 @@ use App\Models\ContactUs;
 use Auth;
 use Validator,Redirect,Response;
 use App\Models\Review;
+use App\Models\BillingAddress;
 
 class HomeController extends Controller
 {
@@ -57,6 +58,7 @@ class HomeController extends Controller
                                 ->where('status',1)
                                 ->orderBy('id','desc')
                                 ->first();
+                                
         $relatedProduct = Product::with(['productSize','productColor','category'])
                                 ->where('category_id',$productDetail->category_id)
                                 ->whereNotIn('id',[$productDetail->id])
@@ -180,7 +182,8 @@ class HomeController extends Controller
     } 
 
     public function myWishlist(){
-        $wihslistProduct = Wishlist::with('products')->where('user_id',Auth::id())->get();
+        $wihslistProduct = Wishlist::with('ProductSize','ProductColor')->where('user_id',Auth::id())->get();
+       
         return view('frontend.wishlist',compact('wihslistProduct'));
 
     }
@@ -235,6 +238,40 @@ class HomeController extends Controller
                 return response()->json(['action' => 'error', 'message' => 'User not login!']);
             }
         }
+    }
+
+
+
+    public function edit($id){
+        $address = BillingAddress::where('id',$id)->first();
+        $user    = User::where('id',$$address->user_id)->first();
+        return view('frontend.saved_address',compact('address','user'));
+    }
+
+    public function update(Request $request){
+      
+        $request->validate([
+            'address'   => 'required|max:255',
+            'country'   => 'required|max:255',
+            'state'     => 'required|max:255',
+            'city'      => 'required|max:255',
+            'pincode'   => 'required|numeric',
+           
+        ]);
+       
+        $addresses = new BillingAddress;
+        $addresses->user_id      = Auth::id();
+        $addresses->address      = $request->address;
+        $addresses->address_type = 1;
+        $addresses->primary_addr = 1;
+        $addresses->pincode      = $request->pincode;
+        $addresses->country      = $request->country;
+        $addresses->state        = $request->state;
+        $addresses->city         = $request->city;
+        $addresses->save();
+      
+        return redirect()->back()->with('success', 'My address added successfully!');
+      
     }
 
 

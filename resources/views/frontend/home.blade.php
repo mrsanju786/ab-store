@@ -157,7 +157,7 @@
                </div>
                <div class="tp-feature-content">
                   <h3 class="tp-feature-title">Member Discount</h3>
-                  <p>Onevery order over $140.00</p>
+                  <p>Onevery order over &#x20B9;140.00</p>
                </div>
             </div>
          </div>
@@ -317,8 +317,8 @@
                                  </div>
                                  <div class="tp-product-price-wrapper">
                                  @if(!empty($value['productSize']))
-                                    <span class="tp-product-price old-price">${{number_format(($value['productSize']['actual_price']),2) ?? "-"}}</span>
-                                    <span class="tp-product-price new-price">${{number_format(($value['productSize']['actual_price']-$value['productSize']['offer_price']),2) ?? "-"}}</span>
+                                    <span class="tp-product-price old-price">&#x20B9;{{number_format(($value['productSize']['actual_price']),2) ?? "-"}}</span>
+                                    <span class="tp-product-price new-price">&#x20B9;{{number_format(($value['productSize']['actual_price']-$value['productSize']['offer_price']),2) ?? "-"}}</span>
                                  @endif
                                  </div>
                               </div>
@@ -410,8 +410,8 @@
                                  </div>
                                  <div class="tp-product-price-wrapper">
                                  @if(!empty($value['productSize']))
-                                    <span class="tp-product-price old-price">${{number_format(($value['productSize']['actual_price']),2) ?? "-"}}</span>
-                                    <span class="tp-product-price new-price">${{number_format(($value['productSize']['actual_price']-$value['productSize']['offer_price']),2) ?? "-"}}</span>
+                                    <span class="tp-product-price old-price">&#x20B9;{{number_format(($value['productSize']['actual_price']),2) ?? "-"}}</span>
+                                    <span class="tp-product-price new-price">&#x20B9;{{number_format(($value['productSize']['actual_price']-$value['productSize']['offer_price']),2) ?? "-"}}</span>
                                  @endif
                                  </div>
                               </div>

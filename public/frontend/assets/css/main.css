@@ -17270,7 +17270,7 @@ product all slider
   color: var(--tp-common-white);
 }
 .tp-product-details-buy-now-btn {
-  display: inline-block;
+  /* display: inline-block; */
   font-size: 16px;
   font-weight: 500;
   padding: 10px 30px;
