@@ -55,12 +55,14 @@ class HomeController extends Controller
                                 ->where('status',1)
                                 ->orderBy('id','desc')
                                 ->first();
+                                
         $relatedProduct = Product::with(['productSize','productColor','category'])
                                 ->where('category_id',$productDetail->category_id)
                                 ->whereNotIn('id',[$productDetail->id])
                                 ->where('status',1)
                                 ->orderBy('id','desc')
                                 ->first();
+
         return view('frontend/product_detail',compact('productDetail','relatedProduct'));
     }
 

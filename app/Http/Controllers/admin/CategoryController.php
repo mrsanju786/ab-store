@@ -85,7 +85,6 @@ class CategoryController extends Controller
             Storage::disk('public')->put($dir . $imageName, file_get_contents($request->file));
             $category->image = $imageName;
         } else{
-
             $category->image = $request->old_image;
         }
 
