@@ -12,6 +12,7 @@ use App\Http\Controllers\admin\ProductOptionController;
 use App\Http\Controllers\admin\ProductColorController;
 use App\Http\Controllers\admin\ProductColorVariantController;
 use App\Http\Controllers\admin\ProductSizeVariantController;
+use App\Http\Controllers\admin\OrderController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -180,6 +181,11 @@ use App\Http\Controllers\admin\ProductSizeVariantController;
             Route::get('subscribe/view/{id}', [AdminController::class, 'subscribeView'])->name('subscribe/view');
             Route::get('subscribe/active/{id}', [AdminController::class, 'subscribeActive'])->name('subscribe/active');
             Route::get('subscribe/inactive/{id}', [AdminController::class, 'subscribeInActive'])->name('subscribe/inActive');
+           
+             /**
+            * admin order Routes
+            */
+           Route::get('order/index', [OrderController::class, 'index'])->name('index');
            
     });
 

@@ -226,45 +226,77 @@
                          <button type="button" class="cartmini__close-btn cartmini-close-btn"><i class="fal fa-times"></i></button>
                      </div>
                  </div>
-                 <div class="cartmini__shipping">
+                 <!-- <div class="cartmini__shipping">
                   <p> Free Shipping for all orders over <span>$50</span></p>
                   <div class="progress">
                      <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" data-width="70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
                    </div>                   
-                 </div>
+                 </div> -->
+                 <?php 
+                  $user_id = Auth::user()->id ?? Null; 
+                  $products = DB::table('carts')
+                                 ->join('product_color_variants', 'carts.variant_color_id','=','product_color_variants.id')
+                                 ->select('carts.*', 'product_color_variants.id as variant_id','product_color_variants.product_id','product_color_variants.color_product_image','product_color_variants.color_name',)
+                                 ->where('user_id',$user_id)
+                                 ->get();
+                 ?>
+                <?php
+                     $sub_total =0;
+                     $total     =0;
+                     $price =0;
+                     ?>
+                 @if(!empty($products) && count($products) > 0)
+                 
+                 @foreach($products as $product)
+                 <?php  
+                        $product_name =App\Models\Product::where('id',$product->product_id)->where('status',1)->first();
+                        $productSizePrice =App\Models\ProductSizeVariant::where('id',$product->variant_size)->where('status',1)->first();
+                       
+                        $price      =$productSizePrice['actual_price']-$productSizePrice['offer_price'];
+                        $sub_total +=$productSizePrice['actual_price']-$productSizePrice['offer_price'];
+                        $total     +=$productSizePrice['actual_price']-$productSizePrice['offer_price'];
+                  ?>
                  <div class="cartmini__widget">
                      <div class="cartmini__widget-item">
                          <div class="cartmini__thumb">
-                           <a href="product-details.html">
-                              <img src="{{asset('frontend/assets/img/product/product-1.jpg')}}" alt="">
+                           <a href="{{url('/product-detail')}}/{{base64_encode($product->id)}}">
+                              <img src="{{env('APP_URL')."product"}}/{{$product->color_product_image}}" alt="">
                            </a>
                          </div>
                          <div class="cartmini__content">
-                           <h5 class="cartmini__title"><a href="product-details.html">Level Bolt Smart Lock</a></h5>
+                           <h5 class="cartmini__title"><a href="{{url('/product-detail')}}/{{base64_encode($product->variant_id)}}">{{$product_name->name ?? "-"}}</a></h5>
                            <div class="cartmini__price-wrapper">
-                              <span class="cartmini__price">$46.00</span>
-                              <span class="cartmini__quantity">x2</span>
+                            
+                              <span class="cartmini__price">&#x20B9;{{$price ?? "-"}}</span>
+                           
+                              <span class="cartmini__quantity">{{$product->quantity ?? "-"}}</span>
                            </div>
                          </div>
                          <a href="#" class="cartmini__del"><i class="fa-regular fa-xmark"></i></a>
                      </div>
                  </div>
+
+                
+                 @endforeach
+                 @else
                  <!-- for wp -->
                  <!-- if no item in cart -->
                  <div class="cartmini__empty text-center d-none">
                      <img src="{{asset('frontend/assets/img/product/cartmini/empty-cart.png')}}" alt="">
                      <p>Your Cart is empty</p>
-                     <a href="shop.html" class="tp-btn">Go to Shop</a>
+                     <a href="{{url('/products')}}" class="tp-btn">Go to Shop</a>
                  </div>
+                 @endif
+                
              </div>
              <div class="cartmini__checkout">
                  <div class="cartmini__checkout-title mb-30">
                      <h4>Subtotal:</h4>
-                     <span>$113.00</span>
+                     <span>&#x20B9; {{number_format($sub_total,2)}}</span>
                  </div>
                  <div class="cartmini__checkout-btn">
-                     <a href="cart.html" class="tp-btn mb-10 w-100"> view cart</a>
-                     <a href="checkout.html" class="tp-btn tp-btn-border w-100"> checkout</a>
+                     <a href="{{url('/cart')}}" class="tp-btn mb-10 w-100"> view cart</a>
+                     <a href="{{url('/checkout')}}" class="tp-btn tp-btn-border w-100"> checkout</a>
                  </div>
              </div>
          </div>

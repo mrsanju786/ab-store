@@ -14027,7 +14027,7 @@ div.tp-author-info-avater img {
   font-weight: 600;
 }
 .cartmini__widget {
-  height: calc(100vh - 380px);
+  
   overflow-y: scroll;
   overscroll-behavior-y: contain;
   scrollbar-width: none;
@@ -17270,7 +17270,7 @@ product all slider
   color: var(--tp-common-white);
 }
 .tp-product-details-buy-now-btn {
-  display: inline-block;
+  /* display: inline-block; */
   font-size: 16px;
   font-weight: 500;
   padding: 10px 30px;
