@@ -209,7 +209,7 @@ class HomeController extends Controller
                 } elseif ($wishlistCount != 0) {
 
                     Wishlist::where(['user_id' => Auth::id(), 'product_id' => $data['product_id']])->delete();
-                    $wish_cnt = Wishlist::where('user_id' ,Auth::user()->id)->count();
+                    $wish_cnt = Wishlis::where('user_id' ,Auth::user()->id)->count();
                     
                     return response()->json(['action' => 'remove', 'message' => 'Product removed successfully from wishlist!', 'wish_cnt'=>$wish_cnt]);
                 }

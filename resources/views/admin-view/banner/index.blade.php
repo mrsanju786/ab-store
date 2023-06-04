@@ -16,7 +16,7 @@
                 <div class="card-body">
                     <div>
                         <div class="table-responsive table-desi table-product">
-                            <table class="table table-1d all-package" id="example">
+                            <table id="example" class="table table-1d all-package" id="example">
                                 <thead>
                                     <tr>
                                         <th>Banner Image</th>
@@ -107,5 +107,12 @@
 
 
 </div>
+
+<script>
+
+    $(document).ready(function () {
+        $('#example').DataTable();
+    });
+</script>
 
 @endsection
