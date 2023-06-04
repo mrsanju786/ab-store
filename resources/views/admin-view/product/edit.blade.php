@@ -53,7 +53,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="mb-4 row align-items-center">
+                                    <!-- <div class="mb-4 row align-items-center">
                                         <label class="form-label-title col-sm-2 mb-0">
                                             Price</label>
                                         <div class="col-sm-10">
@@ -76,7 +76,7 @@
                                                     <span class="error">{{ $errors->first('discount') }}</span>
                                                 @endif    
                                         </div>
-                                    </div>
+                                    </div> -->
                                     <!-- <div class="mb-4 row align-items-center">
                                         <label class="form-label-title col-sm-2 mb-0">
                                             Quantity</label>
@@ -135,7 +135,7 @@
                                             <label class="form-label-title col-sm-2 mb-0">Product
                                                 Description</label>
                                             <div class="col-sm-10">
-                                                <textarea name ="description" id="editor" placeholder ="Description">{{$product->description}}</textarea>
+                                                <textarea name ="description" class="form-control" placeholder ="Description">{{$product->description}}</textarea>
                                                 @if ($errors->has('description'))
                                                     <span class="error">{{ $errors->first('description') }}</span>
                                                 @endif
@@ -143,6 +143,22 @@
                                         </div>
                                     </div>
                                 </div>
+                                <br>
+                                    <br>
+                                    <br>
+                                    <br>
+                                   <div class="col-12">
+                                        <div class="row">
+                                            <label class="form-label-title col-sm-2 mb-0">Long
+                                                Description</label>
+                                            <div class="col-sm-10">
+                                                <textarea name ="long_description"  class="form-control ckeditor"  placeholder ="Long Description">{{$product->long_description ?? ""}}</textarea>
+                                                @if ($errors->has('long_description'))
+                                                    <span class="error">{{ $errors->first('long_description') }}</span>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
                             <!-- </form> -->
                         </div>
                     </div>
@@ -193,5 +209,9 @@
     color:red;
 }
 </style>
+<script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
+<script>
+    CKEDITOR.replace( 'long_description' );
+</script> 
 @endsection
 

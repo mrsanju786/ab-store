@@ -56,7 +56,7 @@
                                             <label class="form-label-title col-sm-2 mb-0">Product
                                                 Description</label>
                                             <div class="col-sm-10">
-                                                <textarea name ="description" id="editor" placeholder ="Description">{{old('description')}}</textarea>
+                                                <textarea name ="description" class="form-control ckeditor"  placeholder ="Description">{{old('description')}}</textarea>
                                                 @if ($errors->has('description'))
                                                     <span class="error">{{ $errors->first('description') }}</span>
                                                 @endif
@@ -110,5 +110,9 @@
     color:red;
 }
 </style>
+<script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
+<script>
+    CKEDITOR.replace( 'description' );
+</script> 
 @endsection
 

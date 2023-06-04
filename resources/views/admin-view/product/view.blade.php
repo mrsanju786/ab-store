@@ -70,6 +70,10 @@
                                         <td>
                                             Status :{{$record->status==1 ? "Active" : "InActive"}}
                                         </td>
+                                        <br> 
+                                        <td>
+                                           Long  Description :{!! $record->long_description !!}
+                                        </td>
                                         
                                 </div>
                                

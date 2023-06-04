@@ -39,6 +39,7 @@ class ProductController extends Controller
             'product_type'   => 'required',
             'image'          => 'required',
             'description'    => 'required',
+            'long_description'  => 'nullable',
           
         ]);
         $main_sku = '#'.rand();
@@ -49,6 +50,7 @@ class ProductController extends Controller
         $product->product_type = $request->product_type;
         $product->product_hsn  = $request->product_hsn;
         $product->description  = $request->description;
+        $product->long_description  = $request->long_description;
         $product->category_id  = $request->category_id;
       
         //add image 
@@ -92,14 +94,16 @@ class ProductController extends Controller
             'product_type'   => 'required',
             'image'          => 'nullable',
             'description'    => 'required',
+            'long_description'    => 'nullable',
         ]);
 
         $product = Product::find(base64_decode($id));
         $product->name = $request->name;
-        $product->description = $request->description;
-        $product->product_hsn = $request->product_hsn;
-        $product->product_type = $request->product_type;
-        $product->category_id = $request->category_id;
+        $product->description      = $request->description;
+        $product->long_description = $request->long_description;
+        $product->product_hsn      = $request->product_hsn;
+        $product->product_type     = $request->product_type;
+        $product->category_id      = $request->category_id;
 
          //add image 
          if ($request->file('image')) {
