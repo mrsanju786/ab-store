@@ -52,6 +52,18 @@
                                             </select>
                                         </div>
                                     </div>
+                                    <div class="mb-4 row align-items-center">
+                                        <label class="form-label-title col-sm-2 mb-0">
+                                            Product Hsn</label>
+                                        <div class="col-sm-10">
+                                            <input class="form-control" type="text"
+                                                placeholder="Product Hsn" name = "product_hsn" value="{{old('product_hsn')}}">
+                                             
+                                                @if ($errors->has('product_hsn'))
+                                                    <span class="error">{{ $errors->first('product_hsn') }}</span>
+                                                @endif    
+                                        </div>
+                                    </div>
 
                                     <div class="mb-4 row align-items-center">
                                         <label class="form-label-title col-sm-2 mb-0">
@@ -59,9 +71,9 @@
                                         <div class="col-sm-10">
                                             <select class="js-example-basic-single w-100" name="product_type">
                                                 <option >Select Type</option>
-                                                <option value="1" >Default</option>
+                                                <!-- <option value="1" >Default</option> -->
                                                 <option value="2" >Featured</option>
-                                                <option value="3" >Hot</option>
+                                                <!-- <option value="3" >Hot</option> -->
                                                 <option value="4" >New </option>
                                             </select>
                                         </div>
@@ -71,7 +83,7 @@
                                             <label class="form-label-title col-sm-2 mb-0">Product
                                                 Description</label>
                                             <div class="col-sm-10">
-                                                <textarea name ="description" id="editor" placeholder ="Description">{{old('description')}}</textarea>
+                                                <textarea name ="description" id="editor"  placeholder ="Description">{{old('description')}}</textarea>
                                                 @if ($errors->has('description'))
                                                     <span class="error">{{ $errors->first('description') }}</span>
                                                 @endif

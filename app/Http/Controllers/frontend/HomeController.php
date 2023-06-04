@@ -22,10 +22,10 @@ class HomeController extends Controller
     public function home()
     {
         $banner   = Banner::where('status',1)->orderBy('id','desc')->get();
-        $category = Category::where('status',1)->orderBy('id','desc')->limit('5')->get();
+        $category = Category::where('status',1)->limit('5')->get();
         $newProduct       = Product::with(['productSize','productColor','category'])->where('product_type',4)->where('status',1)->orderBy('id','desc')->limit('8')->get();
         $featuredProduct  = Product::with(['productSize','productColor','category'])->where('product_type',2)->where('status',1)->orderBy('id','desc')->limit('8')->get();
-        $categoryList = Category::where('status',1)->orderBy('id','desc')->get();
+        $categoryList = Category::where('status',1)->get();
         return view('frontend/home',compact('banner','category','newProduct','featuredProduct','categoryList'));
     }
 
@@ -33,7 +33,7 @@ class HomeController extends Controller
     {
         $products  = Product::with(['productSize','productColor','category'])
                                 ->where('status',1)
-                                ->where('id',base64_decode($id))
+                                ->where('category_id',base64_decode($id))
                                 ->orderBy('id','desc')
                                 ->get();
 
@@ -160,7 +160,10 @@ class HomeController extends Controller
     public function checkProductSize(Request $request){
         $original_price =0;
         $product_data = ProductSizeVariant::where('id', $request->product_size)->where('status',1)->firstOrFail();
-        $original_price = $product_data->actual_price - $product_data->offer_price;
+        $product_color = ProductColorVariant::where('id', $request->product_color)->where('status',1)->firstOrFail();
+        $price =0;
+        $price =$product_color->extra_amount;
+        $original_price = $product_data->offer_price-$price;
         if(!empty($product_data)){
             return response()->json(['product_data'=>$product_data,'original_price'=>$original_price]);
         }else{

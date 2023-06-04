@@ -50,12 +50,16 @@
                                         </td>
                                         <br> 
                                         <td>
-                                            Product Type : @if($record->producy_type==1)
+                                            Product Type :
+                                             
+                                            @if($record->producy_type==1)
                                               {{'Default'}}
                                             @elseif($record->producy_type==2)
-                                              {{'Featured Category'}}
+                                              {{'Featured'}}
+                                            @elseif($record->producy_type==3)
+                                              {{'Hot'}}
                                             @else
-                                            {{'Hot Category'}}
+                                              {{'New '}}
                                             @endif
                                         </td>
                                         <br> 

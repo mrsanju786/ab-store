@@ -96,11 +96,24 @@
                                         <div class="col-sm-10">
                                             <select class="js-example-basic-single w-100" name="product_type">
                                                 <option >Select Type</option>
-                                                <option value="1" {{($product->product_type==1)? 'selected':''}}>Default</option>
+                                                <!-- <option value="1" {{($product->product_type==1)? 'selected':''}}>Default</option> -->
                                                 <option value="2" {{($product->product_type==2)? 'selected':''}}>Featured</option>
-                                                <option value="3" {{($product->product_type==3)? 'selected':''}}>Hot</option>
+                                                <!-- <option value="3" {{($product->product_type==3)? 'selected':''}}>Hot</option> -->
                                                 <option value="4" {{($product->product_type==4)? 'selected':''}}>New </option>
                                             </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-4 row align-items-center">
+                                        <label class="form-label-title col-sm-2 mb-0">
+                                            Product Hsn</label>
+                                        <div class="col-sm-10">
+                                            <input class="form-control" type="text"
+                                                placeholder="Product Hsn" name = "product_hsn" value="{{$product->product_hsn}}">
+                                             
+                                                @if ($errors->has('product_hsn'))
+                                                    <span class="error">{{ $errors->first('product_hsn') }}</span>
+                                                @endif    
                                         </div>
                                     </div>
 

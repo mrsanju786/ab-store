@@ -251,10 +251,11 @@
                  <?php  
                         $product_name =App\Models\Product::where('id',$product->product_id)->where('status',1)->first();
                         $productSizePrice =App\Models\ProductSizeVariant::where('id',$product->variant_size)->where('status',1)->first();
-                       
-                        $price      =$productSizePrice['actual_price']-$productSizePrice['offer_price'];
-                        $sub_total +=$productSizePrice['actual_price']-$productSizePrice['offer_price'];
-                        $total     +=$productSizePrice['actual_price']-$productSizePrice['offer_price'];
+                        $productColorPrice =App\Models\ProductColorVariant::where('id',$product->variant_color_id)->where('status',1)->first();
+
+                        $price      =$productSizePrice['offer_price']-$productColorPrice['extra_amount'];
+                        $sub_total +=$productSizePrice['offer_price']-$productColorPrice['extra_amount'];
+                        $total     +=$productSizePrice['offer_price']-$productColorPrice['extra_amount'];
                   ?>
                  <div class="cartmini__widget">
                      <div class="cartmini__widget-item">
@@ -272,7 +273,7 @@
                               <span class="cartmini__quantity">{{$product->quantity ?? "-"}}</span>
                            </div>
                          </div>
-                         <a href="#" class="cartmini__del"><i class="fa-regular fa-xmark"></i></a>
+                         <!-- <a href="#" class="cartmini__del"><i class="fa-regular fa-xmark"></i></a> -->
                      </div>
                  </div>
 

@@ -275,7 +275,7 @@
                                     <!-- <li><a href="{{url('/shop-category')}}">Categories</a></li> -->
                                     <li class="has-dropdown">
                                        <a href="javascript:;">Categories</a>
-                                       <?php $categoryList = DB::table('categories')->where('status',1)->orderBy('id','desc')->get(); ?>
+                                       <?php $categoryList = DB::table('categories')->where('status',1)->get(); ?>
                                        <ul class="tp-submenu">
                                           @if(!empty($categoryList))
                                           @foreach($categoryList as $value)
