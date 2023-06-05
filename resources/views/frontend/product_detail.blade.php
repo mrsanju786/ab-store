@@ -148,10 +148,13 @@
                            <p>{!! Str::words($productDetail->description, 20,'....')  !!}<span>See more</span></p>
                            
                            <!-- price -->
-                           
+                           <?php $productColor =App\Models\ProductColorVariant::where('product_id',$productDetail->id)->first(); 
+                           $price = 0;
+                           $price = $productColor->extra_amount;
+                           ?>
                            <div class="tp-product-details-price-wrapper mb-20">
                            &#x20B9;<span class="tp-product-details-price old-price" id ="actualPrice">{{number_format(($productDetail['productSize']['actual_price']),2) ?? "-"}}</span>
-                           &#x20B9;<span class="tp-product-details-price new-price" id ="new_price">{{number_format(($productDetail['productSize']['actual_price']-$productDetail['productSize']['offer_price']),2) ?? "-"}}</span>
+                           &#x20B9;<span class="tp-product-details-price new-price" id ="new_price">{{number_format(($productDetail['productSize']['offer_price']-$single_product_data['extra_amount']),2) ?? "-"}}</span>
                            </div>
                           
    
@@ -306,7 +309,7 @@
                            <div class="tp-product-details-query">
                               <div class="tp-product-details-query-item d-flex align-items-center">
                                  <span>SKU:  </span>
-                                 <p>NTB7SDVX44</p>
+                                 <p>{{$productDetail->sku ?? "-"}}</p>
                               </div>
                               <div class="tp-product-details-query-item d-flex align-items-center">
                                  <span>Category:  </span>
@@ -656,10 +659,15 @@
                                     <h3 class="tp-product-title-3">
                                        <a href="product-details.html">{{$value->name ?? "-"}}</a>
                                     </h3>
+                                    
                                     @if(!empty($value['productSize']))
+                                    <?php $productColor =App\Models\ProductColorVariant::where('product_id',$productDetail->id)->first(); 
+                                    $price = 0;
+                                    $price = $productColor->extra_amount;
+                                    ?>
                                     <div class="tp-product-price-wrapper-3">
                                        <span class="tp-product-price-3 new-price">&#x20B9;{{number_format(($value['productSize']['actual_price']),2) ?? "-"}}</span>
-                                       <span class="tp-product-price-3 old-price">&#x20B9;{{number_format(($value['productSize']['actual_price']-$value['productSize']['offer_price']),2) ?? "-"}}</span>
+                                       <span class="tp-product-price-3 old-price">&#x20B9;{{number_format(($value['productSize']['offer_price']-$value['productSize']['extra_amount']),2) ?? "-"}}</span>
                                     </div>
                                     @endif
                                  </div>
@@ -765,6 +773,7 @@ label.star:before {
             success:function(data){
                 if(data.msg==true){
                     toastr.success('Cart added to successfully!');
+                    location.reload();  
                     $('#cart_count').html(data.cart_cnt);
                 }else{
                     toastr.error("Something Went Wrong!");
@@ -841,8 +850,8 @@ label.star:before {
 <script>
 function getVariantSize(){
 
-   var product_size = $('#product_size').val();
-   
+   var product_size  = $('#product_size').val();
+   var product_color = $('#variant_color').val();
   
    var token = '{{csrf_token()}}';
    $.ajax({
@@ -850,7 +859,7 @@ function getVariantSize(){
       url:"{{route('check-product-size')}}",
       data:{
          
-         'product_size' :product_size,
+         'product_size' :product_size,'product_color':product_color,
          
          _token:token,
       },

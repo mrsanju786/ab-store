@@ -52,34 +52,36 @@
                         <?php  
                                $product_name =App\Models\Product::where('id',$product->product_id)->where('status',1)->first();
                                $productSizePrice =App\Models\ProductSizeVariant::where('id',$product->variant_size)->where('status',1)->first();
-                               
-                               $sub_total +=$productSizePrice['actual_price']-$productSizePrice['offer_price'] * $product->quantity;
-                               $total     +=$productSizePrice['actual_price']-$productSizePrice['offer_price'] * $product->quantity;
+                               $productColorPrice =App\Models\ProductColorVariant::where('id',$product->variant_color_id)->where('status',1)->first();
+                               $sub_total +=($productSizePrice['offer_price']-$productColorPrice['extra_amount']) * $product->quantity;
+                               $total     +=($productSizePrice['offer_price']-$productColorPrice['extra_amount']) * $product->quantity;
                         ?>
-                        <td class="tp-cart-title"><a href="{{url('/product-detail')}}/{{base64_encode($product->variant_id)}}">{{$product_name->name ?? "-"}} <br>Size : {{$productSizePrice->size ?? "-"}}GB <br>Color : {{$product->color_name ?? "-"}}</a></td>
+                        <td class="tp-cart-title"><a href="javascript:;">{{$product_name->name ?? "-"}} <br>Size : {{$productSizePrice->size ?? "-"}}GB <br>Color : {{$product->color_name ?? "-"}}</a></td>
                         
                         <!-- price -->
-                        <td class="tp-cart-price"><span>&#x20B9;{{number_format(($productSizePrice['actual_price']-$productSizePrice['offer_price']),2) ?? "-"}}</span></td>
+                        <td class="tp-cart-price"><span>&#x20B9;{{number_format(($productSizePrice['offer_price']-$productColorPrice['extra_amount']),2) ?? "-"}}</span></td>
                         <!-- quantity -->
-                        <td class="tp-cart-quantity">
-                           <div class="tp-product-quantity mt-10 mb-10">
-                              <span class="tp-cart-minus">
+                        <td class="tp-cart-quantity ">
+                           <div class="tp-product-quantity mt-10 mb-10" >
+                              <!-- <span class="tp-cart-minus decrement-btn "  data-pid="{{$product->id}}">
+
                                  <svg width="10" height="2" viewBox="0 0 10 2" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M1 1H9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                  </svg>                                                             
-                              </span>
-                              <input type="text" id="quantity" class="tp-cart-input item_quantity1" value="{{$product->quantity}}" min="1" max="20"
-                                                name="quantity"  data-pid="{{$product->id}}">
-                              <!-- <input class="tp-cart-input" type="text" value="1"> -->
-                              <span class="tp-cart-plus">
+                              </span> -->
+                              
+                              <input type="number"  id="quantity" class="tp-cart-input update_quantity" value="{{$product->quantity}}" min="1" max="20"
+                                                name="quantity"  data-pid="{{$product->id}}" style="height:40px;">
+                            
+                              <!-- <span class="tp-cart-plus increment-btn "  data-pid="{{$product->id}}">
                                  <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M5 1V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                     <path d="M1 5H9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                  </svg>
-                              </span>
+                              </span> -->
                            </div>
                         </td>
-                       
+                        
                         <td class="tp-cart-action">
                            <a href="{{url('/delete-from-cart')}}/{{$product->id}}"class="tp-cart-action-btn">
                               <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -103,22 +105,23 @@
                <div class="row align-items-end">
                   <div class="col-xl-6 col-md-8">
                      <div class="tp-cart-coupon">
-                        <!-- <form action="#">
+                        <form action="#">
                            <div class="tp-cart-coupon-input-box">
-                              <label>Coupon Code:</label>
+                              <!-- <label>Coupon Code:</label>
                               <div class="tp-cart-coupon-input d-flex align-items-center">
                                  <input type="text" placeholder="Enter Coupon Code">
                                  <button type="submit">Apply</button>
-                              </div>
+                              </div> -->
                            </div>
-                        </form> -->
+                        </form>
                      </div>
                   </div>
-                  <div class="col-xl-6 col-md-4">
+                  <br>
+                  <!-- <div class="col-xl-6 col-md-4">
                      <div class="tp-cart-update text-md-end">
                         <a href="javascript:location.reload();" class="tp-cart-update-btn">Update Cart</a>
                      </div>
-                  </div>
+                  </div> -->
                </div>
             </div>
          </div>
@@ -159,31 +162,46 @@
    </div>
 </section>
 
-<link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet"/>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> 
+<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet"/>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
 <script>
-    $(".item_quantity1").change(function(){
-        var product_id = $(this).data("pid");
-        var product_qty = $(this).val();
-        var token = '{{csrf_token()}}';
-        $.ajax({
-            type:"POST",
-            url:"{{route('updateQuantity')}}",
-            data:{
-                'product_id':product_id,
-                'quantity':product_qty,
-                _token:token,
-            },
-            success:function(data){
-               console.log("success");
-            }
-        });
+   $(document).ready(function() {
+   $(".update_quantity").click(function (e) {
+        e.preventDefault();
+         var product_id = $(this).data("pid");
+        
+         var product_qty = $(this).val();
+         var token = '{{csrf_token()}}';
+         $.ajax({
+               type:"POST",
+               url:"{{route('updateQuantity')}}",
+               data:{
+                  'product_id':product_id,
+                  'quantity':product_qty,
+                  _token:token,
+               },
+               success:function(data){
+                  console.log("success");
+                  if(data.msg==true){
+                     location.reload();  
+                    toastr.success('Update quantity successfully!');
+                    
+                }else{
+                    toastr.error("Something Went Wrong!");
+                }
+               }
+         });
 
-    });
+      });
+   
+   });
+   
+  
 </script>
 
-@endsection
 
+@endsection
 

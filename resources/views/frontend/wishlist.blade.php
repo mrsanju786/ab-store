@@ -47,11 +47,11 @@
                     <!-- title -->
                     <?php  $product =App\Models\Product::where('id',$wishlist->productColor->product_id)->where('status',1)->first();
                            $productSizePrice =App\Models\ProductSizeVariant::where('product_id',$wishlist->productColor->product_id)->where('status',1)->first();
-                          
+                           $productColorPrice =App\Models\ProductColorVariant::where('product_id',$wishlist->productColor->product_id)->where('status',1)->first();
                     ?>
                     <td class="tp-cart-title"><a href="{{url('/product-detail')}}/{{base64_encode($wishlist->product_id)}}">{{$product->name ?? "-"}}</a></td>
                     <!-- price -->
-                    <td class="tp-cart-price"><span>&#x20B9;{{number_format(($productSizePrice['actual_price']-$productSizePrice['offer_price']),2) ?? "-"}}</span></td>
+                    <td class="tp-cart-price"><span>&#x20B9;{{number_format(($productSizePrice['offer_price']),2) ?? "-"}}</span></td>
                     <!-- quantity -->
                     <!-- <td class="tp-cart-quantity">
                     <div class="tp-product-quantity mt-10 mb-10">

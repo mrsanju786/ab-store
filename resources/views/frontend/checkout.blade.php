@@ -174,6 +174,8 @@
                     
                         <li class="tp-order-info-list-header">
                             <h4>Product</h4>
+                            <h4>Size</h4>
+                            <h4>Color</h4>
                             <h4>Total</h4>
                         </li>
                     
@@ -190,14 +192,17 @@
                         <?php  
                             $product_name =App\Models\Product::where('id',$product->product_id)->where('status',1)->first();
                             $productSizePrice =App\Models\ProductSizeVariant::where('id',$product->variant_size)->where('status',1)->first();
-                            
-                            $price      =$productSizePrice['actual_price']-$productSizePrice['offer_price'] * $product->quantity;
-                            $sub_total +=$productSizePrice['actual_price']-$productSizePrice['offer_price'] * $product->quantity;
-                            $total     +=$productSizePrice['actual_price']-$productSizePrice['offer_price'] * $product->quantity;
+                            $productColorPrice =App\Models\ProductColorVariant::where('id',$product->variant_color_id)->where('status',1)->first();
+                            $price      =($productSizePrice['offer_price']-$productColorPrice['extra_amount']) * $product->quantity;
+                            $sub_total +=($productSizePrice['offer_price']-$productColorPrice['extra_amount']) * $product->quantity;
+                            $total     +=($productSizePrice['offer_price']-$productColorPrice['extra_amount']) * $product->quantity;
                         ?>
 
                         <li class="tp-order-info-list-desc">
                             <p>{{$product_name->name ?? "-"}} <span> x {{$product->quantity ?? "-"}}</span></p>
+                           
+                            <span>{{$productSizePrice->size ?? "-"}} GB</span>
+                            <span>{{$productColorPrice->color_name ?? "-"}}</span>
                             <span>&#x20B9;{{number_format($price ,2) ?? "-"}}</span>
                         </li>
                         @endforeach

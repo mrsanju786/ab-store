@@ -35,23 +35,22 @@ class ProductController extends Controller
         $request->validate([
             'name'           => 'required',
             'category_id'    => 'required',
-            // 'price'          => 'required',
-            // 'discount'       => 'nullable',
+            'product_hsn'    => 'required|unique:products,product_hsn',
             'product_type'   => 'required',
-            // 'quantity'       => 'required',
-            'image'          => 'nullable',
+            'image'          => 'required',
             'description'    => 'required',
+            'long_description'  => 'nullable',
           
         ]);
-
+        $main_sku = '#'.rand();
         $product = new Product();
-        $product->name        = $request->name;
+        $product->name         = $request->name;
+        $product->sku          = $main_sku;
         $product->slug         = \Str::slug($request->name);
-        // $product->price        = $request->price;
-        // $product->discount     = $request->discount;
         $product->product_type = $request->product_type;
-       // $product->quantity     = $request->quantity;
+        $product->product_hsn  = $request->product_hsn;
         $product->description  = $request->description;
+        $product->long_description  = $request->long_description;
         $product->category_id  = $request->category_id;
       
         //add image 
@@ -91,22 +90,20 @@ class ProductController extends Controller
         $request->validate([
             'name'           => 'required',
             'category_id'    => 'required',
-            // 'price'          => 'required',
-            // 'discount'       => 'nullable',
+            'product_hsn'    => 'required',
             'product_type'   => 'required',
-            // 'quantity'       => 'required',
             'image'          => 'nullable',
             'description'    => 'required',
+            'long_description'    => 'nullable',
         ]);
 
         $product = Product::find(base64_decode($id));
         $product->name = $request->name;
-        $product->description = $request->description;
-        // $product->price        = $request->price;
-        // $product->discount     = $request->discount;
-        $product->product_type = $request->product_type;
-      //  $product->quantity     = $request->quantity;
-        $product->category_id = $request->category_id;
+        $product->description      = $request->description;
+        $product->long_description = $request->long_description;
+        $product->product_hsn      = $request->product_hsn;
+        $product->product_type     = $request->product_type;
+        $product->category_id      = $request->category_id;
 
          //add image 
          if ($request->file('image')) {

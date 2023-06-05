@@ -43,6 +43,16 @@ class CartController extends Controller
         $result = Cart::where('user_id',$user_id)
                     ->where('variant_color_id', $variant_id)
                     ->first();
+        $productSizePrice =ProductSizeVariant::where('id',$size)
+                                           
+                                            ->where('status',1)
+                                            ->first();  
+                                   
+        $productColorPrice =ProductColorVariant::where('id',$variant_id)
+                                           
+                                            ->where('status',1)
+                                            ->first();    
+
         if($result == null){
             $cart = new Cart;
             $cart->user_id         = $user_id;
@@ -51,10 +61,9 @@ class CartController extends Controller
             $cart->quantity        = $quantity;
             $cart->variant_color   = $color;
             $cart->variant_size    = $size;
-            if(!empty($product_detail['productSize'])){
-              $cart->price  = $product_detail['productSize']['actual_price']-$product_detail['productSize']['offer_price'];
-            }
-
+           
+            $cart->price           = $productSizePrice['offer_price']-$productColorPrice['extra_amount'];
+        
             if($cart->save()){
                 $cart_cnt = Cart::where('user_id',$user_id)->count();
                 
@@ -89,12 +98,11 @@ class CartController extends Controller
     }
 
     public function updateQuantity(Request $request){
-        dd('adsd');
+        
         $cart = Cart::where('id',$request->product_id);
         $cart->limit(1)->update(['quantity'=>$request->quantity]);
-        Toastr::success(translate('Update quantity successfully!'));    
-           
-        // return redirect()->back()->with('success', 'Update quantity successfully!');
+        return response()->json(['msg' => true]);
+       // return redirect()->back()->with('success', 'Update quantity successfully!');
            
     }
 
@@ -115,7 +123,8 @@ class CartController extends Controller
 
         $productSizePrice =ProductSizeVariant::where('product_id',$product_detail->product_id)
                     ->where('status',1)
-                    ->first();            
+                    ->first();     
+        
         if($result == null){
             $cart = new Cart;
             $cart->user_id         = $user_id;
@@ -124,10 +133,9 @@ class CartController extends Controller
             $cart->quantity        = 1;
             $cart->variant_color   = $product_detail->id;
             $cart->variant_size    = $productSizePrice->id;
-            if(!empty($productSizePrice)){
-              $cart->price  = $productSizePrice['actual_price']-$productSizePrice['offer_price'];
-            }
-          
+           
+            $cart->price  = $productSizePrice['offer_price']-$product_detail['extra_amount'];
+            
             $cart->save();
             Wishlist::where('product_id',$request->id)->limit(1)->delete();
             return redirect()->back()->with('success', 'Product added to cart successfully!');

@@ -151,7 +151,7 @@
                            
                            <div class="tp-product-details-price-wrapper mb-20">
                            &#x20B9;<span class="tp-product-details-price old-price" id ="actualPrice">{{number_format(($productDetail['productSize']['actual_price']),2) ?? "-"}}</span>
-                           &#x20B9;<span class="tp-product-details-price new-price" id ="new_price">{{number_format(($productDetail['productSize']['actual_price']-$productDetail['productSize']['offer_price']),2) ?? "-"}}</span>
+                           &#x20B9;<span class="tp-product-details-price new-price" id ="new_price">{{number_format(($productDetail['productSize']['offer_price']-$single_product_data['extra_amount']),2) ?? "-"}}</span>
                            </div>
                           
    
@@ -238,7 +238,7 @@
                                     <button type ="submit" class="tp-product-details-add-to-cart-btn w-100 add_to_cart" data-id="{{$productDetail->id}}">Add To Cart</button>
                                  </div>
                               </div>
-                              <button class="tp-product-details-buy-now-btn w-100">Buy Now</button>
+                              <a href="{{url('/checkout')}}" class="tp-product-details-buy-now-btn w-100 add_to_cart"  data-id="{{$productDetail->id}}">Buy Now</a>
                            </div>
                            <div class="tp-product-details-action-sm">
                            @php $countWishlist = 0; @endphp
@@ -628,7 +628,7 @@
                                     <!-- product action -->
                                     <div class="tp-product-action-3 tp-product-action-4 has-shadow tp-product-action-primaryStyle">
                                        <div class="tp-product-action-item-3 d-flex flex-column">
-                                          <button type="button" class="tp-product-action-btn-3 tp-product-add-cart-btn">
+                                          <!-- <button type="button" class="tp-product-action-btn-3 tp-product-add-cart-btn">
                                              <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M3.34706 4.53799L3.85961 10.6239C3.89701 11.0923 4.28036 11.4436 4.74871 11.4436H4.75212H14.0265H14.0282C14.4711 11.4436 14.8493 11.1144 14.9122 10.6774L15.7197 5.11162C15.7384 4.97924 15.7053 4.84687 15.6245 4.73995C15.5446 4.63218 15.4273 4.5626 15.2947 4.54393C15.1171 4.55072 7.74498 4.54054 3.34706 4.53799ZM4.74722 12.7162C3.62777 12.7162 2.68001 11.8438 2.58906 10.728L1.81046 1.4837L0.529505 1.26308C0.181854 1.20198 -0.0501969 0.873587 0.00930333 0.526523C0.0705036 0.17946 0.406255 -0.0462578 0.746256 0.00805037L2.51426 0.313534C2.79901 0.363599 3.01576 0.5995 3.04042 0.888012L3.24017 3.26484C15.3748 3.26993 15.4139 3.27587 15.4726 3.28266C15.946 3.3514 16.3625 3.59833 16.6464 3.97849C16.9303 4.35779 17.0493 4.82535 16.9813 5.29376L16.1747 10.8586C16.0225 11.9177 15.1011 12.7162 14.0301 12.7162H14.0259H4.75402H4.74722Z" fill="currentColor"/>
                                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M12.6629 7.67446H10.3067C9.95394 7.67446 9.66919 7.38934 9.66919 7.03804C9.66919 6.68673 9.95394 6.40161 10.3067 6.40161H12.6629C13.0148 6.40161 13.3004 6.68673 13.3004 7.03804C13.3004 7.38934 13.0148 7.67446 12.6629 7.67446Z" fill="currentColor"/>
@@ -646,15 +646,15 @@
                                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M14.203 6.67473C13.8627 6.67473 13.5743 6.41474 13.5462 6.07159C13.4882 5.35202 13.0046 4.7445 12.3162 4.52302C11.9689 4.41097 11.779 4.04068 11.8906 3.69666C12.0041 3.35175 12.3724 3.16442 12.7206 3.27297C13.919 3.65901 14.7586 4.71561 14.8615 5.96479C14.8905 6.32632 14.6206 6.64322 14.2575 6.6721C14.239 6.67385 14.2214 6.67473 14.203 6.67473Z" fill="currentColor"/>
                                              </svg>                                                                               
                                              <span class="tp-product-tooltip">Add To Wishlist</span>
-                                          </button>
+                                          </button> -->
                                        </div>
                                     </div>
          
-                                    <div class="tp-product-add-cart-btn-large-wrapper">
+                                    <!-- <div class="tp-product-add-cart-btn-large-wrapper">
                                        <button type="button" class="tp-product-add-cart-btn-large">
                                              Add To Cart                                           
                                        </button>
-                                    </div>
+                                    </div> -->
                                  </div>
                                  <div class="tp-product-content-3">
                                     <div class="tp-product-tag-3">
@@ -663,12 +663,12 @@
                                     <h3 class="tp-product-title-3">
                                        <a href="product-details.html">{{$value->name ?? "-"}}</a>
                                     </h3>
-                                    @if(!empty($value['productSize']))
+                                    
                                     <div class="tp-product-price-wrapper-3">
                                        <span class="tp-product-price-3 new-price">&#x20B9;{{number_format(($value['productSize']['actual_price']),2) ?? "-"}}</span>
-                                       <span class="tp-product-price-3 old-price">&#x20B9;{{number_format(($value['productSize']['actual_price']-$value['productSize']['offer_price']),2) ?? "-"}}</span>
+                                       <span class="tp-product-price-3 old-price">&#x20B9;{{number_format(($value['productSize']['offer_price']-$productDetail['productColor']['extra_amount']),2) ?? "-"}}</span>
                                     </div>
-                                    @endif
+                                    
                                  </div>
                               </div>
                            </div>
@@ -772,6 +772,7 @@ label.star:before {
             success:function(data){
                 if(data.msg==true){
                     toastr.success('Cart added to successfully!');
+                    location.reload();  
                     $('#cart_count').html(data.cart_cnt);
                 }else{
                     toastr.error("Something Went Wrong!");
@@ -849,7 +850,7 @@ label.star:before {
 function getVariantSize(){
 
    var product_size = $('#product_size').val();
-   
+   var product_color = $('#variant_color').val();
   
    var token = '{{csrf_token()}}';
    $.ajax({
@@ -857,7 +858,7 @@ function getVariantSize(){
       url:"{{route('check-product-size')}}",
       data:{
          
-         'product_size' :product_size,
+         'product_size' :product_size,product_color:product_color,
          
          _token:token,
       },

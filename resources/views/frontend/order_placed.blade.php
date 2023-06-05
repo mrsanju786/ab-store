@@ -41,7 +41,7 @@
                                  </span>
                               </div>
                               <div class="tp-order-details-content">
-                                 <h3 class="tp-order-details-title">Track Your Order</h3>
+                                 <h3 class="tp-order-details-title"><a href="{{url('/profile')}}">Track Your Order</a></h3>
                                  <!-- <p>We will send you a shipping confirmation email as soon <br> as your order ships</p> -->
                               </div>
                            </div>
@@ -91,6 +91,8 @@
                                  <!-- header -->
                                  <li class="tp-order-info-list-header">
                                     <h4>Product</h4>
+                                    <h4>Size</h4>
+                                    <h4>Color</h4>
                                     <h4>Total</h4>
                                  </li>
 
@@ -107,13 +109,16 @@
                                        $product_name =App\Models\Product::where('id',$value->product_id)->where('status',1)->first();
                                        $productSizePrice =App\Models\ProductSizeVariant::where('id',$value->variant_size)->where('status',1)->first();
                                        $productColor     =App\Models\ProductColorVariant::where('id',$value->variant_color_id)->where('status',1)->first();
-                                       $price      =$productSizePrice['actual_price']-$productSizePrice['offer_price'] * $value->quantity;
-                                       $sub_total +=$productSizePrice['actual_price']-$productSizePrice['offer_price'] * $value->quantity;
-                                       $total     +=$productSizePrice['actual_price']-$productSizePrice['offer_price'] * $value->quantity;
+                                       $price      =($productSizePrice['offer_price']-$productColor['extra_amount']) * $value->quantity;
+                                       $sub_total +=($productSizePrice['offer_price']-$productColor['extra_amount']) * $value->quantity;
+                                       $total     +=($productSizePrice['offer_price']-$productColor['extra_amount']) * $value->quantity;
                                  ?>
                                  <li class="tp-order-info-list-desc">
                                     <p>{{$product_name->name ?? "-"}} <span> x {{$value->quantity ?? "-"}}</span></p>
-                                    <span>&#x20B9;{{$price ?? "0"}}</span>
+                                   
+                                    <span>{{ $productSizePrice->size ?? "-"}} GB</span>
+                                    <span>{{$productColor->color_name ?? "-"}}</span>
+                                    <span>&#x20B9;{{number_format($price,2) ?? "0"}}</span>
                                  </li>
                                  @endforeach
                                  @endif
@@ -122,7 +127,7 @@
                                  <!-- subtotal -->
                                  <li class="tp-order-info-list-subtotal">
                                     <span>Subtotal</span>
-                                    <span>&#x20B9;{{$sub_total ?? "0"}}</span>
+                                    <span>&#x20B9;{{number_format($sub_total,2) ?? "0"}}</span>
                                  </li>
 
                                  <!-- shipping -->
@@ -140,7 +145,7 @@
                                  <!-- total -->
                                  <li class="tp-order-info-list-total">
                                     <span>Total</span>
-                                    <span>&#x20B9;{{$total ?? "0"}}</span>
+                                    <span>&#x20B9;{{number_format($total,2) ?? "0"}}</span>
                                  </li>
                               </ul>
                            </div>

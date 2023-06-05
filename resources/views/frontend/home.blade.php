@@ -80,14 +80,21 @@
             <div class="tp-product-category-item text-center mb-40">
                <div class="tp-product-category-thumb fix">
                   <a href="{{url('/shop-category')}}/{{base64_encode($value->id)}}">
+                     @if(!empty($value->image))
                      <img src="{{env('APP_URL')."category"}}/{{$value->image}}" alt="product-category">
+                     @else
+
+                     @endif
                   </a>
                </div>
                <div class="tp-product-category-content">
                   <h3 class="tp-product-category-title">
                      <a href="shop-category.html">{{$value->title ?? "-"}}</a>
                   </h3>
-                  <p>20 Product</p>
+                  <?php $count =0;
+                        $count =App\Models\Product::where('category_id',$value->id)->count();
+                  ?>
+                  <p>{{$count ?? "0"}} Product</p>
                </div>
             </div>
            
@@ -296,7 +303,7 @@
                               <!-- product content -->
                               <div class="tp-product-content">
                                  <div class="tp-product-category">
-                                    <a href="{{url('/product-detail')}}/{{base64_encode($value->id)}}">{{$value->title ?? "-"}}</a>
+                                    <a href="{{url('/product-detail')}}/{{base64_encode($value->id)}}">{{$value->category->title ?? "-"}}</a>
                                  </div>
                                  <h3 class="tp-product-title">
                                     <a href="{{url('/product-detail')}}/{{base64_encode($value->id)}}">
@@ -318,7 +325,7 @@
                                  <div class="tp-product-price-wrapper">
                                  @if(!empty($value['productSize']))
                                     <span class="tp-product-price old-price">&#x20B9;{{number_format(($value['productSize']['actual_price']),2) ?? "-"}}</span>
-                                    <span class="tp-product-price new-price">&#x20B9;{{number_format(($value['productSize']['actual_price']-$value['productSize']['offer_price']),2) ?? "-"}}</span>
+                                    <span class="tp-product-price new-price">&#x20B9;{{number_format(($value['productSize']['offer_price']),2) ?? "-"}}</span>
                                  @endif
                                  </div>
                               </div>
@@ -389,7 +396,7 @@
                               <!-- product content -->
                               <div class="tp-product-content">
                                  <div class="tp-product-category">
-                                    <a href="shop.html">{{$value->title ?? "-"}}</a>
+                                    <a href="shop.html">{{$value->category->title ?? "-"}}</a>
                                  </div>
                                  <h3 class="tp-product-title">
                                     <a href="product-details.html">
@@ -411,7 +418,7 @@
                                  <div class="tp-product-price-wrapper">
                                  @if(!empty($value['productSize']))
                                     <span class="tp-product-price old-price">&#x20B9;{{number_format(($value['productSize']['actual_price']),2) ?? "-"}}</span>
-                                    <span class="tp-product-price new-price">&#x20B9;{{number_format(($value['productSize']['actual_price']-$value['productSize']['offer_price']),2) ?? "-"}}</span>
+                                    <span class="tp-product-price new-price">&#x20B9;{{number_format(($value['productSize']['offer_price']),2) ?? "-"}}</span>
                                  @endif
                                  </div>
                               </div>

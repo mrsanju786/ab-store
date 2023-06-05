@@ -55,9 +55,9 @@ Route::get('/wishlist',[HomeController::class, 'myWishlist']);
 Route::get('/whishlist-to-cart/{id?}',[CartController::class, 'wishlistToCart'])->name('wishlistToCart');
 Route::post('/update-wishlist', [HomeController::class, 'addFavouriteProduct'])->name('addFavouriteProduct');
 Route::get('/delete-product/{id}', [CartController::class, 'RemoveProduct']);
-Route::post('/update-cart-quantity',[CartController::class, 'updateQuantity'])->name('updateQuantity');
+// Route::post('/update-cart-quantity',[CartController::class, 'updateQuantity'])->name('updateQuantity');
 Route::get('/delete-from-cart/{id}',[CartController::class, 'deleteFromCart']);
-
+Route::post('/update-cart-quantity',[CartController::class, 'updateQuantity'])->name('updateQuantity');
 
 Route::post('/check-product-size',[HomeController::class, 'checkProductSize'])->name('check-product-size');
 Route::post('/check-product-color',[HomeController::class, 'checkProductColor'])->name('check-product-color');

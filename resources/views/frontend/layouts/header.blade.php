@@ -78,7 +78,7 @@
                                  <div class="tp-header-search-box">
                                     <input type="text" placeholder="Search for Products...">
                                  </div>
-                                 <?php $categoryList = DB::table('categories')->where('status',1)->orderBy('id','desc')->get(); ?>
+                                 <?php $categoryList = DB::table('categories')->where('status',1)->get(); ?>
                                  <div class="tp-header-search-category">
                                     <select>
                                        <option>Select Category</option>
@@ -831,7 +831,7 @@
                              
                              <li class="has-dropdown">
                                  <a href="javascript:;">Categories</a>
-                                 <?php $categoryList = DB::table('categories')->where('status',1)->orderBy('id','desc')->get(); ?>
+                                 <?php $categoryList = DB::table('categories')->where('status',1)->get(); ?>
                                  <ul class="tp-submenu">
                                     @if(!empty($categoryList))
                                     @foreach($categoryList as $value)
