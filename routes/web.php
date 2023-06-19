@@ -73,3 +73,10 @@ Route::post('/saveOrder',[OrderController::class, 'saveOrder'])->name('saveOrder
 Route::get('/order-success',[OrderController::class, 'orderSuccess']);
 Route::get('/my-orders',[OrderController::class, 'orderList']);
 Route::get('/order-detail/{id}',[OrderController::class, 'orderDetail'])->name('orderDetail');
+
+//razor pay route
+Route::get('paywithrazorpay', [RazorPayController::class,'payWithRazorpay'])->name('paywithrazorpay');
+Route::post('razorpayCreateOrderId', [RazorPayController::class,'razorpayCreateOrderId'])->name('razorpayCreateOrderId');
+Route::post('payment-razor', [RazorPayController::class,'payment'])->name('payment-razor');
+Route::get('payment-success', [RazorPayController::class, 'success'])->name('payment-success');
+Route::get('payment-fail', [RazorPayController::class, 'fail'])->name('payment-fail');

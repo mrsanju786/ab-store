@@ -11,7 +11,7 @@ use App\Models\ProductSizeVariant;
 use App\Models\ProductColorVariant;
 use App\Models\Order;
 use App\Models\BillingAddress;
-use App\Models\OrderDetail;
+use App\Models\OrderTempDetail;
 use Auth,DB,Log;
 
 class OrderController extends Controller
@@ -63,8 +63,25 @@ class OrderController extends Controller
             // }
            
             Cart::where('user_id',Auth::id())->delete();
+            OrderTempDetail::where('user_id', Auth::id())->delete();
             return redirect()->to('order-success')->with('success', 'Order Placed successfully!',compact('parent_order_id'));
          
+        }else{
+
+            $user_id = Auth::id();
+            $amount = $request->total_amount ?? 0;
+            $address_id = $request->address;
+            $p_method = 'online';
+            $temp_data = new OrderTempDetail;
+            $temp_data->user_id = $user_id;
+            $temp_data->amount = $amount;
+            $temp_data->address_id = $address_id;
+            $temp_data->payment_method = $p_method;
+            $temp_data->save();
+            $temp_id = $temp_data->id;
+            $user_email = Auth::user()->email;
+
+            return view('frontend.razorpay',compact('user_id','temp_id','user_email','amount','address_id'));
         }
     }
 
